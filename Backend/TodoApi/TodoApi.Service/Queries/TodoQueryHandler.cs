@@ -12,11 +12,11 @@ public interface ITodoQueryHandler
 
 public class TodoQueryHandler : ITodoQueryHandler
 {
-    private readonly TodoRepository _repository;
+    private readonly ITodoRepository _repository;
 
     private readonly IMapper _mapper;
 
-    public TodoQueryHandler(TodoRepository repository, IMapper mapper)
+    public TodoQueryHandler(ITodoRepository repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;

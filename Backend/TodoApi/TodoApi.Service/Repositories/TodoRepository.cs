@@ -11,16 +11,16 @@ public interface ITodoRepository
 
 public class TodoRepository : ITodoRepository
 {
-    private readonly DatabaseContext _databaseContext;
+    private readonly TodoDbContext _todoDbContext;
 
-    public TodoRepository(DatabaseContext databaseContext)
+    public TodoRepository(TodoDbContext todoDbContext)
     {
-        _databaseContext = databaseContext;
+        _todoDbContext = todoDbContext;
     }
 
     public async Task<ICollection<Todo>> GetAllAsync()
     {
-        var entities = await _databaseContext.Todos.ToListAsync();
+        var entities = await _todoDbContext.Todos.ToListAsync();
         return entities;
     }
 }

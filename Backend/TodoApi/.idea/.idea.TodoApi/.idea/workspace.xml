@@ -10,123 +10,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="febdeed7-616d-4cd7-a7b7-b9d9ba1dde27" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../.idea/.idea.Todo.dir/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/.idea.Backend.dir/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/.idea.Backend.dir/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/.idea.Backend.dir/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.TodoApi/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.TodoApi/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.TodoApi/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.TodoApi/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.TodoApi/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Data/Services/DatabaseContext.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Data/TodoApi.Data.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Data/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Data/obj/Debug/net6.0/TodoApi.Data.AssemblyInfo.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Data/obj/Debug/net6.0/TodoApi.Data.AssemblyInfoInputs.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Data/obj/Debug/net6.0/TodoApi.Data.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Data/obj/Debug/net6.0/TodoApi.Data.GlobalUsings.g.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Data/obj/Debug/net6.0/TodoApi.Data.assets.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Data/obj/Debug/net6.0/TodoApi.Data.csproj.AssemblyReference.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Data/obj/TodoApi.Data.csproj.nuget.dgspec.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Data/obj/TodoApi.Data.csproj.nuget.g.props" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Data/obj/TodoApi.Data.csproj.nuget.g.targets" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Data/obj/project.assets.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Data/obj/project.nuget.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Data/obj/project.packagespec.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Data/obj/rider.project.restore.info" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Domain/Entities/Todo.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Domain/TodoApi.Domain.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Domain/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Domain/obj/Debug/net6.0/TodoApi.Domain.AssemblyInfo.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Domain/obj/Debug/net6.0/TodoApi.Domain.AssemblyInfoInputs.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Domain/obj/Debug/net6.0/TodoApi.Domain.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Domain/obj/Debug/net6.0/TodoApi.Domain.GlobalUsings.g.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Domain/obj/Debug/net6.0/TodoApi.Domain.assets.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Domain/obj/Debug/net6.0/TodoApi.Domain.csproj.AssemblyReference.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Domain/obj/TodoApi.Domain.csproj.nuget.dgspec.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Domain/obj/TodoApi.Domain.csproj.nuget.g.props" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Domain/obj/TodoApi.Domain.csproj.nuget.g.targets" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Domain/obj/project.assets.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Domain/obj/project.nuget.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Domain/obj/project.packagespec.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Domain/obj/rider.project.restore.info" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/Commands/CreateTodoCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/Commands/ICommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/Dto/TodoDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/Handlers/ICommandHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/Handlers/TodoCommandHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/MappingProfile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/Queries/GetAllTodosQuery.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/Queries/IQuery.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/Queries/IQueryHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/Queries/TodoQueryHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/Repositories/TodoRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/TodoApi.Service.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/obj/Debug/net6.0/TodoApi.Service.AssemblyInfo.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/obj/Debug/net6.0/TodoApi.Service.AssemblyInfoInputs.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/obj/Debug/net6.0/TodoApi.Service.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/obj/Debug/net6.0/TodoApi.Service.GlobalUsings.g.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/obj/Debug/net6.0/TodoApi.Service.assets.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/obj/Debug/net6.0/TodoApi.Service.csproj.AssemblyReference.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/obj/TodoApi.Service.csproj.nuget.dgspec.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/obj/TodoApi.Service.csproj.nuget.g.props" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/obj/TodoApi.Service.csproj.nuget.g.targets" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/obj/project.assets.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/obj/project.nuget.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/obj/project.packagespec.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/obj/rider.project.restore.info" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.sln" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi/.dockerignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi/Controllers/TodoController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi/Program.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi/Properties/launchSettings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi/TodoApi.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi/appsettings.Development.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi/appsettings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi/obj/Debug/net6.0/TodoApi.AssemblyInfo.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi/obj/Debug/net6.0/TodoApi.AssemblyInfoInputs.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi/obj/Debug/net6.0/TodoApi.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi/obj/Debug/net6.0/TodoApi.GlobalUsings.g.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi/obj/Debug/net6.0/TodoApi.assets.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi/obj/Debug/net6.0/TodoApi.csproj.AssemblyReference.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi/obj/TodoApi.csproj.nuget.dgspec.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi/obj/TodoApi.csproj.nuget.g.props" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi/obj/TodoApi.csproj.nuget.g.targets" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi/obj/project.assets.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi/obj/project.nuget.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi/obj/project.packagespec.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi/obj/rider.project.restore.info" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/.idea/.idea.UserApi/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/.idea/.idea.UserApi/.idea/indexLayout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/.idea/.idea.UserApi/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/.idea/.idea.UserApi/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/UserApi.sln" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/UserApi/.dockerignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/UserApi/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/UserApi/Program.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/UserApi/Properties/launchSettings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/UserApi/UserApi.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/UserApi/appsettings.Development.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/UserApi/appsettings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/UserApi/obj/Debug/net6.0/.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/UserApi/obj/Debug/net6.0/UserApi.AssemblyInfo.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/UserApi/obj/Debug/net6.0/UserApi.AssemblyInfoInputs.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/UserApi/obj/Debug/net6.0/UserApi.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/UserApi/obj/Debug/net6.0/UserApi.GlobalUsings.g.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/UserApi/obj/Debug/net6.0/UserApi.assets.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/UserApi/obj/Debug/net6.0/UserApi.csproj.AssemblyReference.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/UserApi/obj/UserApi.csproj.nuget.dgspec.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/UserApi/obj/UserApi.csproj.nuget.g.props" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/UserApi/obj/UserApi.csproj.nuget.g.targets" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/UserApi/obj/project.assets.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/UserApi/obj/project.nuget.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/UserApi/obj/project.packagespec.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../UserApi/UserApi/obj/rider.project.restore.info" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TodoApi.Data/DatabaseInitializer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TodoApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TodoApi/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoApi.Data/Services/DatabaseContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi.Data/Services/DatabaseContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoApi.Domain/Entities/Todo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi.Domain/Entities/Todo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoApi.Service/Queries/TodoQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi.Service/Queries/TodoQueryHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoApi/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoApi/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoApi/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi/Properties/launchSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoApi/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi/appsettings.Development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoApi/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +33,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="SWEA" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2CV7C61i2ou9jK164rX47O0Zu4L" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -148,14 +41,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.TodoApi">
     <configuration name="TodoApi" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/TodoApi/TodoApi.csproj" />
@@ -259,7 +157,8 @@
       <workItem from="1658875776160" duration="22000" />
       <workItem from="1659033391484" duration="1896000" />
       <workItem from="1659091647014" duration="3978000" />
-      <workItem from="1659096286295" duration="304000" />
+      <workItem from="1659096286295" duration="611000" />
+      <workItem from="1659103963292" duration="3089000" />
     </task>
     <servers />
   </component>
@@ -268,6 +167,17 @@
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
