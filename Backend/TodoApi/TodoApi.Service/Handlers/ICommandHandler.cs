@@ -2,7 +2,7 @@
 
 namespace TodoApi.Service.Handlers;
 
-public interface ICommandHandler<T> where T : ICommand
+public interface ICommandHandler<in T> where T : ICommand
 {
-    public ValueTask HandleAsync(T command);
+    public ValueTask Handle(T command, CancellationToken ct);
 }

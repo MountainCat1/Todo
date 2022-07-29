@@ -10,16 +10,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="febdeed7-616d-4cd7-a7b7-b9d9ba1dde27" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/TodoApi.Data/DatabaseInitializer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TodoApi.Data/Repositories/TodoRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TodoApi.Service/Commands/DeleteTodoCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TodoApi.Service/Commands/UpdateTodoCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TodoApi.Service/Queries/GetTodoQuery.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TodoApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TodoApi/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TodoApi.Data/Services/DatabaseContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi.Data/Services/DatabaseContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TodoApi.Domain/Entities/Todo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi.Domain/Entities/Todo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TodoApi.Service/Queries/TodoQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi.Service/Queries/TodoQueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TodoApi/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoApi.Service/Commands/CreateTodoCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi.Service/Commands/CreateTodoCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoApi.Service/Handlers/ICommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi.Service/Handlers/ICommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoApi.Service/Handlers/TodoCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi.Service/Handlers/TodoCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoApi.Service/Queries/IQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi.Service/Handlers/IQueryHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoApi.Service/Queries/TodoQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi.Service/Handlers/TodoQueryHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoApi.Service/Repositories/TodoRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoApi/Controllers/TodoController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi/Controllers/TodoController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TodoApi/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TodoApi/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TodoApi/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TodoApi/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +36,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="SWEA" />
   </component>
   <component name="ProjectId" id="2CV7C61i2ou9jK164rX47O0Zu4L" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -158,8 +161,16 @@
       <workItem from="1659033391484" duration="1896000" />
       <workItem from="1659091647014" duration="3978000" />
       <workItem from="1659096286295" duration="611000" />
-      <workItem from="1659103963292" duration="3089000" />
+      <workItem from="1659103963292" duration="5404000" />
     </task>
+    <task id="LOCAL-00001" summary="Add working database connection to TODO microservice">
+      <created>1659107421807</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1659107421807</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,5 +191,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="Add working database connection to TODO microservice" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add working database connection to TODO microservice" />
   </component>
 </project>

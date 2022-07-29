@@ -2,7 +2,8 @@
 
 namespace TodoApi.Service.Commands;
 
-public class CreateTodoCommand : ICommand
+public class UpdateTodoCommand : ICommand
 {
+    public Guid Guid { get; init; }
     public TodoDto TodoDto { get; init; }
 }

@@ -1,9 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using TodoApi.Data;
+using TodoApi.Data.Repositories;
 using TodoApi.Data.Services;
 using TodoApi.Service;
+using TodoApi.Service.Handlers;
 using TodoApi.Service.Queries;
-using TodoApi.Service.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,7 @@ services.AddAutoMapper(typeof(MappingProfile));
 services.AddScoped<ITodoRepository, TodoRepository>();
 
 services.AddScoped<ITodoQueryHandler, TodoQueryHandler>();
+services.AddScoped<ITodoCommandHandler, TodoCommandHandler>();
 
 
 var app = builder.Build();
