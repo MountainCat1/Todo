@@ -17,6 +17,7 @@ var services = builder.Services;
 
 services.AddControllers();
 services.AddEndpointsApiExplorer();
+services.AddHttpsRedirection(options => options.HttpsPort = 5000);
 services.AddSwaggerGen();
 services.AddLogging(options => options.AddConsole());
 
@@ -31,6 +32,7 @@ services.AddScoped<ITodoQueryHandler, TodoQueryHandler>();
 services.AddScoped<ITodoCommandHandler, TodoCommandHandler>();
 
 
+
 var app = builder.Build();
 
 await new DatabaseInitializer(
@@ -39,7 +41,7 @@ await new DatabaseInitializer(
     .InitializeAsync();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (true || app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();

@@ -9,20 +9,13 @@
     <projectFile profileName="IIS Express">TodoApi.Domain/TodoApi.Domain.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="febdeed7-616d-4cd7-a7b7-b9d9ba1dde27" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/TodoApi.Data/Repositories/TodoRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/Commands/DeleteTodoCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/Commands/UpdateTodoCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TodoApi.Service/Queries/GetTodoQuery.cs" afterDir="false" />
+    <list default="true" id="febdeed7-616d-4cd7-a7b7-b9d9ba1dde27" name="Changes" comment="Added basic CRUD for Todo microservice">
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TodoApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TodoApi/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TodoApi.Service/Commands/CreateTodoCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi.Service/Commands/CreateTodoCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TodoApi.Service/Handlers/ICommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi.Service/Handlers/ICommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TodoApi.Service/Handlers/TodoCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi.Service/Handlers/TodoCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TodoApi.Service/Queries/IQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi.Service/Handlers/IQueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TodoApi.Service/Queries/TodoQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi.Service/Handlers/TodoQueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TodoApi.Service/Repositories/TodoRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TodoApi/Controllers/TodoController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi/Controllers/TodoController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoApi/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TodoApi/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoApi/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi/appsettings.Development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoApi/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +29,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="SWEA" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2CV7C61i2ou9jK164rX47O0Zu4L" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -44,20 +37,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.TodoApi">
+}</component>
+  <component name="RunManager" selected="Docker.Docker Compose">
     <configuration name="TodoApi" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/TodoApi/TodoApi.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net6.0" />
@@ -148,6 +142,58 @@
         <option name="Build" />
       </method>
     </configuration>
+    <configuration name="Docker Compose" type="docker-deploy" factoryName="docker-compose.yml" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="envFilePath" value="" />
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isPublishEnabled="true" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TodoApi/Dockerfile final" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="imageTag" value="base_final" />
+          <option name="buildCliOptions" value="--target final" />
+          <option name="buildKitEnabled" value="true" />
+          <option name="buildOnly" value="true" />
+          <option name="contextFolderPath" value="." />
+          <option name="sourceFilePath" value="TodoApi/Dockerfile" />
+        </settings>
+      </deployment>
+      <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isPublishEnabled="true" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TodoApi/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="containerName" value="" />
+          <option name="contextFolderPath" value="." />
+          <option name="sourceFilePath" value="TodoApi/Dockerfile" />
+        </settings>
+      </deployment>
+      <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isPublishEnabled="true" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue=".NET Launch Settings Profile.TodoApi" />
+      <item itemvalue=".NET Launch Settings Profile.TodoApi.Data" />
+      <item itemvalue=".NET Launch Settings Profile.TodoApi.Data: IIS Express" />
+      <item itemvalue=".NET Launch Settings Profile.TodoApi.Domain" />
+      <item itemvalue=".NET Launch Settings Profile.TodoApi.Domain: IIS Express" />
+      <item itemvalue=".NET Launch Settings Profile.TodoApi: IIS Express" />
+      <item itemvalue="Docker.Docker Compose" />
+      <item itemvalue="Docker.TodoApi/Dockerfile" />
+      <item itemvalue="Docker.TodoApi/Dockerfile final" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.TodoApi/Dockerfile final" />
+        <item itemvalue="Docker.TodoApi/Dockerfile" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -161,7 +207,8 @@
       <workItem from="1659033391484" duration="1896000" />
       <workItem from="1659091647014" duration="3978000" />
       <workItem from="1659096286295" duration="611000" />
-      <workItem from="1659103963292" duration="5404000" />
+      <workItem from="1659103963292" duration="6721000" />
+      <workItem from="1659111089609" duration="4168000" />
     </task>
     <task id="LOCAL-00001" summary="Add working database connection to TODO microservice">
       <created>1659107421807</created>
@@ -170,7 +217,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659107421807</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added basic CRUD for Todo microservice">
+      <created>1659109708692</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1659109708692</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -192,6 +246,7 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Add working database connection to TODO microservice" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add working database connection to TODO microservice" />
+    <MESSAGE value="Added basic CRUD for Todo microservice" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added basic CRUD for Todo microservice" />
   </component>
 </project>
