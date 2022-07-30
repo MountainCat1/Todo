@@ -9,37 +9,17 @@
     <projectFile profileName="IIS Express">TodoApi.Domain/TodoApi.Domain.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="febdeed7-616d-4cd7-a7b7-b9d9ba1dde27" name="Changes" comment="Refactor, used MediaR, divided CQRS more -- into separate namespaces">
-      <change afterPath="$PROJECT_DIR$/Todos.Service/AssemblyPointer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Todos.Service/Commands/CreateTodo/CreateTodoCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Todos.Service/Commands/CreateTodo/CreateTodoCommandHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Todos.Service/Commands/DeleteTodo/DeleteTodoCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Todos.Service/Commands/DeleteTodo/DeleteTodoCommandHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Todos.Service/Commands/UpdateTodo/UpdateTodoCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Todos.Service/Commands/UpdateTodo/UpdateTodoCommandHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Todos.Service/Queries/GetAllFilteredTodos/GetAllFilteredTodosQuery.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Todos.Service/Queries/GetAllFilteredTodos/GetAllFilteredTodosQueryHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Todos.Service/Queries/GetAllTodos/GetAllTodosQuery.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Todos.Service/Queries/GetAllTodos/GetAllTodosQueryHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Todos.Service/Queries/GetTodo/GetTodoQuery.cs" afterDir="false" />
+    <list default="true" id="febdeed7-616d-4cd7-a7b7-b9d9ba1dde27" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Todos.Domain/Entities/TodoTag.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Todos.Service/Commands/AddTodoTag/AddTodoTagCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Todos.Service/Commands/AddTodoTag/AddTodoTagCommandHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TodoApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TodoApi/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Api/Controllers/TodoController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Api/Controllers/TodoController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Todos.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Api/Todos.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Api/Todos.Api.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Commands/CreateTodoCommand.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Commands/DeleteTodoCommand.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Commands/ICommand.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Commands/UpdateTodoCommand.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Handlers/ICommandHandler.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Handlers/IQueryHandler.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Handlers/TodoCommandHandler.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Handlers/TodoQueryHandler.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Queries/GetFilteredTodosQuery.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Queries/GetTodoQuery.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Queries/GetTodosQuery.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Queries/IQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Queries/GetTodo/GetTodoQueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Todos.Service.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Todos.Service.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Validators/TodoValidator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Domain/Entities/Todo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Domain/Entities/Todo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Infrastructure/Repositories/TodoRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Infrastructure/Repositories/TodoRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Infrastructure/Services/TodoDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Infrastructure/Services/TodoDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Service/Dto/CreateTodoDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Dto/CreateTodoDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Service/Dto/TodoDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Dto/TodoDto.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +37,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/cd2e5271223044289d7174c8a2f0869616298/36/f5665df6/ICommand.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ef38234b09464897a1796caedbffff3c3ada98/d4/9a64d989/IQueryable`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/16e25228933e538de5a14ae5e3d114183c20ccac95fcf8478e3c6dcf6e4a2/IRequestHandler.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/57d95aa7e3a88eb2892ab73bf24bea15cf5db06755473e43f2ade49d811542dc/Profile.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Todos.Api/Controllers/TodoController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Todos.Api/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Todos.Infrastructure/DatabaseInitializer.cs" root0="FORCE_HIGHLIGHTING" />
@@ -254,6 +235,8 @@
       <workItem from="1659140745451" duration="2557000" />
       <workItem from="1659173976316" duration="10219000" />
       <workItem from="1659193063049" duration="3652000" />
+      <workItem from="1659197416489" duration="3570000" />
+      <workItem from="1659212024578" duration="2991000" />
     </task>
     <task id="LOCAL-00001" summary="Add working database connection to TODO microservice">
       <created>1659107421807</created>

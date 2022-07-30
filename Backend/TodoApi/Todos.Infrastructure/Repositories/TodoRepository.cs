@@ -1,17 +1,18 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Todos.Domain.Entities;
 using Todos.Infrastructure.Services;
 
 namespace Todos.Infrastructure.Repositories;
 
 public interface ITodoRepository
 {
-    public Task<ICollection<Domain.Entities.Todo>> GetAllAsync(Guid? teamGuid, Guid? userGuid);
-    public Task<ICollection<Domain.Entities.Todo>> GetAllAsync();
-    public Task<Domain.Entities.Todo?> GetAsync(Guid guid);
-    public Task<Domain.Entities.Todo> CreateAsync(Domain.Entities.Todo todo);
+    public Task<ICollection<Todo>> GetAllAsync(Guid? teamGuid, Guid? userGuid);
+    public Task<ICollection<Todo>> GetAllAsync();
+    public Task<Todo?> GetAsync(Guid guid);
+    public Task<Todo> CreateAsync(Todo todo);
     public Task DeleteAsync(Guid guid);
-    public Task<Domain.Entities.Todo> UpdateAsync(Guid guid, Domain.Entities.Todo todo);
+    public Task<Todo> UpdateAsync(Guid guid, Todo todo);
 }
 
 public class TodoRepository : ITodoRepository
@@ -25,11 +26,11 @@ public class TodoRepository : ITodoRepository
         _logger = logger;
     }
 
-    public async Task<ICollection<Domain.Entities.Todo>> GetAllAsync(Guid? teamGuid, Guid? userGuid)
+    public async Task<ICollection<Todo>> GetAllAsync(Guid? teamGuid, Guid? userGuid)
     {
         _logger.LogInformation($"Returning filtered entities...");
         
-        IQueryable<Domain.Entities.Todo> query = _todoDbContext.Todos;
+        IQueryable<Todo> query = _todoDbContext.Todos;
 
         if (teamGuid != null)
             query = query.Where(entity => entity.TeamGuid == teamGuid);
@@ -41,7 +42,7 @@ public class TodoRepository : ITodoRepository
         return entities;
     }
 
-    public async Task<ICollection<Domain.Entities.Todo>> GetAllAsync()
+    public async Task<ICollection<Todo>> GetAllAsync()
     {
         _logger.LogInformation($"Returning all entities...");
         
@@ -49,7 +50,7 @@ public class TodoRepository : ITodoRepository
         return entities;
     }
 
-    public async Task<Domain.Entities.Todo?> GetAsync(Guid guid)
+    public async Task<Todo?> GetAsync(Guid guid)
     {
         _logger.LogInformation($"Returning entity... {guid}");
         
@@ -57,7 +58,7 @@ public class TodoRepository : ITodoRepository
         return entity;
     }
 
-    public async Task<Domain.Entities.Todo> CreateAsync(Domain.Entities.Todo todo)
+    public async Task<Todo> CreateAsync(Todo todo)
     {
         todo.Guid = Guid.NewGuid();
         _logger.LogInformation($"Creating new entity... {todo.Guid}");
@@ -80,7 +81,7 @@ public class TodoRepository : ITodoRepository
         await _todoDbContext.SaveChangesAsync();
     }
 
-    public async Task<Domain.Entities.Todo> UpdateAsync(Guid guid, Domain.Entities.Todo todo)
+    public async Task<Todo> UpdateAsync(Guid guid, Todo todo)
     {
         _logger.LogInformation($"Updating entity... {guid}");
         var entityToUpdate = await GetAsync(guid);

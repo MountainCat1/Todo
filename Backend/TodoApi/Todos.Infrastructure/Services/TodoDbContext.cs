@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Todos.Domain.Entities;
 
 namespace Todos.Infrastructure.Services;
 
@@ -9,10 +12,21 @@ public class TodoDbContext : DbContext
 
     }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder builder)
     {
-        base.OnModelCreating(modelBuilder);
+        base.OnModelCreating(builder);
+        
+        // Setting conversion and comparer for tag being collection of strings
+        builder.Entity<Todo>().Property(p => p.Tags)
+            .HasConversion(
+                tagsCollection => string.Join(';', tagsCollection),
+                s => s.Split(';', StringSplitOptions.TrimEntries))
+            .Metadata.SetValueComparer(new ValueComparer<ICollection<string>>(
+                (c1, c2) => c1.SequenceEqual(c2),
+                collection => collection.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
+                c => c.ToList()));
+
     }
 
-    public DbSet<Domain.Entities.Todo> Todos { get; set; }
+    public DbSet<Todo> Todos { get; set; }
 }

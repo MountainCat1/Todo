@@ -32,7 +32,7 @@ services.AddAutoMapper(typeof(MappingProfile));
 
 services.AddScoped<ITodoRepository, TodoRepository>();
 
-services.AddMediatR(typeof(Todos.Service.AssemblyPointer).Assembly);
+services.AddMediatR(typeof(AssemblyPointer).Assembly);
 
 services.AddScoped<ErrorHandlingMiddleware>();
 
@@ -41,10 +41,10 @@ var app = builder.Build();
 await new DatabaseInitializer(
         app.Services.CreateAsyncScope()
             .ServiceProvider.GetRequiredService<TodoDbContext>())
-    .InitializeAsync(false);
+    .InitializeAsync(true);
 
 // Configure the HTTP request pipeline.
-if (true || app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();

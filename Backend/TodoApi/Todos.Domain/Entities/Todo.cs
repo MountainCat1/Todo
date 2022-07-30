@@ -11,4 +11,6 @@ public class Todo
     public bool IsDone { get; set; }
     public Guid TeamGuid { get; set; }
     public Guid UserGuid { get; set; }
+
+    public ICollection<string> Tags { get; set; }
 }
