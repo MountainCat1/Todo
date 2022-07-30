@@ -9,7 +9,8 @@
     <projectFile profileName="IIS Express">TodoApi.Domain/TodoApi.Domain.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="febdeed7-616d-4cd7-a7b7-b9d9ba1dde27" name="Changes" comment="">
+    <list default="true" id="febdeed7-616d-4cd7-a7b7-b9d9ba1dde27" name="Changes" comment="Refactor, used MediaR, divided CQRS more -- into separate namespaces">
+      <change afterPath="$PROJECT_DIR$/Todos.Service/AssemblyPointer.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Todos.Service/Commands/CreateTodo/CreateTodoCommand.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Todos.Service/Commands/CreateTodo/CreateTodoCommandHandler.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Todos.Service/Commands/DeleteTodo/DeleteTodoCommand.cs" afterDir="false" />
@@ -252,7 +253,7 @@
       <workItem from="1659111089609" duration="8741000" />
       <workItem from="1659140745451" duration="2557000" />
       <workItem from="1659173976316" duration="10219000" />
-      <workItem from="1659193063049" duration="3337000" />
+      <workItem from="1659193063049" duration="3652000" />
     </task>
     <task id="LOCAL-00001" summary="Add working database connection to TODO microservice">
       <created>1659107421807</created>
@@ -303,7 +304,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659188371182</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Refactor, used MediaR, divided CQRS more -- into separate namespaces">
+      <created>1659196740527</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1659196740527</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -334,6 +342,7 @@
     <MESSAGE value="Todo microservice -  refactor, added logging" />
     <MESSAGE value="Todo microservice - Refactoring," />
     <MESSAGE value="todo microservice refactor" />
-    <option name="LAST_COMMIT_MESSAGE" value="todo microservice refactor" />
+    <MESSAGE value="Refactor, used MediaR, divided CQRS more -- into separate namespaces" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor, used MediaR, divided CQRS more -- into separate namespaces" />
   </component>
 </project>
