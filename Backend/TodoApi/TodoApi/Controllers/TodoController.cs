@@ -38,11 +38,11 @@ public class TodoController : Controller
     }
     
     [HttpPost("")]
-    public async Task<IActionResult> CreateTodo([FromBody] TodoDto todoDto)
+    public async Task<IActionResult> CreateTodo([FromBody] CreateTodoDto createTodoDto)
     {
         var command = new CreateTodoCommand()
         {
-            TodoDto = todoDto
+            CreateTodoDto = createTodoDto
         };
         
         await _commandHandler.Handle(command, new CancellationToken());
@@ -52,8 +52,9 @@ public class TodoController : Controller
     [HttpPut("{guid}")]
     public async Task<IActionResult> UpdateTodo([FromRoute] Guid guid, [FromBody] TodoDto todoDto)
     {
-        var command = new CreateTodoCommand()
+        var command = new UpdateTodoCommand()
         {
+            Guid = guid,
             TodoDto = todoDto
         };
         

@@ -38,7 +38,7 @@ var app = builder.Build();
 await new DatabaseInitializer(
         app.Services.CreateAsyncScope()
             .ServiceProvider.GetRequiredService<TodoDbContext>())
-    .InitializeAsync();
+    .InitializeAsync(app.Environment.IsDevelopment());
 
 // Configure the HTTP request pipeline.
 if (true || app.Environment.IsDevelopment())

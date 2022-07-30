@@ -4,5 +4,5 @@ namespace TodoApi.Service.Commands;
 
 public class CreateTodoCommand : ICommand
 {
-    public TodoDto TodoDto { get; init; }
+    public CreateTodoDto CreateTodoDto { get; init; }
 }

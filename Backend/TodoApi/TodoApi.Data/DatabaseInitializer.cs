@@ -4,15 +4,18 @@ namespace TodoApi.Data;
 
 public class DatabaseInitializer
 {
-    private DbContext _dbContext;
+    private readonly DbContext _dbContext;
 
     public DatabaseInitializer(DbContext dbContext)
     {
         _dbContext = dbContext;
     }
 
-    public async Task InitializeAsync()
+    public async Task InitializeAsync(bool recreateDatabase = false)
     {
+        if (recreateDatabase)
+            await _dbContext.Database.EnsureDeletedAsync();
+            
         await _dbContext.Database.EnsureCreatedAsync();
         
 #if DEBUG

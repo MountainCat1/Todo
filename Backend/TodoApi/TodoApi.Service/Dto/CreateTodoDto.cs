@@ -1,11 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿namespace TodoApi.Service.Dto;
 
-namespace TodoApi.Domain.Entities;
-
-public class Todo
+public class CreateTodoDto
 {
-    [Key]
-    public Guid Guid { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
     public bool IsDone { get; set; }

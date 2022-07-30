@@ -27,7 +27,7 @@ public class TodoCommandHandler : ITodoCommandHandler
     
     public async ValueTask Handle(CreateTodoCommand command, CancellationToken ct)
     {
-        var entity = _mapper.Map<Todo>(command.TodoDto);
+        var entity = _mapper.Map<Todo>(command.CreateTodoDto);
         await _todoRepository.CreateAsync(entity);
     }
 

@@ -9,13 +9,17 @@
     <projectFile profileName="IIS Express">TodoApi.Domain/TodoApi.Domain.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="febdeed7-616d-4cd7-a7b7-b9d9ba1dde27" name="Changes" comment="Added basic CRUD for Todo microservice">
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+    <list default="true" id="febdeed7-616d-4cd7-a7b7-b9d9ba1dde27" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/TodoApi.Service/Dto/CreateTodoDto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TodoApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TodoApi/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TodoApi/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoApi.Data/DatabaseInitializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi.Data/DatabaseInitializer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoApi.Domain/Entities/Todo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi.Domain/Entities/Todo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoApi.Service/Commands/CreateTodoCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi.Service/Commands/CreateTodoCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoApi.Service/Handlers/TodoCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi.Service/Handlers/TodoCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoApi.Service/MappingProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi.Service/MappingProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TodoApi/Controllers/TodoController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi/Controllers/TodoController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TodoApi/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TodoApi/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TodoApi/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +46,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.Azurite&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -51,7 +55,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected="Docker.Docker Compose">
+  <component name="RunManager" selected=".NET Launch Settings Profile.TodoApi">
     <configuration name="TodoApi" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/TodoApi/TodoApi.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net6.0" />
@@ -146,6 +150,7 @@
       <deployment type="docker-compose.yml">
         <settings>
           <option name="envFilePath" value="" />
+          <option name="removeImagesOnComposeDown" value="ALL" />
           <option name="sourceFilePath" value="docker-compose.yml" />
         </settings>
       </deployment>
@@ -208,7 +213,9 @@
       <workItem from="1659091647014" duration="3978000" />
       <workItem from="1659096286295" duration="611000" />
       <workItem from="1659103963292" duration="6721000" />
-      <workItem from="1659111089609" duration="4168000" />
+      <workItem from="1659111089609" duration="8741000" />
+      <workItem from="1659140745451" duration="2557000" />
+      <workItem from="1659173976316" duration="1744000" />
     </task>
     <task id="LOCAL-00001" summary="Add working database connection to TODO microservice">
       <created>1659107421807</created>
@@ -224,7 +231,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659109708692</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Fixed https redirection">
+      <created>1659120718959</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1659120718959</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -232,6 +246,9 @@
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.conf" />
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -247,6 +264,7 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Add working database connection to TODO microservice" />
     <MESSAGE value="Added basic CRUD for Todo microservice" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added basic CRUD for Todo microservice" />
+    <MESSAGE value="Fixed https redirection" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed https redirection" />
   </component>
 </project>

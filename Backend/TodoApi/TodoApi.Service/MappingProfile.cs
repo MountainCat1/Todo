@@ -10,5 +10,7 @@ public class MappingProfile : Profile
     {
         CreateMap<Todo, TodoDto>();
         CreateMap<TodoDto, Todo>();
+
+        CreateMap<CreateTodoDto, Todo>();
     }
 }
