@@ -1,12 +1,10 @@
-using FluentValidation;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Todos.Api.Middleware;
 using Todos.Infrastructure;
 using Todos.Infrastructure.Repositories;
 using Todos.Infrastructure.Services;
 using Todos.Service;
-using Todos.Service.Handlers;
-using Todos.Service.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 // Configuration
@@ -34,18 +32,16 @@ services.AddAutoMapper(typeof(MappingProfile));
 
 services.AddScoped<ITodoRepository, TodoRepository>();
 
-services.AddScoped<ITodoQueryHandler, TodoQueryHandler>();
-services.AddScoped<ITodoCommandHandler, TodoCommandHandler>();
+services.AddMediatR(typeof(Todos.Service.AssemblyPointer).Assembly);
 
-services.AddScoped<IValidator<Todos.Domain.Entities.Todo>, TodoValidator>();
-
+services.AddScoped<ErrorHandlingMiddleware>();
 
 var app = builder.Build();
 
 await new DatabaseInitializer(
         app.Services.CreateAsyncScope()
             .ServiceProvider.GetRequiredService<TodoDbContext>())
-    .InitializeAsync(app.Environment.IsDevelopment());
+    .InitializeAsync(false);
 
 // Configure the HTTP request pipeline.
 if (true || app.Environment.IsDevelopment())

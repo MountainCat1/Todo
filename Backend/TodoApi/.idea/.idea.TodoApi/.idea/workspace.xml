@@ -9,71 +9,61 @@
     <projectFile profileName="IIS Express">TodoApi.Domain/TodoApi.Domain.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="febdeed7-616d-4cd7-a7b7-b9d9ba1dde27" name="Changes" comment="Todo microservice - Refactoring,">
-      <change afterPath="$PROJECT_DIR$/Todos.Service/Commands/ICommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Todos.Service/Queries/IQuery.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Todos.Service/Validators/TodoValidator.cs" afterDir="false" />
+    <list default="true" id="febdeed7-616d-4cd7-a7b7-b9d9ba1dde27" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Todos.Service/Commands/CreateTodo/CreateTodoCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Todos.Service/Commands/CreateTodo/CreateTodoCommandHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Todos.Service/Commands/DeleteTodo/DeleteTodoCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Todos.Service/Commands/DeleteTodo/DeleteTodoCommandHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Todos.Service/Commands/UpdateTodo/UpdateTodoCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Todos.Service/Commands/UpdateTodo/UpdateTodoCommandHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Todos.Service/Queries/GetAllFilteredTodos/GetAllFilteredTodosQuery.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Todos.Service/Queries/GetAllFilteredTodos/GetAllFilteredTodosQueryHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Todos.Service/Queries/GetAllTodos/GetAllTodosQuery.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Todos.Service/Queries/GetAllTodos/GetAllTodosQueryHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Todos.Service/Queries/GetTodo/GetTodoQuery.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TodoApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TodoApi/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Api/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Api/.dockerignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Api/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Api/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Api/Controllers/TodoController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Api/Controllers/TodoController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Api/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Api/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Api/Middleware/ErrorHandlingMiddleware.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Api/Middleware/ErrorHandlingMiddleware.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Api/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Api/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Api/Todo.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Api/Todos.Api.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Api/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Api/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Api/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Api/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Domain/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Domain/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Domain/Entities/Todo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Domain/Entities/Todo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Domain/Todo.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Domain/Todos.Domain.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Infrastructure/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Infrastructure/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Infrastructure/DatabaseInitializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Infrastructure/DatabaseInitializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Infrastructure/Repositories/TodoRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Infrastructure/Repositories/TodoRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Infrastructure/Services/TodoDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Infrastructure/Services/TodoDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Infrastructure/Todo.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Infrastructure/Todos.Infrastructure.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Service/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Service/Commands/CreateTodoCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Commands/CreateTodoCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Service/Commands/DeleteTodoCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Commands/DeleteTodoCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Service/Commands/ICommand.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Service/Commands/UpdateTodoCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Commands/UpdateTodoCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Service/Dto/CreateTodoDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Dto/CreateTodoDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Service/Dto/TodoDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Dto/TodoDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Service/Handlers/ICommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Handlers/ICommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Service/Handlers/IQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Handlers/IQueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Service/Handlers/TodoCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Handlers/TodoCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Service/Handlers/TodoQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Handlers/TodoQueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Service/MappingProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/MappingProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Service/Queries/GetFilteredTodosQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Queries/GetFilteredTodosQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Service/Queries/GetTodoQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Queries/GetTodoQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Service/Queries/GetTodosQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Queries/GetTodosQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Service/Queries/IQuery.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todo.Service/Todo.Service.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Todos.Service.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TodoApi.sln" beforeDir="false" afterPath="$PROJECT_DIR$/TodoApi.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Api/Controllers/TodoController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Api/Controllers/TodoController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Api/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Api/Todos.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Api/Todos.Api.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Service/Commands/CreateTodoCommand.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Service/Commands/DeleteTodoCommand.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Service/Commands/ICommand.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Service/Commands/UpdateTodoCommand.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Service/Handlers/ICommandHandler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Service/Handlers/IQueryHandler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Service/Handlers/TodoCommandHandler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Service/Handlers/TodoQueryHandler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Service/Queries/GetFilteredTodosQuery.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Service/Queries/GetTodoQuery.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Service/Queries/GetTodosQuery.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Service/Queries/IQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Queries/GetTodo/GetTodoQueryHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Service/Todos.Service.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Todos.Service.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Service/Validators/TodoValidator.cs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/../.." value="main" />
+      </map>
+    </option>
+  </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/cd2e5271223044289d7174c8a2f0869616298/36/f5665df6/ICommand.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ef38234b09464897a1796caedbffff3c3ada98/d4/9a64d989/IQueryable`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Admin/source/Github/Todo/Backend/TodoApi/TodoApi.Domain/Entities/Todo.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Admin/source/Github/Todo/Backend/TodoApi/TodoApi.Service/Handlers/TodoCommandHandler.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Admin/source/Github/Todo/Backend/TodoApi/TodoApi.Service/MappingProfile.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Admin/source/Github/Todo/Backend/TodoApi/TodoApi/Controllers/TodoController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Admin/source/Github/Todo/Backend/TodoApi/TodoApi/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/16e25228933e538de5a14ae5e3d114183c20ccac95fcf8478e3c6dcf6e4a2/IRequestHandler.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Todos.Api/Controllers/TodoController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Todos.Api/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Todos.Infrastructure/DatabaseInitializer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Todos.Infrastructure/Repositories/TodoRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Todos.Infrastructure/Services/TodoDbContext.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Todos.Service/Queries/GetFilteredTodosQuery.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Todos.Service/Queries/GetTodoQuery.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Todos.Service/Queries/GetTodosQuery.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Todos.Service/Queries/IQuery.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Todos.Service/Validators/TodoValidator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Todos.Service/Queries/GetAllFilteredTodos/GetAllFilteredTodosQuery.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Todos.Service/Queries/GetAllTodos/GetAllTodosQuery.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Todos.Service/Queries/GetTodo/GetTodoQuery.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -261,7 +251,8 @@
       <workItem from="1659103963292" duration="6721000" />
       <workItem from="1659111089609" duration="8741000" />
       <workItem from="1659140745451" duration="2557000" />
-      <workItem from="1659173976316" duration="9505000" />
+      <workItem from="1659173976316" duration="10219000" />
+      <workItem from="1659193063049" duration="3337000" />
     </task>
     <task id="LOCAL-00001" summary="Add working database connection to TODO microservice">
       <created>1659107421807</created>
@@ -305,7 +296,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659185099352</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="todo microservice refactor">
+      <created>1659188371182</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1659188371182</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -335,6 +333,7 @@
     <MESSAGE value="Added teams and users to TODO microservice" />
     <MESSAGE value="Todo microservice -  refactor, added logging" />
     <MESSAGE value="Todo microservice - Refactoring," />
-    <option name="LAST_COMMIT_MESSAGE" value="Todo microservice - Refactoring," />
+    <MESSAGE value="todo microservice refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="todo microservice refactor" />
   </component>
 </project>

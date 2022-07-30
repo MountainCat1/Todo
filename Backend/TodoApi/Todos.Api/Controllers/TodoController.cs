@@ -1,8 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Todos.Service.Commands;
+using Todos.Service.Commands.CreateTodo;
+using Todos.Service.Commands.DeleteTodo;
+using Todos.Service.Commands.UpdateTodo;
 using Todos.Service.Dto;
-using Todos.Service.Handlers;
 using Todos.Service.Queries;
+using Todos.Service.Queries.GetAllFilteredTodos;
+using Todos.Service.Queries.GetAllTodos;
+using Todos.Service.Queries.GetTodo;
 
 namespace Todos.Api.Controllers;
 
@@ -10,22 +16,20 @@ namespace Todos.Api.Controllers;
 [Route("api/todo")]
 public class TodoController : Controller
 {
-    private readonly ITodoQueryHandler _queryHandler;
-    private readonly ITodoCommandHandler _commandHandler;
-
-    public TodoController(ITodoQueryHandler queryHandler, ITodoCommandHandler commandHandler)
+    private readonly IMediator _mediator;
+    
+    public TodoController(IMediator mediator)
     {
-        _queryHandler = queryHandler;
-        _commandHandler = commandHandler;
+        _mediator = mediator;
     }
 
     [HttpGet("")]
     [Produces(typeof(ICollection<TodoDto>))]
     public async Task<IActionResult> GetTodos([FromQuery] Guid? teamGuid, [FromQuery] Guid? userGuid)
     {
-        var query = new GetFilteredTodosQuery(teamGuid, userGuid);
+        var query = new GetAllFilteredTodosQuery(teamGuid, userGuid);
         
-        var result = await _queryHandler.Handle(query, new CancellationToken());
+        var result = await _mediator.Send(query, new CancellationToken());
         return Ok(result);
     }
     
@@ -33,9 +37,9 @@ public class TodoController : Controller
     [Produces(typeof(ICollection<TodoDto>))]
     public async Task<IActionResult> GetTodos()
     {
-        var query = new GetTodosQuery();
+        var query = new GetAllTodosQuery();
         
-        var result = await _queryHandler.Handle(query, new CancellationToken());
+        var result = await _mediator.Send(query, new CancellationToken());
         return Ok(result);
     }
     
@@ -46,7 +50,7 @@ public class TodoController : Controller
     {
         var query = new GetTodoQuery(){Guid = guid};
         
-        var result = await _queryHandler.Handle(query, new CancellationToken());
+        var result = await _mediator.Send(query, new CancellationToken());
 
         if (result == null)
             return NotFound();
@@ -57,37 +61,27 @@ public class TodoController : Controller
     [HttpPost("")]
     public async Task<IActionResult> CreateTodo([FromBody] CreateTodoDto createTodoDto)
     {
-        var command = new CreateTodoCommand()
-        {
-            CreateTodoDto = createTodoDto
-        };
+        var command = new CreateTodoCommand(createTodoDto);
         
-        await _commandHandler.Handle(command, new CancellationToken());
+        await _mediator.Send(command, new CancellationToken());
         return Ok();
     }
     
     [HttpPut("{guid}")]
     public async Task<IActionResult> UpdateTodo([FromRoute] Guid guid, [FromBody] TodoDto todoDto)
     {
-        var command = new UpdateTodoCommand()
-        {
-            Guid = guid,
-            TodoDto = todoDto
-        };
+        var command = new UpdateTodoCommand(guid, todoDto);
         
-        await _commandHandler.Handle(command, new CancellationToken());
+        await _mediator.Send(command, new CancellationToken());
         return Ok();
     }
     
     [HttpDelete("{guid}")]
     public async Task<IActionResult> DeleteTodo([FromRoute] Guid guid)
     {
-        var command = new DeleteTodoCommand()
-        {
-            Guid = guid
-        };
+        var command = new DeleteTodoCommand(guid);
         
-        await _commandHandler.Handle(command, new CancellationToken());
+        await _mediator.Send(command, new CancellationToken());
         return Ok();
     }
 }
