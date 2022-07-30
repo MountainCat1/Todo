@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Todo.Data.Repositories;
 using Todo.Service.Commands;
 using Todo.Domain.Entities;
+using Todo.Infrastructure.Repositories;
 using Todo.Service.Queries;
 
 namespace Todo.Service.Handlers;

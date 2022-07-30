@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Todo.Data.Services;
-using Todo.Domain.Entities;
+using Todo.Infrastructure.Services;
 
-namespace Todo.Data.Repositories;
+namespace Todo.Infrastructure.Repositories;
 
 public interface ITodoRepository
 {

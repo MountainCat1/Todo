@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using Todo.Data;
-using Todo.Data.Repositories;
-using Todo.Data.Services;
+using Todo.Api.Middleware;
+using Todo.Infrastructure;
+using Todo.Infrastructure.Repositories;
+using Todo.Infrastructure.Services;
 using Todo.Service;
 using Todo.Service.Handlers;
-using Todo.Service.Queries;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,6 +51,8 @@ if (true || app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 

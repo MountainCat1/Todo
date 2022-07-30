@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Todo.Data.Repositories;
+using Todo.Infrastructure.Repositories;
 using Todo.Service.Dto;
 using Todo.Service.Queries;
 

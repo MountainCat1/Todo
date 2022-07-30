@@ -4,8 +4,7 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <AssemblyName>Todo.Data</AssemblyName>
-        <RootNamespace>Todo.Data</RootNamespace>
+        <PackageId>Todo.Infrastructure</PackageId>
     </PropertyGroup>
 
     <ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Todo.Data;
+namespace Todo.Infrastructure;
 
 public class DatabaseInitializer
 {
