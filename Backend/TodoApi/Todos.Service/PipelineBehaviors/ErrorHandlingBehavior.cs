@@ -10,7 +10,7 @@ namespace Todos.Service.PipelineBehaviors;
 
 
 public sealed class ErrorHandlingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : class, ICommand<TResponse>
+    where TRequest : class, IRequest<TResponse>
 {
 
     private readonly ILogger<ErrorHandlingBehavior<TRequest,TResponse>> _logger;
