@@ -1,3 +1,4 @@
+using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Todos.Api.Middleware;
@@ -32,8 +33,10 @@ services.AddAutoMapper(typeof(MappingProfile));
 
 services.AddScoped<ITodoRepository, TodoRepository>();
 
-services.AddMediatR(typeof(AssemblyPointer).Assembly);
+services.AddMediatR(typeof(ServiceAssemblyPointer).Assembly);
+services.AddValidatorsFromAssembly(typeof(ServiceAssemblyPointer).Assembly);
 
+services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 services.AddScoped<ErrorHandlingMiddleware>();
 
 var app = builder.Build();

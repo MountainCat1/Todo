@@ -1,4 +1,6 @@
-﻿namespace Todos.Api.Middleware;
+﻿using FluentValidation;
+
+namespace Todos.Api.Middleware;
 
 public class ErrorHandlingMiddleware : IMiddleware
 {
@@ -14,6 +16,11 @@ public class ErrorHandlingMiddleware : IMiddleware
         try
         {
             await next.Invoke(context);
+        }
+        catch (ValidationException validationException)
+        {
+            context.Response.StatusCode = StatusCodes.Status400BadRequest;
+            await context.Response.WriteAsync(validationException.Message);
         }
         catch (Exception e)
         {

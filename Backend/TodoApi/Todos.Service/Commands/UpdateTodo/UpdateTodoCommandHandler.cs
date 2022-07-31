@@ -21,7 +21,7 @@ public class UpdateTodoCommandHandler : ICommandHandler<UpdateTodoCommand>
 
     public async Task<Unit> Handle(UpdateTodoCommand request, CancellationToken cancellationToken)
     {
-        var entity = _mapper.Map<Todo>(request.TodoDto);
+        var entity = _mapper.Map<Todo>(request.Dto);
 
         await _repository.UpdateAsync(request.Guid, entity);
         

@@ -9,16 +9,18 @@
     <projectFile profileName="IIS Express">TodoApi.Domain/TodoApi.Domain.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="febdeed7-616d-4cd7-a7b7-b9d9ba1dde27" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Todos.Service/Abstractions/ICommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Todos.Service/Abstractions/ICommandHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Todos.Service/Abstractions/IQuery.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Todos.Service/Abstractions/IQueryHandler.cs" afterDir="false" />
+    <list default="true" id="febdeed7-616d-4cd7-a7b7-b9d9ba1dde27" name="Changes" comment="Refactor CQRS">
+      <change afterPath="$PROJECT_DIR$/Todos.Service/Commands/CreateTodo/CreateTodoValidator.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Todos.Service/Commands/UpdateTodo/UpdateTodoCommandValidator.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Todos.Service/ValidationBehavior.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TodoApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TodoApi/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Commands/AddTodoTag/AddTodoTagCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Commands/AddTodoTag/AddTodoTagCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Commands/AddTodoTag/AddTodoTagCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Commands/AddTodoTag/AddTodoTagCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Commands/CreateTodo/CreateTodoCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Commands/CreateTodo/CreateTodoCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Commands/CreateTodo/CreateTodoCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Commands/CreateTodo/CreateTodoCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Api/Middleware/ErrorHandlingMiddleware.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Api/Middleware/ErrorHandlingMiddleware.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Api/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Api/Todos.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Api/Todos.Api.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Service/AssemblyPointer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/ServiceAssemblyPointer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Service/Commands/UpdateTodo/UpdateTodoCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Commands/UpdateTodo/UpdateTodoCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Service/Commands/UpdateTodo/UpdateTodoCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Commands/UpdateTodo/UpdateTodoCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Service/Dto/TodoDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Dto/TodoDto.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +44,7 @@
     <setting file="file://$PROJECT_DIR$/Todos.Infrastructure/DatabaseInitializer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Todos.Infrastructure/Repositories/TodoRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Todos.Infrastructure/Services/TodoDbContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Admin/source/Github/Todo/Backend/TodoApi/Todos.Service/Commands/AddTodoTag/AddTodoTagCommand.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Todos.Service/Queries/GetAllFilteredTodos/GetAllFilteredTodosQuery.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Todos.Service/Queries/GetAllTodos/GetAllTodosQuery.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Todos.Service/Queries/GetTodo/GetTodoQuery.cs" root0="FORCE_HIGHLIGHTING" />
@@ -236,7 +239,7 @@
       <workItem from="1659193063049" duration="3652000" />
       <workItem from="1659197416489" duration="3570000" />
       <workItem from="1659212024578" duration="3825000" />
-      <workItem from="1659225565261" duration="566000" />
+      <workItem from="1659225565261" duration="3969000" />
     </task>
     <task id="LOCAL-00001" summary="Add working database connection to TODO microservice">
       <created>1659107421807</created>
@@ -301,7 +304,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659215336570</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Refactor CQRS">
+      <created>1659226794097</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1659226794097</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -334,6 +344,7 @@
     <MESSAGE value="todo microservice refactor" />
     <MESSAGE value="Refactor, used MediaR, divided CQRS more -- into separate namespaces" />
     <MESSAGE value="Added tags" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added tags" />
+    <MESSAGE value="Refactor CQRS" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor CQRS" />
   </component>
 </project>

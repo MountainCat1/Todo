@@ -6,12 +6,12 @@ namespace Todos.Service.Commands.UpdateTodo;
 
 public class UpdateTodoCommand : ICommand
 {
-    public UpdateTodoCommand(Guid guid, TodoDto todoDto)
+    public UpdateTodoCommand(Guid guid, TodoDto dto)
     {
         Guid = guid;
-        TodoDto = todoDto;
+        Dto = dto;
     }
 
     public Guid Guid { get; init; }
-    public TodoDto TodoDto { get; init; }
+    public TodoDto Dto { get; init; }
 }
