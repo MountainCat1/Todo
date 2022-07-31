@@ -3,8 +3,8 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Todos.Api.Middleware;
 using Todos.Infrastructure;
+using Todos.Infrastructure.Data;
 using Todos.Infrastructure.Repositories;
-using Todos.Infrastructure.Services;
 using Todos.Service;
 
 var builder = WebApplication.CreateBuilder(args);

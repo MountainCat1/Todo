@@ -1,9 +1,8 @@
-﻿using System.Text.Json;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Todos.Domain.Entities;
 
-namespace Todos.Infrastructure.Services;
+namespace Todos.Infrastructure.Data;
 
 public class TodoDbContext : DbContext
 {

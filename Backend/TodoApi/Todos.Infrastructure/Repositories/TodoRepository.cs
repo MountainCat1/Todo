@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Todos.Domain.Entities;
-using Todos.Infrastructure.Services;
+using Todos.Infrastructure.Data;
 
 namespace Todos.Infrastructure.Repositories;
 
