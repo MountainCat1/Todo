@@ -9,23 +9,8 @@
     <projectFile profileName="IIS Express">TodoApi.Domain/TodoApi.Domain.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="febdeed7-616d-4cd7-a7b7-b9d9ba1dde27" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Todos.Domain/Exceptions/ItemNotFoundException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Todos.Domain/Repositories/ITodoRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Todos.Service/Exceptions/NotFoundException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Todos.Service/PipelineBehaviors/ErrorHandlingBehavior.cs" afterDir="false" />
+    <list default="true" id="febdeed7-616d-4cd7-a7b7-b9d9ba1dde27" name="Changes" comment="missing files">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TodoApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TodoApi/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Api/Middleware/ErrorHandlingMiddleware.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Api/Middleware/ErrorHandlingMiddleware.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Infrastructure/Repositories/TodoRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Infrastructure/Repositories/TodoRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Commands/AddTodoTag/AddTodoTagCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Commands/AddTodoTag/AddTodoTagCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Commands/CreateTodo/CreateTodoCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Commands/CreateTodo/CreateTodoCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Commands/DeleteTodo/DeleteTodoCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Commands/DeleteTodo/DeleteTodoCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Commands/UpdateTodo/UpdateTodoCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Commands/UpdateTodo/UpdateTodoCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Queries/GetAllFilteredTodos/GetAllFilteredTodosQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Queries/GetAllFilteredTodos/GetAllFilteredTodosQueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Queries/GetAllTodos/GetAllTodosQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Queries/GetAllTodos/GetAllTodosQueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Queries/GetTodo/GetTodoQueryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Queries/GetTodo/GetTodoQueryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/ValidationBehavior.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/PipelineBehaviors/ValidationBehavior.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -225,6 +210,8 @@
       <list>
         <item itemvalue="Docker.TodoApi/Dockerfile final" />
         <item itemvalue="Docker.TodoApi/Dockerfile" />
+        <item itemvalue="Docker.TodoApi/Dockerfile final" />
+        <item itemvalue="Docker.TodoApi/Dockerfile" />
       </list>
     </recent_temporary>
   </component>
@@ -249,6 +236,7 @@
       <workItem from="1659212024578" duration="3825000" />
       <workItem from="1659225565261" duration="4528000" />
       <workItem from="1659265669100" duration="6312000" />
+      <workItem from="1659291541038" duration="301000" />
     </task>
     <task id="LOCAL-00001" summary="Add working database connection to TODO microservice">
       <created>1659107421807</created>
@@ -341,7 +329,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659229886827</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="missing files">
+      <created>1659291816759</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1659291816759</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -378,7 +373,8 @@
     <MESSAGE value="Added validation for CQRS" />
     <MESSAGE value="small comment" />
     <MESSAGE value="refactor - renaming" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor - renaming" />
+    <MESSAGE value="missing files" />
+    <option name="LAST_COMMIT_MESSAGE" value="missing files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
