@@ -2,10 +2,12 @@
 using MediatR;
 using Todos.Domain.Entities;
 using Todos.Infrastructure.Repositories;
+using Todos.Service.Abstractions;
+using Todos.Service.Dto;
 
 namespace Todos.Service.Commands.CreateTodo;
 
-public class CreateTodoCommandHandler : IRequestHandler<CreateTodoCommand>
+public class CreateTodoCommandHandler : ICommandHandler<CreateTodoCommand, Guid>
 {
     private readonly ITodoRepository _repository;
     private readonly IMapper _mapper;
@@ -16,12 +18,12 @@ public class CreateTodoCommandHandler : IRequestHandler<CreateTodoCommand>
         _mapper = mapper;
     }
 
-    public async Task<Unit> Handle(CreateTodoCommand request, CancellationToken cancellationToken)
+    public async Task<Guid> Handle(CreateTodoCommand request, CancellationToken cancellationToken)
     {
         var entity = _mapper.Map<Todo>(request.Dto);
 
-        await _repository.CreateAsync(entity);
+        var createdEntity = await _repository.CreateAsync(entity);
         
-        return Unit.Value;
+        return createdEntity.Guid;
     }
 }

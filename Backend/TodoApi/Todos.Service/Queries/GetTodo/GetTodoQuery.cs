@@ -1,9 +1,10 @@
 ﻿using MediatR;
+using Todos.Service.Abstractions;
 using Todos.Service.Dto;
 
 namespace Todos.Service.Queries.GetTodo;
 
-public class GetTodoQuery : IRequest<TodoDto?>
+public class GetTodoQuery : IQuery<TodoDto?>
 {
     public Guid Guid { get; init; }
 }

@@ -1,8 +1,9 @@
 ﻿using MediatR;
+using Todos.Service.Abstractions;
 
 namespace Todos.Service.Commands.DeleteTodo;
 
-public class DeleteTodoCommand : IRequest
+public class DeleteTodoCommand : ICommand
 {
     public DeleteTodoCommand(Guid guid)
     {

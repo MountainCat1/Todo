@@ -1,9 +1,10 @@
 ﻿using MediatR;
+using Todos.Service.Abstractions;
 using Todos.Service.Dto;
 
 namespace Todos.Service.Commands.CreateTodo;
 
-public class CreateTodoCommand : IRequest
+public class CreateTodoCommand : ICommand<Guid>
 {
     public CreateTodoCommand(CreateTodoDto dto)
     {

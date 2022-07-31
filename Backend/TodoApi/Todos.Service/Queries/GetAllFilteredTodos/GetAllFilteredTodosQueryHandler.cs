@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using MediatR;
 using Todos.Infrastructure.Repositories;
+using Todos.Service.Abstractions;
 using Todos.Service.Dto;
 
 namespace Todos.Service.Queries.GetAllFilteredTodos;
 
-public class GetAllFilteredTodosQueryHandler : IRequestHandler<GetAllFilteredTodosQuery, ICollection<TodoDto>>
+public class GetAllFilteredTodosQueryHandler : IQueryHandler<GetAllFilteredTodosQuery, ICollection<TodoDto>>
 {
     private readonly ITodoRepository _repository;
     private readonly IMapper _mapper;

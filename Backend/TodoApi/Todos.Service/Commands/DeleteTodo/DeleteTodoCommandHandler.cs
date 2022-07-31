@@ -1,10 +1,12 @@
-﻿using AutoMapper;
+﻿using System.Windows.Input;
+using AutoMapper;
 using MediatR;
 using Todos.Infrastructure.Repositories;
+using Todos.Service.Abstractions;
 
 namespace Todos.Service.Commands.DeleteTodo;
 
-public class DeleteTodoCommandHandler : IRequestHandler<DeleteTodoCommand>
+public class DeleteTodoCommandHandler : ICommand<DeleteTodoCommand>
 {    
     private readonly ITodoRepository _repository;
 

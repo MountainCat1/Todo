@@ -10,16 +10,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="febdeed7-616d-4cd7-a7b7-b9d9ba1dde27" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Todos.Domain/Entities/TodoTag.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Todos.Service/Commands/AddTodoTag/AddTodoTagCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Todos.Service/Commands/AddTodoTag/AddTodoTagCommandHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Todos.Service/Abstractions/ICommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Todos.Service/Abstractions/ICommandHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Todos.Service/Abstractions/IQuery.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Todos.Service/Abstractions/IQueryHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TodoApi/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TodoApi/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Domain/Entities/Todo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Domain/Entities/Todo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Infrastructure/Repositories/TodoRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Infrastructure/Repositories/TodoRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Infrastructure/Services/TodoDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Infrastructure/Services/TodoDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Dto/CreateTodoDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Dto/CreateTodoDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Todos.Service/Dto/TodoDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Dto/TodoDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Service/Commands/AddTodoTag/AddTodoTagCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Commands/AddTodoTag/AddTodoTagCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Service/Commands/AddTodoTag/AddTodoTagCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Commands/AddTodoTag/AddTodoTagCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Service/Commands/CreateTodo/CreateTodoCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Commands/CreateTodo/CreateTodoCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Todos.Service/Commands/CreateTodo/CreateTodoCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Todos.Service/Commands/CreateTodo/CreateTodoCommandHandler.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,7 +235,8 @@
       <workItem from="1659173976316" duration="10219000" />
       <workItem from="1659193063049" duration="3652000" />
       <workItem from="1659197416489" duration="3570000" />
-      <workItem from="1659212024578" duration="2991000" />
+      <workItem from="1659212024578" duration="3825000" />
+      <workItem from="1659225565261" duration="566000" />
     </task>
     <task id="LOCAL-00001" summary="Add working database connection to TODO microservice">
       <created>1659107421807</created>
@@ -294,7 +294,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659196740527</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Added tags">
+      <created>1659215336570</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1659215336570</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -326,6 +333,7 @@
     <MESSAGE value="Todo microservice - Refactoring," />
     <MESSAGE value="todo microservice refactor" />
     <MESSAGE value="Refactor, used MediaR, divided CQRS more -- into separate namespaces" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor, used MediaR, divided CQRS more -- into separate namespaces" />
+    <MESSAGE value="Added tags" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added tags" />
   </component>
 </project>

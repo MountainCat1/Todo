@@ -1,12 +1,14 @@
 ﻿using System.Reflection.Metadata.Ecma335;
+using System.Windows.Input;
 using AutoMapper;
 using MediatR;
 using Todos.Domain.Entities;
 using Todos.Infrastructure.Repositories;
+using Todos.Service.Abstractions;
 
 namespace Todos.Service.Commands.UpdateTodo;
 
-public class UpdateTodoCommandHandler : IRequestHandler<UpdateTodoCommand>
+public class UpdateTodoCommandHandler : ICommandHandler<UpdateTodoCommand>
 {
     private readonly ITodoRepository _repository;
     private readonly IMapper _mapper;
