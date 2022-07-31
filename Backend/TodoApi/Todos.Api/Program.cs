@@ -2,10 +2,12 @@ using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Todos.Api.Middleware;
+using Todos.Domain.Repositories;
 using Todos.Infrastructure;
 using Todos.Infrastructure.Data;
 using Todos.Infrastructure.Repositories;
 using Todos.Service;
+using Todos.Service.PipelineBehaviors;
 
 var builder = WebApplication.CreateBuilder(args);
 // Configuration
@@ -37,6 +39,8 @@ services.AddMediatR(typeof(ServiceAssemblyPointer).Assembly);
 services.AddValidatorsFromAssembly(typeof(ServiceAssemblyPointer).Assembly);
 
 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
+
 services.AddScoped<ErrorHandlingMiddleware>();
 
 var app = builder.Build();

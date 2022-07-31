@@ -2,7 +2,7 @@
 using MediatR;
 using Todos.Service.Abstractions;
 
-namespace Todos.Service;
+namespace Todos.Service.PipelineBehaviors;
 
 public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : class, ICommand<TResponse>

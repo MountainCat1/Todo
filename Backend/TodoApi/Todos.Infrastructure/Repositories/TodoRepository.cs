@@ -1,19 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Todos.Domain.Entities;
+using Todos.Domain.Exceptions;
+using Todos.Domain.Repositories;
 using Todos.Infrastructure.Data;
 
 namespace Todos.Infrastructure.Repositories;
-
-public interface ITodoRepository
-{
-    public Task<ICollection<Todo>> GetAllAsync(Guid? teamGuid, Guid? userGuid);
-    public Task<ICollection<Todo>> GetAllAsync();
-    public Task<Todo?> GetAsync(Guid guid);
-    public Task<Todo> CreateAsync(Todo todo);
-    public Task DeleteAsync(Guid guid);
-    public Task<Todo> UpdateAsync(Guid guid, Todo todo);
-}
 
 public class TodoRepository : ITodoRepository
 {
@@ -75,7 +67,7 @@ public class TodoRepository : ITodoRepository
         var entityToDelete = await GetAsync(guid);
 
         if (entityToDelete is null)
-            throw new ArgumentException($"Todos.Api not found (guid: {guid})");
+            throw new ItemNotFoundException($"Todo not found (guid: {guid})");
 
         _todoDbContext.Todos.Remove(entityToDelete);
         await _todoDbContext.SaveChangesAsync();
@@ -87,7 +79,7 @@ public class TodoRepository : ITodoRepository
         var entityToUpdate = await GetAsync(guid);
 
         if (entityToUpdate is null)
-            throw new ArgumentException($"Todos.Api not found (guid: {guid})");
+            throw new ItemNotFoundException($"Todo not found (guid: {guid})");
 
         todo.Guid = entityToUpdate.Guid;
 

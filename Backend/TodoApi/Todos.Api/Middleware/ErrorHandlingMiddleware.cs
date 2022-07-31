@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Todos.Service.Exceptions;
 
 namespace Todos.Api.Middleware;
 
@@ -17,15 +18,20 @@ public class ErrorHandlingMiddleware : IMiddleware
         {
             await next.Invoke(context);
         }
-        catch (ValidationException validationException)
+        catch (NotFoundException ex)
+        {
+            context.Response.StatusCode = StatusCodes.Status404NotFound;
+            await context.Response.WriteAsync(ex.Message);
+        }
+        catch (ValidationException ex)
         {
             context.Response.StatusCode = StatusCodes.Status400BadRequest;
-            await context.Response.WriteAsync(validationException.Message);
+            await context.Response.WriteAsync(ex.Message);
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            _logger.LogError(e, e.Message);
-            context.Response.StatusCode = 500;
+            _logger.LogError(ex, ex.Message);
+            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
             await context.Response.WriteAsync("Something went wrong");
         }
     }
