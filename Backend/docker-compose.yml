@@ -13,8 +13,8 @@ services:
       - rabbitmq_go_net
   todo-api:
     build:
-      context: .
-      dockerfile: TodoApi/Dockerfile
+      context: ./TodoApi
+      dockerfile: Dockerfile
     ports:
       - "5000:5000"
       - "5001:5001"
