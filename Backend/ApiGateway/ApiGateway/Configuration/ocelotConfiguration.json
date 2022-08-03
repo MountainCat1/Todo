@@ -1,0 +1,22 @@
+﻿{
+
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/Todo",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "todo-api",
+          "Port": 5000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Todo",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    }
+  ],
+  "GlobalConfiguration": {
+    "RequestIdKey": "OcRequestId",
+    "AdministrationPath": "/administration"
+  }
+}

@@ -11,6 +11,12 @@ services:
         - ./.docker/rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
     networks:
       - rabbitmq_go_net
+  api-gateway:
+    build:
+      context: ./ApiGateway
+      dockerfile: ApiGateway/Dockerfile
+    ports:
+      - "5100:5100"
   todo-api:
     build:
       context: ./TodoApi
