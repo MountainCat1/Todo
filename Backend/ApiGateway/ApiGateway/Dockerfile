@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 5100
 EXPOSE 443
-ENV ASPNETCORE_URLS="http://*:5100"
+
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
@@ -11,7 +11,7 @@ RUN dotnet restore "ApiGateway/ApiGateway.csproj"
 COPY . .
 WORKDIR "/src/ApiGateway"
 RUN dotnet build "ApiGateway.csproj" -c Release -o /app/build
-RUN dotnet dev-certs https
+RUN dotnet dev-certs https --trust
 
 FROM build AS publish
 RUN dotnet publish "ApiGateway.csproj" -c Release -o /app/publish

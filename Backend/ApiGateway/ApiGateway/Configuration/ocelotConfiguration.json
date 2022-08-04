@@ -2,7 +2,7 @@
 
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/Todo",
+      "DownstreamPathTemplate": "/api/Todo/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -10,13 +10,14 @@
           "Port": 5000
         }
       ],
-      "UpstreamPathTemplate": "/api/Todo",
+      "UpstreamPathTemplate": "/api/Todo/{everything}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
       "DangerousAcceptAnyServerCertificateValidator": true
     }
   ],
   "GlobalConfiguration": {
     "RequestIdKey": "OcRequestId",
-    "AdministrationPath": "/administration"
+    "AdministrationPath": "/administration",
+    "RouteIsCaseSensitive": true
   }
 }

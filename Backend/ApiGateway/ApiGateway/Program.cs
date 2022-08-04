@@ -21,13 +21,23 @@ host.ConfigureAppConfiguration((hostingContext, config) =>
 host.ConfigureLogging(loggingBuilder => loggingBuilder.AddConsole());
 
 // Services
+services.AddControllers();
+services.AddEndpointsApiExplorer();
 services.AddOcelot(configuration);
 
 // App
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
+app.UseStaticFiles();
+app.UseRouting();
+
+app.UseEndpoints(endpoints => {
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+});
 
 app.UseOcelot().Wait();
+
 
 app.Run();
