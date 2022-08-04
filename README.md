@@ -1,7 +1,7 @@
 # Todo Mobile App Back-End
 
 ### Description
-There shhould be general description of the project, please do it later <3
+There should be general description of the project, please do it later <3
 
 ### Todo list
 * Todo microservice             (_In progress..._)
