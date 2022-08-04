@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  db:
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=1Secure*Password1
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - rabbitmq_go_net
+  api-gateway:
+    build:
+      context: ./ApiGateway
+      dockerfile: ApiGateway/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://*:5100
+    ports:
+      - "5100:5100"
+  todo-api:
+    build:
+      context: ./TodoApi
+      dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_URLS=https://*:443;https://*:5000;http://*:5001
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+    depends_on:
+      - db
+networks:
+  rabbitmq_go_net:
+    driver: bridge
