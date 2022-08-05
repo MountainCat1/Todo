@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Teams.Infrastructure;
 using Teams.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,11 @@ services.AddDbContext<TeamsDbContext>(options
 
 // APP
 var app = builder.Build();
+
+await new DatabaseInitializer(
+        app.Services.CreateAsyncScope()
+            .ServiceProvider.GetRequiredService<TeamsDbContext>())
+    .InitializeAsync(true);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
