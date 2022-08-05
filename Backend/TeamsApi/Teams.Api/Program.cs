@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Teams.Domain.Repositories;
 using Teams.Infrastructure;
 using Teams.Infrastructure.Data;
+using Teams.Infrastructure.Repositories;
 using Teams.Service;
-using Teams.Service.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
