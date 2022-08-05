@@ -1,4 +1,6 @@
-﻿namespace Teams.Domain.Abstractions;
+﻿using System.Linq.Expressions;
+
+namespace Teams.Domain.Abstractions;
 
 public interface IRepository<TEntity> where TEntity : class, IEntity
 {
@@ -9,4 +11,5 @@ public interface IRepository<TEntity> where TEntity : class, IEntity
     public Task<TEntity> CreateAsync(TEntity entity);
     public Task<TEntity> InsertAsync(TEntity entity);
     public Task<TEntity> UpdateAsync(Guid guid, TEntity entity);
+    Task<ICollection<TEntity>> GetAsync(Expression<Func<TEntity,bool>> predicate);
 }

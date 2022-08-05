@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Teams.Domain.Abstractions;
 using Teams.Infrastructure.Exceptions;
@@ -35,6 +36,16 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
             throw new ItemNotFoundException();
 
         return entity;
+    }
+
+    public async Task<ICollection<TEntity>> GetAsync(Expression<Func<TEntity,bool>> predicate)
+    {
+        var entities = await _dbContext
+            .Set<TEntity>()
+            .Where(predicate)
+            .ToListAsync();
+
+        return entities;
     }
 
     public async Task<ICollection<TEntity>> GetAllAsync()
