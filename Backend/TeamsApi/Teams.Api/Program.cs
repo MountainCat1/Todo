@@ -1,6 +1,7 @@
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using Teams.Api.Middleware;
 using Teams.Domain.Repositories;
 using Teams.Infrastructure;
 using Teams.Infrastructure.Data;
@@ -34,9 +35,9 @@ services.AddMediatR(typeof(ServiceAssemblyPointer));
 // MediaR validation, check it out here: https://www.nuget.org/packages/MediatR.Extensions.FluentValidation.AspNetCore
 services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly});
 
-
-
 services.AddScoped<ITeamRepository, TeamRepository>();
+
+services.AddScoped<ErrorHandlingMiddleware>();
 
 // APP
 var app = builder.Build();
@@ -52,6 +53,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 
