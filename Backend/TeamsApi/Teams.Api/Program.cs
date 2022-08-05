@@ -1,8 +1,11 @@
 using MediatR;
+using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using Teams.Domain.Repositories;
 using Teams.Infrastructure;
 using Teams.Infrastructure.Data;
 using Teams.Service;
+using Teams.Service.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -24,10 +27,14 @@ services.AddLogging(options =>
 
 services.AddAutoMapper(typeof(MappingProfile));
 services.AddMediatR(typeof(ServiceAssemblyPointer));
+// MediaR validation, check it out here: https://www.nuget.org/packages/MediatR.Extensions.FluentValidation.AspNetCore
+services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly});
 
 services.AddDbContext<TeamsDbContext>(options 
     => options.UseSqlServer(configuration.GetConnectionString("DatabaseConnection") 
         ?? throw new ArgumentException("Connection string was not specified")));
+
+services.AddScoped<ITeamRepository, TeamRepository>();
 
 // APP
 var app = builder.Build();
