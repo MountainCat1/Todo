@@ -8,9 +8,14 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
+        // Team
         CreateMap<Team, TeamDto>();
         CreateMap<TeamDto, Team>();
 
         CreateMap<CreateTeamDto, Team>();
+
+        // TeamMember
+        CreateMap<TeamMember, TeamMemberDto>();
+        CreateMap<TeamMemberDto, TeamMember>();
     }
 }
