@@ -12,6 +12,12 @@ configuration.AddEnvironmentVariables();
 services.AddControllers();
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
+services.AddLogging(options =>
+{
+    options.AddConsole();
+    options.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Warning);
+    options.AddFilter("Microsoft.EntityFrameworkCore.Infrastructure", LogLevel.Warning);
+});
 
 services.AddDbContext<TeamsDbContext>(options 
     => options.UseSqlServer(configuration.GetConnectionString("DatabaseConnection") 

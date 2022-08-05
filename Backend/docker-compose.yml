@@ -17,9 +17,9 @@ services:
       context: ./ApiGateway
       dockerfile: ApiGateway/Dockerfile
     environment:
-      - ASPNETCORE_URLS=http://*:7100
+      - ASPNETCORE_URLS=http://*:4100
     ports:
-      - "7100:7100"
+      - "4100:4100"
   
   # === TODOS API ===
   todo-db:
@@ -32,11 +32,11 @@ services:
       context: ./TodoApi
       dockerfile: Dockerfile
     environment:
-      - ASPNETCORE_URLS=https://*:443;https://*:5000;http://*:7000
+      - ASPNETCORE_URLS=https://*:443;https://*:5001;http://*:4001
       - ConnectionStrings:DatabaseConnection=Server=todo-db;Database=TodoDatabase;User=sa;Password=1Secure*Password1;
     ports:
-      - "5000:5000"
-      - "7001:7001"
+      - "5001:5001"
+      - "4001:4001"
     depends_on:
       - todo-db
         
@@ -51,11 +51,11 @@ services:
       context: ./TeamsApi
       dockerfile: Dockerfile
     environment:
-      - ASPNETCORE_URLS=https://*:443;https://*:5001;http://*:7001
+      - ASPNETCORE_URLS=https://*:443;https://*:5002;http://*:4002
       - ConnectionStrings:DatabaseConnection=Server=todo-db;Database=TodoDatabase;User=sa;Password=1Secure*Password1;
     ports:
-      - "5001:5001"
-      - "7001:7001"
+      - "5002:5002"
+      - "4002:4002"
         
 networks:
   rabbitmq_go_net:
