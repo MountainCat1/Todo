@@ -7,5 +7,6 @@ public interface IRepository<TEntity> where TEntity : class, IEntity
     public Task<ICollection<TEntity>> GetAllAsync();
     public Task DeleteAsync(Guid guid);
     public Task<TEntity> CreateAsync(TEntity entity);
+    public Task<TEntity> InsertAsync(TEntity entity);
     public Task<TEntity> UpdateAsync(Guid guid, TEntity entity);
 }

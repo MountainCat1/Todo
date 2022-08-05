@@ -59,6 +59,14 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, I
         return entity;
     }
 
+    public async Task<TEntity> InsertAsync(TEntity entity)
+    {
+        _dbContext.Add(entity);
+
+        await _dbContext.SaveChangesAsync();
+        return entity;
+    }
+
     public async Task<TEntity> UpdateAsync(Guid guid, TEntity entity)
     {
         var entityToUpdate = await GetRequiredAsync(guid);
