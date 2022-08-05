@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Teams.Infrastructure;
 using Teams.Infrastructure.Data;
@@ -22,6 +23,7 @@ services.AddLogging(options =>
 });
 
 services.AddAutoMapper(typeof(MappingProfile));
+services.AddMediatR(typeof(ServiceAssemblyPointer));
 
 services.AddDbContext<TeamsDbContext>(options 
     => options.UseSqlServer(configuration.GetConnectionString("DatabaseConnection") 
