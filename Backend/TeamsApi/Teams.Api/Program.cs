@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Teams.Infrastructure;
 using Teams.Infrastructure.Data;
+using Teams.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -19,6 +20,8 @@ services.AddLogging(options =>
     options.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Warning);
     options.AddFilter("Microsoft.EntityFrameworkCore.Infrastructure", LogLevel.Warning);
 });
+
+services.AddAutoMapper(typeof(MappingProfile));
 
 services.AddDbContext<TeamsDbContext>(options 
     => options.UseSqlServer(configuration.GetConnectionString("DatabaseConnection") 
