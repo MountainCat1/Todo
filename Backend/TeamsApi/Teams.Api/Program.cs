@@ -3,15 +3,19 @@ using Teams.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
-// Env Vars
-string connectionString = Environment.GetEnvironmentVariable("ConnectionString") ?? throw new ArgumentNullException();
+var configuration = builder.Configuration;
+
+// Configuration
+configuration.AddEnvironmentVariables();
 
 // SERVICES
 services.AddControllers();
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
 
-services.AddDbContext<TeamsDbContext>(options => options.UseSqlServer(connectionString));
+services.AddDbContext<TeamsDbContext>(options 
+    => options.UseSqlServer(configuration.GetConnectionString("DatabaseConnection") 
+        ?? throw new ArgumentException("Connection string was not specified")));
 
 // APP
 var app = builder.Build();
