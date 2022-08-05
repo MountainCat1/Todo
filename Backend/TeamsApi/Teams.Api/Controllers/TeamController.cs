@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Teams.Service.Command.CreateTeamCommand;
 using Teams.Service.Dto;
 using Teams.Service.Queries.GetAllTeams;
+using Teams.Service.Queries.GetTeamMembers;
 
 namespace Teams.Api.Controllers;
 
@@ -21,6 +22,14 @@ public class TeamController : Controller
     public async Task<IActionResult> GetAll()
     {
         var query = new GetAllTeamsQuery();
+        var result = await _mediator.Send(query);
+        return Ok(result);
+    }
+    
+    [HttpGet("members/{teamGuid}")]
+    public async Task<IActionResult> GetMembers([FromRoute] Guid teamGuid)
+    {
+        var query = new GetTeamMembersQuery(teamGuid);
         var result = await _mediator.Send(query);
         return Ok(result);
     }
