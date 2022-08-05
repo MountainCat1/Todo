@@ -17,7 +17,7 @@ Microservice responsible for todos
 ##### Ocelot API gateway
 API gateway using Ocelot solution
 ##### RabbitMQ
-Using popular brocker RabbitMQ to queue requests between microservices
+Using popular broker RabbitMQ to queue requests between microservices
 ##### Team microservice
 Microservice responsible for teams
 ##### Authentication microservice
