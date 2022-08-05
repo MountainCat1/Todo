@@ -2,15 +2,28 @@
 
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/Todo/{everything}",
+      "DownstreamPathTemplate": "/Todo/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "todo-api",
-          "Port": 5000
+          "Port": 5001
         }
       ],
       "UpstreamPathTemplate": "/api/Todo/{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+    {
+      "DownstreamPathTemplate": "/Teams/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "teams-api",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Teams/{everything}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
       "DangerousAcceptAnyServerCertificateValidator": true
     }
