@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Teams.Domain.Abstractions;
 using Teams.Infrastructure.Exceptions;
 
@@ -9,10 +10,12 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
     where TDbContext : DbContext
 {
     private readonly TDbContext _dbContext;
+    private readonly ILogger<Repository<TEntity, TDbContext>> _logger;
 
-    public Repository(TDbContext dbContext)
+    public Repository(TDbContext dbContext, ILogger<Repository<TEntity, TDbContext>> logger)
     {
         _dbContext = dbContext;
+        _logger = logger;
     }
 
     public async Task<TEntity?> GetAsync(Guid guid)
@@ -20,6 +23,7 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
         var entity = await _dbContext
             .FindAsync<TEntity>(guid);
 
+        _logger.LogInformation($"Returning entity: {guid}");
         return entity;
     }
 
@@ -39,6 +43,7 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
             .Set<TEntity>()
             .ToListAsync();
 
+        _logger.LogInformation($"Returning all entities");
         return entities;
     }
 
@@ -48,6 +53,7 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
 
         _dbContext.Remove<TEntity>(entity);
 
+        _logger.LogInformation($"Deleting entity: {guid}");
         await _dbContext.SaveChangesAsync();
     }
 
@@ -57,6 +63,7 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
 
         _dbContext.Add(entity);
 
+        _logger.LogInformation($"Creating entity: {entity.Guid}");
         await _dbContext.SaveChangesAsync();
         return entity;
     }
@@ -65,6 +72,7 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
     {
         _dbContext.Add(entity);
 
+        _logger.LogInformation($"Inserting entity: {entity.Guid}");
         await _dbContext.SaveChangesAsync();
         return entity;
     }
@@ -77,6 +85,7 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
 
         _dbContext.Update<TEntity>(entityToUpdate);
 
+        _logger.LogInformation($"Updating entity: {guid}");
         await _dbContext.SaveChangesAsync();
         return entityToUpdate;
     }
