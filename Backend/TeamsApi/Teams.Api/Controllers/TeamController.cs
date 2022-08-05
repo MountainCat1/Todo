@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Teams.Service.Command.CreateTeamCommand;
 using Teams.Service.Dto;
+using Teams.Service.Queries.GetAllTeams;
 
 namespace Teams.Api.Controllers;
 
@@ -16,6 +17,14 @@ public class TeamController : Controller
         _mediator = mediator;
     }
 
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        var query = new GetAllTeamsQuery();
+        var result = await _mediator.Send(query);
+        return Ok(result);
+    }
+
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateTeamDto dto)
     {
@@ -23,6 +32,7 @@ public class TeamController : Controller
         var result = await _mediator.Send(command);
         return Ok(result);
     }
+    
     
         
     // TODO: do a controller for teams
