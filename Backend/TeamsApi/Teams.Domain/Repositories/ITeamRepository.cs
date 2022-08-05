@@ -10,9 +10,4 @@ public interface ITeamRepository
     public Task<Team> CreateAsync(Team todo);
     public Task DeleteAsync(Guid guid);
     public Task<Team> UpdateAsync(Guid guid, Team todo);
-
-    public Task<ICollection<Guid>> GetMembersAsync(Guid teamGuid);
-    public Task<Team> AddMember(Guid userGuid, Guid teamGuid);
-    public Task DeleteMember(Guid userGuid, Guid teamGuid);
-    public Task UpdateMember(TeamMember teamMember, Guid teamGuid);
 }
