@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Teams.Infrastructure;
-using Teams.Infrastructure.Services;
+using Teams.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
