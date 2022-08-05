@@ -9,5 +9,5 @@ public class TeamsDbContext : DbContext
     {
     }
 
-    public DbSet<Team> Type { get; set; }
+    public DbSet<Team> Teams { get; set; }
 }
