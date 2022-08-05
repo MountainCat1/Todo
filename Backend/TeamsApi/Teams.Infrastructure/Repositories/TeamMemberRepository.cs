@@ -6,7 +6,7 @@ using Teams.Infrastructure.Generics;
 
 namespace Teams.Infrastructure.Repositories;
 
-public class TeamMemberRepository : Repository<TeamMember>
+public class TeamMemberRepository : Repository<TeamMember>, ITeamMemberRepository
 {
     public TeamMemberRepository(DbContext dbContext) : base(dbContext)
     {
