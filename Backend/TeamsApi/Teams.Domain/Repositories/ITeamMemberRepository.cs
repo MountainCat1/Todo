@@ -3,6 +3,6 @@ using Teams.Domain.Entities;
 
 namespace Teams.Domain.Repositories;
 
-public interface ITeamRepository : IRepository<Team>
+public interface ITeamMemberRepository : IRepository<TeamMember>
 {
 }
