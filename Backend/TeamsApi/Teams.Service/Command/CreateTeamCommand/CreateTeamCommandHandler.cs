@@ -17,9 +17,9 @@ public class CreateTeamCommandHandler : ICommandHandler<CreateTeamCommand, TeamD
         _mapper = mapper;
     }
 
-    public async Task<TeamDto> Handle(CreateTeamCommand command, CancellationToken cancellationToken)
+    public async Task<TeamDto> Handle(CreateTeamCommand request, CancellationToken cancellationToken)
     {
-        var entity = _mapper.Map<Team>(command.Dto);
+        var entity = _mapper.Map<Team>(request.Dto);
 
         var createdEntity = await _teamRepository.CreateAsync(entity);
 

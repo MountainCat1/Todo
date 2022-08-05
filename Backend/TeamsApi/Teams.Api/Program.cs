@@ -25,14 +25,16 @@ services.AddLogging(options =>
     options.AddFilter("Microsoft.EntityFrameworkCore.Infrastructure", LogLevel.Warning);
 });
 
+services.AddDbContext<TeamsDbContext>(options 
+    => options.UseSqlServer(configuration.GetConnectionString("DatabaseConnection") 
+                            ?? throw new ArgumentException("Connection string was not specified")));
+
 services.AddAutoMapper(typeof(MappingProfile));
 services.AddMediatR(typeof(ServiceAssemblyPointer));
 // MediaR validation, check it out here: https://www.nuget.org/packages/MediatR.Extensions.FluentValidation.AspNetCore
 services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly});
 
-services.AddDbContext<TeamsDbContext>(options 
-    => options.UseSqlServer(configuration.GetConnectionString("DatabaseConnection") 
-        ?? throw new ArgumentException("Connection string was not specified")));
+
 
 services.AddScoped<ITeamRepository, TeamRepository>();
 

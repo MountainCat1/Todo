@@ -4,11 +4,13 @@ using Teams.Infrastructure.Exceptions;
 
 namespace Teams.Infrastructure.Generics;
 
-public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
+public class Repository<TEntity, TDbContext> : IRepository<TEntity> 
+    where TEntity : class, IEntity
+    where TDbContext : DbContext
 {
-    private readonly DbContext _dbContext;
+    private readonly TDbContext _dbContext;
 
-    public Repository(DbContext dbContext)
+    public Repository(TDbContext dbContext)
     {
         _dbContext = dbContext;
     }
