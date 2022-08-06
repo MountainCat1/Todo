@@ -17,7 +17,7 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
         _dbSet = dbContext.Set<TEntity>();
     }
 
-    public async Task<TEntity?> GetAsync(Guid[] guids)
+    public async Task<TEntity?> GetAsync(object[] guids)
     {
         if (guids.Length == 0)
             throw new ArgumentException("Guid was not provided!");
@@ -54,7 +54,7 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
         }
     }
 
-    public async Task<TEntity> GetRequiredAsync(params Guid[] guids)
+    public async Task<TEntity> GetRequiredAsync(params object[] guids)
     {
         var entity = await GetAsync(guids);
 
@@ -71,7 +71,7 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
         return entities;
     }
 
-    public async Task DeleteAsync(Guid guid)
+    public async Task DeleteAsync(object guid)
     {
         var entity = await GetRequiredAsync(guid);
 

@@ -2,9 +2,13 @@ using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Teams.Api.Middleware;
+using Teams.Domain.Abstractions;
+using Teams.Domain.Entities;
 using Teams.Domain.Repositories;
 using Teams.Infrastructure;
+using Teams.Infrastructure.Abstractions;
 using Teams.Infrastructure.Data;
+using Teams.Infrastructure.Generics;
 using Teams.Infrastructure.Repositories;
 using Teams.Service;
 using Teams.Service.PipelineBehaviors;
@@ -47,6 +51,11 @@ services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly})
 
 services.AddScoped<ITeamRepository, TeamRepository>();
 services.AddScoped<ITeamMemberRepository, TeamMemberRepository>();
+
+services.AddScoped<IRepository<Team>, Repository<Team, TeamsDbContext>>();
+services.AddScoped<IRepository<TeamMember>, Repository<TeamMember, TeamsDbContext>>();
+
+services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
 
 services.AddScoped<ErrorHandlingMiddleware>();
 
