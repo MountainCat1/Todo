@@ -25,15 +25,15 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
             throw new ArgumentException("Guid was not provided!");
         
         var entity = await _dbContext
-            .FindAsync<TEntity>(guids[0]);
+            .FindAsync<TEntity>(guids);
 
         _logger.LogInformation($"Returning entity: {guids[0]}");
         return entity;
     }
 
-    public async Task<TEntity> GetRequiredAsync(Guid guid)
+    public async Task<TEntity> GetRequiredAsync(params Guid[] guids)
     {
-        var entity = await GetAsync(new []{guid});
+        var entity = await GetAsync(guids);
 
         if (entity == null)
             throw new ItemNotFoundException();
@@ -67,26 +67,15 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
 
         _dbContext.Remove<TEntity>(entity);
 
-        _logger.LogInformation($"Deleting entity: {guid}");
+        _logger.LogInformation($"Deleting entity: {entity}");
         await _dbContext.SaveChangesAsync();
     }
 
     public async Task<TEntity> CreateAsync(TEntity entity)
     {
-        entity.Guid = new Guid();
-
         _dbContext.Add(entity);
 
-        _logger.LogInformation($"Creating entity: {entity.Guid}");
-        await _dbContext.SaveChangesAsync();
-        return entity;
-    }
-
-    public async Task<TEntity> InsertAsync(TEntity entity)
-    {
-        _dbContext.Add(entity);
-
-        _logger.LogInformation($"Inserting entity: {entity.Guid}");
+        _logger.LogInformation($"Creating entity: {entity}");
         await _dbContext.SaveChangesAsync();
         return entity;
     }
@@ -94,9 +83,7 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
     public async Task<TEntity> UpdateAsync(Guid guid, TEntity entity)
     {
         var entityToUpdate = await GetRequiredAsync(guid);
-
-        entityToUpdate.Guid = guid;
-
+        
         _dbContext.Update<TEntity>(entityToUpdate);
 
         _logger.LogInformation($"Updating entity: {guid}");
