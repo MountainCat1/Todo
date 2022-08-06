@@ -11,7 +11,4 @@ public class Team : IEntity
     public string Name { get; set; }
     public string Description { get; set; }
     public Guid UserGuid { get; set; }
-    
-    public virtual List<TeamMember> Members { get; set; }
-    public IEnumerable<Guid> MemberGuids => Members.Select(member => member.Guid);
 }

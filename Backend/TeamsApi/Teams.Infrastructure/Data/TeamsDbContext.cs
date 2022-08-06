@@ -10,5 +10,4 @@ public class TeamsDbContext : DbContext
     }
 
     public DbSet<Team> Teams { get; set; }
-    public DbSet<TeamMember> TeamMemberships { get; set; }
 }
