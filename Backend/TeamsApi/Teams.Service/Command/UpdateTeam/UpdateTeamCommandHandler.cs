@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Teams.Domain.Entities;
 using Teams.Domain.Repositories;
-using Teams.Infrastructure.UnitsOfWork;
 using Teams.Service.Abstractions;
 using Teams.Service.Dto;
 
@@ -10,27 +9,22 @@ namespace Teams.Service.Command.UpdateTeam;
 public class UpdateTeamCommandHandler : ICommandHandler<UpdateTeamCommand, TeamDto>
 {
     private readonly IMapper _mapper;
-    private readonly ITeamsUnitOfWork _unitOfWork;
+    private readonly ITeamRepository _teamRepository;
 
-
-    public UpdateTeamCommandHandler(IMapper mapper, ITeamsUnitOfWork unitOfWork)
+    public UpdateTeamCommandHandler(IMapper mapper, ITeamRepository teamRepository)
     {
         _mapper = mapper;
-        _unitOfWork = unitOfWork;
+        _teamRepository = teamRepository;
     }
 
     public async Task<TeamDto> Handle(UpdateTeamCommand command, CancellationToken cancellationToken)
     {
-        var teamRepository = _unitOfWork.GetRepository<ITeamRepository>();
+        var updatedEntity = await _teamRepository.UpdateAsync(command.UpdateDto, command.Guid);
         
-        var update = _mapper.Map<Team>(command.Dto);
+        await _teamRepository.SaveChangesAsync();
 
-        var entityToUpdate = await teamRepository.GetRequiredAsync(command.Guid);
-
-        await teamRepository.UpdateAsync(update, command.Guid);
+        var resultDto = _mapper.Map<TeamDto>(updatedEntity); 
         
-        await _unitOfWork.SaveAsync();
-        
-        return _mapper.Map<TeamDto>(entityToUpdate);
+        return _mapper.Map<TeamDto>(resultDto);
     }
 }

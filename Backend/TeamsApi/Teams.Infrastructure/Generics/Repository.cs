@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Teams.Domain.Abstractions;
 using Teams.Infrastructure.Exceptions;
 
@@ -11,10 +10,17 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
     where TDbContext : DbContext
 {
     private readonly DbSet<TEntity> _dbSet;
+    private readonly Func<Task> _saveChangesAsyncDelegate;
+
 
     public Repository(TDbContext dbContext)
     {
         _dbSet = dbContext.Set<TEntity>();
+
+        _saveChangesAsyncDelegate = async () =>
+        {
+            await dbContext.SaveChangesAsync();
+        };
     }
 
     public async Task<TEntity?> GetAsync(object[] guids)
@@ -85,11 +91,18 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
         return Task.FromResult(entity);
     }
 
-    public async Task UpdateAsync(TEntity update, params object[] keys)
+    public async Task<TEntity> UpdateAsync(object update, params object[] keys)
     {
         var entity = await GetRequiredAsync(keys);
-        
+
         _dbSet.Attach(entity).CurrentValues.SetValues(update);
         _dbSet.Attach(entity).State = EntityState.Modified;
+
+        return entity;
+    }
+
+    public async Task SaveChangesAsync()
+    {
+        await _saveChangesAsyncDelegate();
     }
 }

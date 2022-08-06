@@ -2,7 +2,6 @@
 using Teams.Domain.Entities;
 using Teams.Domain.Repositories;
 using Teams.Infrastructure.Abstractions;
-using Teams.Infrastructure.UnitsOfWork;
 using Teams.Service.Abstractions;
 using Teams.Service.Dto;
 
@@ -10,23 +9,22 @@ namespace Teams.Service.Command.CreateTeamCommand;
 
 public class CreateTeamCommandHandler : ICommandHandler<CreateTeamCommand, TeamDto>
 {
-    private readonly ITeamsUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
-
-    public CreateTeamCommandHandler(IMapper mapper, ITeamsUnitOfWork unitOfWork)
+    private readonly ITeamRepository _teamRepository;
+    
+    
+    public CreateTeamCommandHandler(IMapper mapper, ITeamRepository teamRepository)
     {
         _mapper = mapper;
-        _unitOfWork = unitOfWork;
+        _teamRepository = teamRepository;
     }
 
     public async Task<TeamDto> Handle(CreateTeamCommand request, CancellationToken cancellationToken)
     {
-        var repository = _unitOfWork.GetRepository<ITeamRepository>();
-        
         var entity = _mapper.Map<Team>(request.Dto);
 
-        var createdEntity = await repository.CreateAsync(entity);
-        await _unitOfWork.SaveAsync();
+        var createdEntity = await _teamRepository.CreateAsync(entity);
+        await _teamRepository.SaveChangesAsync();
 
         var createdEntityDto = _mapper.Map<TeamDto>(createdEntity);
         

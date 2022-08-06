@@ -53,8 +53,6 @@ services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly})
 services.AddScoped<ITeamRepository, TeamRepository>();
 services.AddScoped<ITeamMemberRepository, TeamMemberRepository>();
 
-services.AddScoped<ITeamsUnitOfWork, TeamsUnitOfWork>();
-
 services.AddScoped<ErrorHandlingMiddleware>();
 
 // APP
