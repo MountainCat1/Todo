@@ -52,7 +52,7 @@ services:
       dockerfile: Dockerfile
     environment:
       - ASPNETCORE_URLS=https://*:443;https://*:5002;http://*:4002
-      - ConnectionStrings:DatabaseConnection=Server=todo-db;Database=TodoDatabase;User=sa;Password=1Secure*Password1;
+      - ConnectionStrings:DatabaseConnection=Server=teams-db;Database=TeamsDatabase;User=sa;Password=1Secure*Password1;
     ports:
       - "5002:5002"
       - "4002:4002"
