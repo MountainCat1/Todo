@@ -32,17 +32,19 @@ services.AddLogging(options =>
     options.AddFilter("Microsoft.EntityFrameworkCore.Infrastructure", LogLevel.Warning);
 });
 
-if (builder.Environment.IsProduction())
+services.AddDbContext<TeamsDbContext>(options 
+    => options.UseSqlServer(configuration.GetConnectionString("DatabaseConnection") 
+                            ?? throw new ArgumentException("Connection string was not specified")));
+
+/*if (builder.Environment.IsProduction())
 {
-    services.AddDbContext<TeamsDbContext>(options 
-        => options.UseSqlServer(configuration.GetConnectionString("DatabaseConnection") 
-                                ?? throw new ArgumentException("Connection string was not specified")));
+    
 }
 else
 {
     services.AddDbContext<TeamsDbContext>(options 
         => options.UseInMemoryDatabase("TeamsDatabase"));
-}
+}*/
 
 services.AddAutoMapper(typeof(MappingProfile));
 services.AddMediatR(typeof(ServiceAssemblyPointer));
