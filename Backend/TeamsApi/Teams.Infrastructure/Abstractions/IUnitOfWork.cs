@@ -3,7 +3,7 @@ using Teams.Domain.Abstractions;
 
 namespace Teams.Infrastructure.Abstractions;
 
-public interface IUnitOfWork<TDbContext>
+public interface IUnitOfWork<TDbContext> : IUnitOfWork
     where TDbContext : DbContext
 {
     public IRepository<T> GetEntityRepository<T>() where T : class, IEntity;
@@ -12,6 +12,9 @@ public interface IUnitOfWork<TDbContext>
     public Task CommitAsync();
     public Task CreateTransactionAsync();
     Task SaveAsync();
+}
 
-
+public interface IUnitOfWork : IAsyncDisposable
+{
+    
 }

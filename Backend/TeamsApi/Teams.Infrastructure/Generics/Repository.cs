@@ -85,12 +85,11 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
         return Task.FromResult(entity);
     }
 
-    public async Task<TEntity> UpdateAsync(Guid guid, TEntity entity)
+    public async Task UpdateAsync(TEntity update, params object[] keys)
     {
-        var entityToUpdate = await GetRequiredAsync(guid);
+        var entity = await GetRequiredAsync(keys);
         
-        _dbSet.Update(entityToUpdate);
-        
-        return entityToUpdate;   
+        _dbSet.Attach(entity).CurrentValues.SetValues(update);
+        _dbSet.Attach(entity).State = EntityState.Modified;
     }
 }

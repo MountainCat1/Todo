@@ -10,7 +10,8 @@ using Teams.Infrastructure.Data;
 
 namespace Teams.Infrastructure.Generics;
 
-public class UnitOfWork<TDbContext> : IUnitOfWork<TDbContext> where TDbContext : DbContext
+public class UnitOfWork<TDbContext> : IUnitOfWork<TDbContext>
+    where TDbContext : DbContext
 {
     private readonly TDbContext _dbContext;
     private readonly IServiceProvider _serviceProvider;
@@ -76,5 +77,13 @@ public class UnitOfWork<TDbContext> : IUnitOfWork<TDbContext> where TDbContext :
     public async Task SaveAsync()
     {
         await _dbContext.SaveChangesAsync();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if(_transaction != null)
+            await _transaction.DisposeAsync();
+        
+        await _dbContext.DisposeAsync();
     }
 }

@@ -10,6 +10,7 @@ using Teams.Infrastructure.Abstractions;
 using Teams.Infrastructure.Data;
 using Teams.Infrastructure.Generics;
 using Teams.Infrastructure.Repositories;
+using Teams.Infrastructure.UnitsOfWork;
 using Teams.Service;
 using Teams.Service.PipelineBehaviors;
 
@@ -52,10 +53,7 @@ services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly})
 services.AddScoped<ITeamRepository, TeamRepository>();
 services.AddScoped<ITeamMemberRepository, TeamMemberRepository>();
 
-/*services.AddScoped<IRepository<Team>, TeamRepository>();
-services.AddScoped<IRepository<TeamMember>, TeamMemberRepository>();*/
-
-services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
+services.AddScoped<ITeamsUnitOfWork, TeamsUnitOfWork>();
 
 services.AddScoped<ErrorHandlingMiddleware>();
 

@@ -35,7 +35,7 @@ public class TeamController : Controller
     }
     
     [HttpPut("{teamGuid}")]
-    public async Task<IActionResult> Update([FromQuery] Guid teamGuid, [FromBody] UpdateTeamDto dto)
+    public async Task<IActionResult> Update([FromRoute] Guid teamGuid, [FromBody] UpdateTeamDto dto)
     {
         var command = new UpdateTeamCommand(teamGuid, dto);
         var result = await _mediator.Send(command);
