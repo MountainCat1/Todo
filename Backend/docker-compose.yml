@@ -56,6 +56,8 @@ services:
     ports:
       - "5002:5002"
       - "4002:4002"
+    depends_on:
+      - teams-db
         
 networks:
   rabbitmq_go_net:
