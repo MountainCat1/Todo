@@ -26,14 +26,6 @@ public class TeamController : Controller
         var result = await _mediator.Send(query);
         return Ok(result);
     }
-    
-    [HttpGet("/members/{teamGuid}")]
-    public async Task<IActionResult> GetMembers([FromRoute] Guid teamGuid)
-    {
-        var query = new GetTeamMembersQuery(teamGuid);
-        var result = await _mediator.Send(query);
-        return Ok(result);
-    }
 
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateTeamDto dto)
