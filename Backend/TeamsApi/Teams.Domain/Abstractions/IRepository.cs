@@ -19,5 +19,5 @@ public interface IRepository<TEntity> : IRepository where TEntity : class, IEnti
     public Task DeleteAsync(object guid);
     public Task<TEntity> CreateAsync(TEntity entity);
     public Task<TEntity> UpdateAsync(object update, params object[] keys);
-    Task SaveChangesAsync();
+    public Task SaveChangesAsync();
 }
