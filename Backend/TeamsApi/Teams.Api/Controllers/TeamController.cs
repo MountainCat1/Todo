@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Teams.Service.Command.CreateTeamCommand;
+using Teams.Service.Command.UpdateTeam;
 using Teams.Service.Dto;
 using Teams.Service.Queries.GetAllTeams;
 using Teams.Service.Queries.GetTeamMembers;
@@ -26,7 +27,7 @@ public class TeamController : Controller
         return Ok(result);
     }
     
-    [HttpGet("members/{teamGuid}")]
+    [HttpGet("/members/{teamGuid}")]
     public async Task<IActionResult> GetMembers([FromRoute] Guid teamGuid)
     {
         var query = new GetTeamMembersQuery(teamGuid);
@@ -42,6 +43,13 @@ public class TeamController : Controller
         return Ok(result);
     }
     
+    [HttpPut("{teamGuid}")]
+    public async Task<IActionResult> Update([FromQuery] Guid teamGuid, [FromBody] UpdateTeamDto dto)
+    {
+        var command = new UpdateTeamCommand(teamGuid, dto);
+        var result = await _mediator.Send(command);
+        return Ok(result);
+    }
     
         
     // TODO: do a controller for teams
