@@ -18,8 +18,4 @@
       <ProjectReference Include="..\Teams.Infrastructure\Teams.Infrastructure.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Queries\GetTeamMember" />
-    </ItemGroup>
-
 </Project>

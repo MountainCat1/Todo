@@ -51,7 +51,6 @@ services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior
 services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly});
 
 services.AddScoped<ITeamRepository, TeamRepository>();
-services.AddScoped<ITeamMemberRepository, TeamMemberRepository>();
 
 services.AddScoped<ErrorHandlingMiddleware>();
 
