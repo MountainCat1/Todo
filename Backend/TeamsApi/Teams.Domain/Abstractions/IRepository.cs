@@ -5,10 +5,15 @@ namespace Teams.Domain.Abstractions;
 public interface IRepository<TEntity> where TEntity : class, IEntity
 {
     public Task<TEntity?> GetAsync(params Guid[] guids);
+    public Task<IEnumerable<TEntity>> GetAsync(
+        Expression<Func<TEntity, bool>>? filter = null,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
+        params string[] includeProperties);
     public Task<TEntity> GetRequiredAsync(params Guid[] guids);
     public Task<ICollection<TEntity>> GetAllAsync();
     public Task DeleteAsync(Guid guid);
     public Task<TEntity> CreateAsync(TEntity entity);
     public Task<TEntity> UpdateAsync(Guid guid, TEntity entity);
-    Task<ICollection<TEntity>> GetAsync(Expression<Func<TEntity,bool>> predicate);
+
+    
 }

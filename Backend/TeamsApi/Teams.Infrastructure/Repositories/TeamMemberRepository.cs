@@ -9,7 +9,7 @@ namespace Teams.Infrastructure.Repositories;
 
 public class TeamMemberRepository : Repository<TeamMember, TeamsDbContext>, ITeamMemberRepository
 {
-    public TeamMemberRepository(TeamsDbContext dbContext, ILogger<Repository<TeamMember, TeamsDbContext>> logger) : base(dbContext, logger)
+    public TeamMemberRepository(TeamsDbContext dbContext) : base(dbContext)
     {
     }
 }

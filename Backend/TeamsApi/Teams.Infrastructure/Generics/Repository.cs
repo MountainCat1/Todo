@@ -10,13 +10,11 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
     where TEntity : class, IEntity
     where TDbContext : DbContext
 {
-    private readonly TDbContext _dbContext;
-    private readonly ILogger<Repository<TEntity, TDbContext>> _logger;
+    private readonly DbSet<TEntity> _dbSet;
 
-    public Repository(TDbContext dbContext, ILogger<Repository<TEntity, TDbContext>> logger)
+    public Repository(TDbContext dbContext)
     {
-        _dbContext = dbContext;
-        _logger = logger;
+        _dbSet = dbContext.Set<TEntity>();
     }
 
     public async Task<TEntity?> GetAsync(Guid[] guids)
@@ -24,11 +22,36 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
         if (guids.Length == 0)
             throw new ArgumentException("Guid was not provided!");
         
-        var entity = await _dbContext
-            .FindAsync<TEntity>(guids);
-
-        _logger.LogInformation($"Returning entity: {guids[0]}");
+        var entity = await _dbSet.FindAsync(guids);
+        
         return entity;
+    }
+    
+    public virtual async Task<IEnumerable<TEntity>> GetAsync(
+        Expression<Func<TEntity, bool>>? filter = null,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
+        params string[] includeProperties)
+    {
+        IQueryable<TEntity> query = _dbSet;
+
+        if (filter != null)
+        {
+            query = query.Where(filter);
+        }
+
+        foreach (var includeProperty in includeProperties)
+        {
+            query = query.Include(includeProperty);
+        }
+
+        if (orderBy != null)
+        {
+            return await orderBy(query).ToListAsync();
+        }
+        else
+        {
+            return await query.ToListAsync();
+        }
     }
 
     public async Task<TEntity> GetRequiredAsync(params Guid[] guids)
@@ -41,23 +64,10 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
         return entity;
     }
 
-    public async Task<ICollection<TEntity>> GetAsync(Expression<Func<TEntity,bool>> predicate)
-    {
-        var entities = await _dbContext
-            .Set<TEntity>()
-            .Where(predicate)
-            .ToListAsync();
-
-        return entities;
-    }
-
     public async Task<ICollection<TEntity>> GetAllAsync()
     {
-        var entities = await _dbContext
-            .Set<TEntity>()
-            .ToListAsync();
-
-        _logger.LogInformation($"Returning all entities");
+        var entities = await _dbSet.ToListAsync();
+        
         return entities;
     }
 
@@ -65,29 +75,22 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
     {
         var entity = await GetRequiredAsync(guid);
 
-        _dbContext.Remove<TEntity>(entity);
-
-        _logger.LogInformation($"Deleting entity: {entity}");
-        await _dbContext.SaveChangesAsync();
+        _dbSet.Remove(entity);
     }
 
-    public async Task<TEntity> CreateAsync(TEntity entity)
+    public Task<TEntity> CreateAsync(TEntity entity)
     {
-        _dbContext.Add(entity);
-
-        _logger.LogInformation($"Creating entity: {entity}");
-        await _dbContext.SaveChangesAsync();
-        return entity;
+        _dbSet.Add(entity);
+        
+        return Task.FromResult(entity);
     }
 
     public async Task<TEntity> UpdateAsync(Guid guid, TEntity entity)
     {
         var entityToUpdate = await GetRequiredAsync(guid);
         
-        _dbContext.Update<TEntity>(entityToUpdate);
-
-        _logger.LogInformation($"Updating entity: {guid}");
-        await _dbContext.SaveChangesAsync();
-        return entityToUpdate;
+        _dbSet.Update(entityToUpdate);
+        
+        return entityToUpdate;   
     }
 }
