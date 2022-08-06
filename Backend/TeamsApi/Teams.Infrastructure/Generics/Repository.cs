@@ -19,18 +19,21 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
         _logger = logger;
     }
 
-    public async Task<TEntity?> GetAsync(Guid guid)
+    public async Task<TEntity?> GetAsync(Guid[] guids)
     {
+        if (guids.Length == 0)
+            throw new ArgumentException("Guid was not provided!");
+        
         var entity = await _dbContext
-            .FindAsync<TEntity>(guid);
+            .FindAsync<TEntity>(guids[0]);
 
-        _logger.LogInformation($"Returning entity: {guid}");
+        _logger.LogInformation($"Returning entity: {guids[0]}");
         return entity;
     }
 
     public async Task<TEntity> GetRequiredAsync(Guid guid)
     {
-        var entity = await GetAsync(guid);
+        var entity = await GetAsync(new []{guid});
 
         if (entity == null)
             throw new ItemNotFoundException();
