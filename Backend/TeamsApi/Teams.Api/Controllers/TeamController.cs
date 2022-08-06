@@ -4,7 +4,6 @@ using Teams.Service.Command.CreateTeamCommand;
 using Teams.Service.Command.UpdateTeam;
 using Teams.Service.Dto;
 using Teams.Service.Queries.GetAllTeams;
-using Teams.Service.Queries.GetTeamMembers;
 
 namespace Teams.Api.Controllers;
 
