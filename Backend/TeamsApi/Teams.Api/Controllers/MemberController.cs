@@ -1,8 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Teams.Domain.Abstractions;
 using Teams.Domain.Entities;
+using Teams.Domain.Repositories;
 using Teams.Infrastructure.Abstractions;
 using Teams.Infrastructure.Data;
+using Teams.Infrastructure.Repositories;
 using Teams.Service.Queries.GetTeamMembers;
 
 namespace Teams.Api.Controllers;
@@ -27,20 +30,5 @@ public class MemberController : Controller
         var query = new GetTeamMembersQuery(teamGuid);
         var result = await _mediator.Send(query);
         return Ok(result);
-    }
-    
-    
-    [HttpPost("")]
-    public async Task<IActionResult> Test()
-    {
-        //await _unitOfWork.CreateTransactionAsync();
-
-        var teamRepository = _unitOfWork.GetRepository<Team>();
-        var teamMemberRepository = _unitOfWork.GetRepository<TeamMember>();
-
-        await _unitOfWork.SaveAsync();
-        //await _unitOfWork.CommitAsync();
-        
-        return Ok();
     }
 }

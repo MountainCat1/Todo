@@ -25,7 +25,7 @@ public class UnitOfWork<TDbContext> : IUnitOfWork<TDbContext> where TDbContext :
         _serviceProvider = serviceProvider;
     }
 
-    public IRepository<T> GetRepository<T>() where T : class, IEntity
+    public IRepository<T> GetEntityRepository<T>() where T : class, IEntity
     {
         if (_repositories is null)
             _repositories = new Dictionary<Type, IRepository?>();
@@ -40,6 +40,24 @@ public class UnitOfWork<TDbContext> : IUnitOfWork<TDbContext> where TDbContext :
             throw new Exception($"Repository for {typeof(T)} not found!");
 
         return (IRepository<T>)repository;
+    }
+    
+    public TRepository GetRepository<TRepository>()
+        where TRepository : class, IRepository
+    {
+        if (_repositories is null)
+            _repositories = new Dictionary<Type, IRepository?>();
+
+        if (!_repositories.ContainsKey(typeof(TRepository)))
+        {
+            _repositories.Add(typeof(TRepository), _serviceProvider.GetService<TRepository>());
+        }
+
+        var repository = _repositories[typeof(TRepository)];
+        if (repository == null)
+            throw new Exception($"Repository for {typeof(TRepository)} not found!");
+
+        return (TRepository)repository;
     }
 
     public async Task CommitAsync()

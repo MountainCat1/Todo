@@ -52,8 +52,8 @@ services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly})
 services.AddScoped<ITeamRepository, TeamRepository>();
 services.AddScoped<ITeamMemberRepository, TeamMemberRepository>();
 
-services.AddScoped<IRepository<Team>, Repository<Team, TeamsDbContext>>();
-services.AddScoped<IRepository<TeamMember>, Repository<TeamMember, TeamsDbContext>>();
+/*services.AddScoped<IRepository<Team>, TeamRepository>();
+services.AddScoped<IRepository<TeamMember>, TeamMemberRepository>();*/
 
 services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
 
