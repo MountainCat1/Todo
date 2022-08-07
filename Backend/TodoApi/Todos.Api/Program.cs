@@ -21,7 +21,8 @@ var services = builder.Services;
 
 services.AddControllers();
 services.AddEndpointsApiExplorer();
-services.AddHttpsRedirection(options => options.HttpsPort = 5000);
+// TODO: it should not be needed
+//services.AddHttpsRedirection(options => options.HttpsPort = 5000);
 services.AddSwaggerGen();
 services.AddLogging(options =>
 {
