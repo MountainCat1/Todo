@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Teams.Service.Command.CreateTeamCommand;
+namespace Teams.Service.Command.CreateTeam;
 
 public class CreateTeamCommandValidator : AbstractValidator<CreateTeamCommand>
 {

@@ -5,7 +5,7 @@ using Teams.Infrastructure.Abstractions;
 using Teams.Service.Abstractions;
 using Teams.Service.Dto;
 
-namespace Teams.Service.Command.CreateTeamCommand;
+namespace Teams.Service.Command.CreateTeam;
 
 public class CreateTeamCommandHandler : ICommandHandler<CreateTeamCommand, TeamDto>
 {

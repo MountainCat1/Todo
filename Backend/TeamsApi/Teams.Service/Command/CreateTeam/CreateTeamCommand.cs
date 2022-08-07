@@ -1,7 +1,7 @@
 ﻿using Teams.Service.Abstractions;
 using Teams.Service.Dto;
 
-namespace Teams.Service.Command.CreateTeamCommand;
+namespace Teams.Service.Command.CreateTeam;
 
 public class CreateTeamCommand : ICommand<TeamDto>
 {

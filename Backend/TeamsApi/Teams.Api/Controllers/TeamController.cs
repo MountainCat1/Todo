@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Teams.Service.Command.CreateTeamCommand;
+using Teams.Service.Command.CreateTeam;
 using Teams.Service.Command.UpdateTeam;
 using Teams.Service.Dto;
 using Teams.Service.Queries.GetAllTeams;
