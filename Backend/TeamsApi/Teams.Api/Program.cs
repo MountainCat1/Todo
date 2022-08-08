@@ -31,7 +31,10 @@ services.AddLogging(options =>
     options.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Warning);
     options.AddFilter("Microsoft.EntityFrameworkCore.Infrastructure", LogLevel.Warning);
 });
-
+services.AddHttpsRedirection(options =>
+{
+    options.HttpsPort = configuration.GetValue<int>("HTTPS_PORT");
+});
 
 
 if (builder.Environment.IsProduction())

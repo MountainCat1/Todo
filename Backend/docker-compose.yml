@@ -32,6 +32,7 @@ services:
       context: ./TodoApi
       dockerfile: Dockerfile
     environment:
+      - HTTPS_PORT=5001
       - ASPNETCORE_URLS=https://*:443;https://*:5001;http://*:4001
       - ConnectionStrings:DatabaseConnection=Server=todo-db;Database=TodoDatabase;User=sa;Password=1Secure*Password1;
     ports:
@@ -51,6 +52,7 @@ services:
       context: ./TeamsApi
       dockerfile: Dockerfile
     environment:
+      - HTTPS_PORT=5002
       - ASPNETCORE_URLS=https://*:443;https://*:5002;http://*:4002
       - ConnectionStrings:DatabaseConnection=Server=teams-db;Database=TeamsDatabase;User=sa;Password=1Secure*Password1;
     ports:
