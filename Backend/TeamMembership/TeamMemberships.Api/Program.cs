@@ -1,11 +1,28 @@
+using Microsoft.EntityFrameworkCore;
+using TeamMemberships.Infrastructure.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// CONFIGURATION
+var configuration = builder.Configuration;
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+configuration.AddEnvironmentVariables();
+
+
+// SERVICES
+var services = builder.Services;
+
+services.AddControllers();
+services.AddEndpointsApiExplorer();
+services.AddSwaggerGen();
+
+if (builder.Environment.IsDevelopment())
+    services.AddDbContext<TeamMembershipDbContext>(optionsBuilder 
+        => optionsBuilder.UseInMemoryDatabase("TeamMembershipDatabase"));
+else
+    services.AddDbContext<TeamMembershipDbContext>(optionsBuilder 
+        => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
+
 
 var app = builder.Build();
 
