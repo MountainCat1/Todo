@@ -61,6 +61,26 @@ services:
     depends_on:
       - teams-db
         
+  # === TEAM MEMBERSHIPS API ===
+  team-memberships-db:
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=1Secure*Password1
+  team-memberships-api:
+    build:
+      context: ./TeamsApi
+      dockerfile: Dockerfile
+    environment:
+      - HTTPS_PORT=5003
+      - ASPNETCORE_URLS=https://*:443;https://*:5003;http://*:4003
+      - ConnectionStrings:DatabaseConnection=Server=teams-db;Database=TeamMembershipsDatabase;User=sa;Password=1Secure*Password1;
+    ports:
+      - "5003:5003"
+      - "4003:4003"
+    depends_on:
+      - teams-db
+
 networks:
   rabbitmq_go_net:
     driver: bridge
