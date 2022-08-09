@@ -1,19 +1,21 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Teams.Service.Command.CreateTeam;
+using Teams.Service.Command.DeleteTeam;
 using Teams.Service.Command.UpdateTeam;
 using Teams.Service.Dto;
 using Teams.Service.Queries.GetAllTeams;
+using Teams.Service.Queries.GetTeam;
 
 namespace Teams.Api.Controllers;
 
 [ApiController]
-[Route("Team")]
-public class TeamController : Controller
+[Route("Teams")]
+public class TeamsController : Controller
 {
     private readonly IMediator _mediator;
 
-    public TeamController(IMediator mediator)
+    public TeamsController(IMediator mediator)
     {
         _mediator = mediator;
     }
@@ -22,6 +24,14 @@ public class TeamController : Controller
     public async Task<IActionResult> GetAll()
     {
         var query = new GetAllTeamsQuery();
+        var result = await _mediator.Send(query);
+        return Ok(result);
+    }
+    
+    [HttpGet("{guid}")]
+    public async Task<IActionResult> Get([FromRoute] Guid guid)
+    {
+        var query = new GetTeamQuery(guid);
         var result = await _mediator.Send(query);
         return Ok(result);
     }
@@ -42,7 +52,11 @@ public class TeamController : Controller
         return Ok(result);
     }
     
-        
-    // TODO: do a controller for teams
-
+    [HttpDelete("{teamGuid}")]
+    public async Task<IActionResult> Delete([FromRoute] Guid teamGuid)
+    {
+        var command = new DeleteTeamCommand(teamGuid);
+        await _mediator.Send(command);
+        return Ok();
+    }
 }
