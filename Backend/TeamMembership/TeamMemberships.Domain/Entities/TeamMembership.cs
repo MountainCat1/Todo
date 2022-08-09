@@ -1,6 +1,8 @@
-﻿namespace TeamMemberships.Domain.Entities;
+﻿using TeamMemberships.Domain.Abstractions;
 
-public class TeamMembership
+namespace TeamMemberships.Domain.Entities;
+
+public class TeamMembership : IEntity
 {
     public Guid UserGuid { get; set; }
     public Guid TeamGuid { get; set; }
