@@ -18,6 +18,9 @@ services.AddControllers();
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
 
+services.AddHttpsRedirection(options =>
+    options.HttpsPort = configuration.GetValue<int>("HTTPS_PORT"));
+
 if (builder.Environment.IsDevelopment())
     services.AddDbContext<TeamMembershipDbContext>(optionsBuilder 
         => optionsBuilder.UseInMemoryDatabase("TeamMembershipDatabase"));
