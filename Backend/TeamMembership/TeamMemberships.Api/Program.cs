@@ -1,5 +1,7 @@
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using TeamMemberships.Infrastructure.Data;
+using TeamMemberships.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +24,8 @@ if (builder.Environment.IsDevelopment())
 else
     services.AddDbContext<TeamMembershipDbContext>(optionsBuilder 
         => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
+
+services.AddMediatR(typeof(ServiceAssemplyPointer));
 
 
 var app = builder.Build();

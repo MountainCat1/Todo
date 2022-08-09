@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.8" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.8" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.8" />
@@ -20,6 +21,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\TeamMemberships.Infrastructure\TeamMemberships.Infrastructure.csproj" />
+      <ProjectReference Include="..\TeamMemberships.Service\TeamMemberships.Service.csproj" />
     </ItemGroup>
 
 </Project>
