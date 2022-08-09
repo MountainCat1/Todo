@@ -2,7 +2,9 @@ using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using TeamMemberships.Api.Middleware;
+using TeamMemberships.Domain.Repositories;
 using TeamMemberships.Infrastructure.Data;
+using TeamMemberships.Infrastructure.Repositories;
 using TeamMemberships.Service;
 using TeamMemberships.Service.PipelineBehaviors;
 
@@ -40,6 +42,8 @@ else
 services.AddMediatR(typeof(ServiceAssemblyPointer));
 services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly});
 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
+
+services.AddScoped<ITeamMembershipRepository, TeamMembershipRepository>();
 
 services.AddScoped<ErrorHandlingMiddleware>();
 
