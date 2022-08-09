@@ -4,7 +4,7 @@ using Todos.Service.Dto;
 
 namespace Todos.Service.Commands.CreateTodo;
 
-public class CreateTodoCommand : ICommand<Guid>
+public class CreateTodoCommand : ICommand<TodoDto>
 {
     public CreateTodoCommand(CreateTodoDto dto)
     {

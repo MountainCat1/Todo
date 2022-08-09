@@ -13,13 +13,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Configuration
 var configuration = builder.Configuration;
 
+configuration.AddEnvironmentVariables();
 
 // Add services to the container.
 var services = builder.Services;
 
 services.AddControllers();
 services.AddEndpointsApiExplorer();
-services.AddHttpsRedirection(options => options.HttpsPort = 5000);
 services.AddSwaggerGen();
 services.AddLogging(options =>
 {
@@ -29,7 +29,8 @@ services.AddLogging(options =>
 });
 
 services.AddDbContext<TodoDbContext>(options
-    => options.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
+    => options.UseSqlServer(configuration.GetConnectionString("DatabaseConnection") 
+        ?? throw new ArgumentException("Connection string was not specified")));
 
 services.AddAutoMapper(typeof(MappingProfile));
 
@@ -59,7 +60,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
