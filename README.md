@@ -4,10 +4,11 @@
 There should be general description of the project, please do it later <3
 
 ### Todo list
-* Todo microservice             (_In progress..._)
+* Todo microservice             (_Basic CRUD done_)
 * Ocelot API gateway            (_In progress..._)
 * RabbitMQ brocker              (_Not yet started_)
-* Team microservice             (_In progress..._)
+* Team microservice             (_Basic CRUD done_)
+* Team membership microservice  (_In progress..._)
 * Authentication microservice   (_Not yet started_)
 * User microservice             (_Not yet started_)
 
