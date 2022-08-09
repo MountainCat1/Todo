@@ -11,4 +11,8 @@
       <PackageReference Include="MediatR.Extensions.FluentValidation.AspNetCore" Version="3.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\TeamMemberships.Infrastructure\TeamMemberships.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>
