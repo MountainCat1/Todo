@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Teams.Service.Abstractions;
 using Teams.Service.Command.CreateTeam;
 using Teams.Service.Command.DeleteTeam;
 using Teams.Service.Command.UpdateTeam;
@@ -21,21 +22,16 @@ public class TeamsController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> Get([FromQuery] Guid? guid)
     {
-        var query = new GetAllTeamsQuery();
+        IBaseRequest query = guid != null 
+            ? new GetTeamQuery((Guid)guid) 
+            : new GetAllTeamsQuery();
+        
         var result = await _mediator.Send(query);
         return Ok(result);
     }
     
-    [HttpGet("{guid}")]
-    public async Task<IActionResult> Get([FromRoute] Guid guid)
-    {
-        var query = new GetTeamQuery(guid);
-        var result = await _mediator.Send(query);
-        return Ok(result);
-    }
-
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateTeamDto dto)
     {
