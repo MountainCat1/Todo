@@ -1,12 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamMembership.Domain", "TeamMembership.Domain\TeamMembership.Domain.csproj", "{7DE4A16E-10E1-413D-B163-F03CCFAF6267}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamMemberships.Domain", "TeamMemberships.Domain\TeamMemberships.Domain.csproj", "{7DE4A16E-10E1-413D-B163-F03CCFAF6267}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamMembership.Infrastructure", "TeamMembership.Infrastructure\TeamMembership.Infrastructure.csproj", "{46E072DF-1998-4E1A-9C98-036B3D4F45BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamMemberships.Infrastructure", "TeamMemberships.Infrastructure\TeamMemberships.Infrastructure.csproj", "{46E072DF-1998-4E1A-9C98-036B3D4F45BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamMembership.Service", "TeamMembership.Service\TeamMembership.Service.csproj", "{D1BE283E-6276-466E-80EE-F4A87B5FEBB8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamMemberships.Service", "TeamMemberships.Service\TeamMemberships.Service.csproj", "{D1BE283E-6276-466E-80EE-F4A87B5FEBB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamMembership.Api", "TeamMembership.Api\TeamMembership.Api.csproj", "{84019A76-132B-4FB9-960B-6F02DF67CDCF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamMemberships.Api", "TeamMemberships.Api\TeamMemberships.Api.csproj", "{84019A76-132B-4FB9-960B-6F02DF67CDCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
