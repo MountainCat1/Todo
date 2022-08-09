@@ -1,8 +1,10 @@
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using TeamMemberships.Api.Middleware;
 using TeamMemberships.Infrastructure.Data;
 using TeamMemberships.Service;
+using TeamMemberships.Service.PipelineBehaviors;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +39,9 @@ else
 
 services.AddMediatR(typeof(ServiceAssemblyPointer));
 services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly});
+services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
+
+services.AddScoped<ErrorHandlingMiddleware>();
 
 var app = builder.Build();
 
@@ -46,6 +51,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 
