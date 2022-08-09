@@ -1,4 +1,5 @@
 using MediatR;
+using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using TeamMemberships.Infrastructure.Data;
 using TeamMemberships.Service;
@@ -34,8 +35,8 @@ else
     services.AddDbContext<TeamMembershipDbContext>(optionsBuilder 
         => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
 
-services.AddMediatR(typeof(ServiceAssemplyPointer));
-
+services.AddMediatR(typeof(ServiceAssemblyPointer));
+services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly});
 
 var app = builder.Build();
 

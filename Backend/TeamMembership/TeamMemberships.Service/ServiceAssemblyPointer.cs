@@ -1,6 +1,6 @@
 ﻿namespace TeamMemberships.Service;
 
-public class ServiceAssemplyPointer
+public class ServiceAssemblyPointer
 {
     
 }
