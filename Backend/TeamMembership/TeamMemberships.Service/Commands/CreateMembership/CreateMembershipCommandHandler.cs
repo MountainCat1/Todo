@@ -20,10 +20,12 @@ public class CreateMembershipCommandHandler : ICommandHandler<CreateMembershipCo
 
     public async Task<TeamMembershipDto> Handle(CreateMembershipCommand command, CancellationToken cancellationToken)
     {
-        var entity = _mapper.Map<TeamMembership>(command.CreateDto);
+        var entity = _mapper.Map<TeamMembership>(command.MembershipCreateDto);
 
         var createdEntity = await _teamMembershipRepository.CreateAsync(entity);
 
+        await _teamMembershipRepository.SaveChangesAsync();
+        
         var createdEntityDto = _mapper.Map<TeamMembershipDto>(createdEntity);
         
         return createdEntityDto;

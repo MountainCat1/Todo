@@ -18,6 +18,8 @@ public class DeleteMembershipCommandHandler : ICommandHandler<DeleteMembershipCo
     {
         await _teamMembershipRepository.DeleteAsync(command.TeamGuid, command.UserGuid);
         
+        await _teamMembershipRepository.SaveChangesAsync();
+        
         return Unit.Value;
     }
 }

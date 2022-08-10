@@ -1,4 +1,6 @@
-﻿namespace TeamMemberships.Infrastructure.Exceptions;
+﻿using System;
+
+namespace TeamMemberships.Infrastructure.Exceptions;
 
 public class ItemNotFoundException : Exception
 {

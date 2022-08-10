@@ -5,10 +5,10 @@ namespace TeamMemberships.Service.Commands.CreateMembership;
 
 public class CreateMembershipCommand : ICommand<TeamMembershipDto>
 {
-    public CreateMembershipCommand(CreateMembershipDto createDto)
+    public CreateMembershipCommand(MembershipCreateDto membershipCreateDto)
     {
-        CreateDto = createDto;
+        MembershipCreateDto = membershipCreateDto;
     }
 
-    public CreateMembershipDto CreateDto { get; set; }
+    public MembershipCreateDto MembershipCreateDto { get; set; }
 }

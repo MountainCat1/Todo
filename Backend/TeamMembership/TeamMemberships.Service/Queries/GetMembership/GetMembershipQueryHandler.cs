@@ -2,7 +2,7 @@
 using TeamMemberships.Domain.Repositories;
 using TeamMemberships.Service.Abstractions;
 using TeamMemberships.Service.Dto;
-using TeamMemberships.Service.Exceptions;
+using TeamMemberships.Service.Errors;
 
 namespace TeamMemberships.Service.Queries.GetMembership;
 
@@ -22,7 +22,7 @@ public class GetMembershipQueryHandler : IQueryHandler<GetMembershipQuery, TeamM
         var entity = await _teamMembershipRepository.GetAsync(query);
 
         if (entity is null)
-            throw new NotFoundException();
+            throw new NotFoundError();
 
         var dto = _mapper.Map<TeamMembershipDto>(entity);
 

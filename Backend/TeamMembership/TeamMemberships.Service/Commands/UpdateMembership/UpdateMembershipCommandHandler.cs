@@ -22,6 +22,8 @@ public class UpdateMembershipCommandHandler : ICommandHandler<UpdateMembershipCo
             command.UpdateDto, 
             command.TeamGuid, command.UserGuid);
 
+        await _teamMembershipRepository.SaveChangesAsync();
+        
         var updatedEntityDto = _mapper.Map<TeamMembershipDto>(updatedEntity);
 
         return updatedEntityDto;
