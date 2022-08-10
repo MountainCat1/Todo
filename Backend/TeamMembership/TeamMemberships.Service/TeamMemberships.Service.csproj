@@ -16,8 +16,4 @@
       <ProjectReference Include="..\TeamMemberships.Infrastructure\TeamMemberships.Infrastructure.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Queries" />
-    </ItemGroup>
-
 </Project>
