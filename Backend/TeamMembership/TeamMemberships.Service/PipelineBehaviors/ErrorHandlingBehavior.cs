@@ -1,7 +1,7 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 using TeamMemberships.Infrastructure.Exceptions;
-using TeamMemberships.Service.Exceptions;
+using TeamMemberships.Service.Errors;
 
 namespace TeamMemberships.Service.PipelineBehaviors;
 public sealed class ErrorHandlingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
@@ -23,7 +23,7 @@ public sealed class ErrorHandlingBehavior<TRequest, TResponse> : IPipelineBehavi
         }
         catch (ItemNotFoundException ex)
         {
-            throw new NotFoundException(ex.Message, ex);
+            throw new NotFoundError(ex.Message, ex);
         }
     }
 }

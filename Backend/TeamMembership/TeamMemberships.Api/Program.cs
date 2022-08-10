@@ -1,7 +1,12 @@
 using MediatR;
+using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using TeamMemberships.Api.Middleware;
+using TeamMemberships.Domain.Repositories;
 using TeamMemberships.Infrastructure.Data;
+using TeamMemberships.Infrastructure.Repositories;
 using TeamMemberships.Service;
+using TeamMemberships.Service.PipelineBehaviors;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,8 +39,14 @@ else
     services.AddDbContext<TeamMembershipDbContext>(optionsBuilder 
         => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
 
-services.AddMediatR(typeof(ServiceAssemplyPointer));
+services.AddAutoMapper(typeof(MappingProfile));
+services.AddMediatR(typeof(ServiceAssemblyPointer));
+services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly});
+services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
 
+services.AddScoped<ITeamMembershipRepository, TeamMembershipRepository>();
+
+services.AddScoped<ErrorHandlingMiddleware>();
 
 var app = builder.Build();
 
@@ -45,6 +56,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 

@@ -23,10 +23,10 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
         };
     }
 
-    public async Task<TEntity?> GetAsync(object[] guids)
+    public async Task<TEntity?> GetAsync(params object[] guids)
     {
         if (guids.Length == 0)
-            throw new ArgumentException("Guid was not provided!");
+            throw new ArgumentException("No key provided");
         
         var entity = await _dbSet.FindAsync(guids);
         
@@ -77,9 +77,9 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
         return entities;
     }
 
-    public async Task DeleteAsync(object guid)
+    public async Task DeleteAsync(params object[] keys)
     {
-        var entity = await GetRequiredAsync(guid);
+        var entity = await GetRequiredAsync(keys);
 
         _dbSet.Remove(entity);
     }

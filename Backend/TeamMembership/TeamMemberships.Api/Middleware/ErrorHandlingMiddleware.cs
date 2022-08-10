@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using TeamMemberships.Service.Exceptions;
+using TeamMemberships.Service.Errors;
 
 namespace TeamMemberships.Api.Middleware;
 
@@ -18,7 +18,7 @@ public class ErrorHandlingMiddleware : IMiddleware
         {
             await next.Invoke(context);
         }
-        catch (NotFoundException ex)
+        catch (NotFoundError ex)
         {
             context.Response.StatusCode = StatusCodes.Status404NotFound;
             await context.Response.WriteAsync(ex.Message);
