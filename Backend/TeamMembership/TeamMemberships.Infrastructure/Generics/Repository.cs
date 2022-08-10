@@ -26,7 +26,7 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
     public async Task<TEntity?> GetAsync(params object[] guids)
     {
         if (guids.Length == 0)
-            throw new ArgumentException("Guid was not provided!");
+            throw new ArgumentException("No key provided");
         
         var entity = await _dbSet.FindAsync(guids);
         
