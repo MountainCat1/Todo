@@ -8,7 +8,7 @@ There should be general description of the project, please do it later <3
 * Ocelot API gateway            (_In progress..._)
 * RabbitMQ brocker              (_To be configured_)
 * Team microservice             (_Basic CRUD done_)
-* Team membership microservice  (_In progress..._)
+* Team membership microservice  (_Basic CRUD done_)
 * Authentication microservice   (_Not yet started_)
 * User microservice             (_Not yet started_)
 
