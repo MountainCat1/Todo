@@ -2,7 +2,7 @@
 
   "Routes": [
     {
-      "DownstreamPathTemplate": "/Todo/{everything}",
+      "DownstreamPathTemplate": "/Todo",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -10,12 +10,12 @@
           "Port": 5001
         }
       ],
-      "UpstreamPathTemplate": "/api/Todo/{everything}",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "UpstreamPathTemplate": "/api/Todo",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
       "DangerousAcceptAnyServerCertificateValidator": true
     },
     {
-      "DownstreamPathTemplate": "/Teams/{everything}",
+      "DownstreamPathTemplate": "/Teams",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -23,8 +23,21 @@
           "Port": 5002
         }
       ],
-      "UpstreamPathTemplate": "/api/Teams/{everything}",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "UpstreamPathTemplate": "/api/Teams",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+    {
+      "DownstreamPathTemplate": "/User",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "user-api",
+          "Port": 5004
+        }
+      ],
+      "UpstreamPathTemplate": "/api/User",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
       "DangerousAcceptAnyServerCertificateValidator": true
     }
   ],
