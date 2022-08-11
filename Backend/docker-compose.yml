@@ -69,7 +69,7 @@ services:
       - SA_PASSWORD=1Secure*Password1
   team-memberships-api:
     build:
-      context: ./TeamsApi
+      context: ./TeamMembershipApi
       dockerfile: Dockerfile
     environment:
       - HTTPS_PORT=5003
