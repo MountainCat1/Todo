@@ -13,6 +13,7 @@ var services = builder.Services;
 services.AddControllers();
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
+services.AddLogging();
 
 var app = builder.Build();
 
