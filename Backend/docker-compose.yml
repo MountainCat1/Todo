@@ -88,7 +88,7 @@ services:
       - SA_PASSWORD=1Secure*Password1
   users-api:
     build:
-      context: ./Users
+      context: ./UsersApi
       dockerfile: Dockerfile
     environment:
       - HTTPS_PORT=5004
