@@ -1,6 +1,7 @@
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using Users.Api.Middleware;
 using Users.Domain.Repositories;
 using Users.Infrastructure.Data;
 using Users.Infrastructure.Repositories;
@@ -47,6 +48,7 @@ services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior
 
 services.AddScoped<IUserRepository, UserRepository>();
 
+services.AddScoped<ErrorHandlingMiddleware>();
 
 // APP
 var app = builder.Build();
@@ -57,6 +59,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 
