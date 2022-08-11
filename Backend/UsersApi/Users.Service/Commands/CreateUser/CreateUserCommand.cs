@@ -5,5 +5,10 @@ namespace Users.Service.Commands.CreateUser;
 
 public class CreateUserCommand : ICommand<UserDto>
 {
+    public CreateUserCommand(UserCreateDto createDto)
+    {
+        CreateDto = createDto;
+    }
+
     public UserCreateDto CreateDto { get; set; }
 }
