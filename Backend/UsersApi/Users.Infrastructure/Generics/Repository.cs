@@ -23,7 +23,7 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
         };
     }
 
-    public async Task<TEntity?> GetAsync(params object[] guids)
+    public async Task<TEntity?> GetOneAsync(params object[] guids)
     {
         if (guids.Length == 0)
             throw new ArgumentException("No key provided");
@@ -62,7 +62,7 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
 
     public async Task<TEntity> GetRequiredAsync(params object[] guids)
     {
-        var entity = await GetAsync(guids);
+        var entity = await GetOneAsync(guids);
 
         if (entity == null)
             throw new ItemNotFoundException();

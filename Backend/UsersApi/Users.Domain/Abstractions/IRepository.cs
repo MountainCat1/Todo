@@ -9,7 +9,7 @@ public interface IRepository
 }
 public interface IRepository<TEntity> : IRepository where TEntity : class, IEntity
 {
-    public Task<TEntity?> GetAsync(params object[] keys);
+    public Task<TEntity?> GetOneAsync(params object[] keys);
     public Task<IEnumerable<TEntity>> GetAsync(
         Expression<Func<TEntity, bool>>? filter = null,
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
