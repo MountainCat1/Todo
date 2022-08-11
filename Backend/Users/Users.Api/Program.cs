@@ -42,6 +42,7 @@ else
         => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
 
 
+services.AddAutoMapper(typeof(MappingProfile));
 services.AddMediatR(typeof(ServiceAssemblyPointer));
 services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly});
 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
