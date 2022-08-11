@@ -60,7 +60,7 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
         }
     }
 
-    public async Task<TEntity> GetRequiredAsync(params object[] guids)
+    public async Task<TEntity> GetOneRequiredAsync(params object[] guids)
     {
         var entity = await GetOneAsync(guids);
 
@@ -79,7 +79,7 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
 
     public async Task DeleteAsync(params object[] keys)
     {
-        var entity = await GetRequiredAsync(keys);
+        var entity = await GetOneRequiredAsync(keys);
 
         _dbSet.Remove(entity);
     }
@@ -93,7 +93,7 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
 
     public async Task<TEntity> UpdateAsync(object update, params object[] keys)
     {
-        var entity = await GetRequiredAsync(keys);
+        var entity = await GetOneRequiredAsync(keys);
 
         _dbSet.Attach(entity).CurrentValues.SetValues(update);
         _dbSet.Attach(entity).State = EntityState.Modified;
