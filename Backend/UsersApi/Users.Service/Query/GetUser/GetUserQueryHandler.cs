@@ -20,7 +20,7 @@ public class GetUserQueryHandler : IQueryHandler<GetUserQuery, UserDto>
 
     public async Task<UserDto> Handle(GetUserQuery query, CancellationToken cancellationToken)
     {
-        var entity = await _userRepository.GetOneRequiredAsync();
+        var entity = await _userRepository.GetOneRequiredAsync(query.Guid);
 
         var dto = _mapper.Map<UserDto>(entity);
 
