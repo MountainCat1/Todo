@@ -80,6 +80,25 @@ services:
       - "4003:4003"
     depends_on:
       - teams-db
+  # === USER API ===
+  users-db:
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=1Secure*Password1
+  users-api:
+    build:
+      context: ./Users
+      dockerfile: Dockerfile
+    environment:
+      - HTTPS_PORT=5004
+      - ASPNETCORE_URLS=https://*:443;https://*:5004;http://*:4004
+      - ConnectionStrings:DatabaseConnection=Server=users-db;Database=UsersDatabase;User=sa;Password=1Secure*Password1;
+    ports:
+      - "5004:5004"
+      - "4004:4004"
+    depends_on:
+      - users-db
 
 networks:
   rabbitmq_go_net:
