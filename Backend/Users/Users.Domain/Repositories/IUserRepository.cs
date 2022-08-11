@@ -3,7 +3,7 @@ using Users.Domain.Entities;
 
 namespace Users.Domain.Repositories;
 
-public interface ITeamMembershipRepository : IRepository<User>
+public interface IUserRepository : IRepository<User>
 {
     
 }
