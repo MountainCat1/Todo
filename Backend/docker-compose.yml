@@ -74,12 +74,12 @@ services:
     environment:
       - HTTPS_PORT=5003
       - ASPNETCORE_URLS=https://*:443;https://*:5003;http://*:4003
-      - ConnectionStrings:DatabaseConnection=Server=teams-db;Database=TeamMembershipsDatabase;User=sa;Password=1Secure*Password1;
+      - ConnectionStrings:DatabaseConnection=Server=team-memberships-db;Database=TeamMembershipsDatabase;User=sa;Password=1Secure*Password1;
     ports:
       - "5003:5003"
       - "4003:4003"
     depends_on:
-      - teams-db
+      - team-memberships-db
   # === USER API ===
   users-db:
     image: "mcr.microsoft.com/mssql/server:2017-latest"

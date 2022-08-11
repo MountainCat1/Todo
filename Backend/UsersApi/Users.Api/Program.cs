@@ -54,6 +54,11 @@ services.AddScoped<ErrorHandlingMiddleware>();
 // APP
 var app = builder.Build();
 
+await new DatabaseInitializer(
+        app.Services.CreateAsyncScope()
+            .ServiceProvider.GetRequiredService<UserDbContext>())
+    .InitializeAsync(true);
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
