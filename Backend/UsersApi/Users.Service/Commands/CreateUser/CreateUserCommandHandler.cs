@@ -23,6 +23,8 @@ public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, UserD
 
         var createdEntity = await _userRepository.CreateAsync(entity);
 
+        await _userRepository.SaveChangesAsync();
+
         return _mapper.Map<UserDto>(createdEntity);
     }
 }
