@@ -11,8 +11,6 @@ public class UserDbContext : DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<User>()
-            .HasKey(user => user.Guid);
     }
 
     public DbSet<User> Users { get; set; }
