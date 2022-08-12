@@ -9,7 +9,7 @@ namespace Authentication.Service.Services;
 public interface IAccountService
 {
     public Task<Account> RegisterAsync(Guid userGuid, string password);
-    public Task<AuthenticationResultModel> Authenticate(Guid userGuid, string password);
+    public Task<AuthenticationResult> Authenticate(Guid userGuid, string password);
 }
 
 public class AccountService : IAccountService
@@ -42,7 +42,7 @@ public class AccountService : IAccountService
         return createdEntity;
     }
 
-    public async Task<AuthenticationResultModel> Authenticate(Guid userGuid, string password)
+    public async Task<AuthenticationResult> Authenticate(Guid userGuid, string password)
     {
         var account = await _accountRepository.GetOneAsync(x => x.UserGuid == userGuid);
 
@@ -52,15 +52,15 @@ public class AccountService : IAccountService
         var verifySucceeded = BCrypt.Net.BCrypt.Verify(account.PasswordHash, password);
 
         if (verifySucceeded)
-            return new AuthenticationResultModel()
+            return new AuthenticationResult()
             {
                 Account = account,
-                Result = AuthenticationResultModel.AuthenticationResult.Success
+                Succeeded = true
             };
         else
-            return new AuthenticationResultModel()
+            return new AuthenticationResult()
             {
-                Result = AuthenticationResultModel.AuthenticationResult.Failed
+                Succeeded = false
             };
     }
 }
