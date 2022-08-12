@@ -9,8 +9,11 @@ public class AccountDbContext : DbContext
     {
     }
     
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder builder)
     {
+        builder.Entity<Account>()
+            .HasIndex(e => e.UserGuid)
+            .IsUnique();
     }
 
     public DbSet<Account> Accounts { get; set; }

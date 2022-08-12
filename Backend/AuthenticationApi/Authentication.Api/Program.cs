@@ -1,3 +1,5 @@
+using System.Text;
+using Authentication.Api.Configuration;
 using Authentication.Api.Middleware;
 using Authentication.Domain.Entities;
 using Authentication.Domain.Repositories;
@@ -8,8 +10,10 @@ using Authentication.Service.PipelineBehaviors;
 using Authentication.Service.Services;
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +23,9 @@ var configuration = builder.Configuration;
 configuration.AddEnvironmentVariables();
 
 var httpsPort = configuration.GetValue<int>("HTTPS_PORT");
+
+JWTConfiguration jwtConfig = new JWTConfiguration();
+configuration.Bind("JWTConfiguration", jwtConfig);
 
 // SERVICES
 var services = builder.Services;
@@ -42,6 +49,23 @@ else
         => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
 services.AddScoped<IPasswordHasher<Account>, PasswordHasher<Account>>();
 
+/*services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = false,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = jwtConfig.Issuer,
+        ValidAudience = jwtConfig.Audience,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig.SecretKey))
+    };
+});*/
 
 services.AddAutoMapper(typeof(MappingProfile));
 services.AddMediatR(typeof(ServiceAssemblyPointer));
