@@ -10,7 +10,7 @@ There should be general description of the project, please do it later <3
 * Team microservice             (_Basic CRUD done_)
 * Team membership microservice  (_Basic CRUD done_)
 * Authentication microservice   (_Not yet started_)
-* User microservice             (_Not yet started_)
+* User microservice             (_Basic CRUD done_)
 
 ### Microservices
 ##### Todo microservice
