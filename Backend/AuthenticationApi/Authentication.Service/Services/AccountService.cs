@@ -9,7 +9,7 @@ namespace Authentication.Service.Services;
 public interface IAccountService
 {
     public Task<Account> RegisterAsync(Guid userGuid, string password);
-    public Task<AuthenticationResult> Authenticate(Guid userGuid, string password);
+    public Task<AuthenticationResult> AuthenticateAsync(Guid userGuid, string password);
 }
 
 public class AccountService : IAccountService
@@ -42,7 +42,7 @@ public class AccountService : IAccountService
         return createdEntity;
     }
 
-    public async Task<AuthenticationResult> Authenticate(Guid userGuid, string password)
+    public async Task<AuthenticationResult> AuthenticateAsync(Guid userGuid, string password)
     {
         var account = await _accountRepository.GetOneAsync(x => x.UserGuid == userGuid);
 
