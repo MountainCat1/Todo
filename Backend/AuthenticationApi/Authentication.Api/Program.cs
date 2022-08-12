@@ -1,13 +1,58 @@
+using Authentication.Api.Middleware;
+using Authentication.Domain.Repositories;
+using Authentication.Infrastructure.Data;
+using Authentication.Infrastructure.Repositories;
+using Authentication.Service;
+using Authentication.Service.PipelineBehaviors;
+using MediatR;
+using MediatR.Extensions.FluentValidation.AspNetCore;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// CONFIGURATION
+var configuration = builder.Configuration;
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+configuration.AddEnvironmentVariables();
 
+// SERVICES
+var services = builder.Services;
+
+services.AddControllers();
+services.AddEndpointsApiExplorer();
+services.AddSwaggerGen();
+services.AddHttpsRedirection(options =>
+    options.HttpsPort = configuration.GetValue<int>("HTTPS_PORT"));
+services.AddSwaggerGen();
+services.AddLogging(options =>
+{
+    options.AddConsole();
+    options.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Warning);
+    options.AddFilter("Microsoft.EntityFrameworkCore.Infrastructure", LogLevel.Warning);
+});
+if (builder.Environment.IsDevelopment())
+    services.AddDbContext<AccountDbContext>(optionsBuilder 
+        => optionsBuilder.UseInMemoryDatabase("AccountDatabase"));
+else
+    services.AddDbContext<AccountDbContext>(optionsBuilder 
+        => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
+
+services.AddAutoMapper(typeof(MappingProfile));
+services.AddMediatR(typeof(ServiceAssemblyPointer));
+services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly});
+services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
+
+services.AddScoped<IAccountRepository, AccountRepository>();
+
+services.AddScoped<ErrorHandlingMiddleware>();
+
+// APP
 var app = builder.Build();
+
+await new DatabaseInitializer(
+        app.Services.CreateAsyncScope()
+            .ServiceProvider.GetRequiredService<AccountDbContext>())
+    .InitializeAsync(true);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -15,6 +60,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 
