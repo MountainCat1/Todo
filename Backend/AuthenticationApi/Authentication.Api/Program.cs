@@ -1,11 +1,11 @@
 using System.Text;
-using Authentication.Api.Configuration;
 using Authentication.Api.Middleware;
 using Authentication.Domain.Entities;
 using Authentication.Domain.Repositories;
 using Authentication.Infrastructure.Data;
 using Authentication.Infrastructure.Repositories;
 using Authentication.Service;
+using Authentication.Service.Configuration;
 using Authentication.Service.PipelineBehaviors;
 using Authentication.Service.Services;
 using MediatR;
@@ -24,11 +24,13 @@ configuration.AddEnvironmentVariables();
 
 var httpsPort = configuration.GetValue<int>("HTTPS_PORT");
 
-JWTConfiguration jwtConfig = new JWTConfiguration();
+var jwtConfig = new JWTConfiguration();
 configuration.Bind("JWTConfiguration", jwtConfig);
 
 // SERVICES
 var services = builder.Services;
+
+services.AddSingleton(jwtConfig);
 
 services.AddControllers();
 services.AddEndpointsApiExplorer();
@@ -72,6 +74,8 @@ services.AddMediatR(typeof(ServiceAssemblyPointer));
 services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly});
 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
 
+
+services.AddScoped<IJWTService, JWTService>();
 services.AddScoped<IAccountRepository, AccountRepository>();
 services.AddScoped<IAccountService, AccountService>();
 
