@@ -7,7 +7,6 @@ namespace Authentication.Service.PipelineBehaviors;
 public sealed class ErrorHandlingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : class, IRequest<TResponse>
 {
-
     private readonly ILogger<ErrorHandlingBehavior<TRequest,TResponse>> _logger;
 
     public ErrorHandlingBehavior(ILogger<ErrorHandlingBehavior<TRequest, TResponse>> logger)
