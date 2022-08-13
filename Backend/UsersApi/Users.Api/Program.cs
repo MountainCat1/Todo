@@ -3,8 +3,10 @@ using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Users.Api.Middleware;
 using Users.Domain.Repositories;
+using Users.Infrastructure.Configuration;
 using Users.Infrastructure.Data;
 using Users.Infrastructure.Repositories;
+using Users.Infrastructure.Services;
 using Users.Service;
 using Users.Service.PipelineBehaviors;
 
@@ -15,8 +17,13 @@ var configuration = builder.Configuration;
 
 configuration.AddEnvironmentVariables();
 
+var rabbitMqConfig = new RabbitMQConfiguration();
+configuration.Bind("RabbitMQConfiguration", rabbitMqConfig);
+
 // SERVICES
 var services = builder.Services;
+
+services.AddSingleton(rabbitMqConfig);
 
 services.AddControllers();
 services.AddEndpointsApiExplorer();
@@ -38,6 +45,7 @@ else
     services.AddDbContext<UserDbContext>(optionsBuilder 
         => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
 
+services.AddSingleton<IRabbitMQClient, RabbitMQClient>();
 
 services.AddAutoMapper(typeof(MappingProfile));
 services.AddMediatR(typeof(ServiceAssemblyPointer));
@@ -47,6 +55,8 @@ services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior
 services.AddScoped<IUserRepository, UserRepository>();
 
 services.AddScoped<ErrorHandlingMiddleware>();
+
+
 
 // APP
 var app = builder.Build();

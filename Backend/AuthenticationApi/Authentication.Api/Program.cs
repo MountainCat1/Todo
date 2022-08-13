@@ -2,8 +2,10 @@ using System.Text;
 using Authentication.Api.Middleware;
 using Authentication.Domain.Entities;
 using Authentication.Domain.Repositories;
+using Authentication.Infrastructure.Configuration;
 using Authentication.Infrastructure.Data;
 using Authentication.Infrastructure.Repositories;
+using Authentication.Infrastructure.Services;
 using Authentication.Service;
 using Authentication.Service.Configuration;
 using Authentication.Service.PipelineBehaviors;
@@ -27,10 +29,15 @@ var httpsPort = configuration.GetValue<int>("HTTPS_PORT");
 var jwtConfig = new JWTConfiguration();
 configuration.Bind("JWTConfiguration", jwtConfig);
 
+var rabbitMqConfig = new RabbitMQConfiguration();
+configuration.Bind("RabbitMQConfiguration", rabbitMqConfig);
+
+
 // SERVICES
 var services = builder.Services;
 
 services.AddSingleton(jwtConfig);
+services.AddSingleton(rabbitMqConfig);
 
 services.AddControllers();
 services.AddEndpointsApiExplorer();
@@ -49,7 +56,10 @@ if (builder.Environment.IsDevelopment())
 else
     services.AddDbContext<AccountDbContext>(optionsBuilder 
         => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
+
 services.AddScoped<IPasswordHasher<Account>, PasswordHasher<Account>>();
+
+services.AddSingleton<IRabbitMQClient, RabbitMQClient>();
 
 /*services.AddAuthentication(options =>
 {

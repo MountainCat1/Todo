@@ -10,6 +10,7 @@
       <PackageReference Include="AutoMapper" Version="11.0.1" />
       <PackageReference Include="MediatR" Version="10.0.1" />
       <PackageReference Include="MediatR.Extensions.FluentValidation.AspNetCore" Version="3.0.0" />
+      <PackageReference Include="RabbitMQ.Client" Version="6.4.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -17,8 +18,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Configuration" />
-      <Folder Include="Services" />
+      <Reference Include="Microsoft.Extensions.Hosting.Abstractions">
+        <HintPath>..\..\..\..\..\..\..\..\Program Files\dotnet\shared\Microsoft.AspNetCore.App\6.0.8\Microsoft.Extensions.Hosting.Abstractions.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>
