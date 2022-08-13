@@ -6,16 +6,15 @@ using RabbitMQ.Client;
 
 namespace Authentication.Infrastructure.Services;
 
-
 public interface IRabbitMQClient
 {
-    void PublishMessage(string routingKey, object message);
+    public void PublishMessage(string queue, string routingKey, object message);
 }
 
 public class RabbitMQClient : IRabbitMQClient
 {
-    private readonly RabbitMQConfiguration _rabbitMqConfiguration;
     private readonly ILogger<RabbitMQClient> _logger;
+    private readonly RabbitMQConfiguration _rabbitMqConfiguration;
     
     private readonly IModel _channel;
 
@@ -23,39 +22,42 @@ public class RabbitMQClient : IRabbitMQClient
     {
         _rabbitMqConfiguration = rabbitMqConfiguration;
         _logger = logger;
-        
+
         try
         {
             var factory = new ConnectionFactory()
             {
-                HostName = _rabbitMqConfiguration.HostName,
-                Password = _rabbitMqConfiguration.Password,
-                UserName = _rabbitMqConfiguration.UserName,
-                VirtualHost = _rabbitMqConfiguration.VirtualHost
+                HostName = rabbitMqConfiguration.HostName,
+                Password = rabbitMqConfiguration.Password,
+                UserName = rabbitMqConfiguration.UserName,
+                VirtualHost = rabbitMqConfiguration.VirtualHost
             };
             var connection = factory.CreateConnection();
             _channel = connection.CreateModel();
         }
         catch (Exception ex)
         {
-            logger.LogError(-1, ex, "RabbitMQClient init fail");
+            logger.LogError(ex, "RabbitMQClient initialization failed");
         }
+
         _logger = logger;
     }
 
-    public virtual void PublishMessage(string routingKey, object message)
+    public virtual void PublishMessage(string queue, string routingKey, object message)
     {
-        _logger.LogInformation($"PushMessage,routingKey:{routingKey}");
-        _channel.QueueDeclare(queue: "message",
-            durable: false,
-            exclusive: false,
-            autoDelete: false,
-            arguments: null);
-        
+        _logger.LogInformation($"Publishing message...\nqueue: {queue}, routingKey: {routingKey} ");
+
+        _channel.ExchangeDeclare(
+            "account",
+            ExchangeType.Topic,
+            false,
+            false);
+
         string msgJson = JsonSerializer.Serialize(message);
         var body = Encoding.UTF8.GetBytes(msgJson);
-        
-        _channel.BasicPublish(exchange: "message",
+
+        _channel.BasicPublish(
+            exchange: "account",
             routingKey: routingKey,
             basicProperties: null,
             body: body);

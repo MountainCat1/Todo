@@ -24,9 +24,6 @@ public class AccountService : IAccountService
 
     public async Task<Account> RegisterAsync(Guid userGuid, string password)
     {
-        if (await _accountRepository.GetOneAsync(x => x.UserGuid == userGuid) is not null)
-            throw new ArgumentException("Cannot create two accounts for one user GUID");
-
         var hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
 
         if (hashedPassword == null)
