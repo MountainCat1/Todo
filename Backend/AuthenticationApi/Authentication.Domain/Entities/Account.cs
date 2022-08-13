@@ -11,7 +11,4 @@ public class Account : IEntity
     public Guid UserGuid { get; set; }
     [Required]
     public string PasswordHash { get; set; }
-    [EmailAddress]
-    [Required] 
-    public string Email { get; set; }
 }
