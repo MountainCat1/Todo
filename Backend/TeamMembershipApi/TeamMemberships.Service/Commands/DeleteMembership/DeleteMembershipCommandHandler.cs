@@ -16,7 +16,7 @@ public class DeleteMembershipCommandHandler : ICommandHandler<DeleteMembershipCo
 
     public async Task<Unit> Handle(DeleteMembershipCommand command, CancellationToken cancellationToken)
     {
-        await _teamMembershipRepository.DeleteAsync(command.TeamGuid, command.UserGuid);
+        await _teamMembershipRepository.DeleteAsync(command.TeamGuid, command.AccountGuid);
         
         await _teamMembershipRepository.SaveChangesAsync();
         

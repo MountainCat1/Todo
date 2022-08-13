@@ -5,14 +5,14 @@ namespace TeamMemberships.Service.Commands.UpdateMembership;
 
 public class UpdateMembershipCommand : ICommand<TeamMembershipDto>
 {
-    public UpdateMembershipCommand(Guid userGuid, Guid teamGuid, MembershipUpdateDto updateDto)
+    public UpdateMembershipCommand(Guid accountGuid, Guid teamGuid, MembershipUpdateDto updateDto)
     {
-        UserGuid = userGuid;
+        AccountGuid = accountGuid;
         TeamGuid = teamGuid;
         UpdateDto = updateDto;
     }
 
-    public Guid UserGuid { get; set; }
+    public Guid AccountGuid { get; set; }
     public Guid TeamGuid { get; set; }
 
     public MembershipUpdateDto UpdateDto { get; set; }
