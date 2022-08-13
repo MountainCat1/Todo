@@ -19,8 +19,8 @@ public class AuthenticationController : Controller
     }
 
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [HttpPost("registers")]
-    public async Task<IActionResult> RegisterAccount([FromForm] AccountRegisterDto registerDto)
+    [HttpPost("register")]
+    public async Task<IActionResult> RegisterAccount([FromBody] AccountRegisterDto registerDto)
     {
         var command = new RegisterAccountCommand(registerDto);
 
@@ -32,7 +32,7 @@ public class AuthenticationController : Controller
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [HttpPost("authenticate")]
-    public async Task<IActionResult> Authenticate([FromForm] AccountLoginDto loginDto)
+    public async Task<IActionResult> Authenticate([FromBody] AccountLoginDto loginDto)
     {
         var query = new GetAccountJwtQuery(loginDto);
 

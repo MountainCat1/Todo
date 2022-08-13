@@ -2,6 +2,7 @@
 using Authentication.Domain.Repositories;
 using Authentication.Service.Errors;
 using Authentication.Service.Models;
+using BCrypt.Net;
 using Microsoft.AspNetCore.Identity;
 
 namespace Authentication.Service.Services;
@@ -39,6 +40,8 @@ public class AccountService : IAccountService
 
         var createdEntity = await _accountRepository.CreateAsync(account);
 
+        await _accountRepository.SaveChangesAsync();
+        
         return createdEntity;
     }
 
@@ -49,7 +52,8 @@ public class AccountService : IAccountService
         if (account is null)
             throw new NotFoundError("Account not found");
         
-        var verifySucceeded = BCrypt.Net.BCrypt.Verify(account.PasswordHash, password);
+        var passwordHash = BCrypt.Net.BCrypt.HashPassword(password);
+        var verifySucceeded = BCrypt.Net.BCrypt.Verify(account.PasswordHash, passwordHash);
 
         if (verifySucceeded)
             return new AuthenticationResult()

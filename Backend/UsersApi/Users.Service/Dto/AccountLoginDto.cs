@@ -1,7 +1,7 @@
 ﻿namespace Users.Service.Dto;
 
-public class UserCreateDto
+public class AccountLoginDto
 {
-    public string Username { get; set; }
+    public Guid UserGuid { get; set; }
     public string Password { get; set; }
 }

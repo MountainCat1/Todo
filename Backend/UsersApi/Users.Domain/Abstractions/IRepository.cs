@@ -20,7 +20,9 @@ public interface IRepository<TEntity> : IRepository where TEntity : class, IEnti
     public Task<TEntity> GetOneRequiredAsync(params object[] keys);
     public Task<ICollection<TEntity>> GetAllAsync();
     public Task DeleteAsync(params object[] keys);
+    TEntity Create(TEntity entity);
     public Task<TEntity> CreateAsync(TEntity entity);
     public Task<TEntity> UpdateAsync(object update, params object[] keys);
     public Task SaveChangesAsync();
+
 }
