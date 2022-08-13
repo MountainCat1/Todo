@@ -6,26 +6,17 @@ using Users.Domain.Repositories;
 using Users.Infrastructure.Data;
 using Users.Infrastructure.Repositories;
 using Users.Service;
-using Users.Service.Configuration;
 using Users.Service.PipelineBehaviors;
-using Users.Service.Services;
-
 var builder = WebApplication.CreateBuilder(args);
 
 
 // CONFIGURATION
 var configuration = builder.Configuration;
 
-configuration.AddJsonFile("microservices.json");
 configuration.AddEnvironmentVariables();
-
-
-var microserviceConfig = new MicroservicesConfiguration();
-configuration.Bind("Microservices", microserviceConfig);
 
 // SERVICES
 var services = builder.Services;
-
 
 services.AddControllers();
 services.AddEndpointsApiExplorer();
@@ -56,11 +47,6 @@ services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior
 services.AddScoped<IUserRepository, UserRepository>();
 
 services.AddScoped<ErrorHandlingMiddleware>();
-
-services.AddHttpClient<IAuthenticationClient, AuthenticationClient>(client =>
-{
-    client.BaseAddress = new Uri(microserviceConfig.Authentication.Url);
-});
 
 // APP
 var app = builder.Build();

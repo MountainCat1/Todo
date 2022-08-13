@@ -16,4 +16,9 @@
       <ProjectReference Include="..\Users.Infrastructure\Users.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Configuration" />
+      <Folder Include="Services" />
+    </ItemGroup>
+
 </Project>

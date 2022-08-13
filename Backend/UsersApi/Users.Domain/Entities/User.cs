@@ -7,6 +7,8 @@ public class User : IEntity
 {
     [Key]
     public Guid Guid { get; set; }
+
+    public Guid AccountGuid { get; set; }
     
     [MaxLength(32)]
     [MinLength(3)]
