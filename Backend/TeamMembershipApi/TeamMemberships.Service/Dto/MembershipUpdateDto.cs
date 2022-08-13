@@ -2,6 +2,6 @@
 
 public class MembershipUpdateDto
 {
-    public Guid UserGuid { get; set; }
+    public Guid AccountGuid { get; set; }
     public Guid TeamGuid { get; set; }
 }
