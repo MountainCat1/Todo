@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication.Service", "Authentication.Service\Authentication.Service.csproj", "{664104E6-05B0-4345-96AD-692E343F03A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication.Infrastructure", "Authentication.Infrastructure\Authentication.Infrastructure.csproj", "{FE0CCE11-FF01-4431-B5C1-F72EB202FEC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication.Domain", "Authentication.Domain\Authentication.Domain.csproj", "{DA1AB6E7-ACA7-40F8-B2AB-B0619600ED7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication.Api", "Authentication.Api\Authentication.Api.csproj", "{53C4AEC9-007A-4B1C-BFCD-B75218949BC3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{664104E6-05B0-4345-96AD-692E343F03A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{664104E6-05B0-4345-96AD-692E343F03A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{664104E6-05B0-4345-96AD-692E343F03A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{664104E6-05B0-4345-96AD-692E343F03A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE0CCE11-FF01-4431-B5C1-F72EB202FEC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE0CCE11-FF01-4431-B5C1-F72EB202FEC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE0CCE11-FF01-4431-B5C1-F72EB202FEC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE0CCE11-FF01-4431-B5C1-F72EB202FEC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA1AB6E7-ACA7-40F8-B2AB-B0619600ED7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA1AB6E7-ACA7-40F8-B2AB-B0619600ED7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA1AB6E7-ACA7-40F8-B2AB-B0619600ED7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA1AB6E7-ACA7-40F8-B2AB-B0619600ED7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53C4AEC9-007A-4B1C-BFCD-B75218949BC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53C4AEC9-007A-4B1C-BFCD-B75218949BC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53C4AEC9-007A-4B1C-BFCD-B75218949BC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53C4AEC9-007A-4B1C-BFCD-B75218949BC3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
