@@ -23,7 +23,7 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
         };
     }
 
-    public async Task<TEntity?> GetOneAsync(params object[] guids)
+    public virtual async Task<TEntity?> GetOneAsync(params object[] guids)
     {
         if (guids.Length == 0)
             throw new ArgumentException("No key provided");
@@ -59,8 +59,24 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
             return await query.ToListAsync();
         }
     }
+    public async Task<TEntity?> GetOneAsync(Expression<Func<TEntity, bool>>? filter = null, params string[] includeProperties)
+    {
+        IQueryable<TEntity> query = _dbSet;
 
-    public async Task<TEntity> GetOneRequiredAsync(params object[] guids)
+        if (filter != null)
+        {
+            query = query.Where(filter);
+        }
+
+        foreach (var includeProperty in includeProperties)
+        {
+            query = query.Include(includeProperty);
+        }
+
+        return await query.FirstAsync();
+    }
+
+    public virtual async Task<TEntity> GetOneRequiredAsync(params object[] guids)
     {
         var entity = await GetOneAsync(guids);
 
@@ -70,28 +86,28 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
         return entity;
     }
 
-    public async Task<ICollection<TEntity>> GetAllAsync()
+    public virtual async Task<ICollection<TEntity>> GetAllAsync()
     {
         var entities = await _dbSet.ToListAsync();
         
         return entities;
     }
 
-    public async Task DeleteAsync(params object[] keys)
+    public virtual async Task DeleteAsync(params object[] keys)
     {
         var entity = await GetOneRequiredAsync(keys);
 
         _dbSet.Remove(entity);
     }
 
-    public Task<TEntity> CreateAsync(TEntity entity)
+    public virtual Task<TEntity> CreateAsync(TEntity entity)
     {
         _dbSet.Add(entity);
         
         return Task.FromResult(entity);
     }
 
-    public async Task<TEntity> UpdateAsync(object update, params object[] keys)
+    public virtual async Task<TEntity> UpdateAsync(object update, params object[] keys)
     {
         var entity = await GetOneRequiredAsync(keys);
 
@@ -101,7 +117,7 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
         return entity;
     }
 
-    public async Task SaveChangesAsync()
+    public virtual async Task SaveChangesAsync()
     {
         await _saveChangesAsyncDelegate();
     }
