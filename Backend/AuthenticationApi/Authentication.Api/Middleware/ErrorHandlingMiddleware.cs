@@ -18,10 +18,15 @@ public class ErrorHandlingMiddleware : IMiddleware
         {
             await next.Invoke(context);
         }
-        catch (NotFoundError ex)
+        catch (NotFoundError error)
         {
             context.Response.StatusCode = StatusCodes.Status404NotFound;
-            await context.Response.WriteAsync(ex.Message);
+            await context.Response.WriteAsync(error.Message);
+        }
+        catch (UnauthorizedError error)
+        {
+            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            await context.Response.WriteAsync(error.Message);
         }
         catch (ValidationException ex)
         {
