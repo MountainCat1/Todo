@@ -7,8 +7,8 @@ using Users.Infrastructure.Data;
 using Users.Infrastructure.Repositories;
 using Users.Service;
 using Users.Service.PipelineBehaviors;
-var builder = WebApplication.CreateBuilder(args);
 
+var builder = WebApplication.CreateBuilder(args);
 
 // CONFIGURATION
 var configuration = builder.Configuration;
