@@ -100,11 +100,18 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
         _dbSet.Remove(entity);
     }
 
-    public virtual Task<TEntity> CreateAsync(TEntity entity)
+    public virtual TEntity Create(TEntity entity)
     {
         _dbSet.Add(entity);
         
-        return Task.FromResult(entity);
+        return entity;
+    }
+    
+    public virtual async Task<TEntity> CreateAsync(TEntity entity)
+    {
+        var createdEntity = await _dbSet.AddAsync(entity);
+        
+        return createdEntity.Entity;
     }
 
     public virtual async Task<TEntity> UpdateAsync(object update, params object[] keys)

@@ -10,8 +10,10 @@ public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, UserD
 {
     private readonly IMapper _mapper;
     private readonly IUserRepository _userRepository;
-    
-    public CreateUserCommandHandler(IMapper mapper, IUserRepository userRepository)
+
+    public CreateUserCommandHandler(
+        IMapper mapper, 
+        IUserRepository userRepository)
     {
         _mapper = mapper;
         _userRepository = userRepository;

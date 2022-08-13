@@ -10,16 +10,13 @@ using Users.Service.PipelineBehaviors;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 // CONFIGURATION
 var configuration = builder.Configuration;
 
 configuration.AddEnvironmentVariables();
 
-
 // SERVICES
 var services = builder.Services;
-
 
 services.AddControllers();
 services.AddEndpointsApiExplorer();
