@@ -73,7 +73,7 @@ public class Repository<TEntity, TDbContext> : IRepository<TEntity>
             query = query.Include(includeProperty);
         }
 
-        return await query.FirstAsync();
+        return await query.FirstOrDefaultAsync();
     }
 
     public virtual async Task<TEntity> GetOneRequiredAsync(params object[] guids)

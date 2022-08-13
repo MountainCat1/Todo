@@ -99,6 +99,25 @@ services:
       - "4004:4004"
     depends_on:
       - users-db
+  # === USER API ===
+  authentication-db:
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=1Secure*Password1
+  authentication-api:
+    build:
+      context: ./AuthenticationApi
+      dockerfile: Dockerfile
+    environment:
+      - HTTPS_PORT=5005
+      - ASPNETCORE_URLS=https://*:443;https://*:5004;http://*:4005
+      - ConnectionStrings:DatabaseConnection=Server=authentication-db;Database=UsersDatabase;User=sa;Password=1Secure*Password1;
+    ports:
+      - "5005:5005"
+      - "4005:4005"
+    depends_on:
+      - authentication-db
 
 networks:
   rabbitmq_go_net:
