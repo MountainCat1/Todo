@@ -23,24 +23,16 @@ public class RabbitMQClient : IRabbitMQClient
         _rabbitMqConfiguration = rabbitMqConfiguration;
         _logger = logger;
 
-        try
+        var factory = new ConnectionFactory()
         {
-            var factory = new ConnectionFactory()
-            {
-                HostName = rabbitMqConfiguration.HostName,
-                Password = rabbitMqConfiguration.Password,
-                UserName = rabbitMqConfiguration.UserName,
-                VirtualHost = rabbitMqConfiguration.VirtualHost
-            };
-            var connection = factory.CreateConnection();
-            _channel = connection.CreateModel();
-        }
-        catch (Exception ex)
-        {
-            logger.LogError(ex, "RabbitMQClient initialization failed");
-        }
-
-        _logger = logger;
+            HostName = rabbitMqConfiguration.HostName,
+            Password = rabbitMqConfiguration.Password,
+            UserName = rabbitMqConfiguration.UserName,
+            VirtualHost = rabbitMqConfiguration.VirtualHost
+        };
+        
+        var connection = factory.CreateConnection();
+        _channel = connection.CreateModel();
     }
 
     public virtual void PublishMessage(string queue, string routingKey, object message)
