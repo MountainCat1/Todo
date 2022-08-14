@@ -6,19 +6,19 @@ using RabbitMQ.Client;
 using Users.Infrastructure.Configuration;
 
 namespace Users.Infrastructure.RabbitMQ;
-public interface IRabbitMQClient
+public interface IRabbitMQSender
 {
     void PublishMessage(string routingKey, object message);
 }
 
-public class RabbitMQClient : IRabbitMQClient
+public class RabbitMqSender : IRabbitMQSender
 {
     private readonly RabbitMQConfiguration _rabbitMqConfiguration;
-    private readonly ILogger<RabbitMQClient> _logger;
+    private readonly ILogger<RabbitMqSender> _logger;
     
     private readonly IModel _channel;
 
-    public RabbitMQClient(IOptions<RabbitMQConfiguration> rabbitMqConfiguration, ILogger<RabbitMQClient> logger)
+    public RabbitMqSender(IOptions<RabbitMQConfiguration> rabbitMqConfiguration, ILogger<RabbitMqSender> logger)
     {
         _rabbitMqConfiguration = rabbitMqConfiguration.Value;
         _logger = logger;
@@ -44,13 +44,8 @@ public class RabbitMQClient : IRabbitMQClient
 
     public virtual void PublishMessage(string routingKey, object message)
     {
-        _logger.LogInformation($"PushMessage,routingKey:{routingKey}");
-        _channel.QueueDeclare(queue: "message",
-            durable: false,
-            exclusive: false,
-            autoDelete: false,
-            arguments: null);
-        
+        _logger.LogInformation($"Publishing RabbitMQ message with routing key: {routingKey}...");
+
         string msgJson = JsonSerializer.Serialize(message);
         var body = Encoding.UTF8.GetBytes(msgJson);
         

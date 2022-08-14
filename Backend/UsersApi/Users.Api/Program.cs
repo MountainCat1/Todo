@@ -43,7 +43,7 @@ else
     services.AddDbContext<UserDbContext>(optionsBuilder 
         => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
 
-services.AddSingleton<IRabbitMQClient, RabbitMQClient>();
+services.AddSingleton<IRabbitMQSender, RabbitMqSender>();
 services.AddRabbitMqReceiver<AccountCreatedEventReceiver>(receiver =>
 {
     receiver.Exchange  = "account-event-created-exchange";
