@@ -6,18 +6,27 @@ using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Users.Infrastructure.Configuration;
+using BindingFlags = System.Reflection.BindingFlags;
 
 namespace Users.Infrastructure.Abstractions;
 
-public abstract class RabbitMQReceiver : IHostedService
+public interface IRabbitMQReceiver : IHostedService
+{
+    string QueueName { get; set; }
+    bool Process(string message);
+    void Register();
+    void DeRegister();
+}
+
+public abstract class RabbitMQReceiver :  IRabbitMQReceiver
 {
     private readonly IConnection _connection;
     private readonly IModel _channel;
-    protected readonly ILogger<RabbitMQReceiver> Logger;
+    private readonly ILogger<RabbitMQReceiver> _parentLogger;
 
-    public RabbitMQReceiver(IOptions<RabbitMQConfiguration> rabbitMqConfiguration, ILogger<RabbitMQReceiver> logger)
+    public RabbitMQReceiver(IOptions<RabbitMQConfiguration> rabbitMqConfiguration, ILogger<RabbitMQReceiver> parentLogger)
     {
-        Logger = logger;
+        _parentLogger = parentLogger;
 
         var factory = new ConnectionFactory()
         {
@@ -37,8 +46,8 @@ public abstract class RabbitMQReceiver : IHostedService
         return Task.CompletedTask;
     }
 
-    protected abstract string Exchange { get; }
-    protected abstract string QueueName{ get; }
+    public string Exchange { get; set; }
+    public string QueueName{ get; set; }
     
     // How to process messages
     public virtual bool Process(string message)
@@ -48,15 +57,8 @@ public abstract class RabbitMQReceiver : IHostedService
     
     public void Register()
     {
-        Logger.LogInformation($"RabbitListener register");
-        
-        _channel.QueueDeclare(queue: QueueName, exclusive: false, durable: true, autoDelete: false);
-        
-        _channel.QueueBind(
-            queue: QueueName,
-            exchange: Exchange,
-            routingKey: "");
-        
+        _parentLogger.LogInformation($"RabbitListener register");
+
         var consumer = new EventingBasicConsumer(_channel);
 
         consumer.Received += (model, ea) =>
@@ -86,10 +88,27 @@ public abstract class RabbitMQReceiver : IHostedService
 
 public static class RabbitMQReceiverExtensions
 {
-    public static IServiceCollection AddRabbitMqReceiver<T>(this IServiceCollection services)
-        where T : RabbitMQReceiver
+    public static IServiceCollection AddRabbitMqReceiver<T>(this IServiceCollection services, 
+        Action<T> configure)
+        where T : class, IRabbitMQReceiver
     {
-        services.AddHostedService<T>();
+        services.AddHostedService<T>(provider =>
+        {
+            var constructors = typeof(T)
+                .GetConstructors();
+            
+            var constructorInfo = constructors.First();
+
+            var constructorParameters = constructorInfo.GetParameters()
+                .Select(parameterInfo => provider.GetRequiredService(parameterInfo.ParameterType))
+                .ToArray();
+
+            var receiver = (T)constructorInfo.Invoke(constructorParameters);
+            
+            configure(receiver);
+
+            return receiver;
+        });
         
         return services;
     }

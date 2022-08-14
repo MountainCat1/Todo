@@ -7,21 +7,20 @@ namespace Users.Infrastructure.Services.Receivers;
 
 public class AccountCreatedEventReceiver : RabbitMQReceiver
 {
+    private readonly ILogger<AccountCreatedEventReceiver> _logger;
+
     public AccountCreatedEventReceiver(
         IOptions<RabbitMQConfiguration> rabbitMqConfiguration, 
-        ILogger<RabbitMQReceiver> logger) 
-        : base(rabbitMqConfiguration, logger)
+        ILogger<RabbitMQReceiver> parentLogger, 
+        ILogger<AccountCreatedEventReceiver> logger) 
+        : base(rabbitMqConfiguration, parentLogger)
     {
-        Exchange  = "account-event-created-exchange";
-        QueueName = "account-event-created-queue";
+        _logger = logger;
     }
-
-    protected override string Exchange { get; }
-    protected override string QueueName { get; }
 
     public override bool Process(string message)
     {
-        Logger.LogInformation($"Processing message: {message}");
+        _logger.LogInformation($"Processing message: {message}");
         return true;
     }
 }
