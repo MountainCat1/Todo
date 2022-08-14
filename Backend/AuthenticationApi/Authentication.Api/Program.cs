@@ -26,18 +26,11 @@ configuration.AddEnvironmentVariables();
 
 var httpsPort = configuration.GetValue<int>("HTTPS_PORT");
 
-var jwtConfig = new JWTConfiguration();
-configuration.Bind("JWTConfiguration", jwtConfig);
-
-var rabbitMqConfig = new RabbitMQConfiguration();
-configuration.Bind("RabbitMQConfiguration", rabbitMqConfig);
-
-
 // SERVICES
 var services = builder.Services;
 
-services.AddSingleton(jwtConfig);
-services.AddSingleton(rabbitMqConfig);
+services.Configure<JWTConfiguration>(configuration.GetSection(nameof(JWTConfiguration)));
+services.Configure<RabbitMQConfiguration>(configuration.GetSection(nameof(RabbitMQConfiguration)));
 
 services.AddControllers();
 services.AddEndpointsApiExplorer();

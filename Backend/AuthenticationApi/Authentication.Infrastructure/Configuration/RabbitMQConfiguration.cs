@@ -4,8 +4,8 @@ namespace Authentication.Infrastructure.Configuration;
 
 public class RabbitMQConfiguration
 {
-    [JsonPropertyName("userName")]
-    public string UserName { get; set; }
+    [JsonPropertyName("username")]
+    public string Username { get; set; }
 
     [JsonPropertyName("password")]
     public string Password { get; set; }

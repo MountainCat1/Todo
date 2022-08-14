@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Text;
 using Authentication.Service.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Authentication.Service.Services;
@@ -15,9 +16,9 @@ public class JWTService : IJWTService
 {
     private readonly JWTConfiguration _jwtConfiguration;
 
-    public JWTService(JWTConfiguration jwtConfiguration)
+    public JWTService(IOptions<JWTConfiguration> jwtConfiguration)
     {
-        _jwtConfiguration = jwtConfiguration;
+        _jwtConfiguration = jwtConfiguration.Value;
     }
 
     public string GenerateJwtToken(ClaimsIdentity claims)

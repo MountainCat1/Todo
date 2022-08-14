@@ -26,10 +26,10 @@ public class RegisterAccountCommandHandler : ICommandHandler<RegisterAccountComm
     {
         var registerDto = command.RegisterDto;
         
-        var createdAccount = await _accountService.RegisterAsync(Guid.Empty, registerDto.Password);
+        var createdAccount = await _accountService.RegisterAsync(registerDto.Username, registerDto.Password);
 
         var domainEvent = new AccountCreatedDomainEvent(createdAccount.Guid);
-        _rabbitMqClient.PublishMessage("account-created-queue", "account.event.created", domainEvent);
+        _rabbitMqClient.PublishMessage("account.event.created", domainEvent);
 
         return _mapper.Map<AccountDto>(createdAccount);
     }

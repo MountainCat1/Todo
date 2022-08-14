@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using Users.Infrastructure.Configuration;
 
@@ -17,9 +18,9 @@ public class RabbitMQClient : IRabbitMQClient
     
     private readonly IModel _channel;
 
-    public RabbitMQClient(RabbitMQConfiguration rabbitMqConfiguration, ILogger<RabbitMQClient> logger)
+    public RabbitMQClient(IOptions<RabbitMQConfiguration> rabbitMqConfiguration, ILogger<RabbitMQClient> logger)
     {
-        _rabbitMqConfiguration = rabbitMqConfiguration;
+        _rabbitMqConfiguration = rabbitMqConfiguration.Value;
         _logger = logger;
         
         try
