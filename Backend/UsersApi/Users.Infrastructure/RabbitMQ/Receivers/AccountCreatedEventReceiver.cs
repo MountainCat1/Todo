@@ -1,9 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Users.Infrastructure.Abstractions;
 using Users.Infrastructure.Configuration;
 
-namespace Users.Infrastructure.Services.Receivers;
+namespace Users.Infrastructure.RabbitMQ.Receivers;
 
 public class AccountCreatedEventReceiver : RabbitMQReceiver
 {

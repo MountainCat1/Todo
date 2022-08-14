@@ -3,12 +3,11 @@ using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Users.Api.Middleware;
 using Users.Domain.Repositories;
-using Users.Infrastructure.Abstractions;
 using Users.Infrastructure.Configuration;
 using Users.Infrastructure.Data;
+using Users.Infrastructure.RabbitMQ;
+using Users.Infrastructure.RabbitMQ.Receivers;
 using Users.Infrastructure.Repositories;
-using Users.Infrastructure.Services;
-using Users.Infrastructure.Services.Receivers;
 using Users.Service;
 using Users.Service.PipelineBehaviors;
 

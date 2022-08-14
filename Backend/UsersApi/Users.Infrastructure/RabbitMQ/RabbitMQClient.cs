@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using Users.Infrastructure.Configuration;
 
-namespace Users.Infrastructure.Services;
+namespace Users.Infrastructure.RabbitMQ;
 public interface IRabbitMQClient
 {
     void PublishMessage(string routingKey, object message);

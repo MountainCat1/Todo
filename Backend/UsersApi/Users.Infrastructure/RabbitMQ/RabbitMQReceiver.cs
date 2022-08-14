@@ -1,14 +1,13 @@
 ﻿using System.Text;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Users.Infrastructure.Configuration;
-using BindingFlags = System.Reflection.BindingFlags;
 
-namespace Users.Infrastructure.Abstractions;
+namespace Users.Infrastructure.RabbitMQ;
+
 
 public interface IRabbitMQReceiver : IHostedService
 {
@@ -83,33 +82,5 @@ public abstract class RabbitMQReceiver :  IRabbitMQReceiver
     {
         _connection.Close();
         return Task.CompletedTask;
-    }
-}
-
-public static class RabbitMQReceiverExtensions
-{
-    public static IServiceCollection AddRabbitMqReceiver<T>(this IServiceCollection services, 
-        Action<T> configure)
-        where T : class, IRabbitMQReceiver
-    {
-        services.AddHostedService<T>(provider =>
-        {
-            var constructors = typeof(T)
-                .GetConstructors();
-            
-            var constructorInfo = constructors.First();
-
-            var constructorParameters = constructorInfo.GetParameters()
-                .Select(parameterInfo => provider.GetRequiredService(parameterInfo.ParameterType))
-                .ToArray();
-
-            var receiver = (T)constructorInfo.Invoke(constructorParameters);
-            
-            configure(receiver);
-
-            return receiver;
-        });
-        
-        return services;
     }
 }
