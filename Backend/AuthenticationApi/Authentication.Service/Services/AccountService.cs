@@ -10,7 +10,7 @@ namespace Authentication.Service.Services;
 public interface IAccountService
 {
     public Task<Account> RegisterAsync(Guid userGuid, string password);
-    public Task<AuthenticationResult> AuthenticateAsync(Guid userGuid, string password);
+    public Task<AuthenticationResult> AuthenticateAsync(string username,string password);
 }
 
 public class AccountService : IAccountService
@@ -42,9 +42,9 @@ public class AccountService : IAccountService
         return createdEntity;
     }
 
-    public async Task<AuthenticationResult> AuthenticateAsync(Guid userGuid, string password)
+    public async Task<AuthenticationResult> AuthenticateAsync(string username, string password)
     {
-        var account = await _accountRepository.GetOneAsync(x => x.UserGuid == userGuid);
+        var account = await _accountRepository.GetOneAsync(x => x.Username == username);
 
         if (account is null)
             throw new NotFoundError("Account not found");

@@ -25,8 +25,7 @@ public class RegisterAccountCommandHandler : ICommandHandler<RegisterAccountComm
     public async Task<AccountDto> Handle(RegisterAccountCommand command, CancellationToken cancellationToken)
     {
         var registerDto = command.RegisterDto;
-
-        // TODO: add username for accounts
+        
         var createdAccount = await _accountService.RegisterAsync(Guid.Empty, registerDto.Password);
 
         var domainEvent = new AccountCreatedDomainEvent(createdAccount.Guid);

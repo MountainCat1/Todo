@@ -8,6 +8,8 @@ public class Account : IEntity
     [Key]
     public Guid Guid { get; set; }
     [Required]
+    public string Username { get; set; }
+    [Required]
     public Guid UserGuid { get; set; }
     [Required]
     public string PasswordHash { get; set; }

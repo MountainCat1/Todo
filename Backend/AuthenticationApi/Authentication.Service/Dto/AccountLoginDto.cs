@@ -5,7 +5,7 @@ namespace Authentication.Service.Dto;
 public class AccountLoginDto
 {
     [Required]
-    public Guid UserGuid { get; set; }
+    public string Username { get; set; }
     [Required]
     public string Password { get; set; }
 }
