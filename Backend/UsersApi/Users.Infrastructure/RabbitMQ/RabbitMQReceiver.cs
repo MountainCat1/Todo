@@ -56,7 +56,7 @@ public abstract class RabbitMQReceiver :  IRabbitMQReceiver
     
     public void Register()
     {
-        _parentLogger.LogInformation($"RabbitListener register");
+        _parentLogger.LogInformation($"Registering {GetType().Name}...");
 
         var consumer = new EventingBasicConsumer(_channel);
 
