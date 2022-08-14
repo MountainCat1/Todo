@@ -28,15 +28,15 @@
       "DangerousAcceptAnyServerCertificateValidator": true
     },
     {
-      "DownstreamPathTemplate": "/User",
+      "DownstreamPathTemplate": "/Authentication/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "user-api",
+          "Host": "authentication-api",
           "Port": 5004
         }
       ],
-      "UpstreamPathTemplate": "/api/User",
+      "UpstreamPathTemplate": "/api/Authentication/{everything}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
       "DangerousAcceptAnyServerCertificateValidator": true
     }
