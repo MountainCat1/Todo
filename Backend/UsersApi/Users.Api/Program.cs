@@ -6,10 +6,12 @@ using Users.Domain.Repositories;
 using Users.Infrastructure.Configuration;
 using Users.Infrastructure.Data;
 using Users.Infrastructure.RabbitMQ;
-using Users.Infrastructure.RabbitMQ.Receivers;
+using Users.Infrastructure.RabbitMQ.Events;
+using Users.Infrastructure.RabbitMQ.Extensions;
 using Users.Infrastructure.Repositories;
 using Users.Service;
 using Users.Service.PipelineBehaviors;
+using ISender = Users.Infrastructure.RabbitMQ.ISender;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,7 +45,10 @@ else
     services.AddDbContext<UserDbContext>(optionsBuilder 
         => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
 
-services.AddSingleton<IRabbitMQSender, RabbitMqSender>();
+services.AddSingleton<ISender, Sender>();
+services.AddEventHandlers(typeof(IEvent).Assembly);
+services.AddEventReceivers(typeof(IEvent).Assembly);
+
 services.AddRabbitMqReceiver<AccountCreatedEventReceiver>(receiver =>
 {
     receiver.Exchange  = "account-event-created-exchange";

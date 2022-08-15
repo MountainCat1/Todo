@@ -21,9 +21,4 @@
       </Reference>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Abstractions" />
-      <Folder Include="Builders" />
-    </ItemGroup>
-
 </Project>

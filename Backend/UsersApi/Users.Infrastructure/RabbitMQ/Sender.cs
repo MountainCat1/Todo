@@ -6,19 +6,19 @@ using RabbitMQ.Client;
 using Users.Infrastructure.Configuration;
 
 namespace Users.Infrastructure.RabbitMQ;
-public interface IRabbitMQSender
+public interface ISender
 {
     void PublishMessage(string routingKey, object message);
 }
 
-public class RabbitMqSender : IRabbitMQSender
+public class Sender : ISender
 {
     private readonly RabbitMQConfiguration _rabbitMqConfiguration;
-    private readonly ILogger<RabbitMqSender> _logger;
+    private readonly ILogger<Sender> _logger;
     
     private readonly IModel _channel;
 
-    public RabbitMqSender(IOptions<RabbitMQConfiguration> rabbitMqConfiguration, ILogger<RabbitMqSender> logger)
+    public Sender(IOptions<RabbitMQConfiguration> rabbitMqConfiguration, ILogger<Sender> logger)
     {
         _rabbitMqConfiguration = rabbitMqConfiguration.Value;
         _logger = logger;

@@ -1,4 +1,8 @@
-﻿using System.Text;
+﻿using System.Reflection;
+using System.Runtime.Serialization;
+using System.Text;
+using System.Text.Json;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -9,21 +13,30 @@ using Users.Infrastructure.Configuration;
 namespace Users.Infrastructure.RabbitMQ;
 
 
-public interface IRabbitMQReceiver : IHostedService
+public interface IReceiver : IHostedService
 {
     string QueueName { get; set; }
-    bool Process(string message);
+    Task<bool> ProcessAsync(string message);
     void Register();
     void DeRegister();
 }
+public interface IReceiver<TEvent> : IReceiver
+    where TEvent : IEvent
+{
+}
 
-public abstract class RabbitMQReceiver :  IRabbitMQReceiver
+public class Receiver<TEvent> : IReceiver<TEvent> 
+    where TEvent : class, IEvent
 {
     private readonly IConnection _connection;
     private readonly IModel _channel;
-    private readonly ILogger<RabbitMQReceiver> _parentLogger;
+    private readonly ILogger<Receiver<TEvent> > _parentLogger;
 
-    public RabbitMQReceiver(IOptions<RabbitMQConfiguration> rabbitMqConfiguration, ILogger<RabbitMQReceiver> parentLogger)
+    private IEventHandler<TEvent> _eventHandler;
+
+    public Receiver(
+        IOptions<RabbitMQConfiguration> rabbitMqConfiguration, 
+        ILogger<Receiver<TEvent>> parentLogger)
     {
         _parentLogger = parentLogger;
 
@@ -49,9 +62,14 @@ public abstract class RabbitMQReceiver :  IRabbitMQReceiver
     public string QueueName{ get; set; }
     
     // How to process messages
-    public virtual bool Process(string message)
+    public virtual async Task<bool> ProcessAsync(string message)
     {
-        throw new NotImplementedException();
+        TEvent? @event = JsonSerializer.Deserialize<TEvent>(message);
+
+        if (@event == null)
+            throw new SerializationException($"Cannot deserialize broker message to {typeof(TEvent).Name}");
+
+        return await _eventHandler.HandleAsync(@event);
     }
     
     public void Register()
@@ -60,11 +78,11 @@ public abstract class RabbitMQReceiver :  IRabbitMQReceiver
 
         var consumer = new EventingBasicConsumer(_channel);
 
-        consumer.Received += (model, ea) =>
+        consumer.Received += async (model, ea) =>
         {
             var body = ea.Body;
             var message = Encoding.UTF8.GetString(body.ToArray());
-            var result = Process(message);
+            var result = await ProcessAsync(message);
             if (result)
             {
                 _channel.BasicAck(ea.DeliveryTag, false);
