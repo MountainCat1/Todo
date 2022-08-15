@@ -76,10 +76,7 @@ public static class RabbitMQReceiverExtensions
 
     private static object? InvokeGenericMethod(MethodInfo method, Type genericTypeParameter, params object[] arguments)
     {
-        // Build a method with the specific type argument you're interested in
-        method = method.MakeGenericMethod(genericTypeParameter);
-        // The "null" is because it's a static method
-        return method.Invoke(null, arguments);
+        return method.MakeGenericMethod(genericTypeParameter).Invoke(null, arguments);
     }
     
     public static void AddReceiverHostedService<T>(IServiceCollection services, Action<T>? configure = null)
@@ -98,8 +95,7 @@ public static class RabbitMQReceiverExtensions
 
             var receiver = (T)constructorInfo.Invoke(constructorParameters);
 
-            if (configure is not null)
-                configure(receiver);
+            configure?.Invoke(receiver);
 
             return receiver;
         });

@@ -30,16 +30,18 @@ public class Receiver<TEvent> : IReceiver<TEvent>
 {
     private readonly IConnection _connection;
     private readonly IModel _channel;
-    private readonly ILogger<Receiver<TEvent> > _parentLogger;
-
-    private IEventHandler<TEvent> _eventHandler;
+    
+    private readonly ILogger<Receiver<TEvent> > _logger;
+    private readonly IEventHandler<TEvent> _eventHandler;
 
     public Receiver(
         IOptions<RabbitMQConfiguration> rabbitMqConfiguration, 
-        ILogger<Receiver<TEvent>> parentLogger)
+        ILogger<Receiver<TEvent>> logger,
+        IEventHandler<TEvent> eventHandler)
     {
-        _parentLogger = parentLogger;
-
+        _logger = logger;
+        _eventHandler = eventHandler;
+        
         var factory = new ConnectionFactory()
         {
             HostName = rabbitMqConfiguration.Value.HostName,
@@ -72,7 +74,7 @@ public class Receiver<TEvent> : IReceiver<TEvent>
     
     public void Register()
     {
-        _parentLogger.LogInformation($"Registering {GetType().Name}...");
+        _logger.LogInformation($"Registering {GetType().Name}...");
 
         var consumer = new EventingBasicConsumer(_channel);
 
