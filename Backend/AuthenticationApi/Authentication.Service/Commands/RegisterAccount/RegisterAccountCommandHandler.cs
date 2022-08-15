@@ -1,10 +1,9 @@
 ﻿using Authentication.Domain.Events;
-using Authentication.Domain.Repositories;
-using Authentication.Infrastructure.Services;
 using Authentication.Service.Abstractions;
 using Authentication.Service.Dto;
 using Authentication.Service.Services;
 using AutoMapper;
+using BunnyOwO;
 using Microsoft.AspNetCore.Identity;
 
 namespace Authentication.Service.Commands.RegisterAccount;
@@ -13,13 +12,14 @@ public class RegisterAccountCommandHandler : ICommandHandler<RegisterAccountComm
 {
     private readonly IMapper _mapper;
     private readonly IAccountService _accountService;
-    private readonly IRabbitMQClient _rabbitMqClient;
+
+    private readonly ISender _sender;
     
-    public RegisterAccountCommandHandler(IMapper mapper, IAccountService accountService, IRabbitMQClient rabbitMqClient)
+    public RegisterAccountCommandHandler(IMapper mapper, IAccountService accountService, ISender sender)
     {
         _mapper = mapper;
         _accountService = accountService;
-        _rabbitMqClient = rabbitMqClient;
+        _sender = sender;
     }
 
     public async Task<AccountDto> Handle(RegisterAccountCommand command, CancellationToken cancellationToken)
@@ -29,7 +29,7 @@ public class RegisterAccountCommandHandler : ICommandHandler<RegisterAccountComm
         var createdAccount = await _accountService.RegisterAsync(registerDto.Username, registerDto.Password);
 
         var domainEvent = new AccountCreatedDomainEvent(createdAccount.Guid);
-        _rabbitMqClient.PublishMessage("account.event.created", domainEvent);
+        _sender.PublishMessage("account.event.created", domainEvent);
 
         return _mapper.Map<AccountDto>(createdAccount);
     }
