@@ -38,6 +38,8 @@ public static class RabbitMQReceiverExtensions
     /// <exception cref="NullReferenceException"></exception>
     public static IServiceCollection AddEventReceivers(this IServiceCollection services, Assembly assembly)
     {
+        var provider = services.BuildServiceProvider();
+        
         var eventHandlerTypes = assembly
             .GetTypes()
             .Where(type => type.IsClass && type.IsAssignableTo(typeof(IEventHandler)));
@@ -52,11 +54,21 @@ public static class RabbitMQReceiverExtensions
                 throw new NullReferenceException($"Could not find event type for {eventHandlerType.Name}");
 
             var receiverType = typeof(Receiver<>).MakeGenericType(eventType);
-            
+
+            Action<IReceiver> configureAction;
+            using (var scope = provider.CreateScope())
+            {
+                var eventHandlerInterfaceType = eventHandlerType.GetInterfaces()
+                    .FirstOrDefault(type => type.GetGenericTypeDefinition() == typeof(IEventHandler<>));
+                
+                configureAction = ((IEventHandler)scope.ServiceProvider.GetRequiredService(eventHandlerInterfaceType!)!)
+                    .ConfigureReceiver;
+            }
+
             MethodInfo method = typeof(RabbitMQReceiverExtensions)
                 .GetMethod(nameof(AddReceiverHostedService), BindingFlags.Static | BindingFlags.Public)!;
 
-            InvokeGenericMethod(method, receiverType, services, null);
+            InvokeGenericMethod(method, receiverType, services, configureAction);
         }
 
         return services;

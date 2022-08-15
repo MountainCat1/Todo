@@ -57,8 +57,6 @@ public class Receiver<TEvent> : IReceiver<TEvent>
         Register();
         return Task.CompletedTask;
     }
-
-    public string Exchange { get; set; }
     public string QueueName{ get; set; }
     
     // How to process messages

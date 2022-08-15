@@ -6,4 +6,9 @@ public class AccountCreatedEventHandler : IEventHandler<AccountCreatedEvent>
     {
         return true;
     }
+
+    public void ConfigureReceiver(IReceiver receiver)
+    {
+        receiver.QueueName = "account-created-dasdsad";
+    }
 }
