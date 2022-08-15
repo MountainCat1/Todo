@@ -1,4 +1,7 @@
-﻿namespace Users.Infrastructure.RabbitMQ.Events;
+﻿using Users.Infrastructure.RabbitMQ;
+using Users.Infrastructure.RabbitMQ.Events;
+
+namespace Users.Service.EventHandlers;
 
 public class AccountCreatedEventHandler : IEventHandler<AccountCreatedEvent>
 {
