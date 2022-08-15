@@ -1,17 +1,16 @@
+using BunnyOwO;
+using BunnyOwO.Configuration;
+using BunnyOwO.Extensions;
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Users.Api.Middleware;
 using Users.Domain.Repositories;
-using Users.Infrastructure.Configuration;
+using Users.Infrastructure;
 using Users.Infrastructure.Data;
-using Users.Infrastructure.RabbitMQ;
-using Users.Infrastructure.RabbitMQ.Events;
-using Users.Infrastructure.RabbitMQ.Extensions;
 using Users.Infrastructure.Repositories;
 using Users.Service;
 using Users.Service.PipelineBehaviors;
-using ISender = Users.Infrastructure.RabbitMQ.ISender;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,7 +44,11 @@ else
     services.AddDbContext<UserDbContext>(optionsBuilder 
         => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
 
-services.AddEventBus(typeof(IEvent), typeof(ServiceAssemblyMarker));
+services.AddEventBus(
+    typeof(ServiceAssemblyMarker), 
+    typeof(InfrastructureAssemblyMarker));
+
+
 
 services.AddAutoMapper(typeof(MappingProfile));
 services.AddMediatR(typeof(ServiceAssemblyMarker));

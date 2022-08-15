@@ -1,5 +1,5 @@
-﻿using Users.Infrastructure.RabbitMQ;
-using Users.Infrastructure.RabbitMQ.Events;
+﻿using BunnyOwO;
+using Users.Infrastructure.Events;
 
 namespace Users.Service.EventHandlers;
 
