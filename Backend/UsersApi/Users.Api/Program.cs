@@ -45,13 +45,11 @@ else
     services.AddDbContext<UserDbContext>(optionsBuilder 
         => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
 
-services.AddSingleton<ISender, Sender>();
-services.AddEventHandlers(typeof(IEvent).Assembly);
-services.AddEventReceivers(typeof(IEvent).Assembly);
+services.AddEventBus(typeof(IEvent), typeof(ServiceAssemblyMarker));
 
 services.AddAutoMapper(typeof(MappingProfile));
-services.AddMediatR(typeof(ServiceAssemblyPointer));
-services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly});
+services.AddMediatR(typeof(ServiceAssemblyMarker));
+services.AddFluentValidation( new [] { typeof(ServiceAssemblyMarker).Assembly});
 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
 
 services.AddScoped<IUserRepository, UserRepository>();

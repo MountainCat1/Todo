@@ -36,12 +36,12 @@ public static class RabbitMQReceiverExtensions
     /// </summary>
     /// <returns></returns>
     /// <exception cref="NullReferenceException"></exception>
-    public static IServiceCollection AddEventReceivers(this IServiceCollection services, Assembly assembly)
+    public static IServiceCollection AddEventReceivers(this IServiceCollection services, params Assembly[] assemblies)
     {
         var provider = services.BuildServiceProvider();
         
-        var eventHandlerTypes = assembly
-            .GetTypes()
+        var eventHandlerTypes = assemblies
+            .SelectMany(assembly => assembly.GetTypes())
             .Where(type => type.IsClass && type.IsAssignableTo(typeof(IEventHandler)));
 
         foreach (var eventHandlerType in eventHandlerTypes)

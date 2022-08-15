@@ -1,6 +1,6 @@
 ﻿namespace Users.Service;
 
-public class ServiceAssemblyPointer
+public class ServiceAssemblyMarker
 {
     // Intentionally empty
 }

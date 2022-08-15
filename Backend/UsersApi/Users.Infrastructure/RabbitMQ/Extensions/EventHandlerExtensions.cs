@@ -11,10 +11,10 @@ public static class EventHandlerExtensions
     /// </summary>
     /// <returns></returns>
     /// <exception cref="NullReferenceException"></exception>
-    public static IServiceCollection AddEventHandlers(this IServiceCollection services, Assembly assembly)
+    public static IServiceCollection AddEventHandlers(this IServiceCollection services, params Assembly[] assemblies)
     {
-        var eventHandlerTypes = assembly
-            .GetTypes()
+        var eventHandlerTypes = assemblies
+            .SelectMany(assembly => assembly.GetTypes())
             .Where(type => type.IsClass && type.IsAssignableTo(typeof(IEventHandler)));
 
         foreach (var eventHandlerType in eventHandlerTypes)
