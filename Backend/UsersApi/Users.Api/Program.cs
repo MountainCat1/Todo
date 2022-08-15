@@ -49,12 +49,6 @@ services.AddSingleton<ISender, Sender>();
 services.AddEventHandlers(typeof(IEvent).Assembly);
 services.AddEventReceivers(typeof(IEvent).Assembly);
 
-services.AddRabbitMqReceiver<AccountCreatedEventReceiver>(receiver =>
-{
-    receiver.Exchange  = "account-event-created-exchange";
-    receiver.QueueName = "account-event-created-queue";
-});
-
 services.AddAutoMapper(typeof(MappingProfile));
 services.AddMediatR(typeof(ServiceAssemblyPointer));
 services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly});

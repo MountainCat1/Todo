@@ -6,6 +6,11 @@ namespace Users.Infrastructure.RabbitMQ.Extensions;
 
 public static class EventHandlerExtensions
 {
+    /// <summary>
+    /// Registers all event handlers found in specified assembly
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="NullReferenceException"></exception>
     public static IServiceCollection AddEventHandlers(this IServiceCollection services, Assembly assembly)
     {
         var eventHandlerTypes = assembly

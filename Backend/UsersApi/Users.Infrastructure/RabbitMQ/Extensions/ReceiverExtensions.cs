@@ -31,6 +31,11 @@ public static class RabbitMQReceiverExtensions
         return services;
     }
 
+    /// <summary>
+    /// Registers event receivers based on registered event handlers
+    /// </summary>
+    /// <returns></returns>
+    /// <exception cref="NullReferenceException"></exception>
     public static IServiceCollection AddEventReceivers(this IServiceCollection services, Assembly assembly)
     {
         var eventHandlerTypes = assembly
