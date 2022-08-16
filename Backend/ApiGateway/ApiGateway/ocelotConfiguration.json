@@ -1,0 +1,75 @@
+﻿{
+
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/Todo{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "todo-api",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Todo{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+    {
+      "DownstreamPathTemplate": "/Teams{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "teams-api",
+          "Port": 5002
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Teams{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+    {
+      "DownstreamPathTemplate": "/Authentication{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authentication-api",
+          "Port": 5004
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Authentication{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+    {
+      "DownstreamPathTemplate": "/User{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authentication-api",
+          "Port": 5004
+        }
+      ],
+      "UpstreamPathTemplate": "/api/User{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+    {
+      "DownstreamPathTemplate": "/RabbitMQ{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "rabbitmq",
+          "Port": 5672
+        }
+      ],
+      "UpstreamPathTemplate": "/api/RabbitMQ{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    }
+  ],
+  "GlobalConfiguration": {
+    "RequestIdKey": "OcRequestId",
+    "AdministrationPath": "/administration",
+    "RouteIsCaseSensitive": true
+  }
+}

@@ -14,8 +14,8 @@ host.ConfigureAppConfiguration((hostingContext, config) =>
     config
         .AddJsonFile("appsettings.json", true, true)
         .AddJsonFile($"appsettings.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true)
-        .AddJsonFile($"Configuration/ocelotConfiguration.json", true, true)
-        .AddJsonFile($"Configuration/ocelotConfiguration.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true)
+        .AddJsonFile($"ocelotConfiguration.json", true, true)
+        .AddJsonFile($"ocelotConfiguration.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true)
         .AddEnvironmentVariables();
 });
 host.ConfigureLogging(loggingBuilder => loggingBuilder.AddConsole());
