@@ -1,18 +1,25 @@
+using System.Reflection;
 using System.Text;
 using Authentication.Api.Middleware;
 using Authentication.Domain.Entities;
 using Authentication.Domain.Repositories;
+using Authentication.Infrastructure;
 using Authentication.Infrastructure.Data;
 using Authentication.Infrastructure.Repositories;
 using Authentication.Service;
 using Authentication.Service.Configuration;
 using Authentication.Service.PipelineBehaviors;
 using Authentication.Service.Services;
+using BunnyOwO.Configuration;
+using BunnyOwO.Extensions;
+using BunnyOwO.FluentValidation.Extensions;
+using FluentValidation;
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,13 +31,11 @@ configuration.AddEnvironmentVariables();
 
 var httpsPort = configuration.GetValue<int>("HTTPS_PORT");
 
-var jwtConfig = new JWTConfiguration();
-configuration.Bind("JWTConfiguration", jwtConfig);
-
 // SERVICES
 var services = builder.Services;
 
-services.AddSingleton(jwtConfig);
+services.Configure<JWTConfiguration>(configuration.GetSection(nameof(JWTConfiguration)));
+services.Configure<RabbitMQConfiguration>(configuration.GetSection(nameof(RabbitMQConfiguration)));
 
 services.AddControllers();
 services.AddEndpointsApiExplorer();
@@ -43,13 +48,6 @@ services.AddLogging(options =>
     options.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Warning);
     options.AddFilter("Microsoft.EntityFrameworkCore.Infrastructure", LogLevel.Warning);
 });
-if (builder.Environment.IsDevelopment())
-    services.AddDbContext<AccountDbContext>(optionsBuilder 
-        => optionsBuilder.UseInMemoryDatabase("AccountDatabase"));
-else
-    services.AddDbContext<AccountDbContext>(optionsBuilder 
-        => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
-services.AddScoped<IPasswordHasher<Account>, PasswordHasher<Account>>();
 
 /*services.AddAuthentication(options =>
 {
@@ -69,15 +67,29 @@ services.AddScoped<IPasswordHasher<Account>, PasswordHasher<Account>>();
     };
 });*/
 
-services.AddAutoMapper(typeof(MappingProfile));
-services.AddMediatR(typeof(ServiceAssemblyPointer));
-services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly});
-services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
+if (builder.Environment.IsDevelopment())
+    services.AddDbContext<AccountDbContext>(optionsBuilder 
+        => optionsBuilder.UseInMemoryDatabase("AccountDatabase"));
+else
+    services.AddDbContext<AccountDbContext>(optionsBuilder 
+        => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
 
+services.AddSender();
+
+services.AddScoped<IPasswordHasher<Account>, PasswordHasher<Account>>();
+
+services.AddAutoMapper(typeof(MappingProfile));
 
 services.AddScoped<IJWTService, JWTService>();
 services.AddScoped<IAccountRepository, AccountRepository>();
 services.AddScoped<IAccountService, AccountService>();
+
+services.AddMediatR(typeof(ServiceAssemblyMarker));
+services.AddFluentValidation( new [] { typeof(ServiceAssemblyMarker).Assembly});
+services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
+
+services.AddEventHandlers(typeof(ServiceAssemblyMarker).Assembly);
+services.AddEventReceivers(typeof(ServiceAssemblyMarker).Assembly);
 
 services.AddScoped<ErrorHandlingMiddleware>();
 

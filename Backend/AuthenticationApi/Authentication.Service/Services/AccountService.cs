@@ -9,8 +9,8 @@ namespace Authentication.Service.Services;
 
 public interface IAccountService
 {
-    public Task<Account> RegisterAsync(Guid userGuid, string password);
-    public Task<AuthenticationResult> AuthenticateAsync(Guid userGuid, string password);
+    public Task<Account> RegisterAsync(string username, string password);
+    public Task<AuthenticationResult> AuthenticateAsync(string username,string password);
 }
 
 public class AccountService : IAccountService
@@ -22,11 +22,8 @@ public class AccountService : IAccountService
         _accountRepository = accountRepository;
     }
 
-    public async Task<Account> RegisterAsync(Guid userGuid, string password)
+    public async Task<Account> RegisterAsync(string username, string password)
     {
-        if (await _accountRepository.GetOneAsync(x => x.UserGuid == userGuid) is not null)
-            throw new ArgumentException("Cannot create two accounts for one user GUID");
-
         var hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
 
         if (hashedPassword == null)
@@ -35,7 +32,7 @@ public class AccountService : IAccountService
         var account = new Account()
         {
             PasswordHash = hashedPassword,
-            UserGuid = userGuid
+            Username = username
         };
 
         var createdEntity = await _accountRepository.CreateAsync(account);
@@ -45,9 +42,9 @@ public class AccountService : IAccountService
         return createdEntity;
     }
 
-    public async Task<AuthenticationResult> AuthenticateAsync(Guid userGuid, string password)
+    public async Task<AuthenticationResult> AuthenticateAsync(string username, string password)
     {
-        var account = await _accountRepository.GetOneAsync(x => x.UserGuid == userGuid);
+        var account = await _accountRepository.GetOneAsync(x => x.Username == username);
 
         if (account is null)
             throw new NotFoundError("Account not found");

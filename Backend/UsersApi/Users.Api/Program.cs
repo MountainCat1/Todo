@@ -1,8 +1,13 @@
+using BunnyOwO;
+using BunnyOwO.Configuration;
+using BunnyOwO.Extensions;
+using BunnyOwO.FluentValidation.Extensions;
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Users.Api.Middleware;
 using Users.Domain.Repositories;
+using Users.Infrastructure;
 using Users.Infrastructure.Data;
 using Users.Infrastructure.Repositories;
 using Users.Service;
@@ -18,6 +23,8 @@ configuration.AddEnvironmentVariables();
 // SERVICES
 var services = builder.Services;
 
+services.Configure<RabbitMQConfiguration>(configuration.GetSection(nameof(RabbitMQConfiguration)));
+
 services.AddControllers();
 services.AddEndpointsApiExplorer();
 services.AddHttpsRedirection(options =>
@@ -30,19 +37,22 @@ services.AddLogging(options =>
     options.AddFilter("Microsoft.EntityFrameworkCore.Infrastructure", LogLevel.Warning);
 });
 
-
 if (builder.Environment.IsDevelopment())
     services.AddDbContext<UserDbContext>(optionsBuilder 
         => optionsBuilder.UseInMemoryDatabase("UserDatabase"));
 else
     services.AddDbContext<UserDbContext>(optionsBuilder 
         => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
-
+services.AddSender();
 
 services.AddAutoMapper(typeof(MappingProfile));
-services.AddMediatR(typeof(ServiceAssemblyPointer));
-services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly});
+services.AddMediatR(typeof(ServiceAssemblyMarker));
+services.AddFluentValidation( new [] { typeof(ServiceAssemblyMarker).Assembly});
 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
+
+services.AddEventHandlers(typeof(ServiceAssemblyMarker).Assembly);
+services.AddEventReceivers(typeof(ServiceAssemblyMarker).Assembly);
+
 
 services.AddScoped<IUserRepository, UserRepository>();
 

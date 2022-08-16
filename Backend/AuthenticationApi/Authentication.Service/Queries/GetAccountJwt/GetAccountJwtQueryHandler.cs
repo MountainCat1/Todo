@@ -20,7 +20,7 @@ public class GetAccountJwtQueryHandler : IQueryHandler<GetAccountJwtQuery, strin
     {
         var loginDto = query.LoginDto;
 
-        var authenticationResult = await _accountService.AuthenticateAsync(loginDto.UserGuid, loginDto.Password);
+        var authenticationResult = await _accountService.AuthenticateAsync(loginDto.Username, loginDto.Password);
 
         if (!authenticationResult.Succeeded)
             throw new UnauthorizedError();
