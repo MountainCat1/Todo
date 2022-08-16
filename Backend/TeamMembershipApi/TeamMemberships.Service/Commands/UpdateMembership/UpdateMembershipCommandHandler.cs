@@ -20,7 +20,7 @@ public class UpdateMembershipCommandHandler : ICommandHandler<UpdateMembershipCo
     {
         var updatedEntity = await _teamMembershipRepository.UpdateAsync(
             command.UpdateDto, 
-            command.TeamGuid, command.UserGuid);
+            command.TeamGuid, command.AccountGuid);
 
         await _teamMembershipRepository.SaveChangesAsync();
         

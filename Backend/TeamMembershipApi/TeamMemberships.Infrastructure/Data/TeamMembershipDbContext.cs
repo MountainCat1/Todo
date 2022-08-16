@@ -12,7 +12,7 @@ public class TeamMembershipDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<TeamMembership>()
-            .HasKey(entity => new { entity.TeamGuid, entity.UserGuid });
+            .HasKey(entity => new { entity.TeamGuid, UserGuid = entity.AccountGuid });
     }
 
     public DbSet<TeamMembership> TeamMemberships { get; set; }

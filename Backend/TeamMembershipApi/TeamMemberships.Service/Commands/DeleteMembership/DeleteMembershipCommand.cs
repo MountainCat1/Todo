@@ -4,12 +4,12 @@ namespace TeamMemberships.Service.Commands.DeleteMembership;
 
 public class DeleteMembershipCommand : ICommand
 {
-    public DeleteMembershipCommand(Guid teamGuid, Guid userGuid)
+    public DeleteMembershipCommand(Guid teamGuid, Guid accountGuid)
     {
         TeamGuid = teamGuid;
-        UserGuid = userGuid;
+        AccountGuid = accountGuid;
     }
 
     public Guid TeamGuid { get; set; }
-    public Guid UserGuid { get; set; }
+    public Guid AccountGuid { get; set; }
 }

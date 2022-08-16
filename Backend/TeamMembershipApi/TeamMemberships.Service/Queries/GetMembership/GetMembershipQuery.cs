@@ -5,12 +5,12 @@ namespace TeamMemberships.Service.Queries.GetMembership;
 
 public class GetMembershipQuery : IQuery<TeamMembershipDto>
 {
-    public GetMembershipQuery(Guid teamGuid, Guid userGuid)
+    public GetMembershipQuery(Guid teamGuid, Guid accountGuid)
     {
         TeamGuid = teamGuid;
-        UserGuid = userGuid;
+        AccountGuid = accountGuid;
     }
 
     public Guid TeamGuid { get; set; }
-    public Guid UserGuid { get; set; }
+    public Guid AccountGuid { get; set; }
 }
