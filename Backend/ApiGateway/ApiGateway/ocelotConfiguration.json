@@ -2,7 +2,7 @@
 
   "Routes": [
     {
-      "DownstreamPathTemplate": "/Todo",
+      "DownstreamPathTemplate": "/Todo{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -10,12 +10,12 @@
           "Port": 5001
         }
       ],
-      "UpstreamPathTemplate": "/api/Todo",
+      "UpstreamPathTemplate": "/api/Todo{everything}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
       "DangerousAcceptAnyServerCertificateValidator": true
     },
     {
-      "DownstreamPathTemplate": "/Teams",
+      "DownstreamPathTemplate": "/Teams{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -23,12 +23,12 @@
           "Port": 5002
         }
       ],
-      "UpstreamPathTemplate": "/api/Teams",
+      "UpstreamPathTemplate": "/api/Teams{everything}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
       "DangerousAcceptAnyServerCertificateValidator": true
     },
     {
-      "DownstreamPathTemplate": "/Authentication/{everything}",
+      "DownstreamPathTemplate": "/Authentication{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -36,7 +36,21 @@
           "Port": 5004
         }
       ],
-      "UpstreamPathTemplate": "/api/Authentication/{everything}",
+      "UpstreamPathTemplate": "/api/Authentication{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
+
+    {
+      "DownstreamPathTemplate": "/RabbitMQ{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "rabbitmq",
+          "Port": 5672
+        }
+      ],
+      "UpstreamPathTemplate": "/api/RabbitMQ{everything}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
       "DangerousAcceptAnyServerCertificateValidator": true
     }
