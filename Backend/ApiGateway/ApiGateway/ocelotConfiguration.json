@@ -40,7 +40,19 @@
       "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
       "DangerousAcceptAnyServerCertificateValidator": true
     },
-
+    {
+      "DownstreamPathTemplate": "/User{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authentication-api",
+          "Port": 5004
+        }
+      ],
+      "UpstreamPathTemplate": "/api/User{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
+      "DangerousAcceptAnyServerCertificateValidator": true
+    },
     {
       "DownstreamPathTemplate": "/RabbitMQ{everything}",
       "DownstreamScheme": "https",
