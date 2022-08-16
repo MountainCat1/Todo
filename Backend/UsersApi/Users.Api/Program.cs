@@ -44,7 +44,7 @@ else
     services.AddDbContext<UserDbContext>(optionsBuilder 
         => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
 
-services.AddEventBus(
+services.AddBunnyOwO(
     typeof(ServiceAssemblyMarker), 
     typeof(InfrastructureAssemblyMarker));
 

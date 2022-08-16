@@ -24,7 +24,7 @@ public class AccountCreatedEventHandler : IEventHandler<AccountCreatedEvent>
         return true;
     }
 
-    public void ConfigureReceiver(IReceiver receiver)
+    public void ConfigureReceiver(IEventReceiver receiver)
     {
         receiver.QueueName = "user.account-created.queue";
     }
