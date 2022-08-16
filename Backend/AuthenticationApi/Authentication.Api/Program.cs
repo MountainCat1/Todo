@@ -1,8 +1,11 @@
+using System.Reflection;
 using System.Text;
 using Authentication.Api.Middleware;
 using Authentication.Domain.Entities;
 using Authentication.Domain.Repositories;
+using Authentication.Infrastructure;
 using Authentication.Infrastructure.Data;
+using Authentication.Infrastructure.Events;
 using Authentication.Infrastructure.Repositories;
 using Authentication.Service;
 using Authentication.Service.Configuration;
@@ -10,6 +13,8 @@ using Authentication.Service.PipelineBehaviors;
 using Authentication.Service.Services;
 using BunnyOwO.Configuration;
 using BunnyOwO.Extensions;
+using BunnyOwO.FluentValidation.Extensions;
+using FluentValidation;
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -53,7 +58,11 @@ else
 
 services.AddScoped<IPasswordHasher<Account>, PasswordHasher<Account>>();
 
-services.AddSender();
+services.AddBunnyOwOWithValidation(
+    typeof(ServiceAssemblyMarker),
+    typeof(InfrastructureAssemblyMarker),
+    typeof(InfrastructureAssemblyMarker));
+
 /*services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -78,8 +87,8 @@ services.AddScoped<IJWTService, JWTService>();
 services.AddScoped<IAccountRepository, AccountRepository>();
 services.AddScoped<IAccountService, AccountService>();
 
-services.AddMediatR(typeof(ServiceAssemblyPointer));
-services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly});
+services.AddMediatR(typeof(ServiceAssemblyMarker));
+services.AddFluentValidation( new [] { typeof(ServiceAssemblyMarker).Assembly});
 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
 
 services.AddScoped<ErrorHandlingMiddleware>();

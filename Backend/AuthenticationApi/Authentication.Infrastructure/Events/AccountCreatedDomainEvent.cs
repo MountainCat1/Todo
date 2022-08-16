@@ -1,6 +1,8 @@
-﻿namespace Authentication.Domain.Events;
+﻿using BunnyOwO;
 
-public class AccountCreatedDomainEvent
+namespace Authentication.Infrastructure.Events;
+
+public class AccountCreatedDomainEvent : IEvent
 {
     public AccountCreatedDomainEvent(Guid accountGuid)
     {
