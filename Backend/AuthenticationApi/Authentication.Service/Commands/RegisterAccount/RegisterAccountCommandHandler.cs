@@ -1,4 +1,4 @@
-﻿using Authentication.Infrastructure.Events;
+﻿using Authentication.Domain.DomainEvents;
 using Authentication.Service.Abstractions;
 using Authentication.Service.Dto;
 using Authentication.Service.Services;
@@ -28,8 +28,8 @@ public class RegisterAccountCommandHandler : ICommandHandler<RegisterAccountComm
         
         var createdAccount = await _accountService.RegisterAsync(registerDto.Username, registerDto.Password);
 
-        var domainEvent = new AccountCreatedDomainEvent(createdAccount.Guid);
-        _sender.PublishEvent("account.event.created", domainEvent);
+        var domainEvent = new AccountCreatedDomainEvent(Guid.Empty);
+        _sender.PublishEvent("account.event.created", "account.account-created.exchange", domainEvent);
 
         return _mapper.Map<AccountDto>(createdAccount);
     }

@@ -5,7 +5,6 @@ using Authentication.Domain.Entities;
 using Authentication.Domain.Repositories;
 using Authentication.Infrastructure;
 using Authentication.Infrastructure.Data;
-using Authentication.Infrastructure.Events;
 using Authentication.Infrastructure.Repositories;
 using Authentication.Service;
 using Authentication.Service.Configuration;

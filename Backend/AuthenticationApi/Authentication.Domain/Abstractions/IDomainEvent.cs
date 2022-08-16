@@ -1,6 +1,8 @@
-﻿namespace Authentication.Domain.Abstractions;
+﻿using BunnyOwO;
 
-public class IDomainEvent
+namespace Authentication.Domain.Abstractions;
+
+public class IDomainEvent : IEvent
 {
     
 }

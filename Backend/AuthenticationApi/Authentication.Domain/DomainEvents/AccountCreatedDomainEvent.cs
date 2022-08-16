@@ -1,6 +1,6 @@
 ﻿using BunnyOwO;
 
-namespace Authentication.Infrastructure.Events;
+namespace Authentication.Domain.DomainEvents;
 
 public class AccountCreatedDomainEvent : IEvent
 {
