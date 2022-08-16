@@ -48,19 +48,6 @@ services.AddLogging(options =>
     options.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Warning);
     options.AddFilter("Microsoft.EntityFrameworkCore.Infrastructure", LogLevel.Warning);
 });
-if (builder.Environment.IsDevelopment())
-    services.AddDbContext<AccountDbContext>(optionsBuilder 
-        => optionsBuilder.UseInMemoryDatabase("AccountDatabase"));
-else
-    services.AddDbContext<AccountDbContext>(optionsBuilder 
-        => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
-
-services.AddScoped<IPasswordHasher<Account>, PasswordHasher<Account>>();
-
-services.AddBunnyOwOWithValidation(
-    typeof(ServiceAssemblyMarker),
-    typeof(InfrastructureAssemblyMarker),
-    typeof(InfrastructureAssemblyMarker));
 
 /*services.AddAuthentication(options =>
 {
@@ -80,6 +67,17 @@ services.AddBunnyOwOWithValidation(
     };
 });*/
 
+if (builder.Environment.IsDevelopment())
+    services.AddDbContext<AccountDbContext>(optionsBuilder 
+        => optionsBuilder.UseInMemoryDatabase("AccountDatabase"));
+else
+    services.AddDbContext<AccountDbContext>(optionsBuilder 
+        => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
+
+services.AddSender();
+
+services.AddScoped<IPasswordHasher<Account>, PasswordHasher<Account>>();
+
 services.AddAutoMapper(typeof(MappingProfile));
 
 services.AddScoped<IJWTService, JWTService>();
@@ -89,6 +87,9 @@ services.AddScoped<IAccountService, AccountService>();
 services.AddMediatR(typeof(ServiceAssemblyMarker));
 services.AddFluentValidation( new [] { typeof(ServiceAssemblyMarker).Assembly});
 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
+
+services.AddEventHandlers(typeof(ServiceAssemblyMarker).Assembly);
+services.AddEventReceivers(typeof(ServiceAssemblyMarker).Assembly);
 
 services.AddScoped<ErrorHandlingMiddleware>();
 

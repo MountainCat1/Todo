@@ -1,6 +1,7 @@
 using BunnyOwO;
 using BunnyOwO.Configuration;
 using BunnyOwO.Extensions;
+using BunnyOwO.FluentValidation.Extensions;
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
@@ -36,24 +37,22 @@ services.AddLogging(options =>
     options.AddFilter("Microsoft.EntityFrameworkCore.Infrastructure", LogLevel.Warning);
 });
 
-
 if (builder.Environment.IsDevelopment())
     services.AddDbContext<UserDbContext>(optionsBuilder 
         => optionsBuilder.UseInMemoryDatabase("UserDatabase"));
 else
     services.AddDbContext<UserDbContext>(optionsBuilder 
         => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
-
-services.AddBunnyOwO(
-    typeof(ServiceAssemblyMarker), 
-    typeof(InfrastructureAssemblyMarker));
-
-
+services.AddSender();
 
 services.AddAutoMapper(typeof(MappingProfile));
 services.AddMediatR(typeof(ServiceAssemblyMarker));
 services.AddFluentValidation( new [] { typeof(ServiceAssemblyMarker).Assembly});
 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
+
+services.AddEventHandlers(typeof(ServiceAssemblyMarker).Assembly);
+services.AddEventReceivers(typeof(ServiceAssemblyMarker).Assembly);
+
 
 services.AddScoped<IUserRepository, UserRepository>();
 
