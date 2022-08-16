@@ -3,15 +3,6 @@
 ### Description
 There should be general description of the project, please do it later <3
 
-### Todo list
-* Todo microservice             (_Basic CRUD done_)
-* Ocelot API gateway            (_In progress..._)
-* RabbitMQ brocker              (_To be configured_)
-* Team microservice             (_Basic CRUD done_)
-* Team membership microservice  (_Basic CRUD done_)
-* Authentication microservice   (_Not yet started_)
-* User microservice             (_Basic CRUD done_)
-
 ### Microservices
 ##### Todo microservice
 Microservice responsible for todos
