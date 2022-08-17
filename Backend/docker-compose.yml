@@ -25,6 +25,7 @@ services:
       dockerfile: ApiGateway/Dockerfile
     environment:
       - ASPNETCORE_URLS=http://*:4100
+      - ENABLE_SWAGGER=true
     ports:
       - "4100:4100"
   
@@ -42,6 +43,7 @@ services:
       - HTTPS_PORT=5001
       - ASPNETCORE_URLS=https://*:443;https://*:5001;http://*:4001
       - ConnectionStrings:DatabaseConnection=Server=todo-db;Database=TodoDatabase;User=sa;Password=1Secure*Password1;
+      - ENABLE_SWAGGER=true
     ports:
       - "5001:5001"
       - "4001:4001"
@@ -62,6 +64,7 @@ services:
       - HTTPS_PORT=5002
       - ASPNETCORE_URLS=https://*:443;https://*:5002;http://*:4002
       - ConnectionStrings:DatabaseConnection=Server=teams-db;Database=TeamsDatabase;User=sa;Password=1Secure*Password1;
+      - ENABLE_SWAGGER=true
     ports:
       - "5002:5002"
       - "4002:4002"
@@ -82,6 +85,7 @@ services:
       - HTTPS_PORT=5003
       - ASPNETCORE_URLS=https://*:443;https://*:5003;http://*:4003
       - ConnectionStrings:DatabaseConnection=Server=team-memberships-db;Database=TeamMembershipsDatabase;User=sa;Password=1Secure*Password1;
+      - ENABLE_SWAGGER=true
     ports:
       - "5003:5003"
       - "4003:4003"
@@ -101,6 +105,7 @@ services:
       - HTTPS_PORT=5004
       - ASPNETCORE_URLS=https://*:443;https://*:5004;http://*:4004
       - ConnectionStrings:DatabaseConnection=Server=users-db;Database=UsersDatabase;User=sa;Password=1Secure*Password1;
+      - ENABLE_SWAGGER=true
     ports:
       - "5004:5004"
       - "4004:4004"
@@ -120,6 +125,7 @@ services:
       - HTTPS_PORT=5005
       - ASPNETCORE_URLS=https://*:443;https://*:5004;http://*:4005
       - ConnectionStrings:DatabaseConnection=Server=authentication-db;Database=UsersDatabase;User=sa;Password=1Secure*Password1;
+      - ENABLE_SWAGGER=true
     ports:
       - "5005:5005"
       - "4005:4005"

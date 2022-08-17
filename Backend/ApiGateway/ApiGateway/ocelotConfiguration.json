@@ -1,5 +1,4 @@
 ﻿{
-
   "Routes": [
     {
       "DownstreamPathTemplate": "/Todo{everything}",
@@ -12,7 +11,8 @@
       ],
       "UpstreamPathTemplate": "/api/Todo{everything}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
-      "DangerousAcceptAnyServerCertificateValidator": true
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "SwaggerKey": "todos"
     },
     {
       "DownstreamPathTemplate": "/Teams{everything}",
@@ -25,7 +25,8 @@
       ],
       "UpstreamPathTemplate": "/api/Teams{everything}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
-      "DangerousAcceptAnyServerCertificateValidator": true
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "SwaggerKey": "teams"
     },
     {
       "DownstreamPathTemplate": "/Authentication{everything}",
@@ -38,7 +39,8 @@
       ],
       "UpstreamPathTemplate": "/api/Authentication{everything}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
-      "DangerousAcceptAnyServerCertificateValidator": true
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "SwaggerKey": "authentication"
     },
     {
       "DownstreamPathTemplate": "/User{everything}",
@@ -51,7 +53,8 @@
       ],
       "UpstreamPathTemplate": "/api/User{everything}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
-      "DangerousAcceptAnyServerCertificateValidator": true
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "SwaggerKey": "users"
     },
     {
       "DownstreamPathTemplate": "/RabbitMQ{everything}",
@@ -64,12 +67,45 @@
       ],
       "UpstreamPathTemplate": "/api/RabbitMQ{everything}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
-      "DangerousAcceptAnyServerCertificateValidator": true
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "SwaggerKey": "todos"
     }
   ],
   "GlobalConfiguration": {
     "RequestIdKey": "OcRequestId",
     "AdministrationPath": "/administration",
     "RouteIsCaseSensitive": true
-  }
+  },
+  "SwaggerEndPoints": [
+    {
+      "Key": "authentication",
+      "Config": [
+        {
+          "Name": "Authentication API",
+          "Version": "v1",
+          "Url": "https://authentication-api/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "teams",
+      "Config": [
+        {
+          "Name": "Teams API",
+          "Version": "v1",
+          "Url": "https://teams-user/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "todos",
+      "Config": [
+        {
+          "Name": "Todos API",
+          "Version": "v1",
+          "Url": "https://todos-user/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
 }

@@ -67,8 +67,7 @@ await new DatabaseInitializer(
             .ServiceProvider.GetRequiredService<TeamsDbContext>())
     .InitializeAsync(true);
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (configuration.GetValue<bool>("ENABLE_SWAGGER"))
 {
     app.UseSwagger();
     app.UseSwaggerUI();
