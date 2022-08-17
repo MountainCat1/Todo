@@ -8,7 +8,7 @@
 
     <ItemGroup>
       <PackageReference Include="BunnyOwO" Version="1.0.22" />
-      <PackageReference Include="BunnyOwO.FluentValidation" Version="1.0.7" />
+      <PackageReference Include="BunnyOwO.FluentValidation" Version="1.0.8" />
     </ItemGroup>
 
 </Project>
