@@ -25,6 +25,9 @@ services.AddControllers();
 services.AddEndpointsApiExplorer();
 services.AddOcelot(configuration);
 
+services.AddSwaggerGen();
+services.AddSwaggerForOcelot(configuration);
+
 // App
 var app = builder.Build();
 
@@ -37,6 +40,17 @@ app.UseEndpoints(endpoints => {
         pattern: "{controller=Home}/{action=Index}/{id?}");
 });
 
+app.UseSwagger();
+/*app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+    c.RoutePrefix = "swagger";
+});*/
+app.UseSwaggerForOcelotUI(opt =>
+{
+    opt.PathToSwaggerGenerator = "/swagger/docs";
+});
+    
 app.UseOcelot().Wait();
 
 
