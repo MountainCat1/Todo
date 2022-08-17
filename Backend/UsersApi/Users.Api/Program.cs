@@ -43,6 +43,7 @@ if (builder.Environment.IsDevelopment())
 else
     services.AddDbContext<UserDbContext>(optionsBuilder 
         => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
+
 services.AddSender();
 
 services.AddAutoMapper(typeof(MappingProfile));
