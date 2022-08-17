@@ -83,7 +83,7 @@
         {
           "Name": "Authentication API",
           "Version": "v1",
-          "Url": "https://localhost:5004/swagger/v1/swagger.json"
+          "Url": "https://authentication-api/swagger/v1/swagger.json"
         }
       ]
     },
@@ -93,7 +93,7 @@
         {
           "Name": "Teams API",
           "Version": "v1",
-          "Url": "https://localhost:5002/swagger/v1/swagger.json"
+          "Url": "https://teams-user/swagger/v1/swagger.json"
         }
       ]
     },
@@ -103,7 +103,7 @@
         {
           "Name": "Todos API",
           "Version": "v1",
-          "Url": "https://localhost:5001/swagger/v1/swagger.json"
+          "Url": "https://todos-user/swagger/v1/swagger.json"
         }
       ]
     }

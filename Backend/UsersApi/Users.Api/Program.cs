@@ -9,6 +9,7 @@ using Users.Api.Middleware;
 using Users.Domain.Repositories;
 using Users.Infrastructure;
 using Users.Infrastructure.Data;
+using Users.Infrastructure.Events;
 using Users.Infrastructure.Repositories;
 using Users.Service;
 using Users.Service.PipelineBehaviors;
@@ -53,6 +54,7 @@ services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior
 
 services.AddEventHandlersAndReceivers(typeof(ServiceAssemblyMarker));
 
+
 services.AddScoped<IUserRepository, UserRepository>();
 
 services.AddScoped<ErrorHandlingMiddleware>();
@@ -65,8 +67,7 @@ await new DatabaseInitializer(
             .ServiceProvider.GetRequiredService<UserDbContext>())
     .InitializeAsync(true);
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (configuration.GetValue<bool>("ENABLE_SWAGGER"))
 {
     app.UseSwagger();
     app.UseSwaggerUI();
