@@ -4,3 +4,16 @@
 
 ## IMPORTANT, don't forget
 - add swagger to ocelot API gateway
+
+Endpoints:
+
+- Authentication
+    * Register 
+        > Send message to user to create account user profile
+    * Authenticate
+
+- User
+    * Get
+    * Update
+    
+    < Receive message from Authentication to create user profile
