@@ -11,8 +11,4 @@
       <PackageReference Include="Ocelot" Version="18.0.0" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Configuration" />
-    </ItemGroup>
-
 </Project>
