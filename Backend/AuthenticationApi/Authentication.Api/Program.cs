@@ -1,9 +1,6 @@
-using System.Reflection;
-using System.Text;
 using Authentication.Api.Middleware;
 using Authentication.Domain.Entities;
 using Authentication.Domain.Repositories;
-using Authentication.Infrastructure;
 using Authentication.Infrastructure.Data;
 using Authentication.Infrastructure.Repositories;
 using Authentication.Service;
@@ -12,15 +9,10 @@ using Authentication.Service.PipelineBehaviors;
 using Authentication.Service.Services;
 using BunnyOwO.Configuration;
 using BunnyOwO.Extensions;
-using BunnyOwO.FluentValidation.Extensions;
-using FluentValidation;
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 

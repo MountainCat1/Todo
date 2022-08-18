@@ -4,7 +4,6 @@ using Authentication.Service.Dto;
 using Authentication.Service.Services;
 using AutoMapper;
 using BunnyOwO;
-using Microsoft.AspNetCore.Identity;
 
 namespace Authentication.Service.Commands.RegisterAccount;
 

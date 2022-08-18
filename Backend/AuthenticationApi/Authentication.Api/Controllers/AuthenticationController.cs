@@ -2,7 +2,6 @@
 using Authentication.Service.Dto;
 using Authentication.Service.Queries.GetAccountJwt;
 using MediatR;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Authentication.Api.Controllers;

@@ -2,8 +2,6 @@
 using Authentication.Domain.Repositories;
 using Authentication.Service.Errors;
 using Authentication.Service.Models;
-using BCrypt.Net;
-using Microsoft.AspNetCore.Identity;
 
 namespace Authentication.Service.Services;
 

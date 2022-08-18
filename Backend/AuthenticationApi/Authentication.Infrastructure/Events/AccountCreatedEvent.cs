@@ -1,5 +1,4 @@
-﻿using Authentication.Domain.Abstractions;
-using BunnyOwO;
+﻿using BunnyOwO;
 
 namespace Authentication.Infrastructure.Events;
 
