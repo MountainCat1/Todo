@@ -2,6 +2,7 @@
 using Authentication.Domain.Repositories;
 using Authentication.Service.Errors;
 using Authentication.Service.Models;
+using BCrypt.Net;
 
 namespace Authentication.Service.Services;
 
@@ -14,6 +15,7 @@ public interface IAccountService
 public class AccountService : IAccountService
 {
     private readonly IAccountRepository _accountRepository;
+    private readonly string salt;
 
     public AccountService(IAccountRepository accountRepository)
     {
@@ -47,8 +49,7 @@ public class AccountService : IAccountService
         if (account is null)
             throw new NotFoundError("Account not found");
         
-        var passwordHash = BCrypt.Net.BCrypt.HashPassword(password);
-        var verifySucceeded = BCrypt.Net.BCrypt.Verify(account.PasswordHash, passwordHash);
+        var verifySucceeded = BCrypt.Net.BCrypt.Verify(password, account.PasswordHash);
 
         if (verifySucceeded)
             return new AuthenticationResult()
