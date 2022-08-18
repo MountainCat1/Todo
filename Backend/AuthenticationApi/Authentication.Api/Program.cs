@@ -78,6 +78,7 @@ services.AddScoped<IAccountService, AccountService>();
 
 services.AddMediatR(typeof(ServiceAssemblyMarker));
 services.AddFluentValidation( new [] { typeof(ServiceAssemblyMarker).Assembly});
+services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
 
 services.AddEventHandlersAndReceivers(typeof(ServiceAssemblyMarker));
