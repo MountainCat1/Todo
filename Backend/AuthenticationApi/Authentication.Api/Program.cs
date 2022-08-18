@@ -88,8 +88,7 @@ services.AddMediatR(typeof(ServiceAssemblyMarker));
 services.AddFluentValidation( new [] { typeof(ServiceAssemblyMarker).Assembly});
 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
 
-services.AddEventHandlers(typeof(ServiceAssemblyMarker).Assembly);
-services.AddEventReceivers(typeof(ServiceAssemblyMarker).Assembly);
+services.AddEventHandlersAndReceivers(typeof(ServiceAssemblyMarker));
 
 services.AddScoped<ErrorHandlingMiddleware>();
 
