@@ -68,7 +68,7 @@ await new DatabaseInitializer(
             .ServiceProvider.GetRequiredService<UserDbContext>())
     .InitializeAsync(true);
 
-if (configuration.GetValue<bool>("ENABLE_SWAGGER"))
+if (app.Environment.IsDevelopment() || configuration.GetValue<bool>("ENABLE_SWAGGER"))
 {
     app.UseSwagger();
     app.UseSwaggerUI();
