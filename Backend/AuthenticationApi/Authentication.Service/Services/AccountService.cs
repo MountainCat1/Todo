@@ -32,7 +32,8 @@ public class AccountService : IAccountService
         var account = new Account()
         {
             PasswordHash = hashedPassword,
-            Username = username
+            Username = username,
+            UserGuid = Guid.NewGuid()
         };
 
         var createdEntity = await _accountRepository.CreateAsync(account);

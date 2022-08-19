@@ -27,7 +27,11 @@ public class RegisterAccountCommandHandler : ICommandHandler<RegisterAccountComm
         
         var createdAccount = await _accountService.RegisterAsync(registerDto.Username, registerDto.Password);
 
-        var integrationEvent = new AccountCreatedEvent(createdAccount.Guid, createdAccount.Username);
+        var integrationEvent = new AccountCreatedEvent(
+            createdAccount.Guid,
+            createdAccount.Username, 
+            createdAccount.UserGuid);
+        
         _sender.PublishEvent("account.event.created", "account.account-created.exchange", integrationEvent);
 
         return _mapper.Map<AccountDto>(createdAccount);

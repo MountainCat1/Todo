@@ -1,6 +1,7 @@
 ﻿using BunnyOwO;
 using MediatR;
 using Users.Infrastructure.Events;
+using Users.Infrastructure.Events.External;
 using Users.Service.Commands.CreateUser;
 using Users.Service.Dto;
 
@@ -17,7 +18,7 @@ public class AccountCreatedEventHandler : IEventHandler<AccountCreatedEvent>
 
     public async Task<bool> HandleAsync(AccountCreatedEvent @event)
     {
-        var command = new CreateUserCommand(@event.AccountGuid, @event.Username);
+        var command = new CreateUserCommand(@event.AccountGuid, @event.Username, @event.UserGuid);
 
         await _mediator.Send(command);
         

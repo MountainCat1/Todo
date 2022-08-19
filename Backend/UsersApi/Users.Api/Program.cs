@@ -55,7 +55,6 @@ services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior
 
 services.AddEventHandlersAndReceivers(typeof(ServiceAssemblyMarker));
 
-
 services.AddScoped<IUserRepository, UserRepository>();
 
 services.AddScoped<ErrorHandlingMiddleware>();
