@@ -1,6 +1,4 @@
 using System.Security.Cryptography;
-using System.Text;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using Authentication.Api.Middleware;
 using Authentication.Domain.Entities;
@@ -48,7 +46,8 @@ services.AddSwaggerGen();
 services.AddHttpsRedirection(options => options.HttpsPort = httpsPort);
 services.AddSwaggerGen(options =>
 {
-    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme() {
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
         Name = "Authorization",
         Type = SecuritySchemeType.ApiKey,
         Scheme = "Bearer",
@@ -75,6 +74,15 @@ services.AddLogging(options =>
     options.AddFilter("Microsoft.EntityFrameworkCore.Infrastructure", LogLevel.Warning);
 });
 
+services.AddSingleton(provider => {
+    var rsa = RSA.Create();
+    rsa.ImportRSAPrivateKey(
+        source: Convert.FromBase64String(jwtConfig.SecretKey),
+        bytesRead: out _
+    );
+    return new RsaSecurityKey(rsa);
+});
+
 services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -82,13 +90,12 @@ services.AddAuthentication(options =>
 }).AddJwtBearer(options =>
 {
     var rsa = RSA.Create();
-    rsa.ImportRSAPrivateKey(
-        source: Convert.FromBase64String(jwtConfig.SecretKey),
+    rsa.ImportRSAPublicKey(
+        source: Convert.FromBase64String(jwtConfig.PublicKey),
         bytesRead: out _
     );
-    
     var securityKey = new RsaSecurityKey(rsa);
-                    
+    
     if(builder.Environment.IsDevelopment())
         options.IncludeErrorDetails = true; // <- great for debugging
     

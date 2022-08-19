@@ -3,6 +3,7 @@ using Authentication.Service.Commands.RegisterAccount;
 using Authentication.Service.Dto;
 using Authentication.Service.Queries.GetAccountJwt;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Authentication.Api.Controllers;
@@ -41,6 +42,7 @@ public class AuthenticationController : Controller
         return Ok(queryResult);
     }
 
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [HttpPost("claims")]
