@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -47,6 +48,7 @@ services.AddSwaggerGen();
 services.AddHttpsRedirection(options => options.HttpsPort = httpsPort);
 services.AddSwaggerGen(options =>
 {
+    var rsa = RSA.Create();
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme() {
         Name = "Authorization",
         Type = SecuritySchemeType.ApiKey,
@@ -80,6 +82,15 @@ services.AddAuthentication(options =>
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(options =>
 {
+    RSA rsa = RSA.Create();
+    rsa.ImportRSAPrivateKey(
+        source: Convert.FromBase64String(jwtConfig.SecretKey),
+        bytesRead: out int _
+    );
+    
+    SecurityKey securityKey = new RsaSecurityKey(rsa);
+                    
+    options.IncludeErrorDetails = true; // <- great for debugging
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
@@ -88,7 +99,7 @@ services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true,
         ValidIssuer = jwtConfig.Issuer,
         ValidAudience = jwtConfig.Audience,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig.SecretKey))
+        IssuerSigningKey = securityKey
     };
 });
 
