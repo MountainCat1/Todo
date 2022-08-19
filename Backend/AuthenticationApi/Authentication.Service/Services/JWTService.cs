@@ -9,7 +9,7 @@ namespace Authentication.Service.Services;
 
 public interface IJWTService
 {
-    public string GenerateJwtToken(ClaimsIdentity claims);
+    public string GenerateJwtToken(ClaimsIdentity claimsIdentity);
 }
 
 public class JWTService : IJWTService
@@ -21,14 +21,15 @@ public class JWTService : IJWTService
         _jwtConfiguration = jwtConfiguration.Value;
     }
 
-    public string GenerateJwtToken(ClaimsIdentity claims)
+    public string GenerateJwtToken(ClaimsIdentity claimsIdentity)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_jwtConfiguration.SecretKey);
-
+        
+        
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = claims,
+            Subject = claimsIdentity,
             Expires = DateTime.UtcNow.AddMinutes(_jwtConfiguration.Expires),
             Issuer = _jwtConfiguration.Issuer,
             Audience = _jwtConfiguration.Audience,

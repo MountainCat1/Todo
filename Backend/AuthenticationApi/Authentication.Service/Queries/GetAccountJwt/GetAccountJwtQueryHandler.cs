@@ -29,7 +29,9 @@ public class GetAccountJwtQueryHandler : IQueryHandler<GetAccountJwtQuery, strin
         
         var jwtToken = _jwtService.GenerateJwtToken(new ClaimsIdentity(new[]
             {
-                new Claim("userGuid", account.UserGuid.ToString())
+                new Claim(ClaimTypes.Name, account.Username),
+                new Claim(ClaimTypes.UserData, account.UserGuid.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, account.Guid.ToString())
             })
         );
 
