@@ -29,7 +29,7 @@ public class JWTService : IJWTService
 
         using (var rsa = RSA.Create())
         {
-            rsa.ImportPkcs8PrivateKey(Convert.FromBase64String(_jwtConfiguration.SecretKey), out int _);
+            rsa.ImportRSAPrivateKey(Convert.FromBase64String(_jwtConfiguration.SecretKey), out int _);
             
             var signingCredentials = new SigningCredentials(
                 key: new RsaSecurityKey(rsa),
