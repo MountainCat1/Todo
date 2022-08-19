@@ -1,5 +1,7 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+﻿using System.ComponentModel;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using Authentication.Service.Configuration;
 using Microsoft.Extensions.Options;
@@ -9,7 +11,7 @@ namespace Authentication.Service.Services;
 
 public interface IJWTService
 {
-    public string GenerateJwtToken(ClaimsIdentity claims);
+    public string GenerateAsymmetricJwtToken(ClaimsIdentity claimsIdentity);
 }
 
 public class JWTService : IJWTService
@@ -21,14 +23,42 @@ public class JWTService : IJWTService
         _jwtConfiguration = jwtConfiguration.Value;
     }
 
-    public string GenerateJwtToken(ClaimsIdentity claims)
+    public string GenerateAsymmetricJwtToken(ClaimsIdentity claimsIdentity)
+    {
+        var tokenHandler = new JwtSecurityTokenHandler();
+
+        using (var rsa = RSA.Create())
+        {
+            rsa.ImportRSAPrivateKey(Convert.FromBase64String(_jwtConfiguration.SecretKey), out int _);
+            
+            var signingCredentials = new SigningCredentials(
+                key: new RsaSecurityKey(rsa),
+                algorithm: SecurityAlgorithms.RsaSha256 // Important to use RSA version of the SHA algo 
+            );
+            
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = claimsIdentity,
+                Expires = DateTime.UtcNow.AddMinutes(_jwtConfiguration.Expires),
+                Issuer = _jwtConfiguration.Issuer,
+                Audience = _jwtConfiguration.Audience,
+                SigningCredentials = signingCredentials
+            };
+            
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
+        }
+    }
+    
+    private string GenerateSymmetricJwtToken(ClaimsIdentity claimsIdentity)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_jwtConfiguration.SecretKey);
-
+        
+        
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = claims,
+            Subject = claimsIdentity,
             Expires = DateTime.UtcNow.AddMinutes(_jwtConfiguration.Expires),
             Issuer = _jwtConfiguration.Issuer,
             Audience = _jwtConfiguration.Audience,

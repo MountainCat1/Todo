@@ -10,10 +10,11 @@ public class CreateUserCommand : ICommand<UserDto>
         CreateDto = createDto;
     }
     
-    public CreateUserCommand(Guid accountGuid, string username)
+    public CreateUserCommand(Guid accountGuid, string username, Guid userGuid)
     {
         CreateDto = new UserCreateDto()
         {
+            Guid = userGuid,
             AccountGuid = accountGuid,
             Username = username
         };

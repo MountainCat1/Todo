@@ -1,10 +1,14 @@
+using System.Security.Cryptography;
 using BunnyOwO;
 using BunnyOwO.Configuration;
 using BunnyOwO.Extensions;
 using BunnyOwO.FluentValidation.Extensions;
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Users.Api.Configuration;
 using Users.Api.Middleware;
 using Users.Domain.Repositories;
 using Users.Infrastructure;
@@ -20,6 +24,9 @@ var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
 configuration.AddEnvironmentVariables();
+
+var jwtConfig = configuration.GetSection(nameof(JWTConfiguration))
+    .Get<JWTConfiguration>();
 
 // SERVICES
 var services = builder.Services;
@@ -45,15 +52,45 @@ else
     services.AddDbContext<UserDbContext>(optionsBuilder 
         => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
 
+services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    var rsa = RSA.Create();
+    rsa.ImportRSAPublicKey(
+        source: Convert.FromBase64String(jwtConfig.PublicKey),
+        bytesRead: out _
+    );
+    var securityKey = new RsaSecurityKey(rsa);
+    
+    if(builder.Environment.IsDevelopment())
+        options.IncludeErrorDetails = true; // <- great for debugging
+    
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = false,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = jwtConfig.Issuer,
+        ValidAudience = jwtConfig.Audience,
+        IssuerSigningKey = securityKey
+    };
+});
+
+
+
 services.AddSender();
 
 services.AddAutoMapper(typeof(MappingProfile));
 services.AddMediatR(typeof(ServiceAssemblyMarker));
 services.AddFluentValidation( new [] { typeof(ServiceAssemblyMarker).Assembly});
+services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
 
 services.AddEventHandlersAndReceivers(typeof(ServiceAssemblyMarker));
-
 
 services.AddScoped<IUserRepository, UserRepository>();
 
@@ -67,7 +104,7 @@ await new DatabaseInitializer(
             .ServiceProvider.GetRequiredService<UserDbContext>())
     .InitializeAsync(true);
 
-if (configuration.GetValue<bool>("ENABLE_SWAGGER"))
+if (app.Environment.IsDevelopment() || configuration.GetValue<bool>("ENABLE_SWAGGER"))
 {
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -76,6 +113,8 @@ if (configuration.GetValue<bool>("ENABLE_SWAGGER"))
 app.UseMiddleware<ErrorHandlingMiddleware>();
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
