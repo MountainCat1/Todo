@@ -49,8 +49,11 @@ if (builder.Environment.IsDevelopment())
     services.AddDbContext<UserDbContext>(optionsBuilder 
         => optionsBuilder.UseInMemoryDatabase("UserDatabase"));
 else
-    services.AddDbContext<UserDbContext>(optionsBuilder 
-        => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
+    services.AddDbContext<UserDbContext>(optionsBuilder => 
+        optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection"), options =>
+        {
+            options.EnableRetryOnFailure(maxRetryCount: 3, TimeSpan.FromSeconds(10), null);
+        }));
 
 services.AddAuthentication(options =>
 {
