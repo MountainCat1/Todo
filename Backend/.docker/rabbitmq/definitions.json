@@ -35,7 +35,7 @@
       }
     },
     {
-      "name": "team.team-created.queue",
+      "name": "membership.team-created.queue",
       "vhost": "/todo",
       "durable": true,
       "auto_delete": false,
@@ -75,7 +75,7 @@
     {
       "source": "team.team-created.exchange",
       "vhost": "/todo",
-      "destination": "team.team-created.queue",
+      "destination": "membership.team-created.queue",
       "destination_type": "queue",
       "routing_key": "",
       "arguments": {}
