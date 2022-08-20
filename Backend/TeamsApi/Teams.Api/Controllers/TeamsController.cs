@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using System.Security.Claims;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Teams.Service.Abstractions;
@@ -22,11 +23,17 @@ public class TeamsController : Controller
         _mediator = mediator;
     }
 
-    
+    [Authorize]
     [HttpPost("create")]
     public async Task<IActionResult> Create([FromBody] CreateTeamDto dto)
     {
-        var command = new CreateTeamCommand(dto);
+        var accountGuidClaim = User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier);
+        if (accountGuidClaim == null)
+            return Unauthorized("Failed to authenticate account");
+
+        var accountGuid = Guid.Parse(accountGuidClaim.Value);
+        
+        var command = new CreateTeamCommand(dto, accountGuid);
         var result = await _mediator.Send(command);
         return Ok(result);
     }
