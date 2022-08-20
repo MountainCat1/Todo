@@ -80,8 +80,6 @@ services.AddAuthentication(options =>
     };
 });
 
-
-
 services.AddSender();
 
 services.AddAutoMapper(typeof(MappingProfile));
