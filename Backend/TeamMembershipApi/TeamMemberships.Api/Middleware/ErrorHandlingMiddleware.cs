@@ -23,6 +23,11 @@ public class ErrorHandlingMiddleware : IMiddleware
             context.Response.StatusCode = StatusCodes.Status404NotFound;
             await context.Response.WriteAsync(ex.Message);
         }
+        catch (BadRequestError ex)
+        {
+            context.Response.StatusCode = StatusCodes.Status400BadRequest;
+            await context.Response.WriteAsync(ex.Message);
+        }
         catch (ValidationException ex)
         {
             context.Response.StatusCode = StatusCodes.Status400BadRequest;
