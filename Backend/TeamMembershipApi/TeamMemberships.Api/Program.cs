@@ -1,3 +1,4 @@
+using BunnyOwO.Extensions;
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
@@ -39,12 +40,16 @@ else
     services.AddDbContext<TeamMembershipDbContext>(optionsBuilder 
         => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
 
+services.AddSender();
+
 services.AddAutoMapper(typeof(MappingProfile));
 services.AddMediatR(typeof(ServiceAssemblyPointer));
 services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly});
 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
 
 services.AddScoped<ITeamMembershipRepository, TeamMembershipRepository>();
+
+services.AddEventHandlersAndReceivers(typeof(ServiceAssemblyPointer));
 
 services.AddScoped<ErrorHandlingMiddleware>();
 

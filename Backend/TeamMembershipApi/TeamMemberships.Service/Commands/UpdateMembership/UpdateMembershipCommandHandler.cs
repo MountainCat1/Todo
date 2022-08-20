@@ -5,7 +5,7 @@ using TeamMemberships.Service.Dto;
 
 namespace TeamMemberships.Service.Commands.UpdateMembership;
 
-public class UpdateMembershipCommandHandler : ICommandHandler<UpdateMembershipCommand, TeamMembershipDto>
+public class UpdateMembershipCommandHandler : ICommandHandler<UpdateMembershipCommand, MembershipDto>
 {
     private readonly IMapper _mapper;
     private readonly ITeamMembershipRepository _teamMembershipRepository;
@@ -16,7 +16,7 @@ public class UpdateMembershipCommandHandler : ICommandHandler<UpdateMembershipCo
         _teamMembershipRepository = teamMembershipRepository;
     }
 
-    public async Task<TeamMembershipDto> Handle(UpdateMembershipCommand command, CancellationToken cancellationToken)
+    public async Task<MembershipDto> Handle(UpdateMembershipCommand command, CancellationToken cancellationToken)
     {
         var updatedEntity = await _teamMembershipRepository.UpdateAsync(
             command.UpdateDto, 
@@ -24,7 +24,7 @@ public class UpdateMembershipCommandHandler : ICommandHandler<UpdateMembershipCo
 
         await _teamMembershipRepository.SaveChangesAsync();
         
-        var updatedEntityDto = _mapper.Map<TeamMembershipDto>(updatedEntity);
+        var updatedEntityDto = _mapper.Map<MembershipDto>(updatedEntity);
 
         return updatedEntityDto;
     }

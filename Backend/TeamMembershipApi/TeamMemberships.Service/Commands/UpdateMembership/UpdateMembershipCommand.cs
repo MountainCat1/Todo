@@ -3,7 +3,7 @@ using TeamMemberships.Service.Dto;
 
 namespace TeamMemberships.Service.Commands.UpdateMembership;
 
-public class UpdateMembershipCommand : ICommand<TeamMembershipDto>
+public class UpdateMembershipCommand : ICommand<MembershipDto>
 {
     public UpdateMembershipCommand(Guid accountGuid, Guid teamGuid, MembershipUpdateDto updateDto)
     {
