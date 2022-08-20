@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using BunnyOwO.Extensions;
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -80,11 +81,13 @@ else
             options.EnableRetryOnFailure(maxRetryCount: 3, TimeSpan.FromSeconds(10), null);
         }));
 
-
+services.AddSender();
 services.AddAutoMapper(typeof(MappingProfile));
-services.AddMediatR(typeof(ServiceAssemblyPointer));
+services.AddMediatR(typeof(ServiceAssemblyMarker));
 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
-services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly});
+services.AddFluentValidation( new [] { typeof(ServiceAssemblyMarker).Assembly});
+services.AddEventHandlersAndReceivers(typeof(ServiceAssemblyMarker));
+
 
 services.AddScoped<ITeamRepository, TeamRepository>();
 
