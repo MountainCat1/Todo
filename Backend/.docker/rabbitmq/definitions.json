@@ -33,11 +33,28 @@
       "auto_delete": false,
       "arguments": {
       }
+    },
+    {
+      "name": "team.team-created.queue",
+      "vhost": "/todo",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+      }
     }
   ],
   "exchanges": [
     {
       "name": "account.account-created.exchange",
+      "vhost": "/todo",
+      "type": "fanout",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "team.team-created.exchange",
       "vhost": "/todo",
       "type": "fanout",
       "durable": true,
@@ -51,6 +68,14 @@
       "source": "account.account-created.exchange",
       "vhost": "/todo",
       "destination": "user.account-created.queue",
+      "destination_type": "queue",
+      "routing_key": "",
+      "arguments": {}
+    },
+    {
+      "source": "team.team-created.exchange",
+      "vhost": "/todo",
+      "destination": "team.team-created.queue",
       "destination_type": "queue",
       "routing_key": "",
       "arguments": {}
