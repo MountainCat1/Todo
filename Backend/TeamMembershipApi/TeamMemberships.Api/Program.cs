@@ -46,6 +46,7 @@ services.AddAutoMapper(typeof(MappingProfile));
 services.AddMediatR(typeof(ServiceAssemblyPointer));
 services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly});
 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
+services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 
 services.AddScoped<ITeamMembershipRepository, TeamMembershipRepository>();
 
