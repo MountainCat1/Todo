@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using BunnyOwO;
 using Teams.Domain.Entities;
 using Teams.Domain.Repositories;
 using Teams.Infrastructure.Abstractions;
+using Teams.Infrastructure.Events;
 using Teams.Service.Abstractions;
 using Teams.Service.Dto;
 
@@ -11,12 +13,14 @@ public class CreateTeamCommandHandler : ICommandHandler<CreateTeamCommand, TeamD
 {
     private readonly IMapper _mapper;
     private readonly ITeamRepository _teamRepository;
+    private readonly ISender _sender;
     
     
-    public CreateTeamCommandHandler(IMapper mapper, ITeamRepository teamRepository)
+    public CreateTeamCommandHandler(IMapper mapper, ITeamRepository teamRepository, ISender sender)
     {
         _mapper = mapper;
         _teamRepository = teamRepository;
+        _sender = sender;
     }
 
     public async Task<TeamDto> Handle(CreateTeamCommand command, CancellationToken cancellationToken)
@@ -24,6 +28,11 @@ public class CreateTeamCommandHandler : ICommandHandler<CreateTeamCommand, TeamD
         var entity = _mapper.Map<Team>(command.Dto);
 
         var createdEntity = await _teamRepository.CreateAsync(entity);
+
+        var integrationEvent = new TeamCreatedEvent(createdEntity.Guid, command.AccountGuid);
+        
+        _sender.PublishEvent("team.event.created", "team.team-created-exchange", integrationEvent);
+        
         await _teamRepository.SaveChangesAsync();
 
         var createdEntityDto = _mapper.Map<TeamDto>(createdEntity);
