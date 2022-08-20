@@ -84,7 +84,6 @@ else
 services.AddAutoMapper(typeof(MappingProfile));
 services.AddMediatR(typeof(ServiceAssemblyPointer));
 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
-// MediaR validation, check it out here: https://www.nuget.org/packages/MediatR.Extensions.FluentValidation.AspNetCore
 services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly});
 
 services.AddScoped<ITeamRepository, TeamRepository>();
