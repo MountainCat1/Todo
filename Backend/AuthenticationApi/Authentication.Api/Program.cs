@@ -115,8 +115,11 @@ if (builder.Environment.IsDevelopment())
     services.AddDbContext<AccountDbContext>(optionsBuilder 
         => optionsBuilder.UseInMemoryDatabase("AccountDatabase"));
 else
-    services.AddDbContext<AccountDbContext>(optionsBuilder 
-        => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
+    services.AddDbContext<AccountDbContext>(optionsBuilder =>         
+        optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection"), options =>
+        {
+            options.EnableRetryOnFailure(maxRetryCount: 3, TimeSpan.FromSeconds(10), null);
+        }));
 
 services.AddSender();
 
