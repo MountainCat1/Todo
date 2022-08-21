@@ -1,6 +1,6 @@
-namespace TeamMemberships.Service.Dto;
+﻿namespace TeamMemberships.Service.Dto;
 
-public class TeamMembershipDto
+public class MembershipDto
 {
     public Guid AccountGuid { get; set; }
     public Guid TeamGuid { get; set; }

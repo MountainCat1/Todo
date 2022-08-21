@@ -35,8 +35,6 @@ var services = builder.Services;
 services.Configure<JWTConfiguration>(configuration.GetSection(nameof(JWTConfiguration)));
 services.Configure<RabbitMQConfiguration>(configuration.GetSection(nameof(RabbitMQConfiguration)));
 
-
-
 services.AddControllers().AddJsonOptions(options => 
 {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
@@ -103,7 +101,7 @@ services.AddAuthentication(options =>
     {
         ValidateIssuer = true,
         ValidateAudience = true,
-        ValidateLifetime = false,
+        ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
         ValidIssuer = jwtConfig.Issuer,
         ValidAudience = jwtConfig.Audience,

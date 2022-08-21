@@ -3,7 +3,7 @@ using TeamMemberships.Service.Dto;
 
 namespace TeamMemberships.Service.Queries.GetMembership;
 
-public class GetMembershipQuery : IQuery<TeamMembershipDto>
+public class GetMembershipQuery : IQuery<MembershipDto>
 {
     public GetMembershipQuery(Guid teamGuid, Guid accountGuid)
     {

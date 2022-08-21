@@ -1,3 +1,5 @@
+using BunnyOwO.Configuration;
+using BunnyOwO.Extensions;
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +21,8 @@ configuration.AddEnvironmentVariables();
 // SERVICES
 var services = builder.Services;
 
+services.Configure<RabbitMQConfiguration>(configuration.GetSection(nameof(RabbitMQConfiguration)));
+
 services.AddControllers();
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
@@ -33,25 +37,38 @@ services.AddHttpsRedirection(options =>
     options.HttpsPort = configuration.GetValue<int>("HTTPS_PORT"));
 
 if (builder.Environment.IsDevelopment())
-    services.AddDbContext<TeamMembershipDbContext>(optionsBuilder 
+    services.AddDbContext<TeamMembershipDbContext>(optionsBuilder
         => optionsBuilder.UseInMemoryDatabase("TeamMembershipDatabase"));
 else
-    services.AddDbContext<TeamMembershipDbContext>(optionsBuilder 
-        => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
+    services.AddDbContext<TeamMembershipDbContext>(optionsBuilder =>         
+        optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection"), options =>
+        {
+            options.EnableRetryOnFailure(maxRetryCount: 3, TimeSpan.FromSeconds(10), null);
+        }));
+
+services.AddSender();
 
 services.AddAutoMapper(typeof(MappingProfile));
 services.AddMediatR(typeof(ServiceAssemblyPointer));
-services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly});
+services.AddFluentValidation(new[] { typeof(ServiceAssemblyPointer).Assembly });
 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
+services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 
 services.AddScoped<ITeamMembershipRepository, TeamMembershipRepository>();
+
+services.AddEventHandlersAndReceivers(typeof(ServiceAssemblyPointer));
 
 services.AddScoped<ErrorHandlingMiddleware>();
 
 var app = builder.Build();
 
+await new DatabaseInitializer(
+        app.Services.CreateAsyncScope()
+            .ServiceProvider.GetRequiredService<TeamMembershipDbContext>())
+    .InitializeAsync(false);
+
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment()|| configuration.GetValue<bool>("ENABLE_SWAGGER"))
 {
     app.UseSwagger();
     app.UseSwaggerUI();

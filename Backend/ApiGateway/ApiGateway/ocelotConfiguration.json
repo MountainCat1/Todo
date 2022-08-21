@@ -93,7 +93,7 @@
         {
           "Name": "Teams API",
           "Version": "v1",
-          "Url": "https://teams-user/swagger/v1/swagger.json"
+          "Url": "https://teams-api/swagger/v1/swagger.json"
         }
       ]
     },
@@ -103,7 +103,7 @@
         {
           "Name": "Todos API",
           "Version": "v1",
-          "Url": "https://todos-user/swagger/v1/swagger.json"
+          "Url": "https://todos-api/swagger/v1/swagger.json"
         }
       ]
     }

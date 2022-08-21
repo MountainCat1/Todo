@@ -21,6 +21,10 @@ public sealed class ErrorHandlingBehavior<TRequest, TResponse> : IPipelineBehavi
         {
             return await next();
         }
+        catch (ArgumentException ex)
+        {
+            throw new BadRequestError(ex.Message, ex);
+        }
         catch (ItemNotFoundException ex)
         {
             throw new NotFoundError(ex.Message, ex);
