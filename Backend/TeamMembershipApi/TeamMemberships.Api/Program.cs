@@ -62,8 +62,13 @@ services.AddScoped<ErrorHandlingMiddleware>();
 
 var app = builder.Build();
 
+await new DatabaseInitializer(
+        app.Services.CreateAsyncScope()
+            .ServiceProvider.GetRequiredService<TeamMembershipDbContext>())
+    .InitializeAsync(false);
+
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment()|| configuration.GetValue<bool>("ENABLE_SWAGGER"))
 {
     app.UseSwagger();
     app.UseSwaggerUI();

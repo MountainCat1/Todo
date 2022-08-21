@@ -14,6 +14,7 @@ using Teams.Domain.Repositories;
 using Teams.Infrastructure;
 using Teams.Infrastructure.Abstractions;
 using Teams.Infrastructure.Data;
+using Teams.Infrastructure.Events;
 using Teams.Infrastructure.Generics;
 using Teams.Infrastructure.Repositories;
 using Teams.Infrastructure.UnitsOfWork;
@@ -103,7 +104,7 @@ var app = builder.Build();
 await new DatabaseInitializer(
         app.Services.CreateAsyncScope()
             .ServiceProvider.GetRequiredService<TeamsDbContext>())
-    .InitializeAsync(true);
+    .InitializeAsync(false);
 
 if (app.Environment.IsDevelopment() || configuration.GetValue<bool>("ENABLE_SWAGGER"))
 {
