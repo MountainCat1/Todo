@@ -11,13 +11,11 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
-    #networks:
-    # - rabbitmq_go_net
     volumes:
       - ./.docker/rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
       - ./.docker/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
+    restart: on-failure
       
-        
   # === OCELOT API GATEWAY ===
   api-gateway:
     build:
@@ -28,6 +26,7 @@ services:
       - ENABLE_SWAGGER=true
     ports:
       - "4100:4100"
+    restart: on-failure
   
   # === TODOS API ===
   todo-db:
@@ -47,6 +46,7 @@ services:
     ports:
       - "5001:5001"
       - "4001:4001"
+    restart: on-failure
     depends_on:
       - todo-db
         
@@ -68,6 +68,7 @@ services:
     ports:
       - "5002:5002"
       - "4002:4002"
+    restart: on-failure
     depends_on:
       - teams-db
         
@@ -89,6 +90,7 @@ services:
     ports:
       - "5003:5003"
       - "4003:4003"
+    restart: on-failure
     depends_on:
       - team-memberships-db
   # === USER API ===
@@ -109,8 +111,10 @@ services:
     ports:
       - "5004:5004"
       - "4004:4004"
+    restart: on-failure
     depends_on:
       - users-db
+      - 
   # === USER API ===
   authentication-db:
     image: "mcr.microsoft.com/mssql/server:2017-latest"
@@ -129,9 +133,6 @@ services:
     ports:
       - "5005:5005"
       - "4005:4005"
+    restart: on-failure
     depends_on:
       - authentication-db
-
-#networks:
-#  rabbitmq_go_net:
-#    driver: bridge
