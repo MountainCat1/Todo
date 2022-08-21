@@ -1,3 +1,4 @@
+using BunnyOwO.Configuration;
 using BunnyOwO.Extensions;
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
@@ -19,6 +20,8 @@ configuration.AddEnvironmentVariables();
 
 // SERVICES
 var services = builder.Services;
+
+services.Configure<RabbitMQConfiguration>(configuration.GetSection(nameof(RabbitMQConfiguration)));
 
 services.AddControllers();
 services.AddEndpointsApiExplorer();
