@@ -114,7 +114,6 @@ services:
     restart: on-failure
     depends_on:
       - users-db
-      - 
   # === USER API ===
   authentication-db:
     image: "mcr.microsoft.com/mssql/server:2017-latest"
