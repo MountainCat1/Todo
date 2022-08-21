@@ -6,7 +6,7 @@ using TeamMemberships.Service.Errors;
 
 namespace TeamMemberships.Service.Queries.GetMembership;
 
-public class GetMembershipQueryHandler : IQueryHandler<GetMembershipQuery, TeamMembershipDto>
+public class GetMembershipQueryHandler : IQueryHandler<GetMembershipQuery, MembershipDto>
 {
     private readonly ITeamMembershipRepository _teamMembershipRepository;
     private readonly IMapper _mapper;
@@ -17,14 +17,14 @@ public class GetMembershipQueryHandler : IQueryHandler<GetMembershipQuery, TeamM
         _mapper = mapper;
     }
 
-    public async Task<TeamMembershipDto> Handle(GetMembershipQuery query, CancellationToken cancellationToken)
+    public async Task<MembershipDto> Handle(GetMembershipQuery query, CancellationToken cancellationToken)
     {
         var entity = await _teamMembershipRepository.GetAsync(query);
 
         if (entity is null)
             throw new NotFoundError();
 
-        var dto = _mapper.Map<TeamMembershipDto>(entity);
+        var dto = _mapper.Map<MembershipDto>(entity);
 
         return dto;
     }

@@ -7,7 +7,7 @@ using TeamMemberships.Service.Dto;
 
 namespace TeamMemberships.Service.Commands.CreateMembership;
 
-public class CreateMembershipCommandHandler : ICommandHandler<CreateMembershipCommand, TeamMembershipDto>
+public class CreateMembershipCommandHandler : ICommandHandler<CreateMembershipCommand, MembershipDto>
 {
     private readonly ITeamMembershipRepository _teamMembershipRepository;
     private readonly IMapper _mapper;
@@ -18,7 +18,7 @@ public class CreateMembershipCommandHandler : ICommandHandler<CreateMembershipCo
         _mapper = mapper;
     }
 
-    public async Task<TeamMembershipDto> Handle(CreateMembershipCommand command, CancellationToken cancellationToken)
+    public async Task<MembershipDto> Handle(CreateMembershipCommand command, CancellationToken cancellationToken)
     {
         var entity = _mapper.Map<TeamMembership>(command.MembershipCreateDto);
 
@@ -26,7 +26,7 @@ public class CreateMembershipCommandHandler : ICommandHandler<CreateMembershipCo
 
         await _teamMembershipRepository.SaveChangesAsync();
         
-        var createdEntityDto = _mapper.Map<TeamMembershipDto>(createdEntity);
+        var createdEntityDto = _mapper.Map<MembershipDto>(createdEntity);
         
         return createdEntityDto;
     }

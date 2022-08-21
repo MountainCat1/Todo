@@ -3,6 +3,6 @@ using TeamMemberships.Service.Dto;
 
 namespace TeamMemberships.Service.Queries.GetMemberships;
 
-public class GetMembershipsQuery : IQuery<ICollection<TeamMembershipDto>>
+public class GetMembershipsQuery : IQuery<ICollection<MembershipDto>>
 {
 }

@@ -5,7 +5,7 @@ using TeamMemberships.Service.Dto;
 
 namespace TeamMemberships.Service.Queries.GetMemberships;
 
-public class GetMembershipsQueryHandler : IQueryHandler<GetMembershipsQuery, ICollection<TeamMembershipDto>>
+public class GetMembershipsQueryHandler : IQueryHandler<GetMembershipsQuery, ICollection<MembershipDto>>
 {
     private readonly ITeamMembershipRepository _teamMembershipRepository;
     private readonly IMapper _mapper;
@@ -16,11 +16,11 @@ public class GetMembershipsQueryHandler : IQueryHandler<GetMembershipsQuery, ICo
         _mapper = mapper;
     }
 
-    public async Task<ICollection<TeamMembershipDto>> Handle(GetMembershipsQuery query, CancellationToken cancellationToken)
+    public async Task<ICollection<MembershipDto>> Handle(GetMembershipsQuery query, CancellationToken cancellationToken)
     {
         var entities = await _teamMembershipRepository.GetAllAsync();
 
-        var dto = _mapper.Map<ICollection<TeamMembershipDto>>(entities);
+        var dto = _mapper.Map<ICollection<MembershipDto>>(entities);
 
         return dto;
     }
