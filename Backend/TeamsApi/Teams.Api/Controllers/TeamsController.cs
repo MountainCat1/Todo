@@ -35,6 +35,7 @@ public class TeamsController : Controller
         
         var command = new CreateTeamCommand(dto, accountGuid);
         var result = await _mediator.Send(command);
+        
         return Ok(result);
     }
     

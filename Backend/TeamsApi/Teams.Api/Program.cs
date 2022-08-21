@@ -101,7 +101,7 @@ await new DatabaseInitializer(
             .ServiceProvider.GetRequiredService<TeamsDbContext>())
     .InitializeAsync(true);
 
-if (configuration.GetValue<bool>("ENABLE_SWAGGER"))
+if (app.Environment.IsDevelopment() || configuration.GetValue<bool>("ENABLE_SWAGGER"))
 {
     app.UseSwagger();
     app.UseSwaggerUI();
