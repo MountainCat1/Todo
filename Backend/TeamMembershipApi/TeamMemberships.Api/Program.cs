@@ -34,17 +34,20 @@ services.AddHttpsRedirection(options =>
     options.HttpsPort = configuration.GetValue<int>("HTTPS_PORT"));
 
 if (builder.Environment.IsDevelopment())
-    services.AddDbContext<TeamMembershipDbContext>(optionsBuilder 
+    services.AddDbContext<TeamMembershipDbContext>(optionsBuilder
         => optionsBuilder.UseInMemoryDatabase("TeamMembershipDatabase"));
 else
-    services.AddDbContext<TeamMembershipDbContext>(optionsBuilder 
-        => optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection")));
+    services.AddDbContext<TeamMembershipDbContext>(optionsBuilder =>         
+        optionsBuilder.UseSqlServer(configuration.GetConnectionString("DatabaseConnection"), options =>
+        {
+            options.EnableRetryOnFailure(maxRetryCount: 3, TimeSpan.FromSeconds(10), null);
+        }));
 
 services.AddSender();
 
 services.AddAutoMapper(typeof(MappingProfile));
 services.AddMediatR(typeof(ServiceAssemblyPointer));
-services.AddFluentValidation( new [] { typeof(ServiceAssemblyPointer).Assembly});
+services.AddFluentValidation(new[] { typeof(ServiceAssemblyPointer).Assembly });
 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 
