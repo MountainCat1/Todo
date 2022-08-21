@@ -31,7 +31,7 @@ public class CreateTeamCommandHandler : ICommandHandler<CreateTeamCommand, TeamD
 
         var integrationEvent = new TeamCreatedEvent(createdEntity.Guid, command.AccountGuid);
         
-        _sender.PublishEvent("team.event.created", "team.team-created-exchange", integrationEvent);
+        _sender.PublishEvent(integrationEvent, "team.event.created", "team.team-created-exchange");
         
         await _teamRepository.SaveChangesAsync();
 

@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using BunnyOwO.Configuration;
 using BunnyOwO.Extensions;
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
@@ -29,6 +30,9 @@ configuration.AddEnvironmentVariables();
 var jwtConfig = configuration.GetSection(nameof(JWTConfiguration)).Get<JWTConfiguration>();
 
 // SERVICES
+
+services.Configure<RabbitMQConfiguration>(configuration.GetSection(nameof(RabbitMQConfiguration)));
+
 services.AddControllers();
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
