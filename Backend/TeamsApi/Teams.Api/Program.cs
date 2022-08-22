@@ -111,12 +111,13 @@ app.UseAuthorization();
 app.MapControllers();
 
 // Initialize database
-await using (var scope = app.Services.CreateAsyncScope())
+using (var scope = app.Services.CreateScope())
 {
-    await new DatabaseInitializer(scope
-            .ServiceProvider
-            .GetRequiredService<TeamsDbContext>())
-        .InitializeAsync();
+    var dbContext = scope
+        .ServiceProvider
+        .GetRequiredService<TeamsDbContext>();
+
+    await new DatabaseInitializer(dbContext).InitializeAsync();
 }
 
 

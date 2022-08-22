@@ -161,9 +161,8 @@ using (var scope = app.Services.CreateScope())
     var dbContext = scope
         .ServiceProvider
         .GetRequiredService<AccountDbContext>();
-    
-    Console.WriteLine("Migrating...");
-    await dbContext.Database.EnsureCreatedAsync();
+
+    await new DatabaseInitializer(dbContext).InitializeAsync();
 }
 
 app.Run();

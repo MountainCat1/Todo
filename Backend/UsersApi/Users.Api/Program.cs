@@ -117,12 +117,13 @@ app.UseAuthorization();
 app.MapControllers();
 
 // Initialize database
-await using (var scope = app.Services.CreateAsyncScope())
+using (var scope = app.Services.CreateScope())
 {
-    await new DatabaseInitializer(scope
-            .ServiceProvider
-            .GetRequiredService<UserDbContext>())
-        .InitializeAsync();
+    var dbContext = scope
+        .ServiceProvider
+        .GetRequiredService<UserDbContext>();
+
+    await new DatabaseInitializer(dbContext).InitializeAsync();
 }
 
 app.Run();
