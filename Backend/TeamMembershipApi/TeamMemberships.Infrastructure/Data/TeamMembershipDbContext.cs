@@ -13,15 +13,8 @@ public class TeamMembershipDbContext : DbContext
     {
         modelBuilder.Entity<TeamMembership>()
             .HasKey(entity => new { entity.TeamGuid, UserGuid = entity.AccountGuid });
-
-        // Seeding role table
-        modelBuilder.Entity<Role>().HasData(
-            new Role { Name = "Admin" }, 
-            new Role { Name = "Moderator" }, 
-            new Role { Name = "Member" });
     }
     
     public DbSet<TeamMembership> TeamMemberships { get; set; }
-
-    public DbSet<Role> Roles { get; set; }
+    
 }
