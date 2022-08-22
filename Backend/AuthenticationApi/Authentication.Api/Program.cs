@@ -156,4 +156,13 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+await using (var scope = app.Services.CreateAsyncScope())
+{
+    await new DatabaseInitializer(scope
+            .ServiceProvider
+            .GetRequiredService<AccountDbContext>())
+        .InitializeAsync();
+}
+
+
 app.Run();

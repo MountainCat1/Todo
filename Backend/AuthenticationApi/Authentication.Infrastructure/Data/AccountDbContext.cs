@@ -7,7 +7,6 @@ public class AccountDbContext : DbContext
 {
     public AccountDbContext(DbContextOptions options) : base(options)
     {
-        Database.EnsureCreatedAsync();
     }
     
     protected override void OnModelCreating(ModelBuilder builder)

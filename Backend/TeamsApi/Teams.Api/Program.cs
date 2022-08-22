@@ -10,6 +10,7 @@ using Teams.Api.Configuration;
 using Teams.Api.Middleware;
 using Teams.Domain.Repositories;
 using Teams.Infrastructure.Data;
+using Teams.Infrastructure.Events;
 using Teams.Infrastructure.Repositories;
 using Teams.Service;
 using Teams.Service.PipelineBehaviors;
@@ -108,5 +109,15 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Initialize database
+await using (var scope = app.Services.CreateAsyncScope())
+{
+    await new DatabaseInitializer(scope
+            .ServiceProvider
+            .GetRequiredService<TeamsDbContext>())
+        .InitializeAsync();
+}
+
 
 app.Run();
