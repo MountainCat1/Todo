@@ -2,13 +2,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Teams.Service.Abstractions;
 using Teams.Service.Command.CreateTeam;
-using Teams.Service.Command.DeleteTeam;
-using Teams.Service.Command.UpdateTeam;
 using Teams.Service.Dto;
-using Teams.Service.Queries.GetAllTeams;
-using Teams.Service.Queries.GetTeam;
 
 namespace Teams.Api.Controllers;
 

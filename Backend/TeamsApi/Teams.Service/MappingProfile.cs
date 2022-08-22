@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Teams.Domain.Entities;
-using Teams.Service.Command.CreateTeam;
 using Teams.Service.Dto;
 
 namespace Teams.Service;

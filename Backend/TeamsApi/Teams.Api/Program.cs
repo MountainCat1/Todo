@@ -8,16 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Teams.Api.Configuration;
 using Teams.Api.Middleware;
-using Teams.Domain.Abstractions;
-using Teams.Domain.Entities;
 using Teams.Domain.Repositories;
-using Teams.Infrastructure;
-using Teams.Infrastructure.Abstractions;
 using Teams.Infrastructure.Data;
-using Teams.Infrastructure.Events;
-using Teams.Infrastructure.Generics;
 using Teams.Infrastructure.Repositories;
-using Teams.Infrastructure.UnitsOfWork;
 using Teams.Service;
 using Teams.Service.PipelineBehaviors;
 
