@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Teams.Domain.Entities;
+﻿using Teams.Domain.Entities;
 using Teams.Domain.Repositories;
 using Teams.Infrastructure.Data;
 using Teams.Infrastructure.Generics;

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Teams.Domain.Entities;
 using Teams.Domain.Repositories;
 using Teams.Service.Abstractions;
 using Teams.Service.Dto;

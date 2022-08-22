@@ -100,11 +100,6 @@ services.AddScoped<ErrorHandlingMiddleware>();
 // APP
 var app = builder.Build();
 
-await new DatabaseInitializer(
-        app.Services.CreateAsyncScope()
-            .ServiceProvider.GetRequiredService<UserDbContext>())
-    .InitializeAsync(true);
-
 if (app.Environment.IsDevelopment() || configuration.GetValue<bool>("ENABLE_SWAGGER"))
 {
     app.UseSwagger();
@@ -120,5 +115,15 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Initialize database
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope
+        .ServiceProvider
+        .GetRequiredService<UserDbContext>();
+
+    await new DatabaseInitializer(dbContext).InitializeAsync();
+}
 
 app.Run();

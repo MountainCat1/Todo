@@ -8,16 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Teams.Api.Configuration;
 using Teams.Api.Middleware;
-using Teams.Domain.Abstractions;
-using Teams.Domain.Entities;
 using Teams.Domain.Repositories;
-using Teams.Infrastructure;
-using Teams.Infrastructure.Abstractions;
 using Teams.Infrastructure.Data;
 using Teams.Infrastructure.Events;
-using Teams.Infrastructure.Generics;
 using Teams.Infrastructure.Repositories;
-using Teams.Infrastructure.UnitsOfWork;
 using Teams.Service;
 using Teams.Service.PipelineBehaviors;
 
@@ -101,11 +95,6 @@ services.AddScoped<ErrorHandlingMiddleware>();
 // APP
 var app = builder.Build();
 
-await new DatabaseInitializer(
-        app.Services.CreateAsyncScope()
-            .ServiceProvider.GetRequiredService<TeamsDbContext>())
-    .InitializeAsync(false);
-
 if (app.Environment.IsDevelopment() || configuration.GetValue<bool>("ENABLE_SWAGGER"))
 {
     app.UseSwagger();
@@ -120,5 +109,16 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Initialize database
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope
+        .ServiceProvider
+        .GetRequiredService<TeamsDbContext>();
+
+    await new DatabaseInitializer(dbContext).InitializeAsync();
+}
+
 
 app.Run();

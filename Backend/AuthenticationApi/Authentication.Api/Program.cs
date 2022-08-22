@@ -141,11 +141,6 @@ services.AddScoped<ErrorHandlingMiddleware>();
 // APP
 var app = builder.Build();
 
-await new DatabaseInitializer(
-        app.Services.CreateAsyncScope()
-            .ServiceProvider.GetRequiredService<AccountDbContext>())
-    .InitializeAsync(true);
-
 if (app.Environment.IsDevelopment() || configuration.GetValue<bool>("ENABLE_SWAGGER"))
 {
     app.UseSwagger();
@@ -160,5 +155,14 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope
+        .ServiceProvider
+        .GetRequiredService<AccountDbContext>();
+
+    await new DatabaseInitializer(dbContext).InitializeAsync();
+}
 
 app.Run();

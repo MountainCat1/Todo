@@ -15,7 +15,16 @@ services:
       - ./.docker/rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
       - ./.docker/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
     restart: on-failure
-      
+    
+  # === SQL DATABASE SERVER ===
+  
+  sql-server:
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=1Secure*Password1
+    restart: on-failure
+  
   # === OCELOT API GATEWAY ===
   api-gateway:
     build:
@@ -29,11 +38,6 @@ services:
     restart: on-failure
   
   # === TODOS API ===
-  todo-db:
-    image: "mcr.microsoft.com/mssql/server:2017-latest"
-    environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=1Secure*Password1
   todo-api:
     build:
       context: ./TodoApi
@@ -41,21 +45,16 @@ services:
     environment:
       - HTTPS_PORT=5001
       - ASPNETCORE_URLS=https://*:443;https://*:5001;http://*:4001
-      - ConnectionStrings:DatabaseConnection=Server=todo-db;Database=TodoDatabase;User=sa;Password=1Secure*Password1;
+      - ConnectionStrings:DatabaseConnection=Server=sql-server;Database=TodoDatabase;User=sa;Password=1Secure*Password1;
       - ENABLE_SWAGGER=true
     ports:
       - "5001:5001"
       - "4001:4001"
     restart: on-failure
     depends_on:
-      - todo-db
+      - sql-server
         
   # === TEAMS API ===
-  teams-db:
-    image: "mcr.microsoft.com/mssql/server:2017-latest"
-    environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=1Secure*Password1
   teams-api:
     build:
       context: ./TeamsApi
@@ -63,21 +62,16 @@ services:
     environment:
       - HTTPS_PORT=5002
       - ASPNETCORE_URLS=https://*:443;https://*:5002;http://*:4002
-      - ConnectionStrings:DatabaseConnection=Server=teams-db;Database=TeamsDatabase;User=sa;Password=1Secure*Password1;
+      - ConnectionStrings:DatabaseConnection=Server=sql-server;Database=TeamsDatabase;User=sa;Password=1Secure*Password1;
       - ENABLE_SWAGGER=true
     ports:
       - "5002:5002"
       - "4002:4002"
     restart: on-failure
     depends_on:
-      - teams-db
+      - sql-server
         
   # === TEAM MEMBERSHIPS API ===
-  team-memberships-db:
-    image: "mcr.microsoft.com/mssql/server:2017-latest"
-    environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=1Secure*Password1
   team-memberships-api:
     build:
       context: ./TeamMembershipApi
@@ -85,20 +79,15 @@ services:
     environment:
       - HTTPS_PORT=5003
       - ASPNETCORE_URLS=https://*:443;https://*:5003;http://*:4003
-      - ConnectionStrings:DatabaseConnection=Server=team-memberships-db;Database=TeamMembershipsDatabase;User=sa;Password=1Secure*Password1;
+      - ConnectionStrings:DatabaseConnection=Server=sql-server;Database=TeamMembershipsDatabase;User=sa;Password=1Secure*Password1;
       - ENABLE_SWAGGER=true
     ports:
       - "5003:5003"
       - "4003:4003"
     restart: on-failure
     depends_on:
-      - team-memberships-db
+      - sql-server
   # === USER API ===
-  users-db:
-    image: "mcr.microsoft.com/mssql/server:2017-latest"
-    environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=1Secure*Password1
   users-api:
     build:
       context: ./UsersApi
@@ -106,20 +95,15 @@ services:
     environment:
       - HTTPS_PORT=5004
       - ASPNETCORE_URLS=https://*:443;https://*:5004;http://*:4004
-      - ConnectionStrings:DatabaseConnection=Server=users-db;Database=UsersDatabase;User=sa;Password=1Secure*Password1;
+      - ConnectionStrings:DatabaseConnection=Server=sql-server;Database=UsersDatabase;User=sa;Password=1Secure*Password1;
       - ENABLE_SWAGGER=true
     ports:
       - "5004:5004"
       - "4004:4004"
     restart: on-failure
     depends_on:
-      - users-db
+      - sql-server
   # === USER API ===
-  authentication-db:
-    image: "mcr.microsoft.com/mssql/server:2017-latest"
-    environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=1Secure*Password1
   authentication-api:
     build:
       context: ./AuthenticationApi
@@ -127,11 +111,11 @@ services:
     environment:
       - HTTPS_PORT=5005
       - ASPNETCORE_URLS=https://*:443;https://*:5004;http://*:4005
-      - ConnectionStrings:DatabaseConnection=Server=authentication-db;Database=UsersDatabase;User=sa;Password=1Secure*Password1;
+      - ConnectionStrings:DatabaseConnection=Server=sql-server;Database=AccountDatabase;User=sa;Password=1Secure*Password1;
       - ENABLE_SWAGGER=true
     ports:
       - "5005:5005"
       - "4005:4005"
     restart: on-failure
     depends_on:
-      - authentication-db
+      - sql-server
