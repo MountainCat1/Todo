@@ -20,7 +20,8 @@ public class TeamCreatedEventHandler : IEventHandler<TeamCreatedEvent>
         var dto = new MembershipCreateDto()
         {
             AccountGuid = @event.CreatorAccountGuid,
-            TeamGuid = @event.TeamGuid
+            TeamGuid = @event.TeamGuid,
+            
         };
         var command = new CreateMembershipCommand(dto);
 
