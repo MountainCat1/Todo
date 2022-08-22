@@ -18,9 +18,11 @@ public class GetAllFilteredTodosQueryHandler : IQueryHandler<GetAllFilteredTodos
         _repository = repository;
     }
 
-    public async Task<ICollection<TodoDto>> Handle(GetAllFilteredTodosQuery request, CancellationToken cancellationToken)
+    public async Task<ICollection<TodoDto>> Handle(GetAllFilteredTodosQuery query, CancellationToken cancellationToken)
     {
-        var entities = await _repository.GetAllAsync(request.TeamGuid, request.UserGuid);
+        var entities = await _repository.GetAsync(x 
+            => x.TeamGuid == query.TeamGuid && 
+               x.TeamGuid == query.TeamGuid);
 
         var dto = _mapper.Map<ICollection<TodoDto>>(entities);
 
