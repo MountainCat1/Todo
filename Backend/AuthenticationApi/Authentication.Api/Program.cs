@@ -156,13 +156,14 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-await using (var scope = app.Services.CreateAsyncScope())
+using (var scope = app.Services.CreateScope())
 {
-    await new DatabaseInitializer(scope
-            .ServiceProvider
-            .GetRequiredService<AccountDbContext>())
-        .InitializeAsync();
+    var dbContext = scope
+        .ServiceProvider
+        .GetRequiredService<AccountDbContext>();
+    
+    Console.WriteLine("Migrating...");
+    await dbContext.Database.EnsureCreatedAsync();
 }
-
 
 app.Run();

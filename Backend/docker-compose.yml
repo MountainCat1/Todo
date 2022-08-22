@@ -111,7 +111,7 @@ services:
     environment:
       - HTTPS_PORT=5005
       - ASPNETCORE_URLS=https://*:443;https://*:5004;http://*:4005
-      - ConnectionStrings:DatabaseConnection=Server=sql-server;Database=UsersDatabase;User=sa;Password=1Secure*Password1;
+      - ConnectionStrings:DatabaseConnection=Server=sql-server;Database=AccountDatabase;User=sa;Password=1Secure*Password1;
       - ENABLE_SWAGGER=true
     ports:
       - "5005:5005"

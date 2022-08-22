@@ -13,6 +13,8 @@ public class DatabaseInitializer
 
     public async Task InitializeAsync(bool recreateDatabase = false)
     {
+        Console.WriteLine("Initializing database...");
+        
         if (recreateDatabase)
             await _dbContext.Database.EnsureDeletedAsync();
             

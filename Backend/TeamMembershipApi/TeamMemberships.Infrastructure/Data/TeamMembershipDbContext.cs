@@ -7,7 +7,6 @@ public class TeamMembershipDbContext : DbContext
 {
     public TeamMembershipDbContext(DbContextOptions options) : base(options)
     {
-        Database.EnsureCreatedAsync();
     }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)

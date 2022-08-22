@@ -7,7 +7,6 @@ public class TeamsDbContext : DbContext
 {
     public TeamsDbContext(DbContextOptions options) : base(options)
     {
-        Database.EnsureCreatedAsync();
     }
 
     public DbSet<Team> Teams { get; set; }
