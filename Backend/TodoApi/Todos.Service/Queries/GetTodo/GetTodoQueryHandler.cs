@@ -8,7 +8,7 @@ using Todos.Service.Exceptions;
 
 namespace Todos.Service.Queries.GetTodo;
 
-public class GetTodoQueryHandler : IQueryHandler<GetTodoQuery, TodoDto?>
+public class GetTodoQueryHandler : IQueryHandler<GetTodoQuery, TodoDto>
 {
     private readonly ITodoRepository _repository;
     private readonly IMapper _mapper;
@@ -19,13 +19,10 @@ public class GetTodoQueryHandler : IQueryHandler<GetTodoQuery, TodoDto?>
         _repository = repository;
     }
 
-    public async Task<TodoDto?> Handle(GetTodoQuery request, CancellationToken cancellationToken)
+    public async Task<TodoDto> Handle(GetTodoQuery request, CancellationToken cancellationToken)
     {
-        var entity = await _repository.GetAsync(request.Guid);
+        var entity = await _repository.GetOneRequiredAsync(request.Guid);
 
-        if(entity == null)
-            throw new NotFoundException();
-        
         var dto = _mapper.Map<TodoDto?>(entity);
 
         return dto;

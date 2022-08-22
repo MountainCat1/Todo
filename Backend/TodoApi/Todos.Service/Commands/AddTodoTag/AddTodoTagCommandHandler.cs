@@ -21,7 +21,7 @@ public class AddTodoTagCommandHandler : ICommandHandler<AddTodoTagCommand>
 
     public async Task<Unit> Handle(AddTodoTagCommand request, CancellationToken cancellationToken)
     {
-        var entity = await _repository.GetAsync(request.TodoGuid);
+        var entity = await _repository.GetOneRequiredAsync(request.TodoGuid);
 
         if (entity == null)
             throw new NotFoundException();
@@ -29,6 +29,8 @@ public class AddTodoTagCommandHandler : ICommandHandler<AddTodoTagCommand>
         entity.Tags.Add(request.Tag);
 
         await _repository.UpdateAsync(entity.Guid, entity);
+
+        await _repository.SaveChangesAsync();
         
         return Unit.Value;
     }

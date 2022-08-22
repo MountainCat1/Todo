@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Todos.Domain.Abstractions;
 
 namespace Todos.Domain.Entities;
 
-public class Todo
+public class Todo : IEntity
 {
     [Key]
     public Guid Guid { get; set; }

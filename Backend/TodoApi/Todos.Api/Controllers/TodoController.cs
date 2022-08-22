@@ -29,7 +29,7 @@ public class TodoController : Controller
     {
         var query = new GetAllFilteredTodosQuery(teamGuid, userGuid);
         
-        var result = await _mediator.Send(query, new CancellationToken());
+        var result = await _mediator.Send(query);
         return Ok(result);
     }
     
@@ -39,7 +39,7 @@ public class TodoController : Controller
     {
         var query = new GetAllTodosQuery();
         
-        var result = await _mediator.Send(query, new CancellationToken());
+        var result = await _mediator.Send(query);
         return Ok(result);
     }
     
@@ -50,7 +50,7 @@ public class TodoController : Controller
     {
         var query = new GetTodoQuery(){Guid = guid};
         
-        var result = await _mediator.Send(query, new CancellationToken());
+        var result = await _mediator.Send(query);
 
         if (result == null)
             return NotFound();
@@ -63,7 +63,7 @@ public class TodoController : Controller
     {
         var command = new CreateTodoCommand(createTodoDto);
         
-        await _mediator.Send(command, new CancellationToken());
+        await _mediator.Send(command);
         return Ok();
     }
     
@@ -72,7 +72,7 @@ public class TodoController : Controller
     {
         var command = new UpdateTodoCommand(guid, todoDto);
         
-        await _mediator.Send(command, new CancellationToken());
+        await _mediator.Send(command);
         return Ok();
     }
     
@@ -81,7 +81,7 @@ public class TodoController : Controller
     {
         var command = new DeleteTodoCommand(guid);
         
-        await _mediator.Send(command, new CancellationToken());
+        await _mediator.Send(command);
         return Ok();
     }
 }
