@@ -11,7 +11,7 @@ public class TeamMembership : IEntity
     public Guid AccountGuid { get; set; }
 
     [Required]
-    public TeamRole TeamRole { get; set; } = TeamRole.Member;
+    public UserRole Role { get; set; } = UserRole.Member;
 
     public DateTime JoinTime { get; set; }
 }

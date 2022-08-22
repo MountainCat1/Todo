@@ -1,6 +1,6 @@
 ﻿namespace TeamMemberships.Domain.Enums;
 
-public enum TeamRole
+public enum UserRole
 {
     Administrator,
     Moderator,
