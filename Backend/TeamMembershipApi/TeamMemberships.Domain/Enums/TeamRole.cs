@@ -4,5 +4,6 @@ public enum TeamRole
 {
     Administrator,
     Moderator,
+    TrustedMember,
     Member
 }
