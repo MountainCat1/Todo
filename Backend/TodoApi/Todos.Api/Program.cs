@@ -54,7 +54,7 @@ if (configuration.GetValue<bool>("ENABLE_SWAGGER"))
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
 
-// app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
