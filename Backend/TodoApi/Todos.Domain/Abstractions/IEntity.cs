@@ -1,4 +1,4 @@
-﻿namespace Authentication.Domain.Abstractions;
+﻿namespace Todos.Domain.Abstractions;
 
 public interface IEntity
 {

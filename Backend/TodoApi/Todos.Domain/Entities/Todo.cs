@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Authentication.Domain.Abstractions;
+using Todos.Domain.Abstractions;
 
 namespace Todos.Domain.Entities;
 

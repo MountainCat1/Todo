@@ -1,9 +1,9 @@
 ﻿using System.Linq.Expressions;
-using Authentication.Domain.Abstractions;
-using Authentication.Infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using Todos.Domain.Abstractions;
+using Todos.Infrastructure.Exceptions;
 
-namespace Authentication.Infrastructure.Generics;
+namespace Todos.Infrastructure.Generics;
 
 public class Repository<TEntity, TDbContext> : IRepository<TEntity> 
     where TEntity : class, IEntity

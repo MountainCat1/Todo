@@ -1,4 +1,4 @@
-﻿namespace Authentication.Infrastructure.Exceptions;
+﻿namespace Todos.Infrastructure.Exceptions;
 
 public class ItemNotFoundException : Exception
 {

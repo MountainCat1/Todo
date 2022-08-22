@@ -1,4 +1,4 @@
-﻿using Authentication.Domain.Abstractions;
+﻿using Todos.Domain.Abstractions;
 using Todos.Domain.Entities;
 
 namespace Todos.Domain.Repositories;

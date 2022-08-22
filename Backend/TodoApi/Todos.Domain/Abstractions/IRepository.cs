@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Authentication.Domain.Abstractions;
+namespace Todos.Domain.Abstractions;
 
 
 public interface IRepository
