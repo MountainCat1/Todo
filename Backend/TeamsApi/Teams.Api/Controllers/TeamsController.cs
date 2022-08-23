@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Teams.Service.Command.CreateTeam;
 using Teams.Service.Dto;
+using Teams.Service.Queries.GetAllTeamTodos;
 
 namespace Teams.Api.Controllers;
 
@@ -33,6 +34,19 @@ public class TeamsController : Controller
         
         return Ok(result);
     }
+
+    // TODO add resource based authorization!!!
+    // TODO SUUUPER IMPORTANT DO IT PLEAAAASE
+    [Authorize]
+    [HttpGet("{teamGuid}/todos")]
+    public async Task<IActionResult> GetAllTodos([FromRoute] Guid teamGuid)
+    {
+        var query = new GetAllTeamTodosQuery(teamGuid);
+        var result = await _mediator.Send(query);
+        
+        return Ok(result);
+    }
+    
     
     /*[HttpGet]
     public async Task<IActionResult> Get([FromQuery] Guid? guid)
