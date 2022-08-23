@@ -10,7 +10,9 @@ using Teams.Api.Configuration;
 using Teams.Api.Middleware;
 using Teams.Domain.Repositories;
 using Teams.Infrastructure.Data;
+using Teams.Infrastructure.Dto;
 using Teams.Infrastructure.Events;
+using Teams.Infrastructure.HttpClients;
 using Teams.Infrastructure.Repositories;
 using Teams.Service;
 using Teams.Service.PipelineBehaviors;
@@ -87,8 +89,8 @@ services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior
 services.AddFluentValidation( new [] { typeof(ServiceAssemblyMarker).Assembly});
 services.AddEventHandlersAndReceivers(typeof(ServiceAssemblyMarker));
 
-
 services.AddScoped<ITeamRepository, TeamRepository>();
+services.AddHttpClient<ITodoClient, TodoClient>(client => client.BaseAddress = new Uri("todo-api/Todo"));
 
 services.AddScoped<ErrorHandlingMiddleware>();
 
