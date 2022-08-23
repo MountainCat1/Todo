@@ -14,6 +14,7 @@ public class TeamMembershipDbContext : DbContext
         modelBuilder.Entity<TeamMembership>()
             .HasKey(entity => new { entity.TeamGuid, UserGuid = entity.AccountGuid });
     }
-
+    
     public DbSet<TeamMembership> TeamMemberships { get; set; }
+    
 }

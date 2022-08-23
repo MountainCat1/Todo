@@ -1,5 +1,6 @@
 ﻿using BunnyOwO;
 using MediatR;
+using TeamMemberships.Domain.Enums;
 using TeamMemberships.Infrastructure.Events.External;
 using TeamMemberships.Service.Commands.CreateMembership;
 using TeamMemberships.Service.Dto;
@@ -20,7 +21,8 @@ public class TeamCreatedEventHandler : IEventHandler<TeamCreatedEvent>
         var dto = new MembershipCreateDto()
         {
             AccountGuid = @event.CreatorAccountGuid,
-            TeamGuid = @event.TeamGuid
+            TeamGuid = @event.TeamGuid,
+            Role = UserRole.Administrator
         };
         var command = new CreateMembershipCommand(dto);
 
