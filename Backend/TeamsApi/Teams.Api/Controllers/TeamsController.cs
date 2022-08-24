@@ -2,9 +2,11 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Teams.Api.AuthorizationHandlers;
 using Teams.Service.Command.CreateTeam;
 using Teams.Service.Dto;
 using Teams.Service.Queries.GetAllTeamTodos;
+using Teams.Service.Queries.GetTeam;
 
 namespace Teams.Api.Controllers;
 
@@ -13,10 +15,11 @@ namespace Teams.Api.Controllers;
 public class TeamsController : Controller
 {
     private readonly IMediator _mediator;
-
-    public TeamsController(IMediator mediator)
+    private readonly IAuthorizationService _authorizationService;
+    public TeamsController(IMediator mediator, IAuthorizationService authorizationService)
     {
         _mediator = mediator;
+        _authorizationService = authorizationService;
     }
 
     [Authorize]
@@ -34,13 +37,17 @@ public class TeamsController : Controller
         
         return Ok(result);
     }
-
-    // TODO add resource based authorization!!!
-    // TODO SUUUPER IMPORTANT DO IT PLEAAAASE
+    
     [Authorize]
     [HttpGet("{teamGuid}/todos")]
     public async Task<IActionResult> GetAllTodos([FromRoute] Guid teamGuid)
     {
+        var getTeamQuery = new GetTeamQuery(teamGuid);
+        var team = await _mediator.Send(getTeamQuery);
+        var authorizationResult = await _authorizationService.AuthorizeAsync(User, team, Operations.Read);
+        if (!authorizationResult.Succeeded)
+            return Forbid();
+                
         var query = new GetAllTeamTodosQuery(teamGuid);
         var result = await _mediator.Send(query);
         
