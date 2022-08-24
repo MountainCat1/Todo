@@ -2,5 +2,7 @@
 
 public class MembershipDto
 {
-    // TODO
+    public Guid AccountGuid { get; set; }
+    public Guid TeamGuid { get; set; }
+    public string Role { get; set; }
 }
