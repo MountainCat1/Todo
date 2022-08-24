@@ -6,6 +6,7 @@ using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Teams.Api.Configuration;
 using Teams.Api.Middleware;
 using Teams.Domain.Repositories;
@@ -25,6 +26,7 @@ var configuration = builder.Configuration;
 configuration.AddEnvironmentVariables();
 
 var jwtConfig = configuration.GetSection(nameof(JWTConfiguration)).Get<JWTConfiguration>();
+var apiGatewayConfiguration = configuration.GetValue<string>("ApiGatewayUri");
 
 // SERVICES
 
@@ -32,7 +34,29 @@ services.Configure<RabbitMQConfiguration>(configuration.GetSection(nameof(Rabbit
 
 services.AddControllers();
 services.AddEndpointsApiExplorer();
-services.AddSwaggerGen();
+services.AddSwaggerGen(options =>
+{
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 1safsfsdfdfd\"",
+    });
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement {
+        {
+            new OpenApiSecurityScheme {
+                Reference = new OpenApiReference {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
+});
 services.AddLogging(options =>
 {
     options.AddConsole();
@@ -90,7 +114,10 @@ services.AddFluentValidation( new [] { typeof(ServiceAssemblyMarker).Assembly});
 services.AddEventHandlersAndReceivers(typeof(ServiceAssemblyMarker));
 
 services.AddScoped<ITeamRepository, TeamRepository>();
-services.AddHttpClient<ITodoClient, TodoClient>(client => client.BaseAddress = new Uri("todo-api/Todo"));
+services.AddHttpClient<ITodoClient, TodoClient>(client 
+    => client.BaseAddress = new Uri($"{apiGatewayConfiguration}/todos"));
+services.AddHttpClient<IMembershipClient, MembershipClient>(client 
+    => client.BaseAddress = new Uri($"{apiGatewayConfiguration}/teamMembership"));
 
 services.AddScoped<ErrorHandlingMiddleware>();
 

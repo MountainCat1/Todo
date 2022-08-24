@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using System.Text.Json.Serialization;
+using Authentication.Api.Extensions;
 using Authentication.Api.Middleware;
 using Authentication.Domain.Entities;
 using Authentication.Domain.Repositories;
@@ -72,42 +73,7 @@ services.AddLogging(options =>
     options.AddFilter("Microsoft.EntityFrameworkCore.Infrastructure", LogLevel.Warning);
 });
 
-services.AddSingleton(provider => {
-    var rsa = RSA.Create();
-    rsa.ImportRSAPrivateKey(
-        source: Convert.FromBase64String(jwtConfig.SecretKey),
-        bytesRead: out _
-    );
-    return new RsaSecurityKey(rsa);
-});
-
-services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-{
-    var rsa = RSA.Create();
-    rsa.ImportRSAPublicKey(
-        source: Convert.FromBase64String(jwtConfig.PublicKey),
-        bytesRead: out _
-    );
-    var securityKey = new RsaSecurityKey(rsa);
-    
-    if(builder.Environment.IsDevelopment())
-        options.IncludeErrorDetails = true; // <- great for debugging
-    
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = jwtConfig.Issuer,
-        ValidAudience = jwtConfig.Audience,
-        IssuerSigningKey = securityKey
-    };
-});
+services.AddAsymmetricAuthentication(jwtConfig);
 
 if (builder.Environment.IsDevelopment())
     services.AddDbContext<AccountDbContext>(optionsBuilder 
