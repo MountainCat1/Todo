@@ -10,5 +10,4 @@ public class Team : IEntity
     
     public string Name { get; set; }
     public string Description { get; set; }
-    public Guid UserGuid { get; set; }
 }
