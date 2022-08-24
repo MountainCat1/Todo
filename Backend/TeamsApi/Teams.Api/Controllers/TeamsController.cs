@@ -23,7 +23,7 @@ public class TeamsController : Controller
     [HttpPost("create")]
     public async Task<IActionResult> Create([FromBody] CreateTeamDto dto)
     {
-        var accountGuidClaim = User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier);
+        var accountGuidClaim = User.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.PrimarySid);
         if (accountGuidClaim == null)
             return Unauthorized("Failed to authenticate account");
 
