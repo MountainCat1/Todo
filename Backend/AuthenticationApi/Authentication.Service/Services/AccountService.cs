@@ -1,4 +1,5 @@
-﻿using Authentication.Domain.Entities;
+﻿using System.Security.Claims;
+using Authentication.Domain.Entities;
 using Authentication.Domain.Repositories;
 using Authentication.Service.Errors;
 using Authentication.Service.Models;
@@ -10,6 +11,7 @@ public interface IAccountService
 {
     public Task<Account> RegisterAsync(string username, string password);
     public Task<AuthenticationResult> AuthenticateAsync(string username,string password);
+    ClaimsIdentity GenerateClaimsIdentity(Account account);
 }
 
 public class AccountService : IAccountService
@@ -63,5 +65,16 @@ public class AccountService : IAccountService
             {
                 Succeeded = false
             };
+    }
+    
+    public ClaimsIdentity GenerateClaimsIdentity(Account account)
+    {
+        return new ClaimsIdentity(new Claim[]
+        {
+            new(ClaimTypes.Sid, account.Guid.ToString()),
+            new(ClaimTypes.PrimarySid, account.Guid.ToString()),
+            new(ClaimTypes.UserData, account.UserGuid.ToString()),
+            new(ClaimTypes.Name, account.Username)
+        });
     }
 }

@@ -13,7 +13,6 @@ namespace Authentication.Service.Services;
 public interface IJWTService
 {
     public string GenerateAsymmetricJwtToken(ClaimsIdentity claimsIdentity);
-    ClaimsIdentity GenerateClaimsIdentity(Account account);
 }
 
 public class JWTService : IJWTService
@@ -24,18 +23,6 @@ public class JWTService : IJWTService
     {
         _jwtConfiguration = jwtConfiguration.Value;
     }
-
-    public ClaimsIdentity GenerateClaimsIdentity(Account account)
-    {
-        return new ClaimsIdentity(new Claim[]
-        {
-            new(ClaimTypes.Sid, account.Guid.ToString()),
-            new(ClaimTypes.PrimarySid, account.Guid.ToString()),
-            new(ClaimTypes.UserData, account.UserGuid.ToString()),
-            new(ClaimTypes.Name, account.Username)
-        });
-    }
-    
     public string GenerateAsymmetricJwtToken(ClaimsIdentity claimsIdentity)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
