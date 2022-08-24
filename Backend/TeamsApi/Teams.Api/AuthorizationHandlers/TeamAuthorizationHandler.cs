@@ -1,13 +1,12 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
-using Teams.Api.AuthorizationHandlers.Requirements;
 using Teams.Domain.Entities;
 using Teams.Infrastructure.HttpClients;
 
 namespace Teams.Api.AuthorizationHandlers;
 
-public class TeamAuthorizationHandler : AuthorizationHandler<IsMemberAuthorizationRequirement, Team>
+public class TeamAuthorizationHandler : AuthorizationHandler<OperationAuthorizationRequirement, Team>
 {
     private readonly IMembershipClient _membershipClient;
 
@@ -18,7 +17,7 @@ public class TeamAuthorizationHandler : AuthorizationHandler<IsMemberAuthorizati
     
     protected override async Task HandleRequirementAsync(
         AuthorizationHandlerContext context, 
-        IsMemberAuthorizationRequirement requirement,
+        OperationAuthorizationRequirement  requirement,
         Team resource)
     {
         var accountGuid = Guid.Parse(context.User.Claims.First(x => x.Type == ClaimTypes.PrimarySid).Value);
