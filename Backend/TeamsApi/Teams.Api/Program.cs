@@ -4,9 +4,12 @@ using BunnyOwO.Extensions;
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Teams.Api.Authorization;
 using Teams.Api.Configuration;
 using Teams.Api.Middleware;
 using Teams.Domain.Repositories;
@@ -119,7 +122,10 @@ services.AddHttpClient<ITodoClient, TodoClient>(client
 services.AddHttpClient<IMembershipClient, MembershipClient>(client 
     => client.BaseAddress = new Uri($"{apiGatewayConfiguration}/teamMembership"));
 
+ 
 services.AddScoped<ErrorHandlingMiddleware>();
+
+services.AddSingleton<IAuthorizationHandler, TeamAuthorizationHandler>();
 
 // APP
 var app = builder.Build();

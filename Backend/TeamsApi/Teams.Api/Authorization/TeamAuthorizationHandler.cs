@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Teams.Domain.Entities;
 using Teams.Infrastructure.HttpClients;
 
-namespace Teams.Api.AuthorizationHandlers;
+namespace Teams.Api.Authorization;
+
+
 
 public class TeamAuthorizationHandler : AuthorizationHandler<OperationAuthorizationRequirement, Team>
 {
@@ -17,13 +19,13 @@ public class TeamAuthorizationHandler : AuthorizationHandler<OperationAuthorizat
     
     protected override async Task HandleRequirementAsync(
         AuthorizationHandlerContext context, 
-        OperationAuthorizationRequirement  requirement,
+        OperationAuthorizationRequirement requirement,
         Team resource)
     {
         var accountGuid = Guid.Parse(context.User.Claims.First(x => x.Type == ClaimTypes.PrimarySid).Value);
         var membership = await _membershipClient.GetMembershipAsync(resource.Guid, accountGuid);
         
-        if (membership is not null && requirement.Name == Operations.Read.Name)
+        if (membership is not null  && requirement.Name == Operations.Read.Name)
         {
             context.Succeed(requirement);
         }

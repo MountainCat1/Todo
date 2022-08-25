@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization.Infrastructure;
 
-namespace Teams.Api.AuthorizationHandlers;
+namespace Teams.Api.Authorization;
 
 public static class Operations
 {
@@ -12,4 +12,9 @@ public static class Operations
         new OperationAuthorizationRequirement { Name = nameof(Update) };
     public static OperationAuthorizationRequirement Delete =
         new OperationAuthorizationRequirement { Name = nameof(Delete) };
+}
+
+public class ReadTeamRequirement : OperationAuthorizationRequirement
+{
+    
 }
