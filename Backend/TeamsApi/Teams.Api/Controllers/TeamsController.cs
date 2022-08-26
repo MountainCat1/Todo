@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Teams.Api.Authorization;
+using Teams.Service;
 using Teams.Service.Command.CreateTeam;
 using Teams.Service.Dto;
 using Teams.Service.Queries.GetAllTeamTodos;
@@ -42,14 +42,12 @@ public class TeamsController : Controller
     [HttpGet("{teamGuid}/todos")]
     public async Task<IActionResult> GetAllTodos([FromRoute] Guid teamGuid)
     {
-        var getTeamQuery = new GetTeamQuery(teamGuid);
-        var team = await _mediator.Send(getTeamQuery);
-        // this is a TeamDto NOT Team, it won't work, need to figure should we use dto or entity
-        var authorizationResult = await _authorizationService.AuthorizeAsync(User, team, Operations.Read);
+        var query = new GetAllTeamTodosQuery(teamGuid);
+        
+        var authorizationResult = await _authorizationService.AuthorizeAsync(User, query, Operations.Read);
         if (!authorizationResult.Succeeded)
             return Forbid();
-                
-        var query = new GetAllTeamTodosQuery(teamGuid);
+        
         var result = await _mediator.Send(query);
         
         return Ok(result);

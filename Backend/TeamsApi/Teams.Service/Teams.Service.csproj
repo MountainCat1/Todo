@@ -12,6 +12,7 @@
       <PackageReference Include="BunnyOwO" Version="1.0.33" />
       <PackageReference Include="MediatR" Version="10.0.1" />
       <PackageReference Include="MediatR.Extensions.FluentValidation.AspNetCore" Version="3.0.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.7" />
     </ItemGroup>
 
     <ItemGroup>

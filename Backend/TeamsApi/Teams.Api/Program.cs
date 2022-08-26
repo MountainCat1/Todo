@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Teams.Api.Authorization;
 using Teams.Api.Configuration;
 using Teams.Api.Middleware;
 using Teams.Domain.Repositories;
@@ -20,6 +19,7 @@ using Teams.Infrastructure.HttpClients;
 using Teams.Infrastructure.Repositories;
 using Teams.Service;
 using Teams.Service.PipelineBehaviors;
+using Teams.Service.Queries.GetAllTeamTodos;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -125,7 +125,7 @@ services.AddHttpClient<IMembershipClient, MembershipClient>(client
  
 services.AddScoped<ErrorHandlingMiddleware>();
 
-services.AddSingleton<IAuthorizationHandler, TeamAuthorizationHandler>();
+services.AddSingleton<IAuthorizationHandler, GetAllTeamTodosQueryAuthorization>();
 
 // APP
 var app = builder.Build();

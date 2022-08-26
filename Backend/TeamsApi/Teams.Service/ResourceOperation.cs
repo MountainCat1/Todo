@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization.Infrastructure;
 
-namespace Teams.Api.Authorization;
+namespace Teams.Service;
 
 public static class Operations
 {
