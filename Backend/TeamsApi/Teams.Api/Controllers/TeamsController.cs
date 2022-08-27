@@ -44,7 +44,7 @@ public class TeamsController : Controller
     {
         var query = new GetAllTeamTodosQuery(teamGuid);
         
-        var authorizationResult = await _authorizationService.AuthorizeAsync(User, query, Operations.Read);
+        var authorizationResult = await _authorizationService.AuthorizeAsync(User, query, Operations.UseRequest);
         if (!authorizationResult.Succeeded)
             return Forbid();
         
@@ -52,32 +52,4 @@ public class TeamsController : Controller
         
         return Ok(result);
     }
-    
-    
-    /*[HttpGet]
-    public async Task<IActionResult> Get([FromQuery] Guid? guid)
-    {
-        IBaseRequest query = guid != null 
-            ? new GetTeamQuery((Guid)guid) 
-            : new GetAllTeamsQuery();
-        
-        var result = await _mediator.Send(query);
-        return Ok(result);
-    }
-    
-    [HttpPut("{teamGuid}")]
-    public async Task<IActionResult> Update([FromRoute] Guid teamGuid, [FromBody] UpdateTeamDto dto)
-    {
-        var command = new UpdateTeamCommand(teamGuid, dto);
-        var result = await _mediator.Send(command);
-        return Ok(result);
-    }
-    
-    [HttpDelete("{teamGuid}")]
-    public async Task<IActionResult> Delete([FromRoute] Guid teamGuid)
-    {
-        var command = new DeleteTeamCommand(teamGuid);
-        await _mediator.Send(command);
-        return Ok();
-    }*/
 }
