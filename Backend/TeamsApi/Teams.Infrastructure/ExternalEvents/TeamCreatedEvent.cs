@@ -1,6 +1,6 @@
 ﻿using BunnyOwO;
 
-namespace Teams.Infrastructure.Events;
+namespace Teams.Infrastructure.ExternalEvents;
 
 public class TeamCreatedEvent : IEvent
 {

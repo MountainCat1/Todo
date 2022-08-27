@@ -2,7 +2,7 @@
 using BunnyOwO;
 using Teams.Domain.Entities;
 using Teams.Domain.Repositories;
-using Teams.Infrastructure.Events;
+using Teams.Infrastructure.ExternalEvents;
 using Teams.Service.Abstractions;
 using Teams.Service.Dto;
 
