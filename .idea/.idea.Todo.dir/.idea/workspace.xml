@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1c675658-6de7-475a-ba2c-cf1788c3c4c0" name="Changes" comment="" />
+    <list default="true" id="1c675658-6de7-475a-ba2c-cf1788c3c4c0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Backend/TodoApi/Todos.Infrastructure/ExternalMessages/CreateTodoMessage.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/TodoApi/Todos.Service/MessageHandler/CreateTodoMessageHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/TodoApi/Todos.Infrastructure/Todos.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/TodoApi/Todos.Infrastructure/Todos.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/TodoApi/Todos.Service/MappingProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/TodoApi/Todos.Service/MappingProfile.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,6 +44,7 @@
       <workItem from="1661280174727" duration="607000" />
       <workItem from="1661361094559" duration="6000" />
       <workItem from="1661695567742" duration="35000" />
+      <workItem from="1661701487258" duration="13000" />
     </task>
     <task id="LOCAL-00001" summary="moved database initialization back to right befor app start">
       <created>1661174065430</created>

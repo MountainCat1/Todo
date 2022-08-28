@@ -37,7 +37,7 @@ services.AddDbContext<TodoDbContext>(options
 
 
 services.AddAutoMapper(typeof(MappingProfile));
-services.AddSender();
+services.AddMessageSender();
 
 services.AddScoped<ITodoRepository, TodoRepository>();
 
@@ -49,7 +49,7 @@ services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior
 
 services.AddScoped<ErrorHandlingMiddleware>();
 
-services.AddEventHandlersAndReceivers(typeof(ServiceAssemblyMarker));
+services.AddMessageHandlersAndReceivers(typeof(ServiceAssemblyMarker));
 
 var app = builder.Build();
 
