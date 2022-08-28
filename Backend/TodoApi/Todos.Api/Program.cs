@@ -30,9 +30,14 @@ services.AddLogging(options =>
     options.AddFilter("Microsoft.EntityFrameworkCore.Infrastructure", LogLevel.Warning);
 });
 
-services.AddDbContext<TodoDbContext>(options
-    => options.UseSqlServer(configuration.GetConnectionString("DatabaseConnection") 
-        ?? throw new ArgumentException("Connection string was not specified")));
+
+if (builder.Environment.IsDevelopment())
+    services.AddDbContext<TodoDbContext>(options
+        => options.UseInMemoryDatabase("TodoDatabase"));   
+else
+    services.AddDbContext<TodoDbContext>(options
+        => options.UseSqlServer(configuration.GetConnectionString("DatabaseConnection") 
+            ?? throw new ArgumentException("Connection string was not specified")));
 
 
 
