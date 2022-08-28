@@ -1,16 +1,16 @@
-﻿using MediatR;
+﻿using BunnyOwO;
+using MediatR;
 using Teams.Infrastructure.Dto;
 using Teams.Service.Abstractions;
-using Teams.Service.Events;
-using ISender = BunnyOwO.ISender;
+using Teams.Service.Messages;
 
 namespace Teams.Service.Command.CreateTodo;
 
 public class CreateTodoCommandHandler : ICommandHandler<CreateTodoCommand, Unit>
 {
-    private readonly ISender _sender;
+    private readonly IMessageSender _sender;
 
-    public CreateTodoCommandHandler(ISender sender)
+    public CreateTodoCommandHandler(IMessageSender sender)
     {
         _sender = sender;
     }
@@ -20,7 +20,7 @@ public class CreateTodoCommandHandler : ICommandHandler<CreateTodoCommand, Unit>
         var createDto = command.CreateDto;
         createDto.TeamGuid = command.TeamGuid;
 
-        var message = new CreateTodoEvent()
+        var message = new CreateTodoMessage()
         {
             CreateTodo = createDto
         };

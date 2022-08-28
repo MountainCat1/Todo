@@ -1,9 +1,9 @@
 ﻿using BunnyOwO;
 using Teams.Infrastructure.Dto;
 
-namespace Teams.Service.Events;
+namespace Teams.Service.Messages;
 
-public class CreateTodoEvent : IEvent
+public class CreateTodoMessage : IMessage
 {
     public CreateTodoDto CreateTodo { get; set; }
 }
