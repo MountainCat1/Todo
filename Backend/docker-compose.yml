@@ -55,15 +55,15 @@ services:
       - sql-server
         
   # === TEAMS API ===
-  teams-api:
+  team-api:
     build:
       context: ./TeamsApi
       dockerfile: Dockerfile
     environment:
       - HTTPS_PORT=5002
       - ASPNETCORE_URLS=https://*:443;https://*:5002;http://*:4002
-      - ConnectionStrings:DatabaseConnection=Server=sql-server;Database=TeamsDatabase;User=sa;Password=1Secure*Password1;
       - ENABLE_SWAGGER=true
+      - ConnectionStrings:DatabaseConnection=Server=sql-server;Database=TeamsDatabase;User=sa;Password=1Secure*Password1;
     ports:
       - "5002:5002"
       - "4002:4002"
@@ -72,7 +72,7 @@ services:
       - sql-server
         
   # === TEAM MEMBERSHIPS API ===
-  team-memberships-api:
+  team-membership-api:
     build:
       context: ./TeamMembershipApi
       dockerfile: Dockerfile
@@ -88,7 +88,7 @@ services:
     depends_on:
       - sql-server
   # === USER API ===
-  users-api:
+  user-api:
     build:
       context: ./UsersApi
       dockerfile: Dockerfile
@@ -110,7 +110,7 @@ services:
       dockerfile: Dockerfile
     environment:
       - HTTPS_PORT=5005
-      - ASPNETCORE_URLS=https://*:443;https://*:5004;http://*:4005
+      - ASPNETCORE_URLS=https://*:443;https://*:5005;http://*:4005
       - ConnectionStrings:DatabaseConnection=Server=sql-server;Database=AccountDatabase;User=sa;Password=1Secure*Password1;
       - ENABLE_SWAGGER=true
     ports:

@@ -6,18 +6,18 @@ using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Teams.Api.Configuration;
 using Teams.Api.Middleware;
 using Teams.Domain.Repositories;
 using Teams.Infrastructure;
+using Teams.Infrastructure.Configuration;
 using Teams.Infrastructure.Data;
-using Teams.Infrastructure.Dto;
 using Teams.Infrastructure.HttpClients;
 using Teams.Infrastructure.Repositories;
 using Teams.Service;
+using Teams.Service.Command.CreateTodo;
 using Teams.Service.PipelineBehaviors;
 using Teams.Service.Queries.GetAllTeamTodos;
 
@@ -27,13 +27,20 @@ var configuration = builder.Configuration;
 
 // Configuration
 configuration.AddEnvironmentVariables();
+configuration.AddJsonFile( 
+    builder.Environment.IsDevelopment() 
+        ? "microserviceConfiguration.Development.json" 
+        : "microserviceConfiguration.json", 
+    true);
 
 var jwtConfig = configuration.GetSection(nameof(JWTConfiguration)).Get<JWTConfiguration>();
-var apiGatewayConfiguration = configuration.GetValue<string>("ApiGatewayUri");
+var microserviceConfiguration = configuration.GetSection(nameof(MicroserviceConfiguration))
+        .Get<MicroserviceConfiguration>();
 
 // SERVICES
 
 services.Configure<RabbitMQConfiguration>(configuration.GetSection(nameof(RabbitMQConfiguration)));
+services.Configure<MicroserviceConfiguration>(configuration.GetSection(nameof(MicroserviceConfiguration)));
 
 services.AddControllers();
 services.AddEndpointsApiExplorer();
@@ -118,14 +125,15 @@ services.AddEventHandlersAndReceivers(typeof(ServiceAssemblyMarker));
 
 services.AddScoped<ITeamRepository, TeamRepository>();
 services.AddHttpClient<ITodoClient, TodoClient>(client 
-    => client.BaseAddress = new Uri($"{apiGatewayConfiguration}/todos"));
+    => client.BaseAddress = new Uri($"{microserviceConfiguration.Todo}"));
 services.AddHttpClient<IMembershipClient, MembershipClient>(client 
-    => client.BaseAddress = new Uri($"{apiGatewayConfiguration}/teamMembership"));
+    => client.BaseAddress = new Uri($"{microserviceConfiguration.Membership}"));
 
  
 services.AddScoped<ErrorHandlingMiddleware>();
 
 services.AddSingleton<IAuthorizationHandler, GetAllTeamTodosQueryAuthorization>();
+services.AddSingleton<IAuthorizationHandler, CreateTodoCommandAuthorization>();
 
 // APP
 var app = builder.Build();

@@ -13,12 +13,12 @@ using Teams.Service.Queries.GetTeam;
 namespace Teams.Api.Controllers;
 
 [ApiController]
-[Route("Teams")]
-public class TeamsController : Controller
+[Route("Team")]
+public class TeamController : Controller
 {
     private readonly IMediator _mediator;
     private readonly IAuthorizationService _authorizationService;
-    public TeamsController(IMediator mediator, IAuthorizationService authorizationService)
+    public TeamController(IMediator mediator, IAuthorizationService authorizationService)
     {
         _mediator = mediator;
         _authorizationService = authorizationService;
@@ -56,7 +56,7 @@ public class TeamsController : Controller
     }
     
     [Authorize]
-    [HttpGet("{teamGuid}/createTodo")]
+    [HttpPost("{teamGuid}/createTodo")]
     public async Task<IActionResult> CreateTodo([FromRoute] Guid teamGuid, [FromBody] CreateTodoDto createTodoDto)
     {
         var command = new CreateTodoCommand(teamGuid, createTodoDto);

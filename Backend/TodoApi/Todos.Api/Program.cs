@@ -1,7 +1,7 @@
+using BunnyOwO.Configuration;
 using BunnyOwO.Extensions;
 using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.EntityFrameworkCore;
 using Todos.Api.Middleware;
 using Todos.Domain.Repositories;
@@ -19,6 +19,8 @@ configuration.AddEnvironmentVariables();
 
 // Add services to the container.
 var services = builder.Services;
+
+services.Configure<RabbitMQConfiguration>(configuration.GetSection(nameof(RabbitMQConfiguration)));
 
 services.AddControllers();
 services.AddEndpointsApiExplorer();
@@ -38,8 +40,6 @@ else
     services.AddDbContext<TodoDbContext>(options
         => options.UseSqlServer(configuration.GetConnectionString("DatabaseConnection") 
             ?? throw new ArgumentException("Connection string was not specified")));
-
-
 
 services.AddAutoMapper(typeof(MappingProfile));
 services.AddMessageSender();

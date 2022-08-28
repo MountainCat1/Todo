@@ -23,7 +23,7 @@ public class MembershipClient : IMembershipClient
 
     public async Task<MembershipDto?> GetMembershipAsync(Guid teamGuid, Guid accountGuid)
     {
-        var endpoint = string.Format(_getMembershipEndpoint, teamGuid);
+        var endpoint = string.Format(_getMembershipEndpoint, teamGuid, accountGuid);
 
         var endpointUri = new Uri(endpoint, UriKind.Relative);
 

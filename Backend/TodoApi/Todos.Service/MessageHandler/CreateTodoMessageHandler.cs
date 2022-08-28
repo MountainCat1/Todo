@@ -31,6 +31,6 @@ public class CreateTodoMessageHandler : IMessageHandler<CreateTodoMessage>
     
     public void ConfigureReceiver(IMessageReceiver messageReceiver)
     {
-        messageReceiver.QueueName = "todo.create-todo-message.queue";
+        messageReceiver.QueueName = "todo.create-todo.queue";
     }
 }

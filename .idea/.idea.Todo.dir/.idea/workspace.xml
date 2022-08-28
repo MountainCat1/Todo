@@ -2,10 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c675658-6de7-475a-ba2c-cf1788c3c4c0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Backend/TodoApi/Todos.Infrastructure/ExternalMessages/CreateTodoMessage.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/TodoApi/Todos.Service/MessageHandler/CreateTodoMessageHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/TodoApi/Todos.Infrastructure/Todos.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/TodoApi/Todos.Infrastructure/Todos.Infrastructure.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/TodoApi/Todos.Service/MappingProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/TodoApi/Todos.Service/MappingProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/TeamMembershipApi/TeamMemberships.Api/Controllers/TeamMembershipController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/TeamMembershipApi/TeamMemberships.Api/Controllers/TeamMembershipController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/TeamsApi/Teams.Api/Controllers/TeamsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/TeamsApi/Teams.Api/Controllers/TeamsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/TeamsApi/Teams.Api/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/TeamsApi/Teams.Api/appsettings.Development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/TeamsApi/Teams.Api/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/TeamsApi/Teams.Api/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/TeamsApi/Teams.Infrastructure/HttpClients/MembershipClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/TeamsApi/Teams.Infrastructure/HttpClients/MembershipClient.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/TodoApi/Todos.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/TodoApi/Todos.Api/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/TodoApi/Todos.Api/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/TodoApi/Todos.Api/appsettings.Development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/TodoApi/Todos.Api/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/TodoApi/Todos.Api/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/TodoApi/Todos.Service/MessageHandler/CreateTodoMessageHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/TodoApi/Todos.Service/MessageHandler/CreateTodoMessageHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +51,7 @@
       <workItem from="1661361094559" duration="6000" />
       <workItem from="1661695567742" duration="35000" />
       <workItem from="1661701487258" duration="13000" />
+      <workItem from="1661719136856" duration="22000" />
     </task>
     <task id="LOCAL-00001" summary="moved database initialization back to right befor app start">
       <created>1661174065430</created>
