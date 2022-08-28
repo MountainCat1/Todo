@@ -38,6 +38,7 @@
       <workItem from="1661174019860" duration="93000" />
       <workItem from="1661280174727" duration="607000" />
       <workItem from="1661361094559" duration="6000" />
+      <workItem from="1661695567742" duration="35000" />
     </task>
     <task id="LOCAL-00001" summary="moved database initialization back to right befor app start">
       <created>1661174065430</created>

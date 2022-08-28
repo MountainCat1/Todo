@@ -1,5 +1,7 @@
+using BunnyOwO.Extensions;
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.EntityFrameworkCore;
 using Todos.Api.Middleware;
 using Todos.Domain.Repositories;
@@ -32,17 +34,22 @@ services.AddDbContext<TodoDbContext>(options
     => options.UseSqlServer(configuration.GetConnectionString("DatabaseConnection") 
         ?? throw new ArgumentException("Connection string was not specified")));
 
+
+
 services.AddAutoMapper(typeof(MappingProfile));
+services.AddSender();
 
 services.AddScoped<ITodoRepository, TodoRepository>();
 
-services.AddMediatR(typeof(ServiceAssemblyPointer).Assembly);
-services.AddValidatorsFromAssembly(typeof(ServiceAssemblyPointer).Assembly);
+services.AddMediatR(typeof(ServiceAssemblyMarker).Assembly);
+services.AddValidatorsFromAssembly(typeof(ServiceAssemblyMarker).Assembly);
 
 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
 
 services.AddScoped<ErrorHandlingMiddleware>();
+
+services.AddEventHandlersAndReceivers(typeof(ServiceAssemblyMarker));
 
 var app = builder.Build();
 

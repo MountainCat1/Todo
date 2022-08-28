@@ -3,7 +3,7 @@
 
 // Class used to point to the Todos.Service assembly
 // Right now used only by MediaR, and Fluent Validation
-public static class ServiceAssemblyPointer
+public static class ServiceAssemblyMarker
 {
     // Intentionally empty...
 }
