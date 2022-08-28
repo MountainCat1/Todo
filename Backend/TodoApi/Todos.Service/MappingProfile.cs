@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Todos.Domain.Entities;
 using Todos.Infrastructure.ExternalMessages;
+using Todos.Infrastructure.MessageDto;
 using Todos.Service.Commands.CreateTodo;
 using Todos.Service.Dto;
 
@@ -15,6 +16,6 @@ public class MappingProfile : Profile
 
         CreateMap<CreateTodoDto, Todo>();
 
-        CreateMap<CreateTodoMessage, CreateTodoCommand>();
+        CreateMap<CreateTodoMessageDto, CreateTodoDto>();
     }
 }
