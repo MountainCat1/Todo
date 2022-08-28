@@ -9,12 +9,12 @@ namespace Todos.Service.MessageHandler;
 
 public class CreateTodoMessageHandler : IMessageHandler<CreateTodoMessage>
 {
-    private readonly ISender _sender;
+    private readonly IMediator _mediator;
     private readonly IMapper _mapper;
     
-    public CreateTodoMessageHandler(ISender sender, IMapper mapper)
+    public CreateTodoMessageHandler(IMediator mediator, IMapper mapper)
     {
-        _sender = sender;
+        _mediator = mediator;
         _mapper = mapper;
     }
 
@@ -24,7 +24,7 @@ public class CreateTodoMessageHandler : IMessageHandler<CreateTodoMessage>
 
         var command = new CreateTodoCommand(createDto);
 
-        await _sender.Send(command);
+        await _mediator.Send(command);
 
         return true;
     }
