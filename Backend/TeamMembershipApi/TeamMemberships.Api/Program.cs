@@ -62,16 +62,16 @@ services.AddScoped<ErrorHandlingMiddleware>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+app.UseMiddleware<ErrorHandlingMiddleware>();
+
 if (app.Environment.IsDevelopment() || configuration.GetValue<bool>("ENABLE_SWAGGER"))
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseMiddleware<ErrorHandlingMiddleware>();
-
-app.UseHttpsRedirection();
+if(app.Configuration.GetValue<bool>("ENABLE_HTTPS"))
+    app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

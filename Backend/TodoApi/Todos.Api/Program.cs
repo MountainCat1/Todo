@@ -58,15 +58,16 @@ services.AddMessageHandlersAndReceivers(typeof(ServiceAssemblyMarker));
 
 var app = builder.Build();
 
-if (configuration.GetValue<bool>("ENABLE_SWAGGER"))
+app.UseMiddleware<ErrorHandlingMiddleware>();
+
+if (app.Configuration.GetValue<bool>("ENABLE_SWAGGER"))
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseMiddleware<ErrorHandlingMiddleware>();
-
-app.UseHttpsRedirection();
+if(app.Configuration.GetValue<bool>("ENABLE_HTTPS"))
+    app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
