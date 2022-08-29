@@ -65,8 +65,8 @@ public class TeamController : Controller
         if (!authorizationResult.Succeeded)
             return Forbid();
         
-        var result = await _mediator.Send(command);
+        await _mediator.Send(command);
         
-        return Ok(result);
+        return Ok();
     }
 }

@@ -23,7 +23,7 @@ public class TodoController : Controller
         _mediator = mediator;
     }
 
-    [HttpGet("")]
+    [HttpGet("get")]
     [Produces(typeof(ICollection<TodoDto>))]
     public async Task<IActionResult> GetTodos([FromQuery] Guid? teamGuid, [FromQuery] Guid? userGuid)
     {
@@ -33,7 +33,7 @@ public class TodoController : Controller
         return Ok(result);
     }
     
-    [HttpGet("list")]
+    /*[HttpGet("list")]
     [Produces(typeof(ICollection<TodoDto>))]
     public async Task<IActionResult> GetTodos()
     {
@@ -83,5 +83,5 @@ public class TodoController : Controller
         
         await _mediator.Send(command);
         return Ok();
-    }
+    }*/
 }
