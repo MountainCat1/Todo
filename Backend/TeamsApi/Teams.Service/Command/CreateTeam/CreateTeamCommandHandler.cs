@@ -12,14 +12,14 @@ public class CreateTeamCommandHandler : ICommandHandler<CreateTeamCommand, TeamD
 {
     private readonly IMapper _mapper;
     private readonly ITeamRepository _teamRepository;
-    private readonly IMessageSender _messageSender;
+    private readonly IMessageSender _sender;
     
     
-    public CreateTeamCommandHandler(IMapper mapper, ITeamRepository teamRepository, IMessageSender messageSender)
+    public CreateTeamCommandHandler(IMapper mapper, ITeamRepository teamRepository, IMessageSender sender)
     {
         _mapper = mapper;
         _teamRepository = teamRepository;
-        _messageSender = messageSender;
+        _sender = sender;
     }
 
     public async Task<TeamDto> Handle(CreateTeamCommand command, CancellationToken cancellationToken)
@@ -28,9 +28,9 @@ public class CreateTeamCommandHandler : ICommandHandler<CreateTeamCommand, TeamD
 
         var createdEntity = await _teamRepository.CreateAsync(entity);
 
-        var integrationEvent = new TeamCreatedMessage(createdEntity.Guid, command.AccountGuid);
+        var message = new TeamCreatedMessage(createdEntity.Guid, command.AccountGuid);
         
-        _messageSender.PublishEvent(integrationEvent, "team.event.created", "team.team-created.exchange");
+        _sender.Publish(message, "team.event.created", "team.team-created.exchange");
         
         await _teamRepository.SaveChangesAsync();
 

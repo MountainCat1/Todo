@@ -116,12 +116,12 @@ else
             options.EnableRetryOnFailure(maxRetryCount: 3, TimeSpan.FromSeconds(10), null);
         }));
 
-services.AddSender();
+services.AddMessageSender();
 services.AddAutoMapper(typeof(MappingProfile));
 services.AddMediatR(typeof(ServiceAssemblyMarker));
 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
 services.AddFluentValidation( new [] { typeof(ServiceAssemblyMarker).Assembly});
-services.AddEventHandlersAndReceivers(typeof(ServiceAssemblyMarker));
+services.AddMessageHandlersAndReceivers(typeof(ServiceAssemblyMarker));
 
 services.AddScoped<ITeamRepository, TeamRepository>();
 services.AddHttpClient<ITodoClient, TodoClient>(client 

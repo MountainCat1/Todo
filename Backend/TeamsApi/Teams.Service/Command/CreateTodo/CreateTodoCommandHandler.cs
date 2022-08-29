@@ -1,6 +1,5 @@
 ﻿using BunnyOwO;
 using MediatR;
-using Teams.Infrastructure.Dto;
 using Teams.Service.Abstractions;
 using Teams.Service.Messages;
 
@@ -22,11 +21,10 @@ public class CreateTodoCommandHandler : ICommandHandler<CreateTodoCommand, Unit>
 
         var message = new CreateTodoMessage()
         {
-            CreateTodo = createDto
+            CreateDto = createDto
         };
         
-        // TODO that's for sure not correct and should ne called a heresy, change it later
-        _sender.PublishEvent(message, "todo.event.todoCreated", "team.todo-create.exchange");
+        _sender.Publish(message, "todo.message.todoCreated", "team.create-todo.exchange");
         
         return Unit.Value;
     }

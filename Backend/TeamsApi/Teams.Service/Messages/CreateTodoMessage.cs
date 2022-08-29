@@ -5,5 +5,5 @@ namespace Teams.Service.Messages;
 
 public class CreateTodoMessage : IMessage
 {
-    public CreateTodoDto CreateTodo { get; set; }
+    public CreateTodoDto CreateDto { get; set; }
 }
