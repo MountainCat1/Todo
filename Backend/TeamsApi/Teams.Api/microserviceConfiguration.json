@@ -1,0 +1,10 @@
+{
+  "MicroserviceConfiguration": {
+    "ApiGateway":       "http://api-gateway:4100",
+    "Todo":             "http://todo-api:4001/todo/",
+    "Team":             "http://team-api:4002/team/",
+    "Membership":       "http://team-membership-api:4003/membership/",
+    "User":             "http://user-api:4004/user/",
+    "Authentication":   "http://authentication-api:4005/authentication/"
+  }
+}

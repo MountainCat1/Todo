@@ -7,13 +7,14 @@ using Todos.Service.Commands.UpdateTodo;
 using Todos.Service.Dto;
 using Todos.Service.Queries;
 using Todos.Service.Queries.GetAllFilteredTodos;
+using Todos.Service.Queries.GetAllTeamTodos;
 using Todos.Service.Queries.GetAllTodos;
 using Todos.Service.Queries.GetTodo;
 
 namespace Todos.Api.Controllers;
 
 [ApiController]
-[Route("api/todo")]
+[Route("todo")]
 public class TodoController : Controller
 {
     private readonly IMediator _mediator;
@@ -23,65 +24,13 @@ public class TodoController : Controller
         _mediator = mediator;
     }
 
-    [HttpGet("")]
+    [HttpGet("get")]
     [Produces(typeof(ICollection<TodoDto>))]
-    public async Task<IActionResult> GetTodos([FromQuery] Guid? teamGuid, [FromQuery] Guid? userGuid)
+    public async Task<IActionResult> GetTodos([FromQuery] Guid teamGuid)
     {
-        var query = new GetAllFilteredTodosQuery(teamGuid, userGuid);
+        var query = new GetAllTeamTodosQuery(teamGuid);
         
         var result = await _mediator.Send(query);
         return Ok(result);
-    }
-    
-    [HttpGet("list")]
-    [Produces(typeof(ICollection<TodoDto>))]
-    public async Task<IActionResult> GetTodos()
-    {
-        var query = new GetAllTodosQuery();
-        
-        var result = await _mediator.Send(query);
-        return Ok(result);
-    }
-    
-    [HttpGet("{guid}")]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [Produces(typeof(TodoDto))]
-    public async Task<IActionResult> GetTodo([FromRoute] Guid guid)
-    {
-        var query = new GetTodoQuery(){Guid = guid};
-        
-        var result = await _mediator.Send(query);
-
-        if (result == null)
-            return NotFound();
-        
-        return Ok(result);
-    }
-    
-    [HttpPost("")]
-    public async Task<IActionResult> CreateTodo([FromBody] CreateTodoDto createTodoDto)
-    {
-        var command = new CreateTodoCommand(createTodoDto);
-        
-        await _mediator.Send(command);
-        return Ok();
-    }
-    
-    [HttpPut("{guid}")]
-    public async Task<IActionResult> UpdateTodo([FromRoute] Guid guid, [FromBody] TodoDto todoDto)
-    {
-        var command = new UpdateTodoCommand(guid, todoDto);
-        
-        await _mediator.Send(command);
-        return Ok();
-    }
-    
-    [HttpDelete("{guid}")]
-    public async Task<IActionResult> DeleteTodo([FromRoute] Guid guid)
-    {
-        var command = new DeleteTodoCommand(guid);
-        
-        await _mediator.Send(command);
-        return Ok();
     }
 }

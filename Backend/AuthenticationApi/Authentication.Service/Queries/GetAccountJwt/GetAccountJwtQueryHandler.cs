@@ -26,14 +26,10 @@ public class GetAccountJwtQueryHandler : IQueryHandler<GetAccountJwtQuery, strin
             throw new UnauthorizedError();
 
         var account = authenticationResult.Account;
+
+        var claims = _accountService.GenerateClaimsIdentity(account);
         
-        var jwtToken = _jwtService.GenerateAsymmetricJwtToken(new ClaimsIdentity(new[]
-            {
-                new Claim(ClaimTypes.Name, account.Username),
-                new Claim(ClaimTypes.UserData, account.UserGuid.ToString()),
-                new Claim(ClaimTypes.NameIdentifier, account.Guid.ToString())
-            })
-        );
+        var jwtToken = _jwtService.GenerateAsymmetricJwtToken(claims);
 
         return jwtToken;
     }

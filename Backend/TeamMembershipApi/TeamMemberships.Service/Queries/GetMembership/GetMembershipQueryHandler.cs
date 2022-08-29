@@ -19,7 +19,7 @@ public class GetMembershipQueryHandler : IQueryHandler<GetMembershipQuery, Membe
 
     public async Task<MembershipDto> Handle(GetMembershipQuery query, CancellationToken cancellationToken)
     {
-        var entity = await _teamMembershipRepository.GetAsync(query);
+        var entity = await _teamMembershipRepository.GetAsync(query.TeamGuid, query.AccountGuid);
 
         if (entity is null)
             throw new NotFoundError();

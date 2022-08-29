@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using Authentication.Domain.Entities;
 using Authentication.Service.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -22,17 +23,17 @@ public class JWTService : IJWTService
     {
         _jwtConfiguration = jwtConfiguration.Value;
     }
-
     public string GenerateAsymmetricJwtToken(ClaimsIdentity claimsIdentity)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
-
+        string stringToken = String.Empty;    
+        
         using (var rsa = RSA.Create())
         {
             rsa.ImportRSAPrivateKey(Convert.FromBase64String(_jwtConfiguration.SecretKey), out int _);
             
             var signingCredentials = new SigningCredentials(
-                key: new RsaSecurityKey(rsa),
+                key: new RsaSecurityKey(rsa.ExportParameters(true)),
                 algorithm: SecurityAlgorithms.RsaSha256 // Important to use RSA version of the SHA algo 
             );
             
@@ -46,8 +47,10 @@ public class JWTService : IJWTService
             };
             
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
+            stringToken = tokenHandler.WriteToken(token);
         }
+
+        return stringToken;
     }
     
     private string GenerateSymmetricJwtToken(ClaimsIdentity claimsIdentity)

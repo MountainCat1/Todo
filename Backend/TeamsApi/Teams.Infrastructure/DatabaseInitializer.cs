@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Teams.Infrastructure.Events;
+namespace Teams.Infrastructure;
 
 public class DatabaseInitializer
 {

@@ -15,18 +15,18 @@
       "SwaggerKey": "todos"
     },
     {
-      "DownstreamPathTemplate": "/Teams{everything}",
+      "DownstreamPathTemplate": "/Team{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "teams-api",
+          "Host": "team-api",
           "Port": 5002
         }
       ],
-      "UpstreamPathTemplate": "/api/Teams{everything}",
+      "UpstreamPathTemplate": "/api/Team{everything}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
       "DangerousAcceptAnyServerCertificateValidator": true,
-      "SwaggerKey": "teams"
+      "SwaggerKey": "team"
     },
     {
       "DownstreamPathTemplate": "/Authentication{everything}",
@@ -34,7 +34,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "authentication-api",
-          "Port": 5004
+          "Port": 5005
         }
       ],
       "UpstreamPathTemplate": "/api/Authentication{everything}",
@@ -47,14 +47,14 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "authentication-api",
+          "Host": "user-api",
           "Port": 5004
         }
       ],
       "UpstreamPathTemplate": "/api/User{everything}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
       "DangerousAcceptAnyServerCertificateValidator": true,
-      "SwaggerKey": "users"
+      "SwaggerKey": "user"
     },
     {
       "DownstreamPathTemplate": "/RabbitMQ{everything}",
@@ -68,7 +68,7 @@
       "UpstreamPathTemplate": "/api/RabbitMQ{everything}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET", "DELETE" ],
       "DangerousAcceptAnyServerCertificateValidator": true,
-      "SwaggerKey": "todos"
+      "SwaggerKey": "todo"
     }
   ],
   "GlobalConfiguration": {
@@ -88,17 +88,17 @@
       ]
     },
     {
-      "Key": "teams",
+      "Key": "team",
       "Config": [
         {
           "Name": "Teams API",
           "Version": "v1",
-          "Url": "https://teams-api/swagger/v1/swagger.json"
+          "Url": "https://team-api/swagger/v1/swagger.json"
         }
       ]
     },
     {
-      "Key": "todos",
+      "Key": "todo",
       "Config": [
         {
           "Name": "Todos API",

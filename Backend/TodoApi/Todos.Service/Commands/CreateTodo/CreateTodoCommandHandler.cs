@@ -25,6 +25,8 @@ public class CreateTodoCommandHandler : ICommandHandler<CreateTodoCommand, TodoD
 
         var createdEntity = await _repository.CreateAsync(entity);
 
+        await _repository.SaveChangesAsync();
+        
         var createdEntityDto = _mapper.Map<TodoDto>(createdEntity);
         
         return createdEntityDto;

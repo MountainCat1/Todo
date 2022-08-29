@@ -2,7 +2,7 @@
 using BunnyOwO;
 using Teams.Domain.Entities;
 using Teams.Domain.Repositories;
-using Teams.Infrastructure.Events;
+using Teams.Infrastructure.ExternalMessages;
 using Teams.Service.Abstractions;
 using Teams.Service.Dto;
 
@@ -12,10 +12,10 @@ public class CreateTeamCommandHandler : ICommandHandler<CreateTeamCommand, TeamD
 {
     private readonly IMapper _mapper;
     private readonly ITeamRepository _teamRepository;
-    private readonly ISender _sender;
+    private readonly IMessageSender _sender;
     
     
-    public CreateTeamCommandHandler(IMapper mapper, ITeamRepository teamRepository, ISender sender)
+    public CreateTeamCommandHandler(IMapper mapper, ITeamRepository teamRepository, IMessageSender sender)
     {
         _mapper = mapper;
         _teamRepository = teamRepository;
@@ -28,9 +28,9 @@ public class CreateTeamCommandHandler : ICommandHandler<CreateTeamCommand, TeamD
 
         var createdEntity = await _teamRepository.CreateAsync(entity);
 
-        var integrationEvent = new TeamCreatedEvent(createdEntity.Guid, command.AccountGuid);
+        var message = new TeamCreatedMessage(createdEntity.Guid, command.AccountGuid);
         
-        _sender.PublishEvent(integrationEvent, "team.event.created", "team.team-created.exchange");
+        _sender.Publish(message, "team.event.created", "team.team-created.exchange");
         
         await _teamRepository.SaveChangesAsync();
 

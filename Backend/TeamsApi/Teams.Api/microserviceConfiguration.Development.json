@@ -1,0 +1,10 @@
+{
+  "MicroserviceConfiguration": {
+    "ApiGateway":       "http://localhost:4100",
+    "Todo":             "http://localhost:4001/todo",
+    "Team":             "http://localhost:4002/team",
+    "Membership":       "http://localhost:4003/membership",
+    "User":             "http://localhost:4004/user",
+    "Authentication":   "http://localhost:4005/authentication"
+  }
+}

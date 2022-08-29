@@ -100,15 +100,16 @@ services.AddScoped<ErrorHandlingMiddleware>();
 // APP
 var app = builder.Build();
 
+app.UseMiddleware<ErrorHandlingMiddleware>();
+
 if (app.Environment.IsDevelopment() || configuration.GetValue<bool>("ENABLE_SWAGGER"))
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseMiddleware<ErrorHandlingMiddleware>();
-
-app.UseHttpsRedirection();
+if(app.Configuration.GetValue<bool>("ENABLE_HTTPS"))
+    app.UseHttpsRedirection();
 
 app.UseAuthentication();
 

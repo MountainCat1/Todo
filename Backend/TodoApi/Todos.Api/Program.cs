@@ -1,3 +1,5 @@
+using BunnyOwO.Configuration;
+using BunnyOwO.Extensions;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +20,8 @@ configuration.AddEnvironmentVariables();
 // Add services to the container.
 var services = builder.Services;
 
+services.Configure<RabbitMQConfiguration>(configuration.GetSection(nameof(RabbitMQConfiguration)));
+
 services.AddControllers();
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
@@ -28,33 +32,42 @@ services.AddLogging(options =>
     options.AddFilter("Microsoft.EntityFrameworkCore.Infrastructure", LogLevel.Warning);
 });
 
-services.AddDbContext<TodoDbContext>(options
-    => options.UseSqlServer(configuration.GetConnectionString("DatabaseConnection") 
-        ?? throw new ArgumentException("Connection string was not specified")));
+
+if (builder.Environment.IsDevelopment())
+    services.AddDbContext<TodoDbContext>(options
+        => options.UseInMemoryDatabase("TodoDatabase"));   
+else
+    services.AddDbContext<TodoDbContext>(options
+        => options.UseSqlServer(configuration.GetConnectionString("DatabaseConnection") 
+            ?? throw new ArgumentException("Connection string was not specified")));
 
 services.AddAutoMapper(typeof(MappingProfile));
+services.AddMessageSender();
 
 services.AddScoped<ITodoRepository, TodoRepository>();
 
-services.AddMediatR(typeof(ServiceAssemblyPointer).Assembly);
-services.AddValidatorsFromAssembly(typeof(ServiceAssemblyPointer).Assembly);
+services.AddMediatR(typeof(ServiceAssemblyMarker).Assembly);
+services.AddValidatorsFromAssembly(typeof(ServiceAssemblyMarker).Assembly);
 
 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior<,>));
 
 services.AddScoped<ErrorHandlingMiddleware>();
 
+services.AddMessageHandlersAndReceivers(typeof(ServiceAssemblyMarker));
+
 var app = builder.Build();
 
-if (configuration.GetValue<bool>("ENABLE_SWAGGER"))
+app.UseMiddleware<ErrorHandlingMiddleware>();
+
+if (app.Configuration.GetValue<bool>("ENABLE_SWAGGER"))
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseMiddleware<ErrorHandlingMiddleware>();
-
-app.UseHttpsRedirection();
+if(app.Configuration.GetValue<bool>("ENABLE_HTTPS"))
+    app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

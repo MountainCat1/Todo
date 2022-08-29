@@ -4,3 +4,22 @@ services:
   rabbitmq:
     volumes:
       - ./.docker/rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+        
+  team-membership-api:
+    ports:
+      - "80"
+      - "443"
+    environment:
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=PASSWORD
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
+  team-api:
+    ports:
+      - "80"
+      - "443"
+    environment:
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=PASSWORD
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
