@@ -19,7 +19,7 @@ public class GetTeamQueryHandler : IQueryHandler<GetTeamQuery, TeamDto>
 
     public async Task<TeamDto> Handle(GetTeamQuery query, CancellationToken cancellationToken)
     {
-        var entity = await _teamRepository.GetAsync(query.Guid);
+        var entity = await _teamRepository.GetAsync(query.TeamGuid);
 
         if (entity == null)
             throw new NotFoundException();
