@@ -5,12 +5,12 @@ namespace Teams.Service.Command.UpdateTeam;
 
 public class UpdateTeamCommand : ICommand<TeamDto>
 {
-    public UpdateTeamCommand(Guid guid, UpdateTeamDto updateDto)
+    public UpdateTeamCommand(Guid teamGuid, UpdateTeamDto updateDto)
     {
-        Guid = guid;
+        TeamGuid = teamGuid;
         UpdateDto = updateDto;
     }
 
     public UpdateTeamDto UpdateDto { get; set; }
-    public Guid Guid { get; set; }
+    public Guid TeamGuid { get; set; }
 }

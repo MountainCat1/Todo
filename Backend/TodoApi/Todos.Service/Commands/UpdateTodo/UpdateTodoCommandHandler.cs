@@ -20,11 +20,11 @@ public class UpdateTodoCommandHandler : ICommandHandler<UpdateTodoCommand>
         _mapper = mapper;
     }
 
-    public async Task<Unit> Handle(UpdateTodoCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(UpdateTodoCommand command, CancellationToken cancellationToken)
     {
-        var entity = _mapper.Map<Todo>(request.Dto);
+        await _repository.UpdateAsync(command.UpdateDto, command.Guid);
 
-        await _repository.UpdateAsync(request.Guid, entity);
+        await _repository.SaveChangesAsync();
         
         return Unit.Value;
     }

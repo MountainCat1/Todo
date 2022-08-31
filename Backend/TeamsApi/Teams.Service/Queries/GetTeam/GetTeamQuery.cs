@@ -5,10 +5,10 @@ namespace Teams.Service.Queries.GetTeam;
 
 public class GetTeamQuery : IQuery<TeamDto>
 {
-    public GetTeamQuery(Guid guid)
+    public GetTeamQuery(Guid teamGuid)
     {
-        Guid = guid;
+        TeamGuid = teamGuid;
     }
 
-    public Guid Guid { get; set; }
+    public Guid TeamGuid { get; set; }
 }

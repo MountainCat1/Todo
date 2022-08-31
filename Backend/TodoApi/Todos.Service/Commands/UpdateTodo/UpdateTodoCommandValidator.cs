@@ -6,9 +6,9 @@ public class UpdateTodoCommandValidator : AbstractValidator<UpdateTodoCommand>
 {
     public UpdateTodoCommandValidator()
     {
-        RuleFor(x => x.Dto.Title).NotEmpty();
-        RuleFor(x => x.Dto.Title).Length(1, 32);
-        RuleFor(x => x.Dto.Description).MaximumLength(256);
-        RuleFor(x => x.Dto.Tags.Count).LessThan(10);
+        RuleFor(x => x.UpdateDto.Title).NotEmpty();
+        RuleFor(x => x.UpdateDto.Title).Length(1, 32);
+        RuleFor(x => x.UpdateDto.Description).MaximumLength(256);
+        RuleFor(x => x.UpdateDto.Tags.Count).LessThan(10);
     }
 }

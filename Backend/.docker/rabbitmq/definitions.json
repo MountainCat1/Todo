@@ -49,6 +49,14 @@
       "auto_delete": false,
       "arguments": {
       }
+    },
+    {
+      "name": "todo.update-todo.queue",
+      "vhost": "/todo",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+      }
     }
   ],
   "exchanges": [
@@ -78,6 +86,15 @@
       "auto_delete": false,
       "internal": false,
       "arguments": {}
+    },
+    {
+      "name": "team.update-todo.exchange",
+      "vhost": "/todo",
+      "type": "fanout",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
     }
   ],
   "bindings": [
@@ -101,6 +118,14 @@
       "source": "team.create-todo.exchange",
       "vhost": "/todo",
       "destination": "todo.create-todo.queue",
+      "destination_type": "queue",
+      "routing_key": "",
+      "arguments": {}
+    },
+    {
+      "source": "team.update-todo.exchange",
+      "vhost": "/todo",
+      "destination": "todo.update-todo.queue",
       "destination_type": "queue",
       "routing_key": "",
       "arguments": {}

@@ -17,5 +17,6 @@ public class MappingProfile : Profile
         CreateMap<CreateTodoDto, Todo>();
 
         CreateMap<CreateTodoMessageDto, CreateTodoDto>();
+        CreateMap<UpdateTodoMessageDto, UpdateTodoDto>();
     }
 }

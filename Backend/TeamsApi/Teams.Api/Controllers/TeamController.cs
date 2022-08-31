@@ -6,9 +6,12 @@ using Teams.Infrastructure.Dto;
 using Teams.Service;
 using Teams.Service.Command.CreateTeam;
 using Teams.Service.Command.CreateTodo;
+using Teams.Service.Command.UpdateTeam;
 using Teams.Service.Dto;
+using Teams.Service.Queries.GetAllAccountTeams;
 using Teams.Service.Queries.GetAllTeamTodos;
 using Teams.Service.Queries.GetTeam;
+using Teams.Service.Services;
 
 namespace Teams.Api.Controllers;
 
@@ -18,10 +21,12 @@ public class TeamController : Controller
 {
     private readonly IMediator _mediator;
     private readonly IAuthorizationService _authorizationService;
-    public TeamController(IMediator mediator, IAuthorizationService authorizationService)
+    private readonly IAccountService _accountService;
+    public TeamController(IMediator mediator, IAuthorizationService authorizationService, IAccountService accountService)
     {
         _mediator = mediator;
         _authorizationService = authorizationService;
+        _accountService = accountService;
     }
 
     [Authorize]
@@ -39,34 +44,43 @@ public class TeamController : Controller
         
         return Ok(result);
     }
-    
+
     [Authorize]
-    [HttpGet("{teamGuid}/todos")]
-    public async Task<IActionResult> GetAllTodos([FromRoute] Guid teamGuid)
+    [HttpGet("list")]
+    public async Task<IActionResult> GetTeams()
     {
-        var query = new GetAllTeamTodosQuery(teamGuid);
-        
-        var authorizationResult = await _authorizationService.AuthorizeAsync(User, query, Operations.UseRequest);
-        if (!authorizationResult.Succeeded)
-            return Forbid();
-        
-        var result = await _mediator.Send(query);
-        
-        return Ok(result);
+        var accountGuid = await _accountService.GetAccountGuidAsync(User);
+
+        var query = new GetAllAccountTeamsQuery(accountGuid);
+
+        var queryResult = await _mediator.Send(query);
+
+        return Ok(queryResult);
     }
     
     [Authorize]
-    [HttpPost("{teamGuid}/createTodo")]
-    public async Task<IActionResult> CreateTodo([FromRoute] Guid teamGuid, [FromBody] CreateTodoDto createTodoDto)
+    [HttpGet("get/{teamGuid}")]
+    public async Task<IActionResult> GetTeam(Guid teamGuid)
     {
-        var command = new CreateTodoCommand(teamGuid, createTodoDto);
+        var query = new GetTeamQuery(teamGuid);
+
+        var queryResult = await _mediator.Send(query);
+
+        return Ok(queryResult);
+    }
+
+    [Authorize]
+    [HttpPut("update/{teamGuid}")]
+    public async Task<IActionResult> UpdateTeam([FromRoute] Guid teamGuid, [FromBody] UpdateTeamDto updateDto)
+    {
+        var command = new UpdateTeamCommand(teamGuid, updateDto);
         
         var authorizationResult = await _authorizationService.AuthorizeAsync(User, command, Operations.UseRequest);
         if (!authorizationResult.Succeeded)
             return Forbid();
-        
-        await _mediator.Send(command);
-        
-        return Ok();
+
+        var commandResult = await _mediator.Send(command);
+
+        return Ok(commandResult);
     }
 }

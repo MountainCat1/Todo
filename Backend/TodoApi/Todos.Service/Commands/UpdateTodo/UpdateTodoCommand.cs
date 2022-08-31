@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Todos.Infrastructure.MessageDto;
 using Todos.Service.Abstractions;
 using Todos.Service.Dto;
 
@@ -6,12 +7,12 @@ namespace Todos.Service.Commands.UpdateTodo;
 
 public class UpdateTodoCommand : ICommand
 {
-    public UpdateTodoCommand(Guid guid, TodoDto dto)
+    public UpdateTodoCommand(Guid guid, UpdateTodoDto updateDto)
     {
         Guid = guid;
-        Dto = dto;
+        UpdateDto = updateDto;
     }
 
-    public Guid Guid { get; init; }
-    public TodoDto Dto { get; init; }
+    public Guid Guid { get; }
+    public UpdateTodoDto UpdateDto { get; }
 }
