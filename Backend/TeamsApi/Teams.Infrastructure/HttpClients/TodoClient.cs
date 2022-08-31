@@ -7,7 +7,7 @@ namespace Teams.Infrastructure.HttpClients;
 public interface ITodoClient
 {
     Task<ICollection<TodoDto>> GetTeamTodos(Guid teamGuid);
-    Task<ICollection<TodoDto>> GetUserTodos(Guid teamGuid, Guid userGuid);
+    Task<ICollection<TodoDto>> GetUserTodosAsync(Guid teamGuid, Guid accountGuid);
 }
 
 public class TodoClient : ITodoClient
@@ -37,9 +37,9 @@ public class TodoClient : ITodoClient
                ?? throw new SerializationException();
     }
 
-    public async Task<ICollection<TodoDto>> GetUserTodos(Guid teamGuid, Guid userGuid)
+    public async Task<ICollection<TodoDto>> GetUserTodosAsync(Guid teamGuid, Guid accountGuid)
     {
-        var endpoint = string.Format(_getUserTodosEndpoint, teamGuid, userGuid);
+        var endpoint = string.Format(_getUserTodosEndpoint, teamGuid, accountGuid);
 
         var endpointUri = new Uri(endpoint, UriKind.Relative);
 

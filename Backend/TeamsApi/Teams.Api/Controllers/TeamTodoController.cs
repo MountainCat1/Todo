@@ -6,6 +6,7 @@ using Teams.Service;
 using Teams.Service.Command.CreateTodo;
 using Teams.Service.Queries.GetAllAccountTeams;
 using Teams.Service.Queries.GetAllTeamTodos;
+using Teams.Service.Queries.GetAllTodosQuery;
 using Teams.Service.Queries.GetTeam;
 using Teams.Service.Services;
 
@@ -31,6 +32,23 @@ public class TeamTodoController : Controller
     public async Task<IActionResult> GetAllTodos([FromRoute] Guid teamGuid)
     {
         var query = new GetAllTeamTodosQuery(teamGuid);
+
+        var authorizationResult = await _authorizationService.AuthorizeAsync(User, query, Operations.UseRequest);
+        if (!authorizationResult.Succeeded)
+            return Forbid();
+
+        var result = await _mediator.Send(query);
+
+        return Ok(result);
+    }
+    
+    [Authorize]
+    [HttpGet("my-todos")]
+    public async Task<IActionResult> GetAllAccountTodos([FromRoute] Guid teamGuid)
+    {
+        var accountGuid = await _accountService.GetAccountGuidAsync(User);
+        
+        var query = new GetAllTodosQuery(teamGuid, accountGuid);
 
         var authorizationResult = await _authorizationService.AuthorizeAsync(User, query, Operations.UseRequest);
         if (!authorizationResult.Succeeded)
