@@ -43,8 +43,7 @@ public class TeamController : Controller
         
         return Ok(result);
     }
-    
-   
+
     [Authorize]
     [HttpGet("list")]
     public async Task<IActionResult> GetTeams()
