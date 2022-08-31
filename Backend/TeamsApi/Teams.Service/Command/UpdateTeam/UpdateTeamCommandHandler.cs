@@ -18,7 +18,7 @@ public class UpdateTeamCommandHandler : ICommandHandler<UpdateTeamCommand, TeamD
 
     public async Task<TeamDto> Handle(UpdateTeamCommand command, CancellationToken cancellationToken)
     {
-        var updatedEntity = await _teamRepository.UpdateAsync(command.UpdateDto, command.Guid);
+        var updatedEntity = await _teamRepository.UpdateAsync(command.UpdateDto, command.TeamGuid);
         
         await _teamRepository.SaveChangesAsync();
 

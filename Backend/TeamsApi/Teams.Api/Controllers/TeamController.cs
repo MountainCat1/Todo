@@ -6,6 +6,7 @@ using Teams.Infrastructure.Dto;
 using Teams.Service;
 using Teams.Service.Command.CreateTeam;
 using Teams.Service.Command.CreateTodo;
+using Teams.Service.Command.UpdateTeam;
 using Teams.Service.Dto;
 using Teams.Service.Queries.GetAllAccountTeams;
 using Teams.Service.Queries.GetAllTeamTodos;
@@ -70,5 +71,20 @@ public class TeamController : Controller
         var queryResult = await _mediator.Send(query);
 
         return Ok(queryResult);
+    }
+
+    [Authorize]
+    [HttpPut("update/{teamGuid}")]
+    public async Task<IActionResult> UpdateTeam([FromRoute] Guid teamGuid, [FromBody] UpdateTeamDto updateDto)
+    {
+        var command = new UpdateTeamCommand(teamGuid, updateDto);
+        
+        var authorizationResult = await _authorizationService.AuthorizeAsync(User, command, Operations.UseRequest);
+        if (!authorizationResult.Succeeded)
+            return Forbid();
+
+        var commandResult = await _mediator.Send(command);
+
+        return Ok(commandResult);
     }
 }
