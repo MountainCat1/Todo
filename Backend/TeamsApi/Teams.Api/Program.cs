@@ -4,11 +4,11 @@ using BunnyOwO.Extensions;
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Teams.Api.Configuration;
+using Teams.Api.Extensions;
 using Teams.Api.Middleware;
 using Teams.Domain.Repositories;
 using Teams.Infrastructure;
@@ -17,9 +17,7 @@ using Teams.Infrastructure.Data;
 using Teams.Infrastructure.HttpClients;
 using Teams.Infrastructure.Repositories;
 using Teams.Service;
-using Teams.Service.Command.CreateTodo;
 using Teams.Service.PipelineBehaviors;
-using Teams.Service.Queries.GetAllTeamTodos;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -106,6 +104,8 @@ services.AddAuthentication(options =>
     };
 });
 
+services.AddAuthorization();
+
 if (builder.Environment.IsDevelopment())
     services.AddDbContext<TeamsDbContext>(optionsBuilder 
         => optionsBuilder.UseInMemoryDatabase("TeamsDatabase"));
@@ -129,11 +129,9 @@ services.AddHttpClient<ITodoClient, TodoClient>(client
 services.AddHttpClient<IMembershipClient, MembershipClient>(client 
     => client.BaseAddress = new Uri($"{microserviceConfiguration.Membership}"));
 
- 
 services.AddScoped<ErrorHandlingMiddleware>();
 
-services.AddSingleton<IAuthorizationHandler, GetAllTeamTodosQueryAuthorization>();
-services.AddSingleton<IAuthorizationHandler, CreateTodoCommandAuthorization>();
+services.AddAuthorizationHandlers(typeof(ServiceAssemblyMarker).Assembly);
 
 // APP
 var app = builder.Build();
@@ -163,6 +161,5 @@ using (var scope = app.Services.CreateScope())
 
     await new DatabaseInitializer(dbContext).InitializeAsync();
 }
-
 
 app.Run();
