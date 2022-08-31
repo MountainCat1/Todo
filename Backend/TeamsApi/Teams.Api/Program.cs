@@ -18,6 +18,7 @@ using Teams.Infrastructure.HttpClients;
 using Teams.Infrastructure.Repositories;
 using Teams.Service;
 using Teams.Service.PipelineBehaviors;
+using Teams.Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -116,6 +117,8 @@ else
             options.EnableRetryOnFailure(maxRetryCount: 3, TimeSpan.FromSeconds(10), null);
         }));
 
+services.AddScoped<ITeamRepository, TeamRepository>();
+services.AddScoped<IAccountService, AccountService>();
 services.AddMessageSender();
 services.AddAutoMapper(typeof(MappingProfile));
 services.AddMediatR(typeof(ServiceAssemblyMarker));
@@ -123,7 +126,7 @@ services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior
 services.AddFluentValidation( new [] { typeof(ServiceAssemblyMarker).Assembly});
 services.AddMessageHandlersAndReceivers(typeof(ServiceAssemblyMarker));
 
-services.AddScoped<ITeamRepository, TeamRepository>();
+
 services.AddHttpClient<ITodoClient, TodoClient>(client 
     => client.BaseAddress = new Uri($"{microserviceConfiguration.Todo}"));
 services.AddHttpClient<IMembershipClient, MembershipClient>(client 

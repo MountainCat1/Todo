@@ -7,11 +7,11 @@ namespace Teams.Service.Command.CreateTodo;
 
 public class CreateTodoCommandHandler : ICommandHandler<CreateTodoCommand, Unit>
 {
-    private readonly IMessageSender _sender;
+    private readonly IMessageSender _messageSender;
 
-    public CreateTodoCommandHandler(IMessageSender sender)
+    public CreateTodoCommandHandler(IMessageSender messageSender)
     {
-        _sender = sender;
+        _messageSender = messageSender;
     }
 
     public async Task<Unit> Handle(CreateTodoCommand command, CancellationToken cancellationToken)
@@ -19,12 +19,8 @@ public class CreateTodoCommandHandler : ICommandHandler<CreateTodoCommand, Unit>
         var createDto = command.CreateDto;
         createDto.TeamGuid = command.TeamGuid;
 
-        var message = new CreateTodoMessage()
-        {
-            CreateDto = createDto
-        };
-        
-        _sender.Publish(message, "todo.message.todoCreated", "team.create-todo.exchange");
+        var message = new CreateTodoMessage(createDto);
+        _messageSender.Publish(message, "todo.create-todo", "team.create-todo.exchange");
         
         return Unit.Value;
     }

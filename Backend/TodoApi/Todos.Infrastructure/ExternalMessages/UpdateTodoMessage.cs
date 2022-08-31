@@ -5,6 +5,6 @@ namespace Todos.Infrastructure.ExternalMessages;
 
 public class UpdateTodoMessage : IMessage
 {
-    public CreateTodoMessageDto CreateDto { get; set; }
+    public UpdateTodoMessageDto UpdateDto { get; set; }
     public Guid TodoGuid { get; set; }
 }

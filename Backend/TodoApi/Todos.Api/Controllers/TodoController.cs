@@ -34,9 +34,9 @@ public class TodoController : Controller
         return Ok(result);
     }
     
-    [HttpGet("get")]
+    [HttpGet("get/{teamGuid}")]
     [Produces(typeof(ICollection<TodoDto>))]
-    public async Task<IActionResult> GetTodos([FromQuery] Guid teamGuid, [FromQuery] Guid accountGuid)
+    public async Task<IActionResult> GetTodos([FromRoute] Guid teamGuid, [FromQuery] Guid accountGuid)
     {
         var query = new GetAllAccountTeamTodosQuery(teamGuid, accountGuid);
         

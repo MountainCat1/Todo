@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Teams.Infrastructure.Dto;
 using Teams.Service;
 using Teams.Service.Command.CreateTodo;
+using Teams.Service.Command.UpdateTodo;
+using Teams.Service.Dto;
 using Teams.Service.Queries.GetAllAccountTeams;
 using Teams.Service.Queries.GetAllTeamTodos;
 using Teams.Service.Queries.GetAllTodosQuery;
@@ -75,11 +77,10 @@ public class TeamTodoController : Controller
     }
     
     [Authorize]
-    [HttpPost("updateTodo")]
-    public async Task<IActionResult> UpdateTodo([FromRoute] Guid teamGuid, [FromBody] CreateTodoDto createTodoDto)
+    [HttpPost("{todoGuid}/updateTodo")]
+    public async Task<IActionResult> UpdateTodo([FromRoute] Guid teamGuid, [FromRoute] Guid todoGuid, [FromBody] UpdateTodoDto updateDto)
     {
-        // TODO
-        var command = new CreateTodoCommand(teamGuid, createTodoDto);
+        var command = new UpdateTodoCommand(teamGuid, todoGuid, updateDto);
 
         var authorizationResult = await _authorizationService.AuthorizeAsync(User, command, Operations.UseRequest);
         if (!authorizationResult.Succeeded)

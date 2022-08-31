@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using TeamMemberships.Service.Queries.GetAccountMemberships;
 using TeamMemberships.Service.Queries.GetMembership;
 
 namespace TeamMemberships.Api.Controllers
@@ -19,11 +20,21 @@ namespace TeamMemberships.Api.Controllers
         [HttpGet("get")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Get(Guid teamGuid, Guid accountGuid)
+        public async Task<IActionResult> Get([FromQuery] Guid teamGuid, [FromQuery] Guid accountGuid)
         {
             var query = new GetMembershipQuery(teamGuid, accountGuid);
             var queryResult = await _mediator.Send(query);
 
+            return Ok(queryResult);
+        }
+        
+        [HttpGet("list")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> Get([FromQuery] Guid accountGuid)
+        {
+            var query = new GetAccountMembershipsQuery(accountGuid);
+            var queryResult = await _mediator.Send(query);
+        
             return Ok(queryResult);
         }
         

@@ -21,7 +21,7 @@ public class UpdateTodoMessageHandler : IMessageHandler<UpdateTodoMessage>
 
     public async Task<bool> HandleAsync(UpdateTodoMessage message)
     {
-        var updateDto = _mapper.Map<UpdateTodoDto>(message.CreateDto);
+        var updateDto = _mapper.Map<UpdateTodoDto>(message.UpdateDto);
 
         var command = new UpdateTodoCommand(message.TodoGuid, updateDto);
 

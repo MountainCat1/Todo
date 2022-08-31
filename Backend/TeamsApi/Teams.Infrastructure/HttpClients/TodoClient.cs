@@ -15,7 +15,7 @@ public class TodoClient : ITodoClient
     private readonly HttpClient _httpClient;
 
     private readonly string _getTeamTodosEndpoint = "get?teamGuid={0}";
-    private readonly string _getUserTodosEndpoint = "get?teamGuid={0}&accountGuid={1}";
+    private readonly string _getUserTodosEndpoint = "get/{0}?accountGuid={1}";
     
     public TodoClient(HttpClient httpClient)
     {

@@ -23,6 +23,8 @@ public class UpdateTodoCommandHandler : ICommandHandler<UpdateTodoCommand>
     public async Task<Unit> Handle(UpdateTodoCommand command, CancellationToken cancellationToken)
     {
         await _repository.UpdateAsync(command.UpdateDto, command.Guid);
+
+        await _repository.SaveChangesAsync();
         
         return Unit.Value;
     }

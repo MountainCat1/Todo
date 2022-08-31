@@ -10,7 +10,6 @@ public class CreateTodoCommand : ICommand
         TeamGuid = teamGuid;
         CreateDto = createDto;
     }
-
     public Guid TeamGuid { get; set; }
     public CreateTodoDto CreateDto { get; set; }
 }

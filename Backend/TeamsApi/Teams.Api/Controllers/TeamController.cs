@@ -53,10 +53,6 @@ public class TeamController : Controller
 
         var query = new GetAllAccountTeamsQuery(accountGuid);
 
-        var authorizationResult = await _authorizationService.AuthorizeAsync(User, query, Operations.UseRequest);
-        if (!authorizationResult.Succeeded)
-            return Forbid();
-
         var queryResult = await _mediator.Send(query);
 
         return Ok(queryResult);
