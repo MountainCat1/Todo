@@ -55,4 +55,20 @@ public class TeamTodoController : Controller
 
         return Ok();
     }
+    
+    [Authorize]
+    [HttpPost("updateTodo")]
+    public async Task<IActionResult> UpdateTodo([FromRoute] Guid teamGuid, [FromBody] CreateTodoDto createTodoDto)
+    {
+        // TODO
+        var command = new CreateTodoCommand(teamGuid, createTodoDto);
+
+        var authorizationResult = await _authorizationService.AuthorizeAsync(User, command, Operations.UseRequest);
+        if (!authorizationResult.Succeeded)
+            return Forbid();
+
+        await _mediator.Send(command);
+
+        return Ok();
+    }
 }
