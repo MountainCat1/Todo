@@ -1,0 +1,47 @@
+:root {
+    --panel-background-color: #2a2a2a;
+    --panel-background-color-1: #212121;
+    --panel-background-color-2: #1a1a1a;
+    --panel-border-radius: 8px;
+
+    --main-panel-width: 650px;
+    --main-panel-height: 700px;
+
+    --shadow-color: #9a2fa9;
+}
+
+.Main-panel {
+    border-radius: var(--panel-border-radius);
+    background-color: var(--panel-background-color);
+
+    box-shadow: 0 0 24px 0 var(--shadow-color);
+
+    overflow: hidden;
+
+    display: grid;
+    grid-template-columns: 20% 20% 60%;
+    grid-template-rows: 10% 90%;
+    grid-template-areas:
+    "left top    top    "
+    "left center center "
+    "left center center ";
+}
+
+.top-panel {
+    grid-area: top;
+}
+.left-panel {
+    grid-area: left;
+
+    background-color: var(--panel-background-color-2);
+}
+.center-panel {
+    grid-area: center;
+
+    background-color: var(--panel-background-color-1);
+}
+
+.Main-panel {
+    width: var(--main-panel-width);
+    height: var(--main-panel-height);
+}
