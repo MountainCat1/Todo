@@ -7,13 +7,13 @@ interface RegisterDto {
     password: string
 }
 
-export class RegisterComponent extends React.Component<any, RegisterDto>{
+export class RegisterComponent extends React.Component<any, RegisterDto> {
     constructor(props: any) {
         super(props);
 
         this.state = {
-           password: "",
-           username: ""
+            password: "",
+            username: ""
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -27,16 +27,16 @@ export class RegisterComponent extends React.Component<any, RegisterDto>{
         });
     }
 
-    handleSubmit(){
+    handleSubmit() {
         console.log(`Submitting RegisterDto for user ${this.state.username}`);
 
         this.postRegisterDto(this.state);
     }
 
-    postRegisterDto(dto: RegisterDto){
+    postRegisterDto(dto: RegisterDto) {
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(dto)
         };
         // TODO NEED TO CHANGE URL!
@@ -47,20 +47,30 @@ export class RegisterComponent extends React.Component<any, RegisterDto>{
     }
 
     render() {
-        return(<div className='Register-panel'>
-            <form>
+        return (<div className='Register-panel'>
+            <div>
+                <h2>Create your own account!</h2>
+                <div>
+                    <div className='input-group'>
+                        <label>Username: </label>
+                        <input className='input-field' type="text" name='username' value={this.state.username}
+                               onChange={this.handleChange}/>
+                    </div>
+                    <div className='input-group'>
+                        <label>Password: </label>
+                        <input className='input-field' type="password" name='password' value={this.state.password}
+                               onChange={this.handleChange}/>
+                    </div>
+                </div>
+                <button
+                    className='button'
+                    onClick={(event) => {
+                        this.handleSubmit()
+                    }}>
+                    Register
+                </button>
+            </div>
 
-            </form>
-
-            <input type="text" name='username' value={this.state.username}      onChange={this.handleChange}/>
-            <input type="password" name='password' value={this.state.password}  onChange={this.handleChange} />
-            <button
-                onClick={(event) => {
-                    this.handleSubmit()
-                }}
-            >
-                Register
-            </button>
         </div>)
     }
 }
