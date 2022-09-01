@@ -1,16 +1,11 @@
 :root {
-    --panel-background-color: #2a2a2a;
-    --panel-background-color-1: #212121;
-    --panel-background-color-2: #1a1a1a;
-    --panel-border-radius: 8px;
-
     --main-panel-width: 650px;
     --main-panel-height: 700px;
-
-    --shadow-color: #9a2fa9;
 }
-
 .Main-panel {
+    width: var(--main-panel-width);
+    height: var(--main-panel-height);
+
     border-radius: var(--panel-border-radius);
     background-color: var(--panel-background-color);
 
@@ -41,7 +36,3 @@
     background-color: var(--panel-background-color-1);
 }
 
-.Main-panel {
-    width: var(--main-panel-width);
-    height: var(--main-panel-height);
-}

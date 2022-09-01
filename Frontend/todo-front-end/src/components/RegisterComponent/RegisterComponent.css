@@ -1,0 +1,30 @@
+:root{
+    --register-panel-width: 500px;
+    --register-panel-height: 500px;
+}
+
+.Register-panel {
+    height: var(--register-panel-height);
+    width: var(--register-panel-width);
+
+    border-radius: var(--panel-border-radius);
+    background-color: var(--panel-background-color);
+
+    box-shadow: 0 0 24px 0 var(--shadow-color);
+
+    overflow: hidden;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    /*display: grid;
+    grid-template-columns: 20% 20% 60%;
+    grid-template-rows: 10% 90%;
+    grid-template-areas:
+    "left top    top    "
+    "left center center "
+    "left center center ";*/
+}
