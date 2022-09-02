@@ -1,0 +1,115 @@
+:root {
+  --panel-background-color: #2a2a2a;
+  --panel-background-color-1: #212121;
+  --panel-background-color-2: #1a1a1a;
+  --panel-border-radius: 8px;
+  --default-border-radius: 8px;
+  --default-border-radius-small: 4px;
+
+  --main-panel-width: 650px;
+  --main-panel-height: 700px;
+
+  --shadow-color: #9a2fa9;
+
+  --input-height: 21px;
+  --default-font-color: white;
+
+  --button-font-size: 18px;
+}
+
+* {
+  color: var(--default-font-color);
+}
+
+.input-field {
+  background-color: var(--panel-background-color-2);
+
+  border: none;
+
+  height: var(--input-height);
+
+}
+
+.input-field:focus  {
+  box-shadow: 0 0 24px 0 var(--shadow-color);
+  outline: none;
+}
+
+
+.input-group {
+  display: flex;
+
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+}
+
+.input-group > * {
+  margin: 3px;
+}
+
+.button {
+  border-radius: var(--default-border-radius-small);
+  background-color: transparent;
+  padding: 5px 10px;
+  font-size: var(--button-font-size);
+
+  border: none;
+
+  cursor: pointer;
+}
+.button:hover {
+  background-color: var(--panel-background-color-1);
+}
+.button:active {
+  background-color: var(--panel-background-color-2);
+}
+.button:focus {
+  box-shadow: 0 0 24px 0 var(--shadow-color);
+  outline: none;
+}
+
+.App {
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100vh;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
