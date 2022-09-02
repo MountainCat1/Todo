@@ -1,5 +1,6 @@
 import './RegisterComponent.css'
 import React from "react";
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 interface RegisterDto {
@@ -13,33 +14,27 @@ interface RegisterRequestResponse {
     userGuid: String
 }
 
-export class RegisterComponent extends React.Component<any, RegisterDto> {
-    constructor(props: any) {
-        super(props);
+export default function() {
+    const [registerDto, setRegisterDto] = useState<RegisterDto>({username: "", password: "" } );
+    const [loading, setLoading] = useState<boolean>(false);
 
-        this.state = {
-            username: "",
-            password: ""
-        }
-
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleChange(e: React.FormEvent<HTMLInputElement>) {
+    const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         e.preventDefault()
-        this.setState({
-            ...this.state,
+        setRegisterDto({
+            ...registerDto,
             [e.currentTarget.name]: e.currentTarget.value
         });
     }
 
-    handleSubmit() {
-        console.log(`Submitting RegisterDto for user ${this.state.username}`);
+    const handleSubmit = () => {
+        console.log(`Submitting RegisterDto for user ${registerDto.username}`);
 
-        this.postRegisterDto(this.state);
+        postRegisterDto(registerDto);
     }
 
-    postRegisterDto(dto: RegisterDto) {
+    const postRegisterDto = (dto: RegisterDto) => {
+        setLoading(true);
+
         const requestHeaders: HeadersInit = new Headers({
             'Content-Type': 'application/json'
         });
@@ -54,39 +49,42 @@ export class RegisterComponent extends React.Component<any, RegisterDto> {
             .then(response => {
                 return response.json()
             })
+            .catch(() => {
+                setLoading(false);
+            })
             .then(responseJson => {
                 let response = responseJson as RegisterRequestResponse;
                 console.log(response.username);
-
+                setLoading(false);
             });
-        this.props.history.push('/')
     }
 
-    render() {
-        return (<div className='Register-panel'>
+    return (<div className='Register-panel'>
+        <div>
+            <h2>Create your own account!</h2>
             <div>
-                <h2>Create your own account!</h2>
-                <div>
-                    <div className='input-group'>
-                        <label>Username: </label>
-                        <input className='input-field' type="text" name='username' value={this.state.username}
-                               onChange={this.handleChange}/>
-                    </div>
-                    <div className='input-group'>
-                        <label>Password: </label>
-                        <input className='input-field' type="password" name='password' value={this.state.password}
-                               onChange={this.handleChange}/>
-                    </div>
+                <div className='input-group'>
+                    <label>Username: </label>
+                    <input className='input-field' type="text" name='username' value={registerDto.username}
+                           onChange={handleChange}/>
                 </div>
-                <button
-                    className='button'
-                    onClick={() => {
-                        this.handleSubmit()
-                    }}>
-                    Register
-                </button>
+                <div className='input-group'>
+                    <label>Password: </label>
+                    <input className='input-field' type="password" name='password' value={registerDto.password}
+                           onChange={handleChange}/>
+                </div>
             </div>
+            <button
+                className='button'
+                onClick={() => {
+                    handleSubmit()
+                }}>
+                Register
+            </button>
+            {
+                loading ? <div className='loading-ring'> </div> : null
+            }
+        </div>
 
-        </div>)
-    }
+    </div>)
 }
