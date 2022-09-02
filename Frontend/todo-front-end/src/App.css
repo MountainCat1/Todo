@@ -2,19 +2,24 @@
   --panel-background-color: #2a2a2a;
   --panel-background-color-1: #212121;
   --panel-background-color-2: #1a1a1a;
+  --panel-background-color-3: #0a0a0a;
   --panel-border-radius: 8px;
+
   --default-border-radius: 8px;
   --default-border-radius-small: 4px;
 
   --main-panel-width: 650px;
   --main-panel-height: 700px;
 
-  --shadow-color: #9a2fa9;
+  --shadow-neon-color: #9a2fa9;
+  --shadow-color: #0c0c0c;
 
-  --input-height: 21px;
+  --input-height: 25px;
+  --input-font-size: 20px;
   --default-font-color: white;
 
-  --button-font-size: 18px;
+  --button-font-size: 25px;
+  --button-padding: 10px 20px;
 }
 
 * {
@@ -22,16 +27,22 @@
 }
 
 .input-field {
-  background-color: var(--panel-background-color-2);
-
-  border: none;
-
   height: var(--input-height);
 
+  border-radius: var(--default-border-radius-small);
+  background-color: var(--panel-background-color-2);
+  border: none;
+  padding: 6px 8px 4px 8px;
+  margin: 5px;
+
+  font-family: Bahnschrift;
+  font-size: var(--input-font-size);
 }
 
 .input-field:focus  {
-  box-shadow: 0 0 24px 0 var(--shadow-color);
+  box-shadow: inset 0px 0px 12px 0px var(--shadow-color);
+  /*box-shadow: 0 0 24px 0 var(--shadow-color);*/
+
   outline: none;
 }
 
@@ -42,30 +53,34 @@
   justify-content: space-around;
   align-items: center;
   flex-direction: row;
+
 }
 
 .input-group > * {
-  margin: 3px;
+  margin: 3px 7px;
 }
 
 .button {
-  border-radius: var(--default-border-radius-small);
-  background-color: transparent;
-  padding: 5px 10px;
-  font-size: var(--button-font-size);
+  border-radius: var(--default-border-radius);
+  background-color: var(--panel-background-color-1);
+  border: var(--panel-background-color-2) outset;
 
-  border: none;
+  padding: var(--button-padding);
+
+  font-size: var(--button-font-size);
 
   cursor: pointer;
 }
 .button:hover {
-  background-color: var(--panel-background-color-1);
-}
-.button:active {
   background-color: var(--panel-background-color-2);
 }
+.button:active {
+  background-color: var(--panel-background-color-3);
+  border: var(--panel-background-color-1) solid;
+}
 .button:focus {
-  box-shadow: 0 0 24px 0 var(--shadow-color);
+  background-color: var(--panel-background-color-2);
+  /*box-shadow: 0 0 24px 0 var(--shadow-neon-color);*/
   outline: none;
 }
 

@@ -2,7 +2,7 @@
     --register-panel-width: 500px;
     --register-panel-height: 500px;
 
-    --register-inner-panel-width: 300px;
+    --register-inner-panel-width: 500px;
     --register-inner-panel-height: 300px;
 }
 
@@ -13,9 +13,8 @@
     border-radius: var(--panel-border-radius);
     background-color: var(--panel-background-color);
 
-    box-shadow: 0 0 24px 0 var(--shadow-color);
+    box-shadow: 0 0 24px 0 var(--shadow-neon-color);
     border: var(--panel-background-color-1) solid;
-/*var(--panel-background-color-2)*/
     overflow: hidden;
 
     display: flex;
@@ -23,14 +22,6 @@
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
-
-    /*display: grid;
-    grid-template-columns: 20% 20% 60%;
-    grid-template-rows: 10% 90%;
-    grid-template-areas:
-    "left top    top    "
-    "left center center "
-    "left center center ";*/
 }
 
 .Register-panel > * {
