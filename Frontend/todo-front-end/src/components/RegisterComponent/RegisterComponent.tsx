@@ -1,5 +1,6 @@
 import './RegisterComponent.css'
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 
 interface RegisterDto {
     username: string,
@@ -56,7 +57,9 @@ export class RegisterComponent extends React.Component<any, RegisterDto> {
             .then(responseJson => {
                 let response = responseJson as RegisterRequestResponse;
                 console.log(response.username);
+
             });
+        this.props.history.push('/')
     }
 
     render() {
