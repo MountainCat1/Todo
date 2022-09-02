@@ -19,12 +19,13 @@ interface RegistrationStatus {
     error: boolean
 }
 
-export default function() {
+export default function RegisterComponent() {
     const [registerDto, setRegisterDto] = useState<RegisterDto>({username: "", password: "" } );
     const [status, setStatus] = useState<RegistrationStatus>({
         loading: false,
         error: false
     });
+    const navigate = useNavigate();
 
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         e.preventDefault()
@@ -41,7 +42,7 @@ export default function() {
     }
 
     const postRegisterDto = (dto: RegisterDto) => {
-        setStatus({...status, loading: true});
+        setStatus({...status, error: false, loading: true});
 
         const requestHeaders: HeadersInit = new Headers({
             'Content-Type': 'application/json'
@@ -64,6 +65,7 @@ export default function() {
                 let response = responseJson as RegisterRequestResponse;
                 console.log(response.username);
                 setStatus({...status, loading: false, error: false});
+                navigate('/login');
             });
     }
 
