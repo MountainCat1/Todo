@@ -77,7 +77,7 @@ export class RegisterComponent extends React.Component<any, RegisterDto> {
                 </div>
                 <button
                     className='button'
-                    onClick={(event) => {
+                    onClick={() => {
                         this.handleSubmit()
                     }}>
                     Register
