@@ -1,6 +1,5 @@
 import './RegisterComponent.css'
 import React from "react";
-import {Simulate} from "react-dom/test-utils";
 
 interface RegisterDto {
     username: string,
@@ -12,8 +11,8 @@ export class RegisterComponent extends React.Component<any, RegisterDto> {
         super(props);
 
         this.state = {
-            password: "",
-            username: ""
+            username: "",
+            password: ""
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -34,13 +33,22 @@ export class RegisterComponent extends React.Component<any, RegisterDto> {
     }
 
     postRegisterDto(dto: RegisterDto) {
-        const requestOptions = {
+        const requestHeaders: HeadersInit = new Headers({
+            'Content-Type': 'application/json'
+        });
+
+        requestHeaders.set("Access-Control-Allow-Origin", "*");
+        requestHeaders.set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        requestHeaders.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+
+        const requestOptions : RequestInit = {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(dto)
-        };
-        // TODO NEED TO CHANGE URL!
-        fetch('https://jsonplaceholder.typicode.com/posts', requestOptions)
+            headers: requestHeaders,
+            body: JSON.stringify(dto)};
+
+        let url : string = `${process.env.REACT_APP_API_URL}/authentication/register`; // `https://httpbin.org/post`;
+        console.log(JSON.stringify(dto));
+        fetch(url, requestOptions)
             .then(response => {
                 console.log(response);
             });
