@@ -6,6 +6,12 @@ interface RegisterDto {
     password: string
 }
 
+interface RegisterRequestResponse {
+    guid: String,
+    username: String,
+    userGuid: String
+}
+
 export class RegisterComponent extends React.Component<any, RegisterDto> {
     constructor(props: any) {
         super(props);
@@ -37,20 +43,19 @@ export class RegisterComponent extends React.Component<any, RegisterDto> {
             'Content-Type': 'application/json'
         });
 
-        requestHeaders.set("Access-Control-Allow-Origin", "*");
-        requestHeaders.set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        requestHeaders.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
-
         const requestOptions : RequestInit = {
             method: 'POST',
             headers: requestHeaders,
             body: JSON.stringify(dto)};
 
         let url : string = `${process.env.REACT_APP_API_URL}/authentication/register`; // `https://httpbin.org/post`;
-        console.log(JSON.stringify(dto));
         fetch(url, requestOptions)
             .then(response => {
-                console.log(response);
+                return response.json()
+            })
+            .then(responseJson => {
+                let response = responseJson as RegisterRequestResponse;
+                console.log(response.username);
             });
     }
 
