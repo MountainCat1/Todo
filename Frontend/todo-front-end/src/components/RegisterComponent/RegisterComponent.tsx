@@ -14,9 +14,17 @@ interface RegisterRequestResponse {
     userGuid: String
 }
 
+interface RegistrationStatus {
+    loading: boolean,
+    error: boolean
+}
+
 export default function() {
     const [registerDto, setRegisterDto] = useState<RegisterDto>({username: "", password: "" } );
-    const [loading, setLoading] = useState<boolean>(false);
+    const [status, setStatus] = useState<RegistrationStatus>({
+        loading: false,
+        error: false
+    });
 
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         e.preventDefault()
@@ -33,7 +41,7 @@ export default function() {
     }
 
     const postRegisterDto = (dto: RegisterDto) => {
-        setLoading(true);
+        setStatus({...status, loading: true});
 
         const requestHeaders: HeadersInit = new Headers({
             'Content-Type': 'application/json'
@@ -50,19 +58,19 @@ export default function() {
                 return response.json()
             })
             .catch(() => {
-                setLoading(false);
+                setStatus({...status, loading: false, error: true});
             })
             .then(responseJson => {
                 let response = responseJson as RegisterRequestResponse;
                 console.log(response.username);
-                setLoading(false);
+                setStatus({...status, loading: false, error: false});
             });
     }
 
     return (<div className='Register-panel'>
         <div>
             <h2>Create your own account!</h2>
-            <div>
+            <div className='register-panel-form'>
                 <div className='input-group'>
                     <label>Username: </label>
                     <input className='input-field' type="text" name='username' value={registerDto.username}
@@ -73,17 +81,25 @@ export default function() {
                     <input className='input-field' type="password" name='password' value={registerDto.password}
                            onChange={handleChange}/>
                 </div>
+                <button
+                    className='button'
+                    onClick={() => {
+                        handleSubmit()
+                    }}>
+                    Register
+                </button>
             </div>
-            <button
-                className='button'
-                onClick={() => {
-                    handleSubmit()
-                }}>
-                Register
-            </button>
-            {
-                loading ? <div className='loading-ring'> </div> : null
-            }
+            <div className='register-panel-result'>
+                {
+                    status.error
+                        ? <div className='error-message'> Something went wrong! </div>
+                        : status.loading
+                            ? <div className='loading-ring'> </div>
+                            : null
+                }
+            </div>
+
+
         </div>
 
     </div>)

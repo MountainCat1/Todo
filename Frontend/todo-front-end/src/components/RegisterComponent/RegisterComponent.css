@@ -2,13 +2,17 @@
     --register-panel-width: 500px;
     --register-panel-height: 500px;
 
+    --register-panel-form-margin: 20px 0 0 0;
+
     --register-inner-panel-width: 500px;
-    --register-inner-panel-height: 300px;
+    --register-inner-panel-height: 250px;
 }
 
 .Register-panel {
     height: var(--register-panel-height);
     width: var(--register-panel-width);
+
+    margin: var(--register-panel-form-margin);
 
     border-radius: var(--panel-border-radius);
     background-color: var(--panel-background-color);
@@ -24,14 +28,22 @@
     flex-direction: column;
 }
 
-.Register-panel > * {
+.register-panel-form {
     height: var(--register-inner-panel-height);
     width: var(--register-inner-panel-width);
 
+
     display: flex;
 
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+.register-panel-form > .button {
+    margin-top: 20px;
+}
+
+.register-panel-result {
+    height: 100px;
 }
 
