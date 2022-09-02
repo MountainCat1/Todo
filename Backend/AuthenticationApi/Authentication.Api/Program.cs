@@ -33,16 +33,6 @@ var jwtConfig = configuration.GetSection(nameof(JWTConfiguration)).Get<JWTConfig
 // SERVICES
 var services = builder.Services;
 
-
-services.AddCors(options =>
-{
-    options.AddDefaultPolicy(policy =>
-    {
-        var origins = configuration.GetValue<string>("CORS_ORIGINS").Split(';');
-        policy.WithOrigins(origins);
-    });
-});
-
 services.Configure<JWTConfiguration>(configuration.GetSection(nameof(JWTConfiguration)));
 services.Configure<RabbitMQConfiguration>(configuration.GetSection(nameof(RabbitMQConfiguration)));
 services.AddControllers().AddJsonOptions(options => 
@@ -115,8 +105,6 @@ services.AddScoped<ErrorHandlingMiddleware>();
 
 // APP
 var app = builder.Build();
-
-app.UseCors();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
 

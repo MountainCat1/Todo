@@ -22,6 +22,8 @@ host.ConfigureAppConfiguration((hostingContext, config) =>
 host.ConfigureLogging(loggingBuilder => loggingBuilder.AddConsole());
 
 // Services
+services.AddCors();
+
 services.AddControllers();
 services.AddEndpointsApiExplorer();
 services.AddOcelot(configuration);
@@ -31,6 +33,8 @@ services.AddSwaggerForOcelot(configuration);
 
 // App
 var app = builder.Build();
+
+app.UseCors(options => options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
 app.UseStaticFiles();
 app.UseRouting();
