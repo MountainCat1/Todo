@@ -1,25 +1,22 @@
-import '../../../styles/button.css'
-import '../../../styles/form.css'
+import 'styles/button.css'
+import 'styles/form.css'
 import './LoginComponent.css'
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import { useCookies } from 'react-cookie'
+import {LoginDto, LoginStatus, useApiAuthenticate} from "api/authentication";
 
-interface LoginStatus {
-    loading: boolean,
-    error: boolean
-}
 
-interface LoginDto {
-    username: string,
-    password: string
-}
 
 export default function LoginComponent() {
     const [loginDto, setLoginDto] = useState<LoginDto>({username: "", password: ""});
     const [status, setStatus] = useState<LoginStatus>({
         loading: false,
         error: false
+    });
+    const apiAuthenticate = useApiAuthenticate(setStatus, (responseText) => {
+        handleLoginResponse(responseText);
+        navigate('/');
     });
     const navigate = useNavigate();
     const [, setCookie] = useCookies(['auth_token'])
@@ -45,32 +42,7 @@ export default function LoginComponent() {
     const postLoginDto = (dto: LoginDto) => {
         setStatus({...status, loading: true, error: false})
 
-        const requestHeaders: HeadersInit = new Headers({
-            'Content-Type': 'application/json'
-        });
-        const requestOptions: RequestInit = {
-            method: 'POST',
-            headers: requestHeaders,
-            body: JSON.stringify(dto)
-        };
-        let url: string = `${process.env.REACT_APP_API_URL}/authentication/authenticate`;
-        fetch(url, requestOptions)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(response.statusText)
-                }
-                return response.text();
-            })
-            .then((responseText) => {
-                setStatus({...status, loading: false, error: false});
-
-                handleLoginResponse(responseText);
-                navigate('/');
-            })
-            .catch((ex) => {
-                console.log(ex)
-                setStatus({...status, loading: false, error: true});
-            })
+        apiAuthenticate(dto);
     }
 
     return (<div className='auth-panel'>
