@@ -1,6 +1,6 @@
 import './MainPanel.css';
 
-export default function () {
+export default function MainPanel() {
     return (
         <div className='Main-panel Panel'>
             <div className='top-panel'>

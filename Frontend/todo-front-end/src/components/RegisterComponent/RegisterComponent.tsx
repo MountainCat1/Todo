@@ -1,5 +1,9 @@
 import './RegisterComponent.css'
+import '../../styles/button.css'
+import '../../styles/form.css'
 import React from "react";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface RegisterDto {
     username: string,
@@ -12,33 +16,36 @@ interface RegisterRequestResponse {
     userGuid: String
 }
 
-export class RegisterComponent extends React.Component<any, RegisterDto> {
-    constructor(props: any) {
-        super(props);
+interface RegistrationStatus {
+    loading: boolean,
+    error: boolean
+}
 
-        this.state = {
-            username: "",
-            password: ""
-        }
+export default function RegisterComponent() {
+    const [registerDto, setRegisterDto] = useState<RegisterDto>({username: "", password: "" } );
+    const [status, setStatus] = useState<RegistrationStatus>({
+        loading: false,
+        error: false
+    });
+    const navigate = useNavigate();
 
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleChange(e: React.FormEvent<HTMLInputElement>) {
+    const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         e.preventDefault()
-        this.setState({
-            ...this.state,
+        setRegisterDto({
+            ...registerDto,
             [e.currentTarget.name]: e.currentTarget.value
         });
     }
 
-    handleSubmit() {
-        console.log(`Submitting RegisterDto for user ${this.state.username}`);
+    const handleSubmit = () => {
+        console.log(`Submitting RegisterDto for user ${registerDto.username}`);
 
-        this.postRegisterDto(this.state);
+        postRegisterDto(registerDto);
     }
 
-    postRegisterDto(dto: RegisterDto) {
+    const postRegisterDto = (dto: RegisterDto) => {
+        setStatus({...status, error: false, loading: true});
+
         const requestHeaders: HeadersInit = new Headers({
             'Content-Type': 'application/json'
         });
@@ -48,42 +55,53 @@ export class RegisterComponent extends React.Component<any, RegisterDto> {
             headers: requestHeaders,
             body: JSON.stringify(dto)};
 
-        let url : string = `${process.env.REACT_APP_API_URL}/authentication/register`; // `https://httpbin.org/post`;
+        let url : string = `${process.env.REACT_APP_API_URL}/authentication/register`;
         fetch(url, requestOptions)
             .then(response => {
                 return response.json()
             })
+            .catch(() => {
+                setStatus({...status, loading: false, error: true});
+            })
             .then(responseJson => {
                 let response = responseJson as RegisterRequestResponse;
                 console.log(response.username);
+                setStatus({...status, loading: false, error: false});
+                navigate('/login');
             });
     }
 
-    render() {
-        return (<div className='Register-panel'>
-            <div>
-                <h2>Create your own account!</h2>
-                <div>
-                    <div className='input-group'>
-                        <label>Username: </label>
-                        <input className='input-field' type="text" name='username' value={this.state.username}
-                               onChange={this.handleChange}/>
-                    </div>
-                    <div className='input-group'>
-                        <label>Password: </label>
-                        <input className='input-field' type="password" name='password' value={this.state.password}
-                               onChange={this.handleChange}/>
-                    </div>
+    return (<div className='auth-panel'>
+        <div>
+            <h1>Create your own account!</h1>
+            <div className='auth-panel-form'>
+                <div className='input-group'>
+                    <label>Username: </label>
+                    <input className='input-field' type="text" name='username' value={registerDto.username}
+                           onChange={handleChange}/>
+                </div>
+                <div className='input-group'>
+                    <label>Password: </label>
+                    <input className='input-field' type="password" name='password' value={registerDto.password}
+                           onChange={handleChange}/>
                 </div>
                 <button
                     className='button'
                     onClick={() => {
-                        this.handleSubmit()
+                        handleSubmit()
                     }}>
                     Register
                 </button>
             </div>
-
-        </div>)
-    }
+            <div className='register-panel-result'>
+                {
+                    status.error
+                        ? <div className='error-message'> Something went wrong! </div>
+                        : status.loading
+                            ? <div className='loading-ring'> </div>
+                            : null
+                }
+            </div>
+        </div>
+    </div>)
 }
