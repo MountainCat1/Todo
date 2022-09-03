@@ -1,6 +1,7 @@
 import './MainPanel.css';
-import {useIsLoggedIn} from "services/user";
+import {useIsLoggedIn} from "services/authenticationService";
 import {useNavigate} from "react-router-dom";
+import MainPanelUserData from "./UserDataComponent/MainPanelUserData";
 
 export default function MainPanel() {
     const isLoggedIn = useIsLoggedIn();
@@ -10,7 +11,7 @@ export default function MainPanel() {
         <div className='Main-panel Panel'>
             <div className='top-panel'>
                 {isLoggedIn()
-                    ? <div></div>
+                    ? <MainPanelUserData/>
                     : <button className='button'
                               onClick={() => {
                                   navigate('/login')

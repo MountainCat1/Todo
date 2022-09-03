@@ -3,8 +3,8 @@ import 'styles/form.css'
 import './LoginComponent.css'
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {LoginDto, LoginStatus, apiAuthenticate} from "services/authentication";
-import {useSaveAuthToken} from "../../../services/user";
+import {LoginDto, LoginStatus, useApiAuthenticate} from "api/authenticationApi";
+import {useSaveAuthToken} from "services/authenticationService";
 
 
 
@@ -38,10 +38,12 @@ export default function LoginComponent() {
         navigate('/');
     }
 
+    const apiAuthenticate = useApiAuthenticate(setStatus, handleLoginResponse)
+
     const postLoginDto = (dto: LoginDto) => {
         setStatus({...status, loading: true, error: false})
 
-        apiAuthenticate(dto, setStatus, handleLoginResponse);
+        apiAuthenticate(dto);
     }
 
     return (<div className='auth-panel'>
