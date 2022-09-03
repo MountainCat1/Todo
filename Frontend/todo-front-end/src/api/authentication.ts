@@ -2,40 +2,78 @@ import React from "react";
 import apiPost from "./apiPost";
 
 const registerEndpoint: string = '/authentication/register';
+const loginEndpoint: string = '/authentication/authenticate';
 
-export interface RegisterDto {
+export type RegisterDto = {
     username: string,
     password: string
 }
 
-export interface RegisterRequestResponse {
+export type RegisterRequestResponse = {
     guid: String,
     username: String,
     userGuid: String
 }
 
-export interface RegistrationStatus {
+export type RegistrationStatus = {
     loading: boolean,
     error: boolean
 }
 
-export const useApiRegister
-    = (setStatus: React.Dispatch<RegistrationStatus>,
-       onSuccess : (response: RegisterRequestResponse) => void) =>
-    (dto: RegisterDto) => {
-        apiPost(registerEndpoint, dto)
-            .then(response => {
-                if(!response.ok)
-                    throw new Error(response.statusText);
+export const apiRegister
+    = (dto: RegisterDto,
+       setStatus: React.Dispatch<RegistrationStatus>,
+       onSuccess: (response: RegisterRequestResponse) => void) => {
+    setStatus({loading: true, error: false})
 
-                return response.json();
-            })
-            .then(responseJson => {
-                let response = responseJson as RegisterRequestResponse;
-                onSuccess(response);
-                setStatus({loading: false, error: false});
-            })
-            .catch(() => {
-                setStatus({loading: false, error: true});
-            });
-    }
+    apiPost(registerEndpoint, dto)
+        .then(response => {
+            if (!response.ok)
+                throw new Error(response.statusText);
+
+            return response.json();
+        })
+        .then(responseJson => {
+            let response = responseJson as RegisterRequestResponse;
+            onSuccess(response);
+            setStatus({loading: false, error: false});
+        })
+        .catch(() => {
+            setStatus({loading: false, error: true});
+        });
+}
+
+
+export type LoginStatus = {
+    loading: boolean,
+    error: boolean
+}
+
+export type LoginDto = {
+    username: string,
+    password: string
+}
+
+export const apiAuthenticate
+    = (dto: LoginDto,
+       setStatus: React.Dispatch<LoginStatus>,
+       onSuccess: (response: string) => void) => {
+    setStatus({loading: true, error: false})
+
+    apiPost(loginEndpoint, dto)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(response.statusText)
+            }
+            return response.text();
+        })
+        .then((responseText) => {
+            setStatus({loading: false, error: false});
+
+            onSuccess(responseText);
+        })
+        .catch((ex) => {
+            console.log(ex)
+            setStatus({loading: false, error: true});
+        })
+}
