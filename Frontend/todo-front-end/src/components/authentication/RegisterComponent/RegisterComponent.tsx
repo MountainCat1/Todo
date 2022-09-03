@@ -4,7 +4,7 @@ import 'styles/form.css'
 import React from "react";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useApiRegister, RegisterDto, RegistrationStatus} from "api/authentication";
+import { apiRegister, RegisterDto, RegistrationStatus} from "api/authentication";
 
 
 export default function RegisterComponent() {
@@ -14,9 +14,6 @@ export default function RegisterComponent() {
         error: false
     });
     const navigate = useNavigate();
-    const apiRegister = useApiRegister(setStatus, () => {
-        navigate('/login')
-    });
 
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         e.preventDefault()
@@ -29,7 +26,9 @@ export default function RegisterComponent() {
     const handleSubmit = () => {
         console.log(`Submitting RegisterDto for user ${registerDto.username}`);
 
-        apiRegister(registerDto);
+        apiRegister(registerDto, setStatus, () => {
+            navigate('/login');
+        });
     }
 
     return (<div className='auth-panel'>

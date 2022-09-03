@@ -4,7 +4,7 @@ import './LoginComponent.css'
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import { useCookies } from 'react-cookie'
-import {LoginDto, LoginStatus, useApiAuthenticate} from "api/authentication";
+import {LoginDto, LoginStatus, apiAuthenticate} from "api/authentication";
 
 
 
@@ -13,10 +13,6 @@ export default function LoginComponent() {
     const [status, setStatus] = useState<LoginStatus>({
         loading: false,
         error: false
-    });
-    const apiAuthenticate = useApiAuthenticate(setStatus, (responseText) => {
-        handleLoginResponse(responseText);
-        navigate('/');
     });
     const navigate = useNavigate();
     const [, setCookie] = useCookies(['auth_token'])
@@ -30,19 +26,21 @@ export default function LoginComponent() {
     }
 
     const handleSubmit = () => {
-        console.log(`Submitting RegisterDto for user ${loginDto.username}`);
+        console.log(`Submitting LoginDto for user ${loginDto.username}`);
 
         postLoginDto(loginDto);
     }
 
     const handleLoginResponse = (loginResponse: string) => {
         setCookie('auth_token', loginResponse);
+
+        navigate('/');
     }
 
     const postLoginDto = (dto: LoginDto) => {
         setStatus({...status, loading: true, error: false})
 
-        apiAuthenticate(dto);
+        apiAuthenticate(dto, setStatus, handleLoginResponse);
     }
 
     return (<div className='auth-panel'>
