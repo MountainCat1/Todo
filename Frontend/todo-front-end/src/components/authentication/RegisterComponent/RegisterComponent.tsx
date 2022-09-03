@@ -4,7 +4,7 @@ import 'styles/form.css'
 import React from "react";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { apiRegister, RegisterDto, RegistrationStatus} from "api/authentication";
+import { useApiRegister, RegisterDto, RegistrationStatus} from "api/authenticationApi";
 
 
 export default function RegisterComponent() {
@@ -14,6 +14,9 @@ export default function RegisterComponent() {
         error: false
     });
     const navigate = useNavigate();
+    const apiRegister = useApiRegister(setStatus, () => {
+        navigate('/login');
+    });
 
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         e.preventDefault()
@@ -26,9 +29,7 @@ export default function RegisterComponent() {
     const handleSubmit = () => {
         console.log(`Submitting RegisterDto for user ${registerDto.username}`);
 
-        apiRegister(registerDto, setStatus, () => {
-            navigate('/login');
-        });
+        apiRegister(registerDto);
     }
 
     return (<div className='auth-panel'>
@@ -46,7 +47,7 @@ export default function RegisterComponent() {
                            onChange={handleChange}/>
                 </div>
                 <button
-                    className='button'
+                    className='button button-size-big'
                     onClick={() => {
                         handleSubmit()
                     }}>

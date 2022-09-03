@@ -1,11 +1,18 @@
+:root {
+    --big-button-font-size: 25px;
+    --big-button-padding: 10px 20px;
+
+    --button-font-size: 17px;
+    --button-padding: 6px 14px;
+}
+
 .button {
     border-radius: var(--default-border-radius);
     background-color: var(--panel-background-color-1);
-    border: var(--panel-background-color-2) outset;
 
     padding: var(--button-padding);
-
     font-size: var(--button-font-size);
+    border: var(--panel-background-color-2) outset;
 
     cursor: pointer;
 
@@ -24,3 +31,12 @@
     background-color: var(--panel-background-color-2);
     outline: none;
 }
+
+.button-size-big {
+    padding: var(--big-button-padding);
+    font-size: var(--big-button-font-size);
+    border: var(--panel-background-color-2) outset;
+}
+
+
+

@@ -3,8 +3,8 @@ import 'styles/form.css'
 import './LoginComponent.css'
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import { useCookies } from 'react-cookie'
-import {LoginDto, LoginStatus, apiAuthenticate} from "api/authentication";
+import {LoginDto, LoginStatus, useApiAuthenticate} from "api/authenticationApi";
+import {useSaveAuthToken} from "services/authenticationService";
 
 
 
@@ -15,7 +15,7 @@ export default function LoginComponent() {
         error: false
     });
     const navigate = useNavigate();
-    const [, setCookie] = useCookies(['auth_token'])
+    const saveTokenAuthToken = useSaveAuthToken();
 
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         e.preventDefault()
@@ -32,15 +32,18 @@ export default function LoginComponent() {
     }
 
     const handleLoginResponse = (loginResponse: string) => {
-        setCookie('auth_token', loginResponse);
+        // We assume that loginResponse is just a string being jwt token
+        saveTokenAuthToken(loginResponse);
 
         navigate('/');
     }
 
+    const apiAuthenticate = useApiAuthenticate(setStatus, handleLoginResponse)
+
     const postLoginDto = (dto: LoginDto) => {
         setStatus({...status, loading: true, error: false})
 
-        apiAuthenticate(dto, setStatus, handleLoginResponse);
+        apiAuthenticate(dto);
     }
 
     return (<div className='auth-panel'>
@@ -58,7 +61,7 @@ export default function LoginComponent() {
                            onChange={handleChange}/>
                 </div>
                 <button
-                    className='button'
+                    className='button button-size-big'
                     onClick={() => {
                         handleSubmit()
                     }}>
