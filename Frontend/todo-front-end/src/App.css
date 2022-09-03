@@ -33,64 +33,6 @@
   color: var(--error-font-color);
 }
 
-.input-field {
-  height: var(--input-height);
-
-  border-radius: var(--default-border-radius-small);
-  background-color: var(--panel-background-color-2);
-  border: none;
-  padding: 6px 8px 4px 8px;
-  margin: 5px;
-
-  font-family: Bahnschrift, Calibri, "Lucida Console", "Courier New", monospace, -apple-system, sans-serif;
-  font-size: var(--input-font-size);
-}
-
-.input-field:focus  {
-  box-shadow: inset 0 0 12px 0 var(--shadow-color);
-  /*box-shadow: 0 0 24px 0 var(--shadow-color);*/
-
-  outline: none;
-}
-
-
-.input-group {
-  display: flex;
-
-  justify-content: space-around;
-  align-items: center;
-  flex-direction: row;
-
-}
-
-.input-group > * {
-  margin: 3px 7px;
-}
-
-.button {
-  border-radius: var(--default-border-radius);
-  background-color: var(--panel-background-color-1);
-  border: var(--panel-background-color-2) outset;
-
-  padding: var(--button-padding);
-
-  font-size: var(--button-font-size);
-
-  cursor: pointer;
-}
-.button:hover {
-  background-color: var(--panel-background-color-2);
-}
-.button:active {
-  background-color: var(--panel-background-color-3);
-  border: var(--panel-background-color-1) solid;
-}
-.button:focus {
-  background-color: var(--panel-background-color-2);
-  /*box-shadow: 0 0 24px 0 var(--shadow-neon-color);*/
-  outline: none;
-}
-
 .loading-ring {
   display: inline-block;
   width: 80px;
@@ -103,8 +45,8 @@
   height: 64px;
   margin: 8px;
   border-radius: 50%;
-  border: 6px solid #fff;
-  border-color: #fff transparent #fff transparent;
+  border: 6px solid;
+  border-color:  #fff transparent #fff transparent;
   animation: lds-dual-ring 1.2s linear infinite;
 }
 @keyframes lds-dual-ring {

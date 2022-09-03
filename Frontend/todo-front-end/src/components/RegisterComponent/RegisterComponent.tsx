@@ -1,4 +1,6 @@
 import './RegisterComponent.css'
+import '../../styles/button.css'
+import '../../styles/form.css'
 import React from "react";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -69,10 +71,10 @@ export default function RegisterComponent() {
             });
     }
 
-    return (<div className='Register-panel'>
+    return (<div className='auth-panel'>
         <div>
             <h2>Create your own account!</h2>
-            <div className='register-panel-form'>
+            <div className='auth-panel-form'>
                 <div className='input-group'>
                     <label>Username: </label>
                     <input className='input-field' type="text" name='username' value={registerDto.username}
