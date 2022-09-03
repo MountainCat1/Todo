@@ -73,7 +73,7 @@ export default function RegisterComponent() {
 
     return (<div className='auth-panel'>
         <div>
-            <h2>Create your own account!</h2>
+            <h1>Create your own account!</h1>
             <div className='auth-panel-form'>
                 <div className='input-group'>
                     <label>Username: </label>
@@ -102,9 +102,6 @@ export default function RegisterComponent() {
                             : null
                 }
             </div>
-
-
         </div>
-
     </div>)
 }
