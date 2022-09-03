@@ -106,6 +106,16 @@
           "Url": "https://todos-api/swagger/v1/swagger.json"
         }
       ]
+    },
+    {
+      "Key": "user",
+      "Config": [
+        {
+          "Name": "User API",
+          "Version": "v1",
+          "Url": "https://user-api/swagger/v1/swagger.json"
+        }
+      ]
     }
   ]
 }
