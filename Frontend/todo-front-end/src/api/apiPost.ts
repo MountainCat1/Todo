@@ -6,7 +6,11 @@ export default function apiPost(endpoint: string, dto : any) {
         'Content-Type': 'application/json'
     });
 
-    let url: string = `${process.env.REACT_APP_API_URL}${endpoint}`;
+    endpoint.trim();
+    if(endpoint.startsWith('/'))
+        endpoint = endpoint.substring(1);
+
+    let url: string = `${process.env.REACT_APP_API_URL}/${endpoint.trim()}`;
     const requestOptions: RequestInit = {
         method: 'POST',
         headers: requestHeaders,
