@@ -4,22 +4,8 @@ import '../../styles/form.css'
 import React from "react";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {useApiRegister, RegisterDto, RegistrationStatus} from "../../api/authentication";
 
-interface RegisterDto {
-    username: string,
-    password: string
-}
-
-interface RegisterRequestResponse {
-    guid: String,
-    username: String,
-    userGuid: String
-}
-
-interface RegistrationStatus {
-    loading: boolean,
-    error: boolean
-}
 
 export default function RegisterComponent() {
     const [registerDto, setRegisterDto] = useState<RegisterDto>({username: "", password: "" } );
@@ -28,6 +14,9 @@ export default function RegisterComponent() {
         error: false
     });
     const navigate = useNavigate();
+    const apiRegister = useApiRegister(setStatus, () => {
+        navigate('/login')
+    });
 
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         e.preventDefault()
@@ -40,35 +29,7 @@ export default function RegisterComponent() {
     const handleSubmit = () => {
         console.log(`Submitting RegisterDto for user ${registerDto.username}`);
 
-        postRegisterDto(registerDto);
-    }
-
-    const postRegisterDto = (dto: RegisterDto) => {
-        setStatus({...status, error: false, loading: true});
-
-        const requestHeaders: HeadersInit = new Headers({
-            'Content-Type': 'application/json'
-        });
-
-        const requestOptions : RequestInit = {
-            method: 'POST',
-            headers: requestHeaders,
-            body: JSON.stringify(dto)};
-
-        let url : string = `${process.env.REACT_APP_API_URL}/authentication/register`;
-        fetch(url, requestOptions)
-            .then(response => {
-                return response.json()
-            })
-            .catch(() => {
-                setStatus({...status, loading: false, error: true});
-            })
-            .then(responseJson => {
-                let response = responseJson as RegisterRequestResponse;
-                console.log(response.username);
-                setStatus({...status, loading: false, error: false});
-                navigate('/login');
-            });
+        apiRegister(registerDto);
     }
 
     return (<div className='auth-panel'>

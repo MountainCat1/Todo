@@ -5,14 +5,14 @@ import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import { useCookies } from 'react-cookie'
 
-interface LoginDto {
-    username: string,
-    password: string
-}
-
 interface LoginStatus {
     loading: boolean,
     error: boolean
+}
+
+interface LoginDto {
+    username: string,
+    password: string
 }
 
 export default function LoginComponent() {
