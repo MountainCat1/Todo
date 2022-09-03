@@ -24,7 +24,17 @@
 
 .top-panel {
     grid-area: top;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: right;
 }
+.top-panel > * {
+    margin: 20px;
+}
+
+
 .left-panel {
     grid-area: left;
 

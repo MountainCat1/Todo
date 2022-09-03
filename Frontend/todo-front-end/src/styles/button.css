@@ -1,12 +1,18 @@
 :root {
-    --button-font-size: 25px;
-    --button-padding: 10px 20px;
+    --big-button-font-size: 25px;
+    --big-button-padding: 10px 20px;
+
+    --button-font-size: 17px;
+    --button-padding: 6px 14px;
 }
 
 .button {
     border-radius: var(--default-border-radius);
     background-color: var(--panel-background-color-1);
 
+    padding: var(--button-padding);
+    font-size: var(--button-font-size);
+    border: var(--panel-background-color-2) outset;
 
     cursor: pointer;
 
@@ -14,7 +20,6 @@
         border-color     var(--default-transition-duration),
         background-color var(--default-transition-duration);
 }
-
 .button:hover {
     background-color: var(--panel-background-color-2);
 }
@@ -28,8 +33,10 @@
 }
 
 .button-size-big {
-    padding: var(--button-padding);
-    font-size: var(--button-font-size);
+    padding: var(--big-button-padding);
+    font-size: var(--big-button-font-size);
     border: var(--panel-background-color-2) outset;
 }
+
+
 

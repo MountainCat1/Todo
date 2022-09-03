@@ -5,6 +5,7 @@ import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import { useCookies } from 'react-cookie'
 import {LoginDto, LoginStatus, apiAuthenticate} from "api/authentication";
+import {useSaveAuthToken} from "../../../services/authentication";
 
 
 
@@ -15,7 +16,7 @@ export default function LoginComponent() {
         error: false
     });
     const navigate = useNavigate();
-    const [, setCookie] = useCookies(['auth_token'])
+    const saveTokenAuthToken = useSaveAuthToken();
 
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         e.preventDefault()
@@ -32,7 +33,8 @@ export default function LoginComponent() {
     }
 
     const handleLoginResponse = (loginResponse: string) => {
-        setCookie('auth_token', loginResponse);
+        // We assume that loginResponse is just a string being jwt token
+        saveTokenAuthToken(loginResponse);
 
         navigate('/');
     }
