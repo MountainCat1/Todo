@@ -58,7 +58,7 @@ export default function LoginComponent() {
                            onChange={handleChange}/>
                 </div>
                 <button
-                    className='button'
+                    className='button button-size-big'
                     onClick={() => {
                         handleSubmit()
                     }}>
