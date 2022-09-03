@@ -3,8 +3,8 @@ import 'styles/form.css'
 import './LoginComponent.css'
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {LoginDto, LoginStatus, apiAuthenticate} from "api/authentication";
-import {useSaveAuthToken} from "../../../services/authentication";
+import {LoginDto, LoginStatus, apiAuthenticate} from "services/authentication";
+import {useSaveAuthToken} from "../../../services/user";
 
 
 

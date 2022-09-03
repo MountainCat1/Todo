@@ -1,5 +1,5 @@
 import './MainPanel.css';
-import {useIsLoggedIn} from "../../services/authentication";
+import {useIsLoggedIn} from "services/user";
 import {useNavigate} from "react-router-dom";
 
 export default function MainPanel() {

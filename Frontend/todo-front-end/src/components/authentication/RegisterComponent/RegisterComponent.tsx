@@ -4,7 +4,7 @@ import 'styles/form.css'
 import React from "react";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { apiRegister, RegisterDto, RegistrationStatus} from "api/authentication";
+import { apiRegister, RegisterDto, RegistrationStatus} from "services/authentication";
 
 
 export default function RegisterComponent() {
