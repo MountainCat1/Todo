@@ -1,6 +1,6 @@
-import '../../styles/button.css'
-import '../../styles/form.css'
-import '../LoginComponent/LoginComponent.css'
+import '../../../styles/button.css'
+import '../../../styles/form.css'
+import './LoginComponent.css'
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import { useCookies } from 'react-cookie'

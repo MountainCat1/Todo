@@ -2,8 +2,8 @@ import React from 'react';
 import './App.css';
 import MainPanel from "./components/MainPanel/MainPanel";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import RegisterComponent from "./components/RegisterComponent/RegisterComponent"
-import LoginComponent from "./components/LoginComponent/LoginComponent";
+import RegisterComponent from "./components/authentication/RegisterComponent/RegisterComponent"
+import LoginComponent from "./components/authentication/LoginComponent/LoginComponent";
 
 
 function App() {

@@ -1,10 +1,10 @@
 import './RegisterComponent.css'
-import '../../styles/button.css'
-import '../../styles/form.css'
+import '../../../styles/button.css'
+import '../../../styles/form.css'
 import React from "react";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {useApiRegister, RegisterDto, RegistrationStatus} from "../../api/authentication";
+import {useApiRegister, RegisterDto, RegistrationStatus} from "../../../api/authentication";
 
 
 export default function RegisterComponent() {
