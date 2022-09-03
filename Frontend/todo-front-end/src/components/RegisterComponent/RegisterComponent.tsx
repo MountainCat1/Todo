@@ -53,7 +53,7 @@ export default function RegisterComponent() {
             headers: requestHeaders,
             body: JSON.stringify(dto)};
 
-        let url : string = `${process.env.REACT_APP_API_URL}/authentication/register`; // `https://httpbin.org/post`;
+        let url : string = `${process.env.REACT_APP_API_URL}/authentication/register`;
         fetch(url, requestOptions)
             .then(response => {
                 return response.json()
