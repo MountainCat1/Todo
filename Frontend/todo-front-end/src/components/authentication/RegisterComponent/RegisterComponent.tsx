@@ -37,12 +37,12 @@ export default function RegisterComponent() {
             <h1>Create your own account!</h1>
             <div className='auth-panel-form'>
                 <div className='input-group'>
-                    <label>Username: </label>
+                    <label>Username </label>
                     <input className='input-field' type="text" name='username' value={registerDto.username}
                            onChange={handleChange}/>
                 </div>
                 <div className='input-group'>
-                    <label>Password: </label>
+                    <label>Password </label>
                     <input className='input-field' type="password" name='password' value={registerDto.password}
                            onChange={handleChange}/>
                 </div>

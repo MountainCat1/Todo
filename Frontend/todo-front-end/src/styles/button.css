@@ -8,6 +8,10 @@
     font-size: var(--button-font-size);
 
     cursor: pointer;
+
+    transition:
+        border-color     var(--default-transition-duration),
+        background-color var(--default-transition-duration);
 }
 .button:hover {
     background-color: var(--panel-background-color-2);

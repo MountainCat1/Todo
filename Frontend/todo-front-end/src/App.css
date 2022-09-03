@@ -2,11 +2,13 @@
   --panel-background-color: #2a2a2a;
   --panel-background-color-1: #212121;
   --panel-background-color-2: #1a1a1a;
-  --panel-background-color-3: #0a0a0a;
+  --panel-background-color-3: #151515;
   --panel-border-radius: 8px;
 
   --default-border-radius: 8px;
   --default-border-radius-small: 4px;
+
+  --default-transition-duration: 0.2s;
 
   --main-panel-width: 650px;
   --main-panel-height: 700px;
