@@ -64,6 +64,6 @@
     align-items: center;
     flex-direction: column;
 }
-.auth-panel-form > .big-button {
+.auth-panel-form > .button {
     margin-top: 20px;
 }
