@@ -1,5 +1,5 @@
 import {useCookies} from "react-cookie";
-import {useApiGetUserData} from "../api/userApi";
+import {useApiGetUserData, UserDto} from "../api/userApi";
 
 
 export function useSaveAuthToken() {
@@ -33,10 +33,10 @@ export function useIsLoggedIn() {
     };
 }
 
-export function useGetUserData(){
+export function  useGetUserData(){
     const apiGetUserData = useApiGetUserData();
 
-    return () => {
-        return apiGetUserData();
+    return async () : Promise<UserDto | null>  => {
+        return await apiGetUserData();
     }
 }

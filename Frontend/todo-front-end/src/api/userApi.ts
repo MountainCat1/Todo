@@ -6,24 +6,24 @@ export type UserDto = {
     username: string,
 }
 
-export function useApiGetUserData(){
+export function useApiGetUserData() {
     const apiGet = useApiGet();
 
-    return (): UserDto | null => {
-        apiGet('user/get')
+    return async () : Promise<UserDto | null> => {
+        let user : UserDto | null = null;
+
+         await apiGet('user/me')
             .then(response => {
                 if (!response.ok)
                     throw new Error(response.statusText);
-
                 return response.json();
             })
             .then(responseJson => {
-                return responseJson as UserDto;
+                user = responseJson as UserDto;
             })
             .catch((reason) => {
-                console.log(reason);
+                console.error(reason);
             });
-
-        return null;
+        return user;
     }
 }
