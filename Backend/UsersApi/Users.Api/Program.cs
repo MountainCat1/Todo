@@ -5,6 +5,7 @@ using BunnyOwO.Extensions;
 using BunnyOwO.FluentValidation.Extensions;
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -117,6 +118,7 @@ services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior
 services.AddEventHandlersAndReceivers(typeof(ServiceAssemblyMarker));
 
 services.AddScoped<IUserRepository, UserRepository>();
+services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 services.AddScoped<ErrorHandlingMiddleware>();
 
