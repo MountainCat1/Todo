@@ -21,52 +21,15 @@ public class UserController : Controller
         _mediator = mediator;
     }
 
-    [HttpGet("")]
+    [HttpGet("get")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Get([FromQuery] Guid? guid)
+    public async Task<IActionResult> Get([FromQuery] Guid guid)
     {
-        IBaseRequest query = guid is null
-            ? new GetUsersQuery()
-            : new GetUserQuery((Guid)guid);
+        var query = new GetUserQuery(guid);
 
         var queryResult = await _mediator.Send(query);
 
         return Ok(queryResult);
-    }
-    
-    [HttpPost("")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> Create([FromBody] UserCreateDto createDto)
-    {
-        var command = new CreateUserCommand(createDto);
-        
-        var commandResult = await _mediator.Send(command);
-
-        return Ok(commandResult);
-    }
-
-    [HttpPut("")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Update([FromQuery] Guid guid, [FromBody] UserUpdateDto updateDto)
-    {
-        var command = new UpdateUserCommand(guid, updateDto);
-        
-        var commandResult = await _mediator.Send(command);
-
-        return Ok(commandResult);
-    }
-    
-    [HttpDelete("")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Delete([FromQuery] Guid guid)
-    {
-        var command = new DeleteUserCommand(guid);
-        
-        await _mediator.Send(command);
-
-        return Ok();
     }
 }
