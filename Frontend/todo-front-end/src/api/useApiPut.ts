@@ -1,11 +1,12 @@
 import {useCookies} from "react-cookie";
 
 
-export default function useApiGet() {
+export default function useApiPut() {
     const [cookies,] = useCookies();
-
-    return async (endpoint: string) => {
+    
+    return async (endpoint: string, dto : any) => {
         const requestHeaders: HeadersInit = new Headers({
+            'Content-Type': 'application/json'
         });
 
         if(cookies.auth_token != null)
@@ -15,11 +16,11 @@ export default function useApiGet() {
         if(endpoint.startsWith('/'))
             endpoint = endpoint.substring(1);
 
-
         let url: string = `${process.env.REACT_APP_API_URL}/${endpoint}`;
         const requestOptions: RequestInit = {
-            method: 'GET',
-            headers: requestHeaders
+            method: 'PUT',
+            headers: requestHeaders,
+            body: JSON.stringify(dto)
         };
 
         return fetch(url, requestOptions);

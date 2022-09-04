@@ -4,7 +4,7 @@ import {useCookies} from "react-cookie";
 export default function useApiPost() {
     const [cookies,] = useCookies();
     
-    return (endpoint: string, dto : any) => {
+    return async (endpoint: string, dto : any) => {
         const requestHeaders: HeadersInit = new Headers({
             'Content-Type': 'application/json'
         });
