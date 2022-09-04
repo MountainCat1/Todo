@@ -24,11 +24,9 @@ public class UserController : Controller
     [HttpGet("get")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Get([FromQuery] Guid? guid)
+    public async Task<IActionResult> Get([FromQuery] Guid guid)
     {
-        IBaseRequest query = guid is null
-            ? new GetUsersQuery()
-            : new GetUserQuery((Guid)guid);
+        var query = new GetUserQuery(guid);
 
         var queryResult = await _mediator.Send(query);
 
