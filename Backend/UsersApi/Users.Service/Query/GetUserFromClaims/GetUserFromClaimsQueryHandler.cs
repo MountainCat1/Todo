@@ -1,29 +1,26 @@
 ﻿using System.Security.Claims;
 using AutoMapper;
 using Users.Domain.Repositories;
+using Users.Service.Abstractions;
 using Users.Service.Dto;
 
-namespace Users.Service.Services;
+namespace Users.Service.Query.GetUserFromClaims;
 
-public interface IUserService
+public class GetUserFromClaimsQueryHandler : IQueryHandler<GetUserFromClaimsQuery, UserDto>
 {
-    Task<UserDto> GetUserFromClaimsAsync(ClaimsPrincipal claimsPrincipal);
-}
 
-public class UserService : IUserService
-{
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
 
-    public UserService(IUserRepository userRepository, IMapper mapper)
+    public GetUserFromClaimsQueryHandler(IMapper mapper, IUserRepository userRepository)
     {
-        _userRepository = userRepository;
         _mapper = mapper;
+        _userRepository = userRepository;
     }
 
-    public async Task<UserDto> GetUserFromClaimsAsync(ClaimsPrincipal claimsPrincipal)
+    public async Task<UserDto> Handle(GetUserFromClaimsQuery query, CancellationToken cancellationToken)
     {
-        var accountGuid = claimsPrincipal.Claims
+        var accountGuid = query.ClaimsPrincipal.Claims
             .First(claim => claim.Type == ClaimTypes.PrimarySid).Value;
 
         var entity = await _userRepository.GetOneAsync(user => user.AccountGuid == Guid.Parse(accountGuid));
