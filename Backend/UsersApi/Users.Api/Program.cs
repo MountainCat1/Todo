@@ -1,11 +1,8 @@
 using System.Security.Cryptography;
-using BunnyOwO;
 using BunnyOwO.Configuration;
 using BunnyOwO.Extensions;
-using BunnyOwO.FluentValidation.Extensions;
 using MediatR;
 using MediatR.Extensions.FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -13,13 +10,10 @@ using Microsoft.OpenApi.Models;
 using Users.Api.Configuration;
 using Users.Api.Middleware;
 using Users.Domain.Repositories;
-using Users.Infrastructure;
 using Users.Infrastructure.Data;
-using Users.Infrastructure.Events;
 using Users.Infrastructure.Repositories;
 using Users.Service;
 using Users.Service.PipelineBehaviors;
-using Users.Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -119,7 +113,6 @@ services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior
 services.AddEventHandlersAndReceivers(typeof(ServiceAssemblyMarker));
 
 services.AddScoped<IUserRepository, UserRepository>();
-services.AddScoped<IUserService, UserService>();
 
 services.AddScoped<ErrorHandlingMiddleware>();
 

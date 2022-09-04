@@ -1,9 +1,7 @@
 ﻿using BunnyOwO;
 using MediatR;
-using Users.Infrastructure.Events;
 using Users.Infrastructure.Events.External;
 using Users.Service.Commands.CreateUser;
-using Users.Service.Dto;
 
 namespace Users.Service.EventHandlers;
 

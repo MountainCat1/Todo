@@ -1,6 +1,4 @@
 ﻿using FluentValidation;
-using Users.Service.Abstractions;
-using Users.Service.Dto;
 
 namespace Users.Service.Commands.CreateUser;
 
