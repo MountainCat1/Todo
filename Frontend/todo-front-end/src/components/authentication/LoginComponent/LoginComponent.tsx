@@ -9,7 +9,10 @@ import {useSaveAuthToken} from "services/authenticationService";
 
 
 export default function LoginComponent() {
-    const [loginDto, setLoginDto] = useState<LoginDto>({username: "", password: ""});
+    const [loginDto, setLoginDto] = useState<LoginDto>({
+        username: "",
+        password: ""
+    });
     const [status, setStatus] = useState<LoginStatus>({
         loading: false,
         error: false
@@ -33,9 +36,12 @@ export default function LoginComponent() {
 
     const handleLoginResponse = (loginResponse: string) => {
         // We assume that loginResponse is just a string being jwt token
-        saveTokenAuthToken(loginResponse);
-
-        navigate('/');
+        let p = new Promise((resolve) => {
+            saveTokenAuthToken(loginResponse);
+            resolve(null);
+        }).then(r => {
+            navigate('/');
+        })
     }
 
     const apiAuthenticate = useApiAuthenticate(setStatus, handleLoginResponse)

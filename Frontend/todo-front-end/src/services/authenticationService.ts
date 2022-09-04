@@ -8,6 +8,7 @@ export function useSaveAuthToken() {
     return (token: string): void => {
         setCookie('auth_token', token, {
             sameSite: true,
+            path: '/',
             maxAge: 900 // 15 min
         });
     }
