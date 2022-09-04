@@ -5,23 +5,23 @@ using Users.Service.Dto;
 
 namespace Users.Service.Services;
 
-public interface IAuthenticationService
+public interface IUserService
 {
-    Task<UserDto> GetUserGuid(ClaimsPrincipal claimsPrincipal);
+    Task<UserDto> GetUser(ClaimsPrincipal claimsPrincipal);
 }
 
-public class AuthenticationService : IAuthenticationService
+public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
 
-    public AuthenticationService(IUserRepository userRepository, IMapper mapper)
+    public UserService(IUserRepository userRepository, IMapper mapper)
     {
         _userRepository = userRepository;
         _mapper = mapper;
     }
 
-    public async Task<UserDto> GetUserGuid(ClaimsPrincipal claimsPrincipal)
+    public async Task<UserDto> GetUser(ClaimsPrincipal claimsPrincipal)
     {
         var accountGuid = claimsPrincipal.Claims
             .First(claim => claim.Type == ClaimTypes.PrimarySid).Value;

@@ -19,6 +19,7 @@ using Users.Infrastructure.Events;
 using Users.Infrastructure.Repositories;
 using Users.Service;
 using Users.Service.PipelineBehaviors;
+using Users.Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -118,7 +119,7 @@ services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ErrorHandlingBehavior
 services.AddEventHandlersAndReceivers(typeof(ServiceAssemblyMarker));
 
 services.AddScoped<IUserRepository, UserRepository>();
-services.AddScoped<IAuthenticationService, AuthenticationService>();
+services.AddScoped<IUserService, UserService>();
 
 services.AddScoped<ErrorHandlingMiddleware>();
 
