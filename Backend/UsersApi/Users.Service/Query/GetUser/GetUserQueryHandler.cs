@@ -2,7 +2,6 @@
 using Users.Domain.Repositories;
 using Users.Service.Abstractions;
 using Users.Service.Dto;
-using Users.Service.Query.GetUsers;
 
 namespace Users.Service.Query.GetUser;
 

@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using Users.Service.Commands.CreateUser;
 
 namespace Users.Service.Commands.UpdateUser;
 

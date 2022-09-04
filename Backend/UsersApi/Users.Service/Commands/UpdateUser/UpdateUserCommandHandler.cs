@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using Users.Domain.Entities;
 using Users.Domain.Repositories;
 using Users.Service.Abstractions;
-using Users.Service.Commands.CreateUser;
 using Users.Service.Dto;
 
 namespace Users.Service.Commands.UpdateUser;

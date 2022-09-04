@@ -6,6 +6,7 @@ export default function MainPanelUserData() {
     const clearAuthToken = useClearAuthToken();
 
     if (getUserData() == null) {
+        console.error('Failed to get user data. Logging of user')
         clearAuthToken();
     }
 
