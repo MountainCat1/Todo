@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using Authentication.Service.Commands.RegisterAccount;
 using Authentication.Service.Dto;
+using Authentication.Service.Queries.Authenticate;
 using Authentication.Service.Queries.GetAccountJwt;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -35,7 +36,7 @@ public class AuthenticationController : Controller
     [HttpPost("authenticate")]
     public async Task<IActionResult> Authenticate([FromBody] AccountLoginDto loginDto)
     {
-        var query = new GetAccountJwtQuery(loginDto);
+        var query = new AuthenticateQuery(loginDto);
 
         var queryResult = await _mediator.Send(query);
 
