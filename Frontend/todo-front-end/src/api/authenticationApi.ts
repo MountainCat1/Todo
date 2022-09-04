@@ -1,8 +1,8 @@
 import React from "react";
 import useApiPost from "./useApiPost";
 
-const registerEndpoint: string = '/authentication/register';
-const loginEndpoint: string = '/authentication/authenticate';
+const registerEndpoint: string =    '/authentication/register';
+const loginEndpoint: string =       '/authentication/authenticate';
 
 export type RegisterDto = {
     username: string,
@@ -57,9 +57,14 @@ export type LoginDto = {
     password: string
 }
 
+export type LoginResponse = {
+    userGuid: string,
+    authToken: string
+}
+
 export const useApiAuthenticate
     = (setStatus: React.Dispatch<LoginStatus>,
-       onSuccess: (response: string) => void) => {
+       onSuccess: (response: LoginResponse) => void) => {
 
     const apiPost = useApiPost();
 
@@ -71,12 +76,12 @@ export const useApiAuthenticate
                 if (!response.ok) {
                     throw new Error(response.statusText)
                 }
-                return response.text();
+                return response.json();
             })
-            .then((responseText) => {
+            .then((responseJson) => {
                 setStatus({loading: false, error: false});
 
-                onSuccess(responseText);
+                onSuccess(responseJson as LoginResponse);
             })
             .catch((ex) => {
                 console.log(ex)

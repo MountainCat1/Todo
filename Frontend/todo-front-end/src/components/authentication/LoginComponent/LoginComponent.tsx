@@ -3,7 +3,7 @@ import 'styles/form.css'
 import './LoginComponent.css'
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {LoginDto, LoginStatus, useApiAuthenticate} from "api/authenticationApi";
+import {LoginDto, LoginResponse, LoginStatus, useApiAuthenticate} from "api/authenticationApi";
 import {useSaveAuthToken} from "services/authenticationService";
 
 
@@ -34,12 +34,12 @@ export default function LoginComponent() {
         postLoginDto(loginDto);
     }
 
-    const handleLoginResponse = (loginResponse: string) => {
+    const handleLoginResponse = (loginResponse: LoginResponse) => {
         // We assume that loginResponse is just a string being jwt token
-        let p = new Promise((resolve) => {
-            saveTokenAuthToken(loginResponse);
+        new Promise((resolve) => {
+            saveTokenAuthToken(loginResponse.authToken);
             resolve(null);
-        }).then(r => {
+        }).then(() => {
             navigate('/');
         })
     }

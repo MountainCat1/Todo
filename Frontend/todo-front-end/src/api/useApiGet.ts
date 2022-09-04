@@ -10,6 +10,8 @@ export default function useApiGet() {
 
         if(cookies.auth_token != null)
             requestHeaders.set('Authorization', `Bearer ${cookies.auth_token}`)
+        else
+            requestHeaders.set('Authorization', `Bearer XDDDDD`)
 
         endpoint = endpoint.trim();
         if(endpoint.startsWith('/'))
@@ -19,6 +21,7 @@ export default function useApiGet() {
         let url: string = `${process.env.REACT_APP_API_URL}/${endpoint}`;
         const requestOptions: RequestInit = {
             method: 'GET',
+            headers: requestHeaders
         };
 
         return fetch(url, requestOptions);
