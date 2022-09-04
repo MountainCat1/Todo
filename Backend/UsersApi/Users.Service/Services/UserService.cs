@@ -7,7 +7,7 @@ namespace Users.Service.Services;
 
 public interface IUserService
 {
-    Task<UserDto> GetUser(ClaimsPrincipal claimsPrincipal);
+    Task<UserDto> GetUserFromClaimsAsync(ClaimsPrincipal claimsPrincipal);
 }
 
 public class UserService : IUserService
@@ -21,7 +21,7 @@ public class UserService : IUserService
         _mapper = mapper;
     }
 
-    public async Task<UserDto> GetUser(ClaimsPrincipal claimsPrincipal)
+    public async Task<UserDto> GetUserFromClaimsAsync(ClaimsPrincipal claimsPrincipal)
     {
         var accountGuid = claimsPrincipal.Claims
             .First(claim => claim.Type == ClaimTypes.PrimarySid).Value;
