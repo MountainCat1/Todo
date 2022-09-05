@@ -7,22 +7,46 @@
     width: var(--popupWidth);
     height: var(--popupHeight);
 
+    z-index: 11;
+
     border-radius: var(--panel-border-radius);
     background-color: var(--panel-background-color-3);
     border: var(--panel-background-color-1) solid;
 
     box-shadow: 0 0 24px 0 var(--shadow-color);
 
-    animation: 0.5s ease-out 0s 1 slideInFromLeft;
+    animation: 0.5s ease-out 0s 1 popupAppear;
 }
 
-@keyframes slideInFromLeft {
+@keyframes popupAppear {
     0% {
         transform: translate(-50%, -50%) scale(0);
     }
     100% {
         transform: translate(-50%, -50%) scale(100%);
     }
+}
+
+@keyframes backgroundAppear {
+    0% {
+        background: rgba(0, 0, 0, 0);
+    }
+    100% {
+        background: rgba(0, 0, 0, 0.7);
+    }
+}
+
+.popup-background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 10;
+
+    background: rgba(0, 0, 0, 0.7);
+
+    animation: 0.5s ease-out 0s 1 backgroundAppear;
 }
 
 .center-screen {
