@@ -2,8 +2,11 @@
     --big-button-font-size: 25px;
     --big-button-padding: 10px 20px;
 
-    --button-font-size: 17px;
-    --button-padding: 6px 14px;
+    --button-font-size: 20px;
+    --button-padding: 7px 16px;
+
+    --small-button-font-size: 17px;
+    --small-button-padding: 6px 14px;
 }
 
 .button {
@@ -35,6 +38,12 @@
 .button-size-big {
     padding: var(--big-button-padding);
     font-size: var(--big-button-font-size);
+    border: var(--panel-background-color-2) outset;
+}
+
+.button-size-small {
+    padding: var(--small-button-padding);
+    font-size: var(--small-button-font-size);
     border: var(--panel-background-color-2) outset;
 }
 
