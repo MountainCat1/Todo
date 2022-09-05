@@ -2,7 +2,7 @@
     --big-button-font-size: 25px;
     --big-button-padding: 10px 20px;
 
-    --button-font-size: 20px;
+    --button-max-font-size: 20px;
     --button-padding: 7px 16px;
 
     --small-button-font-size: 17px;
@@ -14,7 +14,7 @@
     background-color: var(--panel-background-color-1);
 
     padding: var(--button-padding);
-    font-size: var(--button-font-size);
+    font-size: var(--button-max-font-size);
     border: var(--panel-background-color-2) outset;
 
     cursor: pointer;
