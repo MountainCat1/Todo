@@ -24,7 +24,13 @@ export default function TeamComponent() {
         </button>
 
         {state.showFormPopup
-            ? <Popup>
+            ? <Popup handleClose={() => {
+                setState({
+                    ...state,
+                    showFormPopup: false
+                })
+            }
+            }>
                 <CreateTeamForm/>
             </Popup>
             : <></>
