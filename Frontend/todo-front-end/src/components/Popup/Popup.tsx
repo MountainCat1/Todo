@@ -6,6 +6,7 @@ interface IPopupProps {
     handleClose? : () => any | null
 }
 
+// need to add a focus on popup show
 export default function Popup(props : IPopupProps) {
     const mainRef = useRef(null);
 
