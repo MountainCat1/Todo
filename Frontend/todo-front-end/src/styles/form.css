@@ -34,6 +34,11 @@
 }
 
 
+.form {
+
+}
+
+
 .auth-panel {
     height: var(--register-panel-height);
     width: var(--register-panel-width);

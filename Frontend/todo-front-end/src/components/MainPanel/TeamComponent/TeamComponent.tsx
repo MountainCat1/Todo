@@ -1,5 +1,6 @@
 import Popup from "components/Popup/Popup";
 import {useState} from "react";
+import CreateTeamForm from "./CreateTeamForm/CreateTeamForm";
 
 type TeamComponentState = {
     showFormPopup: boolean
@@ -24,7 +25,7 @@ export default function TeamComponent() {
 
         {state.showFormPopup
             ? <Popup>
-                XDD
+                <CreateTeamForm/>
             </Popup>
             : <></>
         }

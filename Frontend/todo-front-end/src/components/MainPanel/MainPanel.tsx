@@ -1,4 +1,6 @@
 import './MainPanel.css';
+import  'styles/text.css'
+
 import {useIsLoggedIn} from "services/authenticationService";
 import {useNavigate} from "react-router-dom";
 import MainPanelUserData from "./UserDataComponent/MainPanelUserData";
