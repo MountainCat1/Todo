@@ -11,7 +11,11 @@ export default function CreateTeamForm(){
     })
 
     function handleChange() {
+        // TODO
+    }
 
+    function handleSubmit() {
+        // TODO
     }
 
     return (<div className='form'>
@@ -22,5 +26,10 @@ export default function CreateTeamForm(){
             <input className='input-field' type="password" name='password' value={createDto.name}
                    onChange={handleChange}/>
         </div>
+        <br/>
+
+        <button className='button' onClick={handleSubmit}>
+            Create Team
+        </button>
     </div>)
 }
