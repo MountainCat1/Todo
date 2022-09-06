@@ -1,5 +1,5 @@
 import './Popup.css'
-import React, {useRef} from "react";
+import React, {useEffect, useRef} from "react";
 
 interface IPopupProps {
     children : any,
@@ -8,7 +8,10 @@ interface IPopupProps {
 
 // need to add a focus on popup show
 export default function Popup(props : IPopupProps) {
-    const mainRef = useRef(null);
+    const popupRef = useRef<any>(null);
+    const effect = useEffect(() => {
+        popupRef.current?.focus()
+    },[]);
 
     const handleClose = () => {
         if (props?.handleClose) {
@@ -23,7 +26,7 @@ export default function Popup(props : IPopupProps) {
     }
 
     return (
-        <div onKeyDown={handleKeyPress} ref={mainRef} tabIndex={0}>
+        <div onKeyDown={handleKeyPress} ref={popupRef} tabIndex={0}>
             <div className='popup-background' onClick={handleClose} >
 
             </div>
