@@ -22,7 +22,6 @@ export default function TeamComponent() {
         <button className='button button-size-small' onClick={handleCreateTeamButton}>
             Create Team
         </button>
-
         {state.showFormPopup
             ? <Popup handleClose={() => {
                 setState({

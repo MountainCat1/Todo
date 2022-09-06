@@ -1,6 +1,8 @@
-.popup, .popup > * {
+.popup, .popup .popup-background > * {
     --popupWidth: 400px;
     --popupHeight: 500px;
+
+    --popup-appear-time: 0.3s;
 }
 
 .popup {
@@ -15,7 +17,7 @@
 
     box-shadow: 0 0 24px 0 var(--shadow-color);
 
-    animation: 0.5s ease-out 0s 1 popupAppear;
+    animation: var(--popup-appear-time) ease-out 0s 1 popupAppear;
 }
 
 @keyframes popupAppear {
@@ -24,15 +26,6 @@
     }
     100% {
         transform: translate(-50%, -50%) scale(100%);
-    }
-}
-
-@keyframes backgroundAppear {
-    0% {
-        background: rgba(0, 0, 0, 0);
-    }
-    100% {
-        background: rgba(0, 0, 0, 0.7);
     }
 }
 
@@ -46,7 +39,16 @@
 
     background: rgba(0, 0, 0, 0.7);
 
-    animation: 0.5s ease-out 0s 1 backgroundAppear;
+    animation: var(--popup-appear-time) ease-out 0s 1 backgroundAppear;
+}
+
+@keyframes backgroundAppear {
+    0% {
+        background: rgba(0, 0, 0, 0);
+    }
+    100% {
+        background: rgba(0, 0, 0, 0.7);
+    }
 }
 
 .center-screen {
@@ -56,3 +58,4 @@
     margin-right: -50%;
     transform: translate(-50%, -50%);
 }
+
