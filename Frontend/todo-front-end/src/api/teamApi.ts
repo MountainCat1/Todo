@@ -1,17 +1,16 @@
 import useApiPost from "./useApiPost";
 
 
-export type TeamDto = {
+export type CreateTeamDto = {
     name:        string;
     description: string;
 }
 
-export function useApiCreateTeam(createDto : TeamDto) {
+export function useApiCreateTeam(createDto : CreateTeamDto) {
     const apiPost = useApiPost();
 
-
-    return( async () : Promise<TeamDto | null> => {
-        let team: TeamDto | null = null;
+    return( async () : Promise<CreateTeamDto | null> => {
+        let team: CreateTeamDto | null = null;
 
         apiPost('/team/create', createDto)
             .then(response => {
@@ -20,7 +19,7 @@ export function useApiCreateTeam(createDto : TeamDto) {
                 return response.json();
             })
             .then(responseJson => {
-                team = responseJson as TeamDto;
+                team = responseJson as CreateTeamDto;
             })
             .catch((reason) => {
                 console.error(reason);

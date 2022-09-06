@@ -1,21 +1,24 @@
 import React, {useState} from "react";
+import {CreateTeamDto} from "../../../../api/teamApi";
 
-type CreateTeamDto = {
-    name: string
-}
 
 export default function CreateTeamForm(){
 
     const [createDto, setCreateDto] = useState<CreateTeamDto>({
-        name: ''
+        name: '',
+        description: ''
     })
 
-    function handleChange() {
-        // TODO
+    function handleChange(e : React.FormEvent<HTMLInputElement>) {
+        e.preventDefault()
+        setCreateDto({
+            ...createDto,
+            [e.currentTarget.name]: e.currentTarget.value
+        });
     }
 
     function handleSubmit() {
-        // TODO
+        console.log(createDto)
     }
 
     return (<div className='form'>
@@ -23,7 +26,12 @@ export default function CreateTeamForm(){
 
         <div className='input-group'>
             <label>Team name</label>
-            <input className='input-field' type="password" name='password' value={createDto.name}
+            <input className='input-field' type="text" name='name' value={createDto.name}
+                   onChange={handleChange}/>
+        </div>
+        <div className='input-group'>
+            <label>Description</label>
+            <input className='input-field' type="text" name='description' value={createDto.description}
                    onChange={handleChange}/>
         </div>
         <br/>
