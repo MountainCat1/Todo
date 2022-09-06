@@ -1,18 +1,16 @@
 # Todo Mobile App Back-End
 
 ### Description
-There should be general description of the project, please do it later <3
+##### Back-End
+Back-End of an application was made using ASP.NET CORE
+o	Uses Domain Driven Design
+o	Architecture is consisting of independent microservices hidden behind API gateway
+o	Communication is done via http as well as Message Broker RabbitMQ
+o	Messaging via Broker is done using my NuGet package BunnyOwO
+o	Domain layer is completely separated from presentation layer by using DTOs
+o	Application uses authentication using JWTs
+o	Application is Docker ready, docker-compose.yml is present in repository
 
-### Microservices
-##### Todo microservice
-Microservice responsible for todos
-##### Ocelot API gateway
-API gateway using Ocelot solution
-##### RabbitMQ
-Using popular broker RabbitMQ to queue requests between microservices
-##### Team microservice
-Microservice responsible for teams
-##### Authentication microservice
-Microservice responsible for authentication
-##### User microservice
-Microservice responsible for users
+##### Front-End
+Front-End was made using React with TypeScript
+
