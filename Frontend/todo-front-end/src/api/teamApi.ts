@@ -10,8 +10,6 @@ export function useApiCreateTeam() {
     const apiPost = useApiPost();
 
     return( async (createDto : CreateTeamDto) : Promise<void> => {
-        let team: CreateTeamDto | null = null;
-
         apiPost('/team/create', createDto)
             .then(response => {
                 if (!response.ok)
