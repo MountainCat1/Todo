@@ -38,6 +38,11 @@
 
 }
 
+.form-result {
+    margin-top: 25px;
+    height: 100px;
+}
+
 
 .auth-panel {
     height: var(--register-panel-height);

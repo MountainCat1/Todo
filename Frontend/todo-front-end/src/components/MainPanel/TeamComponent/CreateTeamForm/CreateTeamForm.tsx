@@ -50,9 +50,16 @@ export default function CreateTeamForm(props : ICreateTeamFormProps){
             Create Team
         </button>
         {
-            requestStatus.error
-                ? <p>XD</p>
-                : <p>not XD</p>
+            <div className='form-result'>
+                {
+                    requestStatus.error
+                        ? <div className='error-message'> Something went wrong! </div>
+                        : requestStatus.loading
+                            ? <div className='loading-ring'> </div>
+                            : null
+                }
+            </div>
+
         }
     </div>)
 }
