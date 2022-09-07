@@ -1,5 +1,6 @@
 import React from "react";
 import useApiPost from "./useApiPost";
+import {RequestStatus} from "./abstractions";
 
 const registerEndpoint: string =    '/authentication/register';
 const loginEndpoint: string =       '/authentication/authenticate';
@@ -15,13 +16,8 @@ export type RegisterRequestResponse = {
     userGuid: String
 }
 
-export type RegistrationStatus = {
-    loading: boolean,
-    error: boolean
-}
-
 export const useApiRegister
-    = (setStatus: React.Dispatch<RegistrationStatus>,
+    = (setStatus: React.Dispatch<RequestStatus>,
        onSuccess: (response: RegisterRequestResponse) => void) => {
 
     const apiPost = useApiPost();

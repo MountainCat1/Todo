@@ -4,12 +4,13 @@ import 'styles/form.css'
 import React from "react";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useApiRegister, RegisterDto, RegistrationStatus} from "api/authenticationApi";
+import { useApiRegister, RegisterDto } from "api/authenticationApi";
+import {RequestStatus} from "api/abstractions";
 
 
 export default function RegisterComponent() {
     const [registerDto, setRegisterDto] = useState<RegisterDto>({username: "", password: "" } );
-    const [status, setStatus] = useState<RegistrationStatus>({
+    const [status, setStatus] = useState<RequestStatus>({
         loading: false,
         error: false
     });
