@@ -17,7 +17,7 @@ export default function MainPanelUserData() {
                 clearAuthToken();
             }
         });
-    }, [clearAuthToken, getUserData]);
+    }, [, ]);
     return <div>
         Welcome {userData?.username}!
     </div>
