@@ -9,7 +9,7 @@ export type CreateTeamDto = {
 export function useApiCreateTeam() {
     const apiPost = useApiPost();
 
-    return( (createDto : CreateTeamDto) => {
+    return( async (createDto : CreateTeamDto) => {
         apiPost('/team/create', createDto)
             .then(response => {
                 if (!response.ok)
