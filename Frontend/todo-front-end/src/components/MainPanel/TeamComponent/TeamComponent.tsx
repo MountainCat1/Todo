@@ -18,19 +18,20 @@ export default function TeamComponent() {
         })
     }
 
+    const closeTeamCreationPopup = () => {
+        setState({
+            ...state,
+            showFormPopup: false
+        })
+    }
+
     return (<>
         <button className='button button-size-small' onClick={handleCreateTeamButton}>
             Create Team
         </button>
         {state.showFormPopup
-            ? <Popup handleClose={() => {
-                setState({
-                    ...state,
-                    showFormPopup: false
-                })
-            }
-            }>
-                <CreateTeamForm/>
+            ? <Popup handleClose={closeTeamCreationPopup}>
+                <CreateTeamForm closePopup={closeTeamCreationPopup}/>
             </Popup>
             : <></>
         }

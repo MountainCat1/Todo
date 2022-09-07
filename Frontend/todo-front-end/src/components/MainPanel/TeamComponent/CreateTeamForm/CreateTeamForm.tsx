@@ -1,13 +1,16 @@
 import React, {useState} from "react";
-import {CreateTeamDto} from "../../../../api/teamApi";
+import {CreateTeamDto, useApiCreateTeam} from "../../../../api/teamApi";
 
+interface ICreateTeamFormProps {
+    closePopup : () => void
+}
 
-export default function CreateTeamForm(){
-
+export default function CreateTeamForm(props : ICreateTeamFormProps){
     const [createDto, setCreateDto] = useState<CreateTeamDto>({
         name: '',
         description: ''
     })
+    const apiCreateTeam = useApiCreateTeam();
 
     function handleChange(e : React.FormEvent<HTMLInputElement>) {
         e.preventDefault()
@@ -18,7 +21,9 @@ export default function CreateTeamForm(){
     }
 
     function handleSubmit() {
-        console.log(createDto)
+        apiCreateTeam(createDto).then(() => {
+            props.closePopup();
+        });
     }
 
     return (<div className='form'>
