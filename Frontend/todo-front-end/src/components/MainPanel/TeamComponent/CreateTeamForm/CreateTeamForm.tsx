@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-import {CreateTeamDto, useApiCreateTeam} from "../../../../api/teamApi";
+import {CreateTeamDto, useApiCreateTeam} from "api/teamApi";
+import {RequestStatus} from "api/abstractions";
 
 interface ICreateTeamFormProps {
     closePopup : () => void
@@ -10,7 +11,13 @@ export default function CreateTeamForm(props : ICreateTeamFormProps){
         name: '',
         description: ''
     })
-    const apiCreateTeam = useApiCreateTeam();
+    const [requestStatus, setRequestStatus] = useState<RequestStatus>({
+        loading: false,
+        error: false
+    })
+    const apiCreateTeam = useApiCreateTeam(setRequestStatus, () => {
+        props.closePopup();
+    });
 
     function handleChange(e : React.FormEvent<HTMLInputElement>) {
         e.preventDefault()
@@ -20,10 +27,8 @@ export default function CreateTeamForm(props : ICreateTeamFormProps){
         });
     }
 
-    function handleSubmit() {
-        apiCreateTeam(createDto).then(() => {
-            props.closePopup();
-        });
+    async function handleSubmit() {
+        await apiCreateTeam(createDto);
     }
 
     return (<div className='form'>
@@ -44,5 +49,10 @@ export default function CreateTeamForm(props : ICreateTeamFormProps){
         <button className='button' onClick={handleSubmit}>
             Create Team
         </button>
+        {
+            requestStatus.error
+                ? <p>XD</p>
+                : <p>not XD</p>
+        }
     </div>)
 }
