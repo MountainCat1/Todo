@@ -10,7 +10,7 @@ export function useApiCreateTeam() {
     const apiPost = useApiPost();
 
     return( async (createDto : CreateTeamDto) => {
-        apiPost('/team/create', createDto)
+        await apiPost('/team/create', createDto)
             .then(response => {
                 if (!response.ok)
                     throw new Error(response.statusText);
