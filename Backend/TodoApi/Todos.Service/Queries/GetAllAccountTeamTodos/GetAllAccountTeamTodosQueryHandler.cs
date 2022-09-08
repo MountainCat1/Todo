@@ -20,7 +20,7 @@ public class GetAllAccountTeamTodosQueryHandler : IQueryHandler<GetAllAccountTea
     {
         var entities = await _repository.GetAsync(x 
             => x.TeamGuid == query.TeamGuid && 
-               x.TeamGuid == query.TeamGuid);
+               x.AccountGuid == query.AccountGuid);
 
         var dto = _mapper.Map<ICollection<TodoDto>>(entities);
 

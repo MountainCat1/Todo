@@ -8,7 +8,7 @@ using Teams.Service.Command.UpdateTodo;
 using Teams.Service.Dto;
 using Teams.Service.Queries.GetAllAccountTeams;
 using Teams.Service.Queries.GetAllTeamTodos;
-using Teams.Service.Queries.GetAllTodosQuery;
+using Teams.Service.Queries.GetAllTodos;
 using Teams.Service.Queries.GetTeam;
 using Teams.Service.Services;
 
