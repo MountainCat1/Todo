@@ -1,10 +1,8 @@
-﻿using AutoMapper;
-using Teams.Infrastructure.Dto;
+﻿using Teams.Infrastructure.Dto;
 using Teams.Infrastructure.HttpClients;
 using Teams.Service.Abstractions;
-using Teams.Service.Queries.GetAllAccountTeams;
 
-namespace Teams.Service.Queries.GetAllTodosQuery;
+namespace Teams.Service.Queries.GetAllTodos;
 
 public class GetAllTodosQueryHandler : IQueryHandler<GetAllTodosQuery, ICollection<TodoDto>>
 {

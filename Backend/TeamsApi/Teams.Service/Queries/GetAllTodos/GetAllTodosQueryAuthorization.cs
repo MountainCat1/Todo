@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Teams.Infrastructure.HttpClients;
 
-namespace Teams.Service.Queries.GetAllTodosQuery;
+namespace Teams.Service.Queries.GetAllTodos;
 
 public class GetAllTodosQueryAuthorization : AuthorizationHandler<UseRequestRequirement, GetAllTodosQuery>
 {

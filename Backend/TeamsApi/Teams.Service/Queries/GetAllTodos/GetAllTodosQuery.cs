@@ -1,7 +1,7 @@
 ﻿using Teams.Infrastructure.Dto;
 using Teams.Service.Abstractions;
 
-namespace Teams.Service.Queries.GetAllTodosQuery;
+namespace Teams.Service.Queries.GetAllTodos;
 
 public class GetAllTodosQuery : IQuery<ICollection<TodoDto>>
 {
