@@ -1,10 +1,10 @@
 ﻿using BunnyOwO;
 
-namespace TeamMemberships.Infrastructure.Events.External;
+namespace TeamMemberships.Infrastructure.Messages.External;
 
-public class TeamCreatedEvent : IEvent
+public class TeamCreatedMessage : IMessage
 {
-    public TeamCreatedEvent(Guid teamGuid, Guid creatorAccountGuid)
+    public TeamCreatedMessage(Guid teamGuid, Guid creatorAccountGuid)
     {
         TeamGuid = teamGuid;
         CreatorAccountGuid = creatorAccountGuid;

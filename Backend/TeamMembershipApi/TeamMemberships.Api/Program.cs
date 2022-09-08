@@ -46,7 +46,7 @@ else
             options.EnableRetryOnFailure(maxRetryCount: 3, TimeSpan.FromSeconds(10), null);
         }));
 
-services.AddSender();
+services.AddMessageSender();
 
 services.AddAutoMapper(typeof(MappingProfile));
 services.AddMediatR(typeof(ServiceAssemblyPointer));
@@ -56,7 +56,7 @@ services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 
 services.AddScoped<ITeamMembershipRepository, TeamMembershipRepository>();
 
-services.AddEventHandlersAndReceivers(typeof(ServiceAssemblyPointer));
+services.AddMessageHandlersAndReceivers(typeof(ServiceAssemblyPointer));
 
 services.AddScoped<ErrorHandlingMiddleware>();
 

@@ -1,13 +1,13 @@
 ﻿using BunnyOwO;
 using MediatR;
 using TeamMemberships.Domain.Enums;
-using TeamMemberships.Infrastructure.Events.External;
+using TeamMemberships.Infrastructure.Messages.External;
 using TeamMemberships.Service.Commands.CreateMembership;
 using TeamMemberships.Service.Dto;
 
-namespace TeamMemberships.Service.EventHandlers;
+namespace TeamMemberships.Service.MessageHandlers;
 
-public class TeamCreatedEventHandler : IEventHandler<TeamCreatedEvent>
+public class TeamCreatedEventHandler : IMessageHandler<TeamCreatedMessage>
 {
     private readonly IMediator _mediator;
 
@@ -16,12 +16,12 @@ public class TeamCreatedEventHandler : IEventHandler<TeamCreatedEvent>
         _mediator = mediator;
     }
 
-    public async Task<bool> HandleAsync(TeamCreatedEvent @event)
+    public async Task<bool> HandleAsync(TeamCreatedMessage message)
     {
         var dto = new MembershipCreateDto()
         {
-            AccountGuid = @event.CreatorAccountGuid,
-            TeamGuid = @event.TeamGuid,
+            AccountGuid = message.CreatorAccountGuid,
+            TeamGuid = message.TeamGuid,
             Role = UserRole.Administrator
         };
         var command = new CreateMembershipCommand(dto);
@@ -31,7 +31,7 @@ public class TeamCreatedEventHandler : IEventHandler<TeamCreatedEvent>
         return true;
     }
 
-    public void ConfigureReceiver(IEventReceiver receiver)
+    public void ConfigureReceiver(IMessageReceiver receiver)
     {
         receiver.QueueName = "membership.team-created.queue";
     }
