@@ -2,7 +2,6 @@ import useApiPost from "./useApiPost";
 import React from "react";
 import {RequestStatus} from "./abstractions";
 import useApiGet from "./useApiGet";
-import {UserDto} from "./userApi";
 
 
 export type CreateTeamDto = {
@@ -20,7 +19,7 @@ export function useApiGetTeamList(){
     const apiGet = useApiGet()
 
     return(async () => {
-        let teamDto : TeamDto | null = null;
+        let dto : TeamDto[] | null = null;
 
         await apiGet('teams/list')
             .then(response => {
@@ -29,7 +28,7 @@ export function useApiGetTeamList(){
                 return response.json();
             })
             .then(responseJson => {
-                teamDto = responseJson as TeamDto;
+                dto = responseJson as TeamDto[];
             })
             .catch((reason) => {
                 console.error(reason);
