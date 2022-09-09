@@ -1,15 +1,30 @@
 import Popup from "components/Popup/Popup";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import CreateTeamForm from "./CreateTeamForm/CreateTeamForm";
+import {TeamDto, useApiGetTeamList} from "api/teamApi";
 
 type TeamComponentState = {
-    showFormPopup: boolean
+    showFormPopup: boolean,
+
+    teamDto: TeamDto[]
 }
 
 export default function TeamComponent() {
     const [state, setState] = useState<TeamComponentState>({
-        showFormPopup: false
+        showFormPopup: false,
+        teamDto: new Array<TeamDto>()
     });
+
+    const getTeamList = useApiGetTeamList();
+
+    useEffect(()=> {
+        getTeamList().then((dto) => {
+            setState({
+                ...state,
+                teamDto: dto as TeamDto[]
+            })
+        });
+    }, [])
 
     const handleCreateTeamButton = () => {
         setState({
@@ -25,6 +40,8 @@ export default function TeamComponent() {
         })
     }
 
+
+
     return (<>
         <button className='button button-size-small' onClick={handleCreateTeamButton}>
             Create Team
@@ -35,5 +52,7 @@ export default function TeamComponent() {
             </Popup>
             : <></>
         }
+
+        {}
     </>)
 }

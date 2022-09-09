@@ -18,7 +18,7 @@ export type TeamDto = {
 export function useApiGetTeamList(){
     const apiGet = useApiGet()
 
-    return(async () => {
+    return(async () : Promise<TeamDto[] | null>  => {
         let dto : TeamDto[] | null = null;
 
         await apiGet('teams/list')
@@ -33,6 +33,8 @@ export function useApiGetTeamList(){
             .catch((reason) => {
                 console.error(reason);
             });
+
+        return dto;
     })
 }
 
