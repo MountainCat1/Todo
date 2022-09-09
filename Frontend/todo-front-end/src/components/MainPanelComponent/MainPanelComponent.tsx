@@ -1,4 +1,4 @@
-import './MainPanel.css';
+import './MainPanelComponent.css';
 import  'styles/text.css'
 
 import {useIsLoggedIn} from "services/authenticationService";
@@ -6,7 +6,7 @@ import {useNavigate} from "react-router-dom";
 import MainPanelUserData from "./UserDataComponent/MainPanelUserData";
 import TeamComponent from "./TeamComponent/TeamComponent";
 
-export default function MainPanel() {
+export default function MainPanelComponent() {
     const isLoggedIn = useIsLoggedIn();
     const navigate = useNavigate();
 

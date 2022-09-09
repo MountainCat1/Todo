@@ -1,6 +1,6 @@
 import Popup from "components/Popup/Popup";
 import {useEffect, useState} from "react";
-import CreateTeamForm from "./CreateTeamForm/CreateTeamForm";
+import CreateTeamForm from "./CreateTeamFormComponent/CreateTeamForm";
 import {TeamDto, useApiGetTeamList} from "api/teamApi";
 import TeamDisplayPanelComponent from "./TeamDisplayPanelComponent/TeamDisplayPanelComponent";
 

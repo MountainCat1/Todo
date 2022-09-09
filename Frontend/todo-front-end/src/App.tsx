@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import MainPanel from "./components/MainPanel/MainPanel";
+import MainPanelComponent from "./components/MainPanelComponent/MainPanelComponent";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import RegisterComponent from "./components/authentication/RegisterComponent/RegisterComponent"
 import LoginComponent from "./components/authentication/LoginComponent/LoginComponent";
@@ -11,7 +11,7 @@ function App() {
         <div className="App">
             <Router>
                 <Routes>
-                    <Route path="/"         element={<MainPanel/>}/>
+                    <Route path="/"         element={<MainPanelComponent/>}/>
                     <Route path="/register" element={<RegisterComponent/>}/>
                     <Route path="/login"    element={<LoginComponent/>}/>
                 </Routes>
