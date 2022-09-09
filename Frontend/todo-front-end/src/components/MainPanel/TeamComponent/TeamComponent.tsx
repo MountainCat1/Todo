@@ -2,6 +2,7 @@ import Popup from "components/Popup/Popup";
 import {useEffect, useState} from "react";
 import CreateTeamForm from "./CreateTeamForm/CreateTeamForm";
 import {TeamDto, useApiGetTeamList} from "api/teamApi";
+import TeamDisplayPanelComponent from "./TeamDisplayPanelComponent/TeamDisplayPanelComponent";
 
 type TeamComponentState = {
     showFormPopup: boolean,
@@ -53,6 +54,8 @@ export default function TeamComponent() {
             : <></>
         }
 
-        {}
+        {state.teamDto.map(dto =>
+            (<TeamDisplayPanelComponent dto={dto as TeamDto}/>)
+        )}
     </>)
 }

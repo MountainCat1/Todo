@@ -21,7 +21,7 @@ export function useApiGetTeamList(){
     return(async () : Promise<TeamDto[] | null>  => {
         let dto : TeamDto[] | null = null;
 
-        await apiGet('teams/list')
+        await apiGet('team/list')
             .then(response => {
                 if (!response.ok)
                     throw new Error(response.statusText);
