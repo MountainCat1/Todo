@@ -52,7 +52,13 @@ export default function LoginComponent() {
         apiAuthenticate(dto);
     }
 
-    return (<div className='auth-panel'>
+    function handleKeyPress(event: React.KeyboardEvent<HTMLDivElement>) {
+        if(event.key === 'Enter'){
+            postLoginDto(loginDto);
+        }
+    }
+
+    return (<div className='auth-panel' onKeyDown={handleKeyPress}>
         <div>
             <h1>Welcome back!</h1>
             <div className='auth-panel-form'>

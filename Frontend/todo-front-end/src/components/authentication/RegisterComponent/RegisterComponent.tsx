@@ -33,7 +33,13 @@ export default function RegisterComponent() {
         apiRegister(registerDto);
     }
 
-    return (<div className='auth-panel'>
+    function handleKeyPress(event: React.KeyboardEvent<HTMLDivElement>) {
+        if(event.key === 'Enter'){
+            handleSubmit();
+        }
+    }
+
+    return (<div className='auth-panel' onKeyDown={handleKeyPress}>
         <div>
             <h1>Create your own account!</h1>
             <div className='auth-panel-form'>
