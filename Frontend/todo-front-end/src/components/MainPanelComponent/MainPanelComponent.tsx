@@ -25,6 +25,7 @@ export default function MainPanelComponent() {
             ...state,
             selectedTeam: teamDto
         })
+        console.log(state);
     }
 
     return (

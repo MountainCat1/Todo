@@ -3,12 +3,15 @@ import {TeamDto} from "api/teamApi";
 
 
 interface TeamDisplayPanelProps {
-    dto : TeamDto
+    dto : TeamDto,
+    handleClick: (teamDto : TeamDto) => void
 }
 
 export default function TeamDisplayPanelComponent(props : TeamDisplayPanelProps){
+
     return (
-    <button className='button button-size-small team-display-panel'>
+    <button className='button button-size-small team-display-panel'
+            onClick={() => props.handleClick(props.dto)}>
         {props.dto.name}
     </button>)
 }

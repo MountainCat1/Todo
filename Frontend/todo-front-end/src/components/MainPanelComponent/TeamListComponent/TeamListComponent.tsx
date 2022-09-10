@@ -45,6 +45,10 @@ export default function TeamListComponent(props : ITeamComponentListProps) {
         })
     }
 
+    const handleClickOnDisplayPanel = (teamDto : TeamDto) => {
+        props.handleSelectTeam(teamDto)
+    }
+
     return (<>
         <button className='button button-size-small create-team-button'
                 onClick={handleCreateTeamButton}>
@@ -60,7 +64,11 @@ export default function TeamListComponent(props : ITeamComponentListProps) {
         <div className='team-list'>
             {   state.teamDto != null
                 ? state.teamDto.map(dto =>
-                    (<TeamDisplayPanelComponent key={dto.guid} dto={dto as TeamDto}/>))
+                    (<TeamDisplayPanelComponent
+                        key={dto.guid}
+                        dto={dto as TeamDto}
+                        handleClick={handleClickOnDisplayPanel}
+                        />))
                 : <></>
             }
         </div>
