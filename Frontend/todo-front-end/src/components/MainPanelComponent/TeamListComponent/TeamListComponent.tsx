@@ -1,4 +1,4 @@
-import './TeamComponent.css'
+import './TeamListComponent.css'
 import PopupComponent from "components/PopupComponent/PopupComponent";
 import {useEffect, useState} from "react";
 import CreateTeamForm from "./CreateTeamFormComponent/CreateTeamForm";
@@ -7,11 +7,14 @@ import TeamDisplayPanelComponent from "./TeamDisplayPanelComponent/TeamDisplayPa
 
 type TeamComponentState = {
     showFormPopup: boolean,
-
     teamDto: TeamDto[]
 }
 
-export default function TeamComponent() {
+interface ITeamComponentListProps{
+    handleSelectTeam : (teamDto : TeamDto) => void;
+}
+
+export default function TeamListComponent(props : ITeamComponentListProps) {
     const [state, setState] = useState<TeamComponentState>({
         showFormPopup: false,
         teamDto: new Array<TeamDto>()
@@ -41,8 +44,6 @@ export default function TeamComponent() {
             showFormPopup: false
         })
     }
-
-
 
     return (<>
         <button className='button button-size-small create-team-button'
