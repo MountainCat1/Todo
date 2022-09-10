@@ -1,4 +1,4 @@
-import './Popup.css'
+import './PopupComponent.css'
 import React, {useEffect, useRef} from "react";
 
 interface IPopupProps {
@@ -7,7 +7,7 @@ interface IPopupProps {
 }
 
 // need to add a focus on popup show
-export default function Popup(props : IPopupProps) {
+export default function PopupComponent(props : IPopupProps) {
     const popupRef = useRef<any>(null);
     const effect = useEffect(() => {
         popupRef.current?.focus()

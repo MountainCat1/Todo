@@ -2,7 +2,6 @@ import {useClearAuthToken, useGetUserData} from "services/authenticationService"
 import {useEffect, useState} from "react";
 import {UserDto} from "api/userApi";
 
-
 export default function MainPanelUserData() {
     const getUserData = useGetUserData();
     const clearAuthToken = useClearAuthToken();

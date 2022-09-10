@@ -1,4 +1,4 @@
-import Popup from "components/Popup/Popup";
+import PopupComponent from "components/PopupComponent/PopupComponent";
 import {useEffect, useState} from "react";
 import CreateTeamForm from "./CreateTeamFormComponent/CreateTeamForm";
 import {TeamDto, useApiGetTeamList} from "api/teamApi";
@@ -48,9 +48,9 @@ export default function TeamComponent() {
             Create Team
         </button>
         {state.showFormPopup
-            ? <Popup handleClose={closeTeamCreationPopup}>
+            ? <PopupComponent handleClose={closeTeamCreationPopup}>
                 <CreateTeamForm closePopup={closeTeamCreationPopup}/>
-            </Popup>
+            </PopupComponent>
             : <></>
         }
 
