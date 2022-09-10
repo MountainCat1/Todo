@@ -1,3 +1,4 @@
+import './TeamComponent.css'
 import PopupComponent from "components/PopupComponent/PopupComponent";
 import {useEffect, useState} from "react";
 import CreateTeamForm from "./CreateTeamFormComponent/CreateTeamForm";
@@ -44,8 +45,9 @@ export default function TeamComponent() {
 
 
     return (<>
-        <button className='button button-size-small' onClick={handleCreateTeamButton}>
-            Create Team
+        <button className='button button-size-small create-team-button'
+                onClick={handleCreateTeamButton}>
+            Create New Team
         </button>
         {state.showFormPopup
             ? <PopupComponent handleClose={closeTeamCreationPopup}>
@@ -54,8 +56,13 @@ export default function TeamComponent() {
             : <></>
         }
 
-        {state.teamDto.map(dto =>
-            (<TeamDisplayPanelComponent dto={dto as TeamDto}/>)
-        )}
+        <div className='team-list'>
+            {   state.teamDto != null
+                ? state.teamDto.map(dto =>
+                    (<TeamDisplayPanelComponent key={dto.guid} dto={dto as TeamDto}/>))
+                : <></>
+            }
+        </div>
+
     </>)
 }

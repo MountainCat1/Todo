@@ -1,3 +1,4 @@
+import './TeamDisplayPanelComponent.css'
 import {TeamDto} from "api/teamApi";
 
 
@@ -6,9 +7,8 @@ interface TeamDisplayPanelProps {
 }
 
 export default function TeamDisplayPanelComponent(props : TeamDisplayPanelProps){
-
-
-    return ( <>
+    return (
+    <button className='button button-size-small team-display-panel'>
         {props.dto.name}
-    </> )
+    </button>)
 }
