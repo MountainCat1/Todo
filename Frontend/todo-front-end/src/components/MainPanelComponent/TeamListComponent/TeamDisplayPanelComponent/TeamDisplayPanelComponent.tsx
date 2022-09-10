@@ -12,6 +12,8 @@ export default function TeamDisplayPanelComponent(props : TeamDisplayPanelProps)
     return (
     <button className='button button-size-small team-display-panel'
             onClick={() => props.handleClick(props.dto)}>
-        {props.dto.name}
+        <div className='team-name'>
+            {props.dto.name}
+        </div>
     </button>)
 }
