@@ -14,3 +14,5 @@ Back-End of an application was made using ASP.NET CORE
 ##### Front-End
 Front-End was made using React with TypeScript
 
+##### Deployment
+Application will be prepared to be deployed on Azure Containers
